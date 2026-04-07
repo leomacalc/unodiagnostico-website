@@ -23,7 +23,7 @@
   "social": {
     "instagram": "https://instagram.com/unodiagnostico",
     "facebook": "https://m.facebook.com/unodiagnostico/",
-    "whatsapp_link": "https://api.whatsapp.com/send?phone=558521816818&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Uno%20Diagn%C3%B3sticos"
+    "whatsapp_link": "https://api.whatsapp.com/send?phone=558521816818&text=Olá%2C%20gostaria%20de%20mais%20informações%20sobre%20a%20Uno%20Diagnósticos"
   },
   "contact_form_subjects": [
     "Sugestões e elogios",
@@ -32,9 +32,44 @@
     "Gerência",
     "Outros"
   ],
+  "stats": {
+    "years": "5+",
+    "exams": "50mil+",
+    "equipment": "6+"
+  },
+  "faq": [
+    {
+      "question": "Como faço para agendar um exame na Uno Diagnóstico?",
+      "answer": "Você pode agendar pelo WhatsApp clicando no botão 'Agendar Exame' em nosso site, ou ligando para (85) 2181-6818. O atendimento funciona todos os dias das 7h às 22h."
+    },
+    {
+      "question": "Quais exames de imagem a Uno Diagnóstico realiza?",
+      "answer": "Realizamos radiografia digital, tomografia computadorizada, ultrassonografia e Doppler, mamografia, densitometria óssea e biópsias/punções guiadas por imagem. Em breve também ofereceremos ressonância magnética."
+    },
+    {
+      "question": "Preciso de pedido médico para realizar um exame?",
+      "answer": "Sim, para todos os exames de diagnóstico por imagem é necessário apresentar o pedido médico no momento do exame. É importante que o pedido contenha o tipo de exame e a região a ser examinada."
+    },
+    {
+      "question": "Quais convênios são aceitos?",
+      "answer": "Atualmente aceitamos LivSaúde, UMIED, CAMED, FUSEx e ISSEC. Também realizamos atendimento particular com pagamento via PIX, cartão de crédito, cartão de débito ou dinheiro."
+    },
+    {
+      "question": "Quanto tempo demora para receber o resultado do exame?",
+      "answer": "O prazo varia conforme o tipo de exame. Radiografias costumam ficar prontas no mesmo dia. Ultrassonografias e tomografias em até 3 dias úteis. Os resultados ficam disponíveis online em nosso portal de resultados."
+    },
+    {
+      "question": "Quais formas de pagamento são aceitas para atendimento particular?",
+      "answer": "Aceitamos PIX (pagamento instantâneo), cartões de crédito das principais bandeiras (Visa, Mastercard, Elo, American Express e Hipercard) com opção de parcelamento, cartão de débito e dinheiro."
+    },
+    {
+      "question": "Onde fica a Uno Diagnóstico?",
+      "answer": "Estamos localizados na Avenida I, Business Place Torre 2, ao lado da UNIMED, no bairro Jereissati, Setor A, em Maracanaú/CE, CEP 61900-320. Funcionamos todos os dias das 7h às 22h."
+    }
+  ],
   "seo": {
-    "title": "Uno Diagnóstico | Diagnóstico por Imagem em Maracanaú/CE",
-    "description": "Clínica de diagnóstico por imagem em Maracanaú/CE. Radiografia digital, tomografia, ultrassonografia, mamografia, densitometria óssea e biópsias. Agende pelo WhatsApp.",
-    "keywords": "diagnóstico por imagem, radiografia digital, tomografia, ultrassonografia, mamografia, densitometria óssea, Maracanaú, Ceará"
+    "title": "Uno Diagnóstico | Exames de Imagem em Maracanaú/CE - Agende pelo WhatsApp",
+    "description": "Clínica de diagnóstico por imagem em Maracanaú/CE. Radiografia digital, tomografia, ultrassonografia, mamografia, densitometria óssea e biópsias. Aceitamos PIX e cartão. Agende pelo WhatsApp: (85) 2181-6818.",
+    "keywords": "diagnóstico por imagem Maracanaú, radiografia digital Maracanaú, tomografia Maracanaú CE, ultrassonografia Maracanaú, mamografia Maracanaú, densitometria óssea Maracanaú, clínica de imagem Maracanaú, exame de imagem Ceará, biópsias guiadas imagem, ressonância magnética Maracanaú"
   }
 }
