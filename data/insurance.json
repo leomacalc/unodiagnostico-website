@@ -5,7 +5,27 @@
     {
       "id": "livsaude",
       "name": "LivSaúde",
-      "logo": "images/livsaude-logo.png"
+      "logo": "images/insurance/livsaude.png"
+    },
+    {
+      "id": "umied",
+      "name": "UMIED",
+      "logo": "images/insurance/umied.png"
+    },
+    {
+      "id": "camed",
+      "name": "CAMED",
+      "logo": "images/insurance/camed.png"
+    },
+    {
+      "id": "fusex",
+      "name": "FUSEx",
+      "logo": "images/insurance/fusex.png"
+    },
+    {
+      "id": "issec",
+      "name": "ISSEC",
+      "logo": "images/insurance/issec.png"
     }
   ]
 }
