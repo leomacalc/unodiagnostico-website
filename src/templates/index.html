@@ -30,10 +30,7 @@
   <header class="header">
     <div class="container">
       <a href="#" class="logo">
-        <div class="logo-text">
-          {{SITE_NAME}}
-          <small>Diagnóstico por Imagem</small>
-        </div>
+        <img src="images/logos/logo-verde.png" alt="{{SITE_NAME}}">
       </a>
 
       <nav>
@@ -43,7 +40,6 @@
           <li><a href="#corpo-clinico">Corpo Clínico</a></li>
           <li><a href="#nosso-espaco">Nosso Espaço</a></li>
           <li><a href="#blog">Blog</a></li>
-          <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
 
@@ -66,7 +62,6 @@
     <a href="#corpo-clinico">Corpo Clínico</a>
     <a href="#nosso-espaco">Nosso Espaço</a>
     <a href="#blog">Blog</a>
-    <a href="#contato">Contato</a>
     <div class="mobile-nav-social">
       <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
       <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
@@ -74,31 +69,49 @@
     </div>
   </nav>
 
-  <!-- ========== HERO ========== -->
+  <!-- ========== HERO CAROUSEL ========== -->
   <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Diagnóstico por imagem com <em>precisão</em> e <em>credibilidade</em></h1>
-        <p>{{SITE_DESCRIPTION_SHORT}}</p>
-        <div class="hero-buttons">
-          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp">
-            {{ICON_WHATSAPP}} Agendamento de Exames
-          </a>
-          <a href="{{RESULTS_URL}}" target="_blank" rel="noopener" class="btn btn-secondary">
-            Resultados de Exames
-          </a>
+    <div class="hero-carousel">
+      <div class="hero-slide active">
+        <div class="container">
+          <div class="hero-content">
+            <h1>Diagnóstico por imagem com <em>precisão</em> e <em>credibilidade</em></h1>
+            <p>{{SITE_DESCRIPTION_SHORT}}</p>
+            <div class="hero-buttons">
+              <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp">
+                {{ICON_WHATSAPP}} Agendamento de Exames
+              </a>
+              <a href="{{RESULTS_URL}}" target="_blank" rel="noopener" class="btn btn-secondary">
+                Resultados de Exames
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="hero-slide">
+        <div class="container">
+          <div class="hero-slide-announcement">
+            <span class="announcement-badge">Em Breve</span>
+            <h2>Ressonância Magnética</h2>
+            <p>Em breve, a Uno Diagnóstico contará com Ressonância Magnética de alta definição. Mais um passo para oferecer o melhor em diagnóstico por imagem.</p>
+            <div class="hero-buttons" style="justify-content:center">
+              <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp">
+                {{ICON_WHATSAPP}} Saiba Mais
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-dots">
+      <span class="hero-dot active" data-slide="0"></span>
+      <span class="hero-dot" data-slide="1"></span>
     </div>
   </section>
 
   <!-- ========== SERVICES / EXAMES ========== -->
   <section id="exames" class="section services">
     <div class="container">
-      <div class="section-title">
-        <span>Exames</span>
-        <h2>Nossos Exames</h2>
-      </div>
       <div class="services-grid">
             {{SERVICES_HTML}}
       </div>
@@ -108,10 +121,6 @@
   <!-- ========== INSURANCE / CONVÊNIOS ========== -->
   <section id="convenios" class="section insurance">
     <div class="container">
-      <div class="section-title">
-        <span>Convênios</span>
-        <h2>Nossos Convênios</h2>
-      </div>
       <div class="insurance-content">
             {{INSURANCE_HTML}}
       </div>
@@ -121,10 +130,6 @@
   <!-- ========== DOCTORS / CORPO CLÍNICO ========== -->
   <section id="corpo-clinico" class="section doctors">
     <div class="container">
-      <div class="section-title">
-        <span>Corpo Clínico</span>
-        <h2>Conheça Nosso Corpo Clínico</h2>
-      </div>
       <div class="doctors-grid">
             {{DOCTORS_HTML}}
       </div>
@@ -134,10 +139,6 @@
   <!-- ========== GALLERY / NOSSO ESPAÇO ========== -->
   <section id="nosso-espaco" class="section gallery">
     <div class="container">
-      <div class="section-title">
-        <span>Nosso Espaço</span>
-        <h2>Confira Nosso Espaço</h2>
-      </div>
       <div class="gallery-grid">
         <div class="gallery-item" style="background:var(--color-primary-light);display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:1rem;padding:20px;text-align:center">Adicione fotos do espaço em<br>public/images/gallery/</div>
         <div class="gallery-item" style="background:var(--color-primary-light);display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:1rem;padding:20px;text-align:center">Adicione fotos do espaço em<br>public/images/gallery/</div>
@@ -149,88 +150,37 @@
   <!-- ========== BLOG ========== -->
   <section id="blog" class="section blog">
     <div class="container">
-      <div class="section-title">
-        <span>Blog</span>
-        <h2>Confira Nosso Blog</h2>
-      </div>
       <div class="blog-grid">
             {{BLOG_HTML}}
       </div>
     </div>
   </section>
 
-  <!-- ========== CONTACT ========== -->
-  <section id="contato" class="section contact">
-    <div class="container">
-      <div class="section-title">
-        <span>Contato</span>
-        <h2>Entre em Contato</h2>
-      </div>
-      <div class="contact-grid">
-        <form id="contact-form" class="contact-form">
-          <div class="form-group">
-            <label for="subject">Assunto</label>
-            <select id="subject" name="subject" required>
-                  {{CONTACT_SUBJECTS}}
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="name">Nome</label>
-            <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Telefone</label>
-            <input type="tel" id="phone" name="phone" placeholder="(85) 99999-9999">
-          </div>
-          <div class="form-group">
-            <label for="message">Mensagem</label>
-            <textarea id="message" name="message" placeholder="Sua mensagem..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Enviar</button>
-        </form>
-
-        <div class="contact-info">
-          <div class="contact-info-item">
-            <div class="contact-info-icon">{{ICON_LOCATION}}</div>
-            <div>
-              <h4>{{UNIT_NAME}}</h4>
-              <p>{{ADDRESS_FULL}}</p>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon">{{ICON_CLOCK}}</div>
-            <div>
-              <h4>Horário de Funcionamento</h4>
-              <p>{{HOURS}}</p>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon">{{ICON_PHONE}}</div>
-            <div>
-              <h4>Telefone / WhatsApp</h4>
-              <p><a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener">{{PHONE}}</a></p>
-            </div>
-          </div>
-          <div class="contact-info-item">
-            <div class="contact-info-icon">{{ICON_MAIL}}</div>
-            <div>
-              <h4>Email</h4>
-              <p><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
-            </div>
-          </div>
-          <div class="contact-map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.3!2d-38.62!3d-3.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAvenida+I+17+Jereissati+I+Maracanau!5e0!3m2!1spt-BR!2sbr!4v1"
-              width="100%" height="250" style="border:0" allowfullscreen="" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Localização Uno Diagnóstico">
-            </iframe>
-          </div>
+  <!-- ========== FOOTER MAP ========== -->
+  <section class="footer-map">
+    <div class="footer-map-inner">
+      <div class="footer-map-info">
+        <h3>{{UNIT_NAME}}</h3>
+        <div class="map-info-item">
+          <div class="map-info-icon">{{ICON_LOCATION}}</div>
+          <p>{{ADDRESS_FULL}}</p>
         </div>
+        <div class="map-info-item">
+          <div class="map-info-icon">{{ICON_CLOCK}}</div>
+          <p>{{HOURS}}</p>
+        </div>
+        <div class="map-info-item">
+          <div class="map-info-icon">{{ICON_PHONE}}</div>
+          <p><a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" style="color:var(--color-secondary)">{{PHONE}}</a></p>
+        </div>
+      </div>
+      <div class="footer-map-embed">
+        <iframe
+          src="https://www.google.com/maps?q=Avenida+I+Business+Place+Torre+2+Jereissati+Maracanau+CE+61900-320&output=embed"
+          width="100%" height="300" style="border:0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localização Uno Diagnóstico">
+        </iframe>
       </div>
     </div>
   </section>
@@ -239,7 +189,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-content">
-        <div class="footer-logo">{{SITE_NAME}}</div>
+        <div class="footer-logo"><img src="images/logos/logo-verde.png" alt="{{SITE_NAME}}"></div>
         <div class="footer-social">
           <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
           <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
