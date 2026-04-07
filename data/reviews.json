@@ -1,0 +1,63 @@
+{
+  "google_rating": 4.7,
+  "google_total_reviews": 1574,
+  "google_place_id": "ChIJZ2tZJmtTxwcRSJLBSoNG-zU",
+  "reviews": [
+    {
+      "name": "Ticiane Moreira",
+      "rating": 5,
+      "text": "Quero aqui elogiar as recepcionistas. As meninas super educadas, atenciosas, pró-ativas, da recepção à auxiliar do consultório. A mulher da limpeza é extraordinária. Parabéns!",
+      "time": "11 meses atrás",
+      "badge": "Local Guide"
+    },
+    {
+      "name": "Maria Matos",
+      "rating": 5,
+      "text": "Da recepção ao atendimento médico nota 10, estou super satisfeita!",
+      "time": "6 meses atrás",
+      "badge": ""
+    },
+    {
+      "name": "Marcelo A.",
+      "rating": 5,
+      "text": "Os médicos e funcionários estão de parabéns por serem altamente profissionais e educados. Salas de exames de alta qualidade. Estão de parabéns!",
+      "time": "3 anos atrás",
+      "badge": "Local Guide"
+    },
+    {
+      "name": "Yana Jéssyca",
+      "rating": 5,
+      "text": "Atendimento super humanizado, foram atenciosos. Gostei e indico!",
+      "time": "3 meses atrás",
+      "badge": ""
+    },
+    {
+      "name": "Tais Almeida",
+      "rating": 5,
+      "text": "Recepção ótima, atendimento rápido e tudo muito limpo e organizado. Super indico!",
+      "time": "4 meses atrás",
+      "badge": ""
+    },
+    {
+      "name": "Rayany Gomes",
+      "rating": 5,
+      "text": "Muito organizado, excelente atendimento e obstetra sensível e atencioso. Atendimento sempre bem humanizado, amei!",
+      "time": "6 meses atrás",
+      "badge": ""
+    },
+    {
+      "name": "Washington Luiz",
+      "rating": 5,
+      "text": "UNO Diagnóstico sempre com resultados excelentes e se preocupando em dar aos clientes os resultados em primeira mão. As atendentes são ótimas, bastante atenciosas e educadas!",
+      "time": "1 ano atrás",
+      "badge": ""
+    },
+    {
+      "name": "Cida Brito",
+      "rating": 5,
+      "text": "Excelente atendimento, muito boa! Parabéns, vocês merecem sim 5 estrelas, se possível eu daria muito mais!",
+      "time": "6 meses atrás",
+      "badge": ""
+    }
+  ]
+}

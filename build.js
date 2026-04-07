@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* ============================================
-   UNO DIAGNÃSTICO - Build Script
+   UNO DIAGNÓSTICO - Build Script
    Reads JSON data files + HTML template
    Generates static site in /dist
    ============================================ */
@@ -19,6 +19,7 @@ const services = loadJSON('services.json');
 const doctors = loadJSON('doctors.json');
 const insurance = loadJSON('insurance.json');
 const blogPosts = loadJSON('blog-posts.json');
+const reviews = loadJSON('reviews.json');
 
 // --- Load Template ---
 const template = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'index.html'), 'utf-8');
@@ -45,7 +46,7 @@ const icons = {
 
 // --- Helper Functions ---
 function formatDate(dateStr) {
-  const months = ['janeiro', 'fevereiro', 'marÃ§o', 'abril', 'maio', 'junho',
+  const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
     'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   const d = new Date(dateStr + 'T12:00:00');
   return d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
@@ -69,7 +70,7 @@ function generateServicesHTML() {
 function generateDoctorsHTML() {
   return doctors.map(function (d) {
     const photoHTML = d.photo
-      ? '<img src="' + d.photo + '" alt="' + escapeHTML(d.name) + ' - MÃ©dico Radiologista em MaracanaÃº" loading="lazy">'
+      ? '<img src="' + d.photo + '" alt="' + escapeHTML(d.name) + ' - Médico Radiologista em Maracanaú" loading="lazy">'
       : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="64" height="64"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 
     const qualificationsHTML = d.qualifications.map(function (q) {
@@ -90,10 +91,10 @@ function generateDoctorsHTML() {
 function generateInsuranceHTML() {
   let html = '';
   insurance.partners.forEach(function (p) {
-    html += '<div class="insurance-logo"><img src="' + p.logo + '" alt="ConvÃªnio ' + escapeHTML(p.name) + ' aceito na Uno DiagnÃ³stico" loading="lazy"></div>';
+    html += '<div class="insurance-logo"><img src="' + p.logo + '" alt="Convênio ' + escapeHTML(p.name) + ' aceito na Uno Diagnóstico" loading="lazy"></div>';
   });
   if (insurance.accepts_private) {
-    html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condiÃ§Ãµes</p></a>';
+    html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
   }
   return html;
 }
@@ -192,6 +193,42 @@ function generateContactSubjects() {
   }).join('\n                  ');
 }
 
+function generateGoogleStarsHTML(rating) {
+  var fullStars = Math.floor(rating);
+  var hasHalf = (rating - fullStars) >= 0.3;
+  var html = '';
+  for (var i = 0; i < fullStars; i++) {
+    html += '★';
+  }
+  if (hasHalf) {
+    html += '★';
+  }
+  return html;
+}
+
+function generateReviewsHTML() {
+  return reviews.reviews.map(function (r) {
+    var initial = r.name.charAt(0).toUpperCase();
+    var starsHTML = '';
+    for (var i = 0; i < r.rating; i++) {
+      starsHTML += '★';
+    }
+    var badgeHTML = r.badge ? '<span class="review-badge">' + escapeHTML(r.badge) + '</span>' : '';
+    return '<div class="review-card">' +
+      '<div class="review-card-header">' +
+      '<div class="review-avatar">' + initial + '</div>' +
+      '<div class="review-author">' +
+      '<span class="review-name">' + escapeHTML(r.name) + '</span>' +
+      badgeHTML +
+      '</div>' +
+      '</div>' +
+      '<div class="review-stars">' + starsHTML + '</div>' +
+      '<p class="review-text">' + escapeHTML(r.text) + '</p>' +
+      '<span class="review-time">' + escapeHTML(r.time) + '</span>' +
+      '</div>';
+  }).join('\n        ');
+}
+
 // --- Build Page ---
 let html = template;
 
@@ -218,6 +255,10 @@ const replacements = {
   '{{SERVICES_HTML}}': generateServicesHTML(),
   '{{DOCTORS_HTML}}': generateDoctorsHTML(),
   '{{INSURANCE_HTML}}': generateInsuranceHTML(),
+  '{{GOOGLE_RATING}}': reviews.google_rating.toString(),
+  '{{GOOGLE_STARS_HTML}}': generateGoogleStarsHTML(reviews.google_rating),
+  '{{GOOGLE_TOTAL_REVIEWS}}': reviews.google_total_reviews.toLocaleString('pt-BR'),
+  '{{REVIEWS_HTML}}': generateReviewsHTML(),
   '{{BLOG_HTML}}': generateBlogHTML(),
   '{{FAQ_HTML}}': generateFAQHTML(),
   '{{SCHEMA_ORG}}': generateSchemaOrg(),
@@ -278,4 +319,4 @@ console.log('  - ' + doctors.length + ' doctors');
 console.log('  - ' + blogPosts.length + ' blog posts');
 console.log('  - ' + insurance.partners.length + ' insurance partners');
 console.log('  - ' + (site.faq ? site.faq.length : 0) + ' FAQ items');
-
+console.log('  - ' + reviews.reviews.length + ' reviews (Google ' + reviews.google_rating + '★)');

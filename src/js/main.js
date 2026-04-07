@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }, observerOptions);
 
-  document.querySelectorAll('.service-card, .doctor-card, .blog-card, .payment-card, .trust-item, .faq-item').forEach(function (el) {
+  document.querySelectorAll('.service-card, .doctor-card, .blog-card, .payment-card, .trust-item, .faq-item, .review-card').forEach(function (el) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -248,4 +248,3 @@ document.addEventListener('DOMContentLoaded', function () {
   style.textContent = '.animate-in { opacity: 1 !important; transform: translateY(0) !important; }';
   document.head.appendChild(style);
 });
-
