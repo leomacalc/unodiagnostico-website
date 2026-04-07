@@ -137,6 +137,61 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // --- Blog Modal ---
+  var blogModal = document.getElementById('blog-modal');
+  var blogModalClose = document.querySelector('.blog-modal-close');
+  var blogLinks = document.querySelectorAll('.blog-link[data-blog]');
+
+  if (blogLinks.length && blogModal) {
+    blogLinks.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var blogId = this.getAttribute('data-blog');
+        showBlogModal(blogId);
+      });
+    });
+
+    blogModalClose.addEventListener('click', closeBlogModal);
+    blogModal.addEventListener('click', function (e) {
+      if (e.target === blogModal) closeBlogModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && blogModal.classList.contains('active')) closeBlogModal();
+    });
+  }
+
+  function showBlogModal(blogId) {
+    var card = document.querySelector('[data-blog-id="' + blogId + '"]');
+    if (!card) return;
+
+    var title = card.querySelector('h3').textContent;
+    var date = card.querySelector('.blog-date').textContent;
+    var fullContent = card.querySelector('.blog-full-content');
+    var image = card.querySelector('.blog-image img');
+
+    document.getElementById('blog-modal-title').textContent = title;
+    document.getElementById('blog-modal-date').textContent = date;
+    document.getElementById('blog-modal-content').innerHTML = fullContent ? fullContent.innerHTML : '';
+
+    var modalImage = document.getElementById('blog-modal-image');
+    if (image) {
+      modalImage.innerHTML = '<img src="' + image.src + '" alt="' + title + '">';
+      modalImage.style.display = '';
+    } else {
+      modalImage.style.display = 'none';
+    }
+
+    blogModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBlogModal() {
+    blogModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
   // --- FAQ Accordion ---
   var faqQuestions = document.querySelectorAll('.faq-question');
   faqQuestions.forEach(function (question) {
@@ -193,3 +248,4 @@ document.addEventListener('DOMContentLoaded', function () {
   style.textContent = '.animate-in { opacity: 1 !important; transform: translateY(0) !important; }';
   document.head.appendChild(style);
 });
+
