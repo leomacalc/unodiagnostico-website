@@ -5,7 +5,7 @@
     "specialty": "Médico Radiologista",
     "crm": "CRM-CE 10914",
     "rqe": "RQE 7848",
-    "photo": "images/dr-leonardo.jpg",
+    "photo": "images/doctors/leonardo.png",
     "qualifications": [
       "Médico pela Universidade Federal do Ceará",
       "Residência em Radiologia – Hospital Geral de Fortaleza",
@@ -19,7 +19,7 @@
     "specialty": "Médico Radiologista",
     "crm": "CRM-CE 15887",
     "rqe": "RQE 9900",
-    "photo": "images/dr-tacio.jpg",
+    "photo": "images/doctors/tacio.png",
     "qualifications": [
       "Médico pela Universidade Federal do Piauí",
       "Residência em Radiologia – Hospital do Câncer de Barretos/SP",
