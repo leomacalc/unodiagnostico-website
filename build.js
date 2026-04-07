@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* ============================================
-   UNO DIAGNÓSTICO - Build Script
+   UNO DIAGNÃSTICO - Build Script
    Reads JSON data files + HTML template
    Generates static site in /dist
    ============================================ */
@@ -45,7 +45,7 @@ const icons = {
 
 // --- Helper Functions ---
 function formatDate(dateStr) {
-  const months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+  const months = ['janeiro', 'fevereiro', 'marÃ§o', 'abril', 'maio', 'junho',
     'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   const d = new Date(dateStr + 'T12:00:00');
   return d.getDate() + ' de ' + months[d.getMonth()] + ' de ' + d.getFullYear();
@@ -69,7 +69,7 @@ function generateServicesHTML() {
 function generateDoctorsHTML() {
   return doctors.map(function (d) {
     const photoHTML = d.photo
-      ? '<img src="' + d.photo + '" alt="' + escapeHTML(d.name) + ' - Médico Radiologista em Maracanaú" loading="lazy">'
+      ? '<img src="' + d.photo + '" alt="' + escapeHTML(d.name) + ' - MÃ©dico Radiologista em MaracanaÃº" loading="lazy">'
       : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="64" height="64"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 
     const qualificationsHTML = d.qualifications.map(function (q) {
@@ -90,10 +90,10 @@ function generateDoctorsHTML() {
 function generateInsuranceHTML() {
   let html = '';
   insurance.partners.forEach(function (p) {
-    html += '<div class="insurance-logo"><img src="' + p.logo + '" alt="Convênio ' + escapeHTML(p.name) + ' aceito na Uno Diagnóstico" loading="lazy"></div>';
+    html += '<div class="insurance-logo"><img src="' + p.logo + '" alt="ConvÃªnio ' + escapeHTML(p.name) + ' aceito na Uno DiagnÃ³stico" loading="lazy"></div>';
   });
   if (insurance.accepts_private) {
-    html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
+    html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condiÃ§Ãµes</p></a>';
   }
   return html;
 }
