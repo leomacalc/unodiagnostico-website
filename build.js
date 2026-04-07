@@ -58,7 +58,7 @@ function escapeHTML(str) {
 // --- Generate HTML Sections ---
 function generateServicesHTML() {
   return services.map(function (s) {
-    return '<div class="service-card" data-service="' + s.id + '" data-title="' + escapeHTML(s.name) + '" data-description="' + escapeHTML(s.description) + '" data-preparations=\'' + escapeHTML(JSON.stringify(s.preparations)) + '\'>' +
+    return '<div class="service-card" data-service="' + s.id + '" data-title="' + escapeHTML(s.name) + '" data-description="' + escapeHTML(s.description) + '" data-preparations=' + "'" + escapeHTML(JSON.stringify(s.preparations)) + "'" + '>' +
       '<div class="service-icon">' + (icons[s.icon] || '') + '</div>' +
       '<h3>' + s.name + '</h3>' +
       '<p>' + s.short_description + '</p>' +
@@ -69,7 +69,7 @@ function generateServicesHTML() {
 function generateDoctorsHTML() {
   return doctors.map(function (d) {
     const photoHTML = d.photo
-      ? '<img src="' + d.photo + '" alt="' + escapeHTML(d.name) + '" loading="lazy">'
+      ? '<img src="' + d.photo + '" alt="' + escapeHTML(d.name) + ' - Médico Radiologista em Maracanaú" loading="lazy">'
       : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="64" height="64"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 
     const qualificationsHTML = d.qualifications.map(function (q) {
@@ -90,7 +90,7 @@ function generateDoctorsHTML() {
 function generateInsuranceHTML() {
   let html = '';
   insurance.partners.forEach(function (p) {
-    html += '<div class="insurance-logo"><img src="' + p.logo + '" alt="' + escapeHTML(p.name) + '" loading="lazy"></div>';
+    html += '<div class="insurance-logo"><img src="' + p.logo + '" alt="Convênio ' + escapeHTML(p.name) + ' aceito na Uno Diagnóstico" loading="lazy"></div>';
   });
   if (insurance.accepts_private) {
     html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
@@ -101,7 +101,7 @@ function generateInsuranceHTML() {
 function generateBlogHTML() {
   return blogPosts.slice(0, 3).map(function (post) {
     return '<div class="blog-card">' +
-      '<div class="blog-image"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:2rem">&#128196;</div></div>' +
+      '<div class="blog-image"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:2rem">📰</div></div>' +
       '<div class="blog-content">' +
       '<div class="blog-date" data-date="' + post.date + '">' + formatDate(post.date) + '</div>' +
       '<h3>' + post.title + '</h3>' +
@@ -109,6 +109,75 @@ function generateBlogHTML() {
       '<a href="#" class="blog-link">Ler mais &rarr;</a>' +
       '</div></div>';
   }).join('\n            ');
+}
+
+function generateFAQHTML() {
+  if (!site.faq || !site.faq.length) return '';
+  return site.faq.map(function (item, index) {
+    return '<div class="faq-item">' +
+      '<div class="faq-question" data-faq="' + index + '">' +
+      '<h3>' + escapeHTML(item.question) + '</h3>' +
+      '<span class="faq-toggle">+</span>' +
+      '</div>' +
+      '<div class="faq-answer"><p>' + escapeHTML(item.answer) + '</p></div>' +
+      '</div>';
+  }).join('\n        ');
+}
+
+function generateSchemaOrg() {
+  var schema = {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "name": site.name,
+    "description": site.seo.description,
+    "url": "https://unodiagnostico.com",
+    "telephone": site.phone,
+    "email": site.email,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": site.address.street + ', ' + site.address.complement,
+      "addressLocality": site.address.city,
+      "addressRegion": site.address.state,
+      "postalCode": site.address.cep,
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "-3.8764",
+      "longitude": "-38.6254"
+    },
+    "openingHours": "Mo-Su 07:00-22:00",
+    "medicalSpecialty": "Diagnostic Radiology",
+    "availableService": services.map(function (s) {
+      return {
+        "@type": "MedicalTest",
+        "name": s.name,
+        "description": s.short_description
+      };
+    }),
+    "paymentAccepted": "Cash, Credit Card, Debit Card, PIX",
+    "currenciesAccepted": "BRL"
+  };
+  return JSON.stringify(schema, null, 2);
+}
+
+function generateSchemaFAQ() {
+  if (!site.faq || !site.faq.length) return '{}';
+  var schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": site.faq.map(function (item) {
+      return {
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      };
+    })
+  };
+  return JSON.stringify(schema, null, 2);
 }
 
 function generateContactSubjects() {
@@ -144,6 +213,12 @@ const replacements = {
   '{{DOCTORS_HTML}}': generateDoctorsHTML(),
   '{{INSURANCE_HTML}}': generateInsuranceHTML(),
   '{{BLOG_HTML}}': generateBlogHTML(),
+  '{{FAQ_HTML}}': generateFAQHTML(),
+  '{{SCHEMA_ORG}}': generateSchemaOrg(),
+  '{{SCHEMA_FAQ}}': generateSchemaFAQ(),
+  '{{STATS_YEARS}}': site.stats ? site.stats.years : '5+',
+  '{{STATS_EXAMS}}': site.stats ? site.stats.exams : '50mil+',
+  '{{STATS_EQUIPMENT}}': site.stats ? site.stats.equipment : '6+',
   '{{CONTACT_SUBJECTS}}': generateContactSubjects(),
   '{{CSS}}': css,
   '{{JS}}': js,
@@ -196,3 +271,4 @@ console.log('  - ' + services.length + ' services');
 console.log('  - ' + doctors.length + ' doctors');
 console.log('  - ' + blogPosts.length + ' blog posts');
 console.log('  - ' + insurance.partners.length + ' insurance partners');
+console.log('  - ' + (site.faq ? site.faq.length : 0) + ' FAQ items');
