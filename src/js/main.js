@@ -106,33 +106,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // --- Contact form ---
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
+  // --- Hero Carousel ---
+  var heroSlides = document.querySelectorAll('.hero-slide');
+  var heroDots = document.querySelectorAll('.hero-dot');
+  var currentSlide = 0;
+  var slideInterval = null;
 
-      const formData = new FormData(contactForm);
-      const subject = formData.get('subject');
-      const name = formData.get('name');
-      const email = formData.get('email');
-      const phone = formData.get('phone');
-      const message = formData.get('message');
+  function showSlide(index) {
+    heroSlides.forEach(function (slide, i) {
+      slide.classList.toggle('active', i === index);
+    });
+    heroDots.forEach(function (dot, i) {
+      dot.classList.toggle('active', i === index);
+    });
+    currentSlide = index;
+  }
 
-      // Build WhatsApp message as fallback
-      const whatsappText = encodeURIComponent(
-        'Contato via site - ' + subject + '\n\n' +
-        'Nome: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Telefone: ' + phone + '\n' +
-        'Mensagem: ' + message
-      );
+  function nextSlide() {
+    showSlide((currentSlide + 1) % heroSlides.length);
+  }
 
-      const whatsappNumber = document.body.getAttribute('data-whatsapp') || '558521816818';
-      window.open('https://api.whatsapp.com/send?phone=' + whatsappNumber + '&text=' + whatsappText, '_blank');
+  if (heroSlides.length > 1) {
+    slideInterval = setInterval(nextSlide, 5000);
 
-      contactForm.reset();
-      alert('Mensagem enviada via WhatsApp! Obrigado pelo contato.');
+    heroDots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        var slideIndex = parseInt(this.getAttribute('data-slide'));
+        showSlide(slideIndex);
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000);
+      });
     });
   }
 
@@ -161,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }, observerOptions);
 
-  document.querySelectorAll('.service-card, .doctor-card, .blog-card, .contact-info-item').forEach(function (el) {
+  document.querySelectorAll('.service-card, .doctor-card, .blog-card').forEach(function (el) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
