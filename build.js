@@ -58,7 +58,7 @@ function escapeHTML(str) {
 // --- Generate HTML Sections ---
 function generateServicesHTML() {
   return services.map(function (s) {
-    return '<div class="service-card" data-service="' + s.id + '" data-title="' + escapeHTML(s.name) + '" data-description="' + escapeHTML(s.description) + '" data-preparations=' + "'" + escapeHTML(JSON.stringify(s.preparations)) + "'" + '>' +
+    return '<div class="service-card" data-service="' + s.id + '" data-title="' + escapeHTML(s.name) + '" data-description="' + escapeHTML(s.description) + '" data-preparations=\'' + escapeHTML(JSON.stringify(s.preparations)) + '\'>' +
       '<div class="service-icon">' + (icons[s.icon] || '') + '</div>' +
       '<h3>' + s.name + '</h3>' +
       '<p>' + s.short_description + '</p>' +
@@ -100,14 +100,20 @@ function generateInsuranceHTML() {
 
 function generateBlogHTML() {
   return blogPosts.slice(0, 3).map(function (post) {
-    return '<div class="blog-card">' +
-      '<div class="blog-image"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:2rem">📰</div></div>' +
+    var imageHTML = post.image
+      ? '<img src="' + post.image + '" alt="' + escapeHTML(post.title) + '" loading="lazy">'
+      : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:2rem">&#128196;</div>';
+    var contentFormatted = post.content.replace(/\n/g, '<br>');
+    return '<div class="blog-card" data-blog-id="' + post.id + '">' +
+      '<div class="blog-image">' + imageHTML + '</div>' +
       '<div class="blog-content">' +
       '<div class="blog-date" data-date="' + post.date + '">' + formatDate(post.date) + '</div>' +
       '<h3>' + post.title + '</h3>' +
       '<p>' + post.excerpt + '</p>' +
-      '<a href="#" class="blog-link">Ler mais &rarr;</a>' +
-      '</div></div>';
+      '<a href="#" class="blog-link" data-blog="' + post.id + '">Ler mais &rarr;</a>' +
+      '</div>' +
+      '<div class="blog-full-content" style="display:none">' + contentFormatted + '</div>' +
+      '</div>';
   }).join('\n            ');
 }
 
@@ -272,3 +278,4 @@ console.log('  - ' + doctors.length + ' doctors');
 console.log('  - ' + blogPosts.length + ' blog posts');
 console.log('  - ' + insurance.partners.length + ' insurance partners');
 console.log('  - ' + (site.faq ? site.faq.length : 0) + ' FAQ items');
+
