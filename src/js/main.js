@@ -6,8 +6,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   // --- Mobile Menu Toggle ---
-  const mobileToggle = document.querySelector('.mobile-toggle');
-  const mobileNav = document.querySelector('.mobile-nav');
+  var mobileToggle = document.querySelector('.mobile-toggle');
+  var mobileNav = document.querySelector('.mobile-nav');
 
   if (mobileToggle && mobileNav) {
     mobileToggle.addEventListener('click', function () {
@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
       mobileToggle.classList.toggle('active');
     });
 
-    // Close mobile nav on link click
     mobileNav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         mobileNav.classList.remove('active');
@@ -27,14 +26,14 @@ document.addEventListener('DOMContentLoaded', function () {
   // --- Smooth Scroll for anchor links ---
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
+      var targetId = this.getAttribute('href');
       if (targetId === '#') return;
-      const target = document.querySelector(targetId);
+      var target = document.querySelector(targetId);
       if (target) {
         e.preventDefault();
-        const headerOffset = 80;
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        var headerOffset = 80;
+        var elementPosition = target.getBoundingClientRect().top;
+        var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
@@ -44,14 +43,14 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // --- Service Modal ---
-  const serviceCards = document.querySelectorAll('.service-card[data-service]');
-  const modalOverlay = document.getElementById('service-modal');
-  const modalClose = document.querySelector('.modal-close');
+  var serviceCards = document.querySelectorAll('.service-card[data-service]');
+  var modalOverlay = document.getElementById('service-modal');
+  var modalClose = document.querySelector('.modal-close');
 
   if (serviceCards.length && modalOverlay) {
     serviceCards.forEach(function (card) {
       card.addEventListener('click', function () {
-        const serviceId = this.getAttribute('data-service');
+        var serviceId = this.getAttribute('data-service');
         showServiceModal(serviceId);
       });
     });
@@ -67,17 +66,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function showServiceModal(serviceId) {
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const modalPreparations = document.getElementById('modal-preparations');
+    var modalTitle = document.getElementById('modal-title');
+    var modalDescription = document.getElementById('modal-description');
+    var modalPreparations = document.getElementById('modal-preparations');
 
-    // Data is embedded in the HTML as data attributes on cards
-    const card = document.querySelector('[data-service="' + serviceId + '"]');
+    var card = document.querySelector('[data-service="' + serviceId + '"]');
     if (!card) return;
 
-    const title = card.getAttribute('data-title');
-    const description = card.getAttribute('data-description');
-    const preparations = JSON.parse(card.getAttribute('data-preparations') || '[]');
+    var title = card.getAttribute('data-title');
+    var description = card.getAttribute('data-description');
+    var preparations = JSON.parse(card.getAttribute('data-preparations') || '[]');
 
     modalTitle.textContent = title;
     modalDescription.textContent = description;
@@ -95,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // --- Header scroll effect ---
-  const header = document.querySelector('.header');
+  var header = document.querySelector('.header');
   if (header) {
     window.addEventListener('scroll', function () {
       if (window.scrollY > 50) {
@@ -139,23 +137,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // --- FAQ Accordion ---
+  var faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(function (question) {
+    question.addEventListener('click', function () {
+      var faqItem = this.parentElement;
+      var wasOpen = faqItem.classList.contains('open');
+
+      // Close all other items
+      document.querySelectorAll('.faq-item.open').forEach(function (item) {
+        item.classList.remove('open');
+      });
+
+      // Toggle clicked item
+      if (!wasOpen) {
+        faqItem.classList.add('open');
+      }
+    });
+  });
+
   // --- Blog date formatting ---
   document.querySelectorAll('[data-date]').forEach(function (el) {
-    const dateStr = el.getAttribute('data-date');
+    var dateStr = el.getAttribute('data-date');
     if (dateStr) {
-      const date = new Date(dateStr + 'T12:00:00');
-      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      var date = new Date(dateStr + 'T12:00:00');
+      var options = { day: 'numeric', month: 'long', year: 'numeric' };
       el.textContent = date.toLocaleDateString('pt-BR', options);
     }
   });
 
   // --- Intersection Observer for animations ---
-  const observerOptions = {
+  var observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   };
 
-  const observer = new IntersectionObserver(function (entries) {
+  var observer = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('animate-in');
@@ -164,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }, observerOptions);
 
-  document.querySelectorAll('.service-card, .doctor-card, .blog-card').forEach(function (el) {
+  document.querySelectorAll('.service-card, .doctor-card, .blog-card, .payment-card, .trust-item, .faq-item').forEach(function (el) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
