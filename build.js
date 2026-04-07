@@ -93,7 +93,7 @@ function generateInsuranceHTML() {
     html += '<div class="insurance-logo"><img src="' + p.logo + '" alt="' + escapeHTML(p.name) + '" loading="lazy"></div>';
   });
   if (insurance.accepts_private) {
-    html += '<div class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></div>';
+    html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
   }
   return html;
 }
