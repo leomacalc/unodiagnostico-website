@@ -7,12 +7,13 @@
   "whatsapp_message": "Olá, gostaria de mais informações sobre a Uno Diagnósticos",
   "email": "contato@unodiagnostico.com",
   "address": {
-    "street": "Avenida I, 17",
-    "neighborhood": "Jereissati I",
-    "complement": "Business Place – Torre II",
+    "street": "Avenida I",
+    "neighborhood": "Jereissati",
+    "complement": "Business Place Torre 2 - Ao lado da UNIMED - Setor A",
     "city": "Maracanaú",
     "state": "CE",
-    "full": "Avenida I, 17. Jereissati I. Business Place – Torre II Maracanaú, CE"
+    "cep": "61900-320",
+    "full": "Avenida I, Business Place Torre 2, ao lado da UNIMED - Jereissati, Setor A - Maracanaú/CE, 61900-320"
   },
   "hours": "Todos os dias | 7h às 22h",
   "unit_name": "Unidade Maracanaú",
