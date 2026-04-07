@@ -1,0 +1,39 @@
+{
+  "name": "Uno Diagnóstico",
+  "tagline": "Diagnóstico por imagem com precisão e credibilidade",
+  "description": "Clínica de diagnóstico por imagem em Maracanaú/CE, oferecendo exames com tecnologia de ponta e equipe médica especializada.",
+  "phone": "(85) 2181-6818",
+  "whatsapp": "558521816818",
+  "whatsapp_message": "Olá, gostaria de mais informações sobre a Uno Diagnósticos",
+  "email": "contato@unodiagnostico.com",
+  "address": {
+    "street": "Avenida I, 17",
+    "neighborhood": "Jereissati I",
+    "complement": "Business Place – Torre II",
+    "city": "Maracanaú",
+    "state": "CE",
+    "full": "Avenida I, 17. Jereissati I. Business Place – Torre II Maracanaú, CE"
+  },
+  "hours": "Todos os dias | 7h às 22h",
+  "unit_name": "Unidade Maracanaú",
+  "technical_director": "Dr. Leonardo Alcântara, CRM 10914/RQE 7848",
+  "legal_name": "Uno Clínica de Diagnóstico por Imagem LTDA",
+  "results_url": "https://uno.otimusclinic.com/uno/servlet/app.resultadodeexame?sdTjZIxAkYVpFL5AwTTQ8QwYtMA7qRj3B6bU5uP3P0Y=",
+  "social": {
+    "instagram": "https://instagram.com/unodiagnostico",
+    "facebook": "https://m.facebook.com/unodiagnostico/",
+    "whatsapp_link": "https://api.whatsapp.com/send?phone=558521816818&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Uno%20Diagn%C3%B3sticos"
+  },
+  "contact_form_subjects": [
+    "Sugestões e elogios",
+    "Reclamações",
+    "Agendamentos",
+    "Gerência",
+    "Outros"
+  ],
+  "seo": {
+    "title": "Uno Diagnóstico | Diagnóstico por Imagem em Maracanaú/CE",
+    "description": "Clínica de diagnóstico por imagem em Maracanaú/CE. Radiografia digital, tomografia, ultrassonografia, mamografia, densitometria óssea e biópsias. Agende pelo WhatsApp.",
+    "keywords": "diagnóstico por imagem, radiografia digital, tomografia, ultrassonografia, mamografia, densitometria óssea, Maracanaú, Ceará"
+  }
+}

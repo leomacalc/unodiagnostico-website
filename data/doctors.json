@@ -1,0 +1,31 @@
+[
+  {
+    "id": "dr-leonardo-alcantara",
+    "name": "Dr. Leonardo Alcântara",
+    "specialty": "Médico Radiologista",
+    "crm": "CRM-CE 10914",
+    "rqe": "RQE 7848",
+    "photo": "images/dr-leonardo.jpg",
+    "qualifications": [
+      "Médico pela Universidade Federal do Ceará",
+      "Residência em Radiologia – Hospital Geral de Fortaleza",
+      "Fellowship em RM Mamária – Stanford University",
+      "Título de especialista pelo Colégio Brasileiro de Radiologia / AMB em Radiologia e Diagnóstico por Imagem"
+    ]
+  },
+  {
+    "id": "dr-tacio-rates-duete",
+    "name": "Dr. Tácio Rates Duete",
+    "specialty": "Médico Radiologista",
+    "crm": "CRM-CE 15887",
+    "rqe": "RQE 9900",
+    "photo": "images/dr-tacio.jpg",
+    "qualifications": [
+      "Médico pela Universidade Federal do Piauí",
+      "Residência em Radiologia – Hospital do Câncer de Barretos/SP",
+      "Especialização em Radiologia Intervencionista pela USP-RP",
+      "Título de especialista pelo Colégio Brasileiro de Radiologia / AMB em Radiologia e Diagnóstico por Imagem",
+      "Título de especialista pelo Colégio Brasileiro de Radiologia / AMB em Radiologia Intervencionista"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "accepts_private": true,
+  "private_label": "Atendemos Particular",
+  "partners": [
+    {
+      "id": "livsaude",
+      "name": "LivSaúde",
+      "logo": "images/livsaude-logo.png"
+    }
+  ]
+}

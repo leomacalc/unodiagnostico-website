@@ -1,0 +1,80 @@
+[
+  {
+    "id": "radiografia-digital",
+    "name": "Radiografia Digital",
+    "icon": "xray",
+    "short_description": "Exames de raio-X com tecnologia digital, proporcionando imagens de alta resolução com menor exposição à radiação.",
+    "description": "A radiografia digital é um exame de diagnóstico por imagem que utiliza sensores digitais em vez de filmes tradicionais. Oferece imagens de alta resolução com menor exposição à radiação, resultados mais rápidos e possibilidade de ajustes na imagem para melhor visualização das estruturas anatômicas.",
+    "preparations": [
+      "Não é necessário jejum",
+      "Informe ao técnico se estiver grávida ou com suspeita de gravidez",
+      "Remova objetos metálicos da região a ser examinada",
+      "Traga exames anteriores, se houver"
+    ]
+  },
+  {
+    "id": "biopsias-puncoes",
+    "name": "Biópsias e Punções",
+    "icon": "syringe",
+    "short_description": "Procedimentos guiados por imagem para coleta de material biológico com precisão e segurança.",
+    "description": "As biópsias e punções são procedimentos minimamente invasivos guiados por imagem (ultrassonografia ou tomografia) para coleta de material biológico para análise. São realizados por médicos especializados em radiologia intervencionista, garantindo precisão e segurança.",
+    "preparations": [
+      "Jejum de 8 horas (conforme orientação médica)",
+      "Informe medicamentos em uso, especialmente anticoagulantes",
+      "Traga exames anteriores relacionados",
+      "É necessário acompanhante no dia do procedimento"
+    ]
+  },
+  {
+    "id": "ultrassonografia-doppler",
+    "name": "Ultrassonografia e Doppler",
+    "icon": "ultrasound",
+    "short_description": "Exames por ultrassom para avaliação de órgãos, tecidos e fluxo sanguíneo, sem uso de radiação.",
+    "description": "A ultrassonografia utiliza ondas sonoras de alta frequência para produzir imagens em tempo real dos órgãos e tecidos do corpo. O Doppler é uma técnica complementar que avalia o fluxo sanguíneo nos vasos. São exames seguros, indolores e que não utilizam radiação ionizante.",
+    "preparations": [
+      "Ultrassom abdominal: jejum de 6 a 8 horas",
+      "Ultrassom pélvico: bexiga cheia (beber 4-6 copos de água 1h antes)",
+      "Ultrassom de tireoide: não é necessário preparo especial",
+      "Traga exames anteriores, se houver"
+    ]
+  },
+  {
+    "id": "tomografia-computadorizada",
+    "name": "Tomografia Computadorizada",
+    "icon": "ct-scan",
+    "short_description": "Exames de tomografia com equipamento moderno para diagnósticos detalhados e precisos.",
+    "description": "A tomografia computadorizada é um exame que utiliza raios-X e tecnologia computacional para produzir imagens detalhadas em cortes transversais do corpo. Permite visualização precisa de ossos, órgãos e tecidos moles, sendo essencial para diversos diagnósticos.",
+    "preparations": [
+      "Jejum de 4 a 6 horas (para exames com contraste)",
+      "Informe alergias, especialmente a iodo ou contraste",
+      "Traga exames de creatinina recentes (últimos 30 dias)",
+      "Informe se possui diabetes, problemas renais ou cardíacos"
+    ]
+  },
+  {
+    "id": "densitometria-ossea",
+    "name": "Densitometria Óssea",
+    "icon": "bone",
+    "short_description": "Avaliação da densidade mineral óssea para diagnóstico e acompanhamento de osteoporose.",
+    "description": "A densitometria óssea é o exame padrão-ouro para medir a densidade mineral dos ossos. É fundamental para o diagnóstico e acompanhamento da osteoporose e osteopenia, ajudando a avaliar o risco de fraturas e orientar o tratamento.",
+    "preparations": [
+      "Não é necessário jejum",
+      "Evite suplementos de cálcio 24 horas antes",
+      "Não realize exames com bário ou contraste 7 dias antes",
+      "Use roupas confortáveis sem botões ou zíperes metálicos"
+    ]
+  },
+  {
+    "id": "mamografia",
+    "name": "Mamografia",
+    "icon": "mammography",
+    "short_description": "Exame de rastreamento e diagnóstico de doenças mamárias com tecnologia avançada.",
+    "description": "A mamografia é o principal exame para rastreamento e diagnóstico precoce do câncer de mama. Utiliza raios-X de baixa dose para produzir imagens detalhadas das mamas, permitindo a detecção de lesões em estágio inicial.",
+    "preparations": [
+      "Agende preferencialmente após o período menstrual",
+      "Não use desodorante, talco ou creme na região das mamas e axilas",
+      "Traga mamografias anteriores para comparação",
+      "Informe se está grávida ou amamentando"
+    ]
+  }
+]
