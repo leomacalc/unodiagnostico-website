@@ -2,6 +2,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
+  "functions": {
+    "api/transcribe.js": { "memory": 1024, "maxDuration": 30 },
+    "api/format.js": { "memory": 512, "maxDuration": 30 }
+  },
   "headers": [
     {
       "source": "/(.*)",

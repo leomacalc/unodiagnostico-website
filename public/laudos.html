@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNO Diagnóstico — Ditado de Laudos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181c26;
+    --surface2: #1f2333;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8eaf0;
+    --text2: #7a8099;
+    --text3: #4a5070;
+    --accent: #3b82f6;
+    --accent-dim: rgba(59,130,246,0.12);
+    --accent-border: rgba(59,130,246,0.3);
+    --danger: #ef4444;
+    --danger-dim: rgba(239,68,68,0.1);
+    --danger-border: rgba(239,68,68,0.3);
+    --success: #22c55e;
+    --success-dim: rgba(34,197,94,0.1);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 20px 80px;
+  }
+
+  .logo {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 48px;
+  }
+  .logo span { color: var(--accent); }
+
+  .container { width: 100%; max-width: 680px; }
+
+  /* REC CARD */
+  .rec-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  #rec-btn {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    position: relative;
+  }
+  #rec-btn:hover { border-color: var(--accent); background: var(--accent-dim); }
+  #rec-btn.recording {
+    border-color: var(--danger-border);
+    background: var(--danger-dim);
+    animation: recpulse 1.4s ease-in-out infinite;
+  }
+  @keyframes recpulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+    50% { box-shadow: 0 0 0 8px rgba(239,68,68,0.12); }
+  }
+
+  .rec-info { flex: 1; }
+  #rec-status {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  #rec-hint {
+    font-size: 12px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  .waveform {
+    display: flex; align-items: center; gap: 3px; height: 36px;
+  }
+  .wbar {
+    width: 3px; border-radius: 2px;
+    background: var(--border2);
+    transition: height 0.06s, background 0.1s;
+  }
+
+  /* PIPELINE */
+  .status-bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    font-family: var(--mono);
+  }
+  .status-bar.info { background: var(--accent-dim); border: 1px solid var(--accent-border); color: var(--accent); }
+  .status-bar.error { background: var(--danger-dim); border: 1px solid var(--danger-border); color: var(--danger); }
+  .status-bar.success { background: var(--success-dim); border: 1px solid rgba(34,197,94,0.25); color: var(--success); }
+  .hidden { display: none !important; }
+
+  .spinner {
+    width: 13px; height: 13px; flex-shrink: 0;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* LAUDO */
+  .laudo-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .laudo-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .laudo-label {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text3); font-family: var(--mono);
+  }
+  .hdr-btns { display: flex; gap: 8px; }
+
+  .ghost-btn {
+    height: 30px; padding: 0 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    font-size: 12px; font-family: var(--mono);
+    cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .ghost-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+  .ghost-btn.primary {
+    border-color: var(--accent-border);
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .ghost-btn.primary:hover { background: rgba(59,130,246,0.2); }
+
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    flex: 1; padding: 10px 0;
+    font-size: 12px; font-family: var(--mono);
+    text-align: center; cursor: pointer;
+    color: var(--text3);
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+
+  #laudo-formatted {
+    padding: 24px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text);
+    min-height: 200px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: var(--sans);
+  }
+  #laudo-formatted b { color: #fff; }
+  .placeholder-text { color: var(--text3); font-family: var(--mono); font-size: 13px; }
+
+  #laudo-raw {
+    width: 100%; min-height: 200px;
+    border: none; outline: none; resize: vertical;
+    padding: 24px;
+    font-size: 13px; line-height: 1.8;
+    color: var(--text2);
+    background: var(--surface);
+    font-family: var(--mono);
+  }
+
+  .laudo-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  #char-count { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+  /* COPY TOAST */
+  #copy-toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    background: var(--success-dim);
+    border: 1px solid rgba(34,197,94,0.3);
+    color: var(--success);
+    font-family: var(--mono); font-size: 12px;
+    padding: 10px 20px; border-radius: 8px;
+    opacity: 0; transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  #copy-toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="logo">UNO <span>//</span> LAUDOS</div>
+
+<div class="container">
+
+  <div class="rec-card">
+    <button id="rec-btn" title="Gravar / Parar">
+      <svg id="mic-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7a8099" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="9" y="2" width="6" height="12" rx="3"/>
+        <path d="M5 10a7 7 0 0 0 14 0"/>
+        <line x1="12" y1="19" x2="12" y2="22"/>
+        <line x1="8" y1="22" x2="16" y2="22"/>
+      </svg>
+      <div id="stop-icon" class="hidden" style="width:20px;height:20px;border-radius:4px;background:var(--danger);"></div>
+    </button>
+
+    <div class="rec-info">
+      <div id="rec-status">Clique para gravar</div>
+      <div id="rec-hint">00:00 — dite a modalidade no início</div>
+    </div>
+
+    <div class="waveform" id="waveform">
+      <div class="wbar" style="height:5px"></div>
+      <div class="wbar" style="height:9px"></div>
+      <div class="wbar" style="height:7px"></div>
+      <div class="wbar" style="height:13px"></div>
+      <div class="wbar" style="height:5px"></div>
+      <div class="wbar" style="height:9px"></div>
+      <div class="wbar" style="height:7px"></div>
+      <div class="wbar" style="height:11px"></div>
+      <div class="wbar" style="height:5px"></div>
+      <div class="wbar" style="height:8px"></div>
+      <div class="wbar" style="height:6px"></div>
+      <div class="wbar" style="height:10px"></div>
+    </div>
+  </div>
+
+  <div id="status-bar" class="status-bar info hidden">
+    <div class="spinner" id="spinner"></div>
+    <span id="status-msg">Transcrevendo com Whisper...</span>
+  </div>
+
+  <div class="laudo-card">
+    <div class="laudo-header">
+      <span class="laudo-label">Laudo</span>
+      <div class="hdr-btns">
+        <button class="ghost-btn" id="btn-clear">limpar</button>
+        <button class="ghost-btn primary" id="btn-copy-header">copiar</button>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" id="tab-fmt" onclick="showTab('fmt')">formatado</div>
+      <div class="tab" id="tab-raw" onclick="showTab('raw')">bruto</div>
+    </div>
+
+    <div id="pane-fmt">
+      <div id="laudo-formatted">
+        <span class="placeholder-text">// dite o laudo para começar</span>
+      </div>
+    </div>
+    <div id="pane-raw" class="hidden">
+      <textarea id="laudo-raw" placeholder="// transcrição bruta do Whisper"></textarea>
+    </div>
+
+    <div class="laudo-footer">
+      <span id="char-count">0 chars</span>
+      <button class="ghost-btn primary" id="btn-copy-footer">copiar laudo</button>
+    </div>
+  </div>
+
+</div>
+
+<div id="copy-toast">laudo copiado</div>
+
+<script>
+let mediaRecorder = null;
+let audioChunks = [];
+let timerInterval = null;
+let seconds = 0;
+let isRecording = false;
+let animFrame = null;
+let analyser = null;
+let formattedText = '';
+
+const $ = id => document.getElementById(id);
+
+$('rec-btn').onclick = () => { if (!isRecording) startRecording(); else stopRecording(); };
+
+async function startRecording() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ctx.createMediaStreamSource(stream);
+    analyser = ctx.createAnalyser();
+    analyser.fftSize = 64;
+    src.connect(analyser);
+    animateWaveform();
+
+    const mime = getSupportedMime();
+    mediaRecorder = new MediaRecorder(stream, { mimeType: mime });
+    audioChunks = [];
+    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+    mediaRecorder.onstop = processAudio;
+    mediaRecorder.start(250);
+
+    isRecording = true; seconds = 0;
+    $('rec-btn').classList.add('recording');
+    $('mic-svg').classList.add('hidden');
+    $('stop-icon').classList.remove('hidden');
+    $('rec-status').textContent = 'Gravando...';
+    $('rec-status').style.color = 'var(--danger)';
+    timerInterval = setInterval(() => {
+      seconds++;
+      $('rec-hint').textContent = pad(Math.floor(seconds/60)) + ':' + pad(seconds%60) + ' — clique para parar';
+    }, 1000);
+  } catch(e) {
+    showStatus('Microfone indisponível: ' + e.message, 'error');
+  }
+}
+
+function stopRecording() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    mediaRecorder.stream.getTracks().forEach(t => t.stop());
+    mediaRecorder.stop();
+  }
+  isRecording = false;
+  clearInterval(timerInterval);
+  cancelAnimationFrame(animFrame);
+  $('rec-btn').classList.remove('recording');
+  $('mic-svg').classList.remove('hidden');
+  $('stop-icon').classList.add('hidden');
+  $('rec-status').textContent = 'Processando...';
+  $('rec-status').style.color = 'var(--text2)';
+  $('rec-hint').textContent = 'aguarde...';
+  resetWaveform();
+}
+
+async function processAudio() {
+  const mime = getSupportedMime();
+  const ext = mime.includes('webm') ? 'webm' : mime.includes('ogg') ? 'ogg' : 'mp4';
+  const blob = new Blob(audioChunks, { type: mime });
+  const file = new File([blob], 'audio.' + ext, { type: mime });
+
+  showStatus('Transcrevendo com Whisper...', 'info');
+
+  const form = new FormData();
+  form.append('file', file);
+
+  try {
+    const r1 = await fetch('/api/transcribe', { method: 'POST', body: form });
+    const d1 = await r1.json();
+    if (d1.error) { showStatus('Erro Whisper: ' + (d1.error.message || d1.error), 'error'); resetReady(); return; }
+
+    const rawText = d1.text || '';
+    $('laudo-raw').value = rawText;
+
+    showStatus('Formatando laudo com IA...', 'info');
+
+    const r2 = await fetch('/api/format', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: rawText })
+    });
+    const d2 = await r2.json();
+    if (d2.error) { showStatus('Erro formatação: ' + (d2.error.message || d2.error), 'error'); resetReady(); return; }
+
+    formattedText = (d2.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+    renderFormatted();
+    updateCharCount();
+    hideStatus();
+    resetReady();
+  } catch(e) {
+    showStatus('Erro: ' + e.message, 'error');
+    resetReady();
+  }
+}
+
+function resetReady() {
+  $('rec-status').textContent = 'Clique para gravar';
+  $('rec-status').style.color = 'var(--text)';
+  $('rec-hint').textContent = '00:00 — dite a modalidade no início';
+}
+
+function renderFormatted() {
+  const html = formattedText
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/&lt;b&gt;/g,'<b>').replace(/&lt;\/b&gt;/g,'</b>')
+    .replace(/\n/g,'<br>');
+  $('laudo-formatted').innerHTML = html || '<span class="placeholder-text">// dite o laudo para começar</span>';
+}
+
+window.showTab = function(tab) {
+  $('tab-fmt').classList.toggle('active', tab === 'fmt');
+  $('tab-raw').classList.toggle('active', tab === 'raw');
+  $('pane-fmt').classList.toggle('hidden', tab !== 'fmt');
+  $('pane-raw').classList.toggle('hidden', tab !== 'raw');
+};
+
+function animateWaveform() {
+  if (!analyser) return;
+  const bars = document.querySelectorAll('.wbar');
+  const data = new Uint8Array(analyser.frequencyBinCount);
+  function draw() {
+    animFrame = requestAnimationFrame(draw);
+    analyser.getByteFrequencyData(data);
+    bars.forEach((b, i) => {
+      const v = data[i * 2] || 0;
+      b.style.height = Math.max(3, Math.round(v / 7)) + 'px';
+      b.style.background = v > 55 ? 'var(--danger)' : 'var(--border2)';
+    });
+  }
+  draw();
+}
+
+function resetWaveform() {
+  [5,9,7,13,5,9,7,11,5,8,6,10].forEach((h,i) => {
+    const b = document.querySelectorAll('.wbar')[i];
+    if (b) { b.style.height = h+'px'; b.style.background = 'var(--border2)'; }
+  });
+}
+
+function getSupportedMime() {
+  return ['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus','audio/mp4']
+    .find(t => MediaRecorder.isTypeSupported(t)) || 'audio/webm';
+}
+
+function showStatus(msg, type) {
+  const el = $('status-bar');
+  el.className = 'status-bar ' + type;
+  $('status-msg').textContent = msg;
+  $('spinner').classList.toggle('hidden', type !== 'info');
+  el.classList.remove('hidden');
+}
+function hideStatus() { $('status-bar').classList.add('hidden'); }
+
+function updateCharCount() {
+  $('char-count').textContent = formattedText.length + ' chars';
+}
+
+function copyLaudo() {
+  if (!formattedText) return;
+  navigator.clipboard.writeText(formattedText).then(() => {
+    const t = $('copy-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  });
+}
+
+$('btn-copy-header').onclick = copyLaudo;
+$('btn-copy-footer').onclick = copyLaudo;
+
+$('btn-clear').onclick = () => {
+  formattedText = '';
+  $('laudo-formatted').innerHTML = '<span class="placeholder-text">// dite o laudo para começar</span>';
+  $('laudo-raw').value = '';
+  updateCharCount();
+  hideStatus();
+};
+</script>
+</body>
+</html>
