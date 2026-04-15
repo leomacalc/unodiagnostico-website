@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8a0b4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d06090;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)" />
+  <circle cx="680" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="720" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="100" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="60" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+  <path d="M 340 120 C 300 80, 270 90, 280 130 C 290 165, 330 175, 340 180" fill="none" stroke="url(#ribbon)" stroke-width="22" stroke-linecap="round"/>
+  <path d="M 340 120 C 380 80, 410 90, 400 130 C 390 165, 350 175, 340 180" fill="none" stroke="url(#ribbon)" stroke-width="22" stroke-linecap="round"/>
+  <path d="M 340 180 C 320 210, 310 240, 320 260" fill="none" stroke="url(#ribbon)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M 340 180 C 360 210, 370 240, 360 260" fill="none" stroke="url(#ribbon)" stroke-width="18" stroke-linecap="round"/>
+  <rect x="450" y="90" width="60" height="130" rx="8" fill="#abce5f" opacity="0.9"/>
+  <rect x="455" y="95" width="50" height="10" rx="4" fill="#005a87" opacity="0.5"/>
+  <rect x="440" y="225" width="80" height="12" rx="4" fill="#c8e47a" opacity="0.9"/>
+  <rect x="445" y="240" width="70" height="8" rx="3" fill="#abce5f" opacity="0.7"/>
+  <rect x="462" y="108" width="36" height="25" rx="3" fill="#003f6b" opacity="0.8"/>
+  <rect x="465" y="111" width="30" height="19" rx="2" fill="#007ab5" opacity="0.6"/>
+  <circle cx="464" cy="146" r="4" fill="#003f6b" opacity="0.8"/>
+  <circle cx="476" cy="146" r="4" fill="#abce5f" opacity="0.9"/>
+  <circle cx="488" cy="146" r="4" fill="#003f6b" opacity="0.8"/>
+  <circle cx="480" cy="165" r="8" fill="#003f6b" opacity="0.6"/>
+  <circle cx="480" cy="165" r="5" fill="#abce5f" opacity="0.8"/>
+  <rect x="510" y="100" width="10" height="140" rx="4" fill="#003f6b" opacity="0.5"/>
+  <rect x="0" y="350" width="800" height="6" fill="url(#accent)" opacity="0.8"/>
+  <text x="400" y="310" font-family="Montserrat, Arial, sans-serif" font-size="28" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">Mamografia</text>
+  <text x="400" y="340" font-family="Open Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#c8e47a" text-anchor="middle" letter-spacing="0.3">Guia completo sobre rastreamento do câncer de mama</text>
+  <text x="40" y="30" font-family="Montserrat, Arial, sans-serif" font-size="13" font-weight="700" fill="#abce5f" opacity="0.9">UNO DIAGNÓSTICO</text>
+  <rect x="40" y="34" width="150" height="2" fill="#abce5f" opacity="0.5" rx="1"/>
+</svg>
