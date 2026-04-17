@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8efd5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="680" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="720" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="100" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="60" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots pattern -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- Bone icon (femur / long bone) on the left -->
+  <g transform="translate(230 120) rotate(-20)">
+    <!-- Top knob -->
+    <circle cx="0" cy="0" r="28" fill="url(#bone)" stroke="#005a87" stroke-width="2"/>
+    <circle cx="-18" cy="10" r="20" fill="url(#bone)" stroke="#005a87" stroke-width="2"/>
+    <!-- Shaft -->
+    <rect x="-14" y="10" width="28" height="120" fill="url(#bone)" stroke="#005a87" stroke-width="2" rx="8"/>
+    <!-- Bottom knob -->
+    <circle cx="0" cy="135" r="26" fill="url(#bone)" stroke="#005a87" stroke-width="2"/>
+    <circle cx="18" cy="148" r="18" fill="url(#bone)" stroke="#005a87" stroke-width="2"/>
+    <!-- Bone density (inner trabeculae) -->
+    <line x1="-8" y1="40" x2="8" y2="55" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+    <line x1="-8" y1="60" x2="8" y2="45" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+    <line x1="-8" y1="80" x2="8" y2="95" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+    <line x1="-8" y1="100" x2="8" y2="85" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+    <line x1="-8" y1="120" x2="8" y2="125" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+  </g>
+
+  <!-- Density bar chart icon (right side) -->
+  <g transform="translate(450 115)">
+    <!-- Scanner frame -->
+    <rect x="-10" y="-10" width="240" height="170" rx="10" fill="#003f6b" opacity="0.35" stroke="#abce5f" stroke-width="2"/>
+    <!-- Chart bars showing T-score -->
+    <rect x="15" y="90" width="30" height="55" fill="#abce5f" opacity="0.95" rx="3"/>
+    <rect x="55" y="70" width="30" height="75" fill="#c8e47a" opacity="0.95" rx="3"/>
+    <rect x="95" y="45" width="30" height="100" fill="#abce5f" opacity="0.95" rx="3"/>
+    <rect x="135" y="60" width="30" height="85" fill="#c8e47a" opacity="0.9" rx="3"/>
+    <rect x="175" y="80" width="30" height="65" fill="#abce5f" opacity="0.85" rx="3"/>
+    <!-- Baseline -->
+    <line x1="5" y1="150" x2="225" y2="150" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
+    <!-- Indicator dots -->
+    <circle cx="30" cy="85" r="4" fill="#ffffff"/>
+    <circle cx="70" cy="65" r="4" fill="#ffffff"/>
+    <circle cx="110" cy="40" r="4" fill="#ffffff"/>
+    <circle cx="150" cy="55" r="4" fill="#ffffff"/>
+    <circle cx="190" cy="75" r="4" fill="#ffffff"/>
+    <!-- Trend line -->
+    <polyline points="30,85 70,65 110,40 150,55 190,75" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.9"/>
+    <!-- Label -->
+    <text x="110" y="20" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle" opacity="0.9">DENSIDADE ÓSSEA</text>
+  </g>
+
+  <!-- Green accent bar at bottom -->
+  <rect x="0" y="350" width="800" height="6" fill="url(#accent)" opacity="0.8"/>
+
+  <!-- Text block -->
+  <text x="400" y="310" font-family="Montserrat, Arial, sans-serif" font-size="28" font-weight="700"
+        fill="#ffffff" text-anchor="middle" letter-spacing="0.5">
+    Densitometria Óssea
+  </text>
+  <text x="400" y="340" font-family="Open Sans, Arial, sans-serif" font-size="15" font-weight="400"
+        fill="#c8e47a" text-anchor="middle" letter-spacing="0.3">
+    Quando fazer e como cuidar da saúde dos seus ossos
+  </text>
+
+  <!-- Logo / brand mark -->
+  <text x="40" y="30" font-family="Montserrat, Arial, sans-serif" font-size="13" font-weight="700"
+        fill="#abce5f" opacity="0.9">UNO DIAGNÓSTICO</text>
+  <rect x="40" y="34" width="150" height="2" fill="#abce5f" opacity="0.5" rx="1"/>
+</svg>
