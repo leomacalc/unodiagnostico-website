@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="filmGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0a2540;stop-opacity:0.95" />
+      <stop offset="60%" style="stop-color:#031426;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#000814;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="ribGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.85" />
+      <stop offset="100%" style="stop-color:#e6f4ff;stop-opacity:0.55" />
+    </linearGradient>
+    <radialGradient id="lungGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:0.35" />
+      <stop offset="100%" style="stop-color:#abce5f;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- X-ray film/viewer panel (left side) -->
+  <g transform="translate(60 50)">
+    <!-- Film frame -->
+    <rect x="0" y="0" width="280" height="240" rx="10" fill="url(#filmGrad)" stroke="#abce5f" stroke-width="2.5" opacity="0.95"/>
+
+    <!-- Film clips at top -->
+    <rect x="50" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.75"/>
+    <rect x="208" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.75"/>
+
+    <!-- Lung glow background -->
+    <ellipse cx="90" cy="120" rx="55" ry="80" fill="url(#lungGlow)" opacity="0.85"/>
+    <ellipse cx="190" cy="120" rx="55" ry="80" fill="url(#lungGlow)" opacity="0.85"/>
+
+    <!-- Spine (vertebrae) -->
+    <g fill="url(#ribGrad)" opacity="0.9">
+      <rect x="135" y="40" width="10" height="14" rx="2"/>
+      <rect x="135" y="58" width="10" height="14" rx="2"/>
+      <rect x="135" y="76" width="10" height="14" rx="2"/>
+      <rect x="135" y="94" width="10" height="14" rx="2"/>
+      <rect x="135" y="112" width="10" height="14" rx="2"/>
+      <rect x="135" y="130" width="10" height="14" rx="2"/>
+      <rect x="135" y="148" width="10" height="14" rx="2"/>
+      <rect x="135" y="166" width="10" height="14" rx="2"/>
+      <rect x="135" y="184" width="10" height="14" rx="2"/>
+      <rect x="135" y="202" width="10" height="14" rx="2"/>
+    </g>
+
+    <!-- Clavicles -->
+    <path d="M 60 40 Q 100 30 135 45" fill="none" stroke="url(#ribGrad)" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+    <path d="M 220 40 Q 180 30 145 45" fill="none" stroke="url(#ribGrad)" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+
+    <!-- Left ribs (anatomical right side of patient) -->
+    <g fill="none" stroke="url(#ribGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+      <path d="M 135 60 Q 95 70 55 95"/>
+      <path d="M 135 80 Q 90 90 45 115"/>
+      <path d="M 135 100 Q 85 110 40 135"/>
+      <path d="M 135 120 Q 85 130 42 155"/>
+      <path d="M 135 140 Q 90 148 50 175"/>
+      <path d="M 135 160 Q 95 168 60 195"/>
+      <path d="M 135 180 Q 100 188 75 210"/>
+    </g>
+
+    <!-- Right ribs -->
+    <g fill="none" stroke="url(#ribGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.85">
+      <path d="M 145 60 Q 185 70 225 95"/>
+      <path d="M 145 80 Q 190 90 235 115"/>
+      <path d="M 145 100 Q 195 110 240 135"/>
+      <path d="M 145 120 Q 195 130 238 155"/>
+      <path d="M 145 140 Q 190 148 230 175"/>
+      <path d="M 145 160 Q 185 168 220 195"/>
+      <path d="M 145 180 Q 180 188 205 210"/>
+    </g>
+
+    <!-- Heart shadow -->
+    <path d="M 110 130 Q 115 115 135 118 Q 155 115 160 130 Q 158 155 135 175 Q 115 158 110 130 Z"
+          fill="#0a1d2e" stroke="#ffffff" stroke-width="1.2" opacity="0.7"/>
+
+    <!-- Diaphragm curves -->
+    <path d="M 50 215 Q 95 225 135 215" fill="none" stroke="url(#ribGrad)" stroke-width="2.5" opacity="0.8"/>
+    <path d="M 145 215 Q 185 225 230 215" fill="none" stroke="url(#ribGrad)" stroke-width="2.5" opacity="0.8"/>
+
+    <!-- Label markers -->
+    <text x="14" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95">R</text>
+    <text x="260" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95">L</text>
+
+    <!-- Bottom info -->
+    <text x="140" y="232" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700"
+          fill="#abce5f" text-anchor="middle" opacity="0.95">TÓRAX PA • UNO DIAGNÓSTICO</text>
+  </g>
+
+  <!-- X-ray beam / radiation symbol (right side) -->
+  <g transform="translate(530 110)">
+    <!-- Outer arc rays -->
+    <g stroke="#abce5f" stroke-width="2.5" stroke-linecap="round" opacity="0.7" fill="none">
+      <path d="M 60 60 L 20 20"/>
+      <path d="M 60 60 L 100 20"/>
+      <path d="M 60 60 L 20 100"/>
+      <path d="M 60 60 L 100 100"/>
+      <path d="M 60 60 L 60 10"/>
+      <path d="M 60 60 L 60 110"/>
+      <path d="M 60 60 L 10 60"/>
+      <path d="M 60 60 L 110 60"/>
+    </g>
+
+    <!-- Center radiation symbol -->
+    <circle cx="60" cy="60" r="38" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.9"/>
+    <circle cx="60" cy="60" r="8" fill="#abce5f" opacity="0.95"/>
+
+    <!-- Three trefoil blades (radiation symbol style) -->
+    <g fill="#ffffff" opacity="0.85">
+      <path d="M 60 60 L 50 28 Q 60 22 70 28 Z"/>
+      <path d="M 60 60 L 85 75 Q 87 86 78 92 Z"/>
+      <path d="M 60 60 L 35 75 Q 33 86 42 92 Z"/>
+    </g>
+
+    <!-- Sparkles around -->
+    <circle cx="10" cy="20" r="2.5" fill="#abce5f" opacity="0.7"/>
+    <circle cx="115" cy="30" r="2" fill="#c8e47a" opacity="0.6"/>
+    <circle cx="20" cy="110" r="2" fill="#abce5f" opacity="0.5"/>
+    <circle cx="110" cy="115" r="2.5" fill="#c8e47a" opacity="0.7"/>
+  </g>
+
+  <!-- Stethoscope-ish curve (decoration) -->
+  <g opacity="0.4" fill="none" stroke="#abce5f" stroke-width="2.5" stroke-linecap="round">
+    <path d="M 480 220 Q 540 240 590 260 Q 640 275 700 245"/>
+    <circle cx="700" cy="245" r="6" fill="#abce5f" stroke="none" opacity="0.85"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="325" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Raio-X de tórax</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="358" font-family="Open Sans, Arial, sans-serif" font-size="15" font-weight="400"
+        fill="#c8e47a" text-anchor="middle">Exame rápido, seguro e essencial • Indicações e preparo</text>
+
+  <!-- Bottom accent line -->
+  <rect x="280" y="372" width="240" height="3" rx="1.5" fill="url(#accent)" opacity="0.85"/>
+</svg>
