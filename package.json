@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "Site estático da Uno Diagnóstico - Gerenciado por IA",
   "scripts": {
-    "build": "node download-images.js && node build.js",
+    "build": "node build.js",
     "dev": "node build.js && npx serve dist -p 3000",
+    "dev:fetch": "node download-images.js && node build.js && npx serve dist -p 3000",
+    "fetch-images": "node download-images.js",
     "preview": "npx serve dist -p 3000"
   },
   "author": "Uno Diagnóstico",
