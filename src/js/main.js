@@ -221,30 +221,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // --- Intersection Observer for animations ---
-  var observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  // --- Reveal on scroll (usa classe .reveal definida no CSS) ---
+  var revealSelectors = [
+    '.service-card', '.doctor-card', '.blog-card', '.payment-card',
+    '.trust-item', '.faq-item', '.review-card', '.insurance-logo',
+    '.insurance-private', '.section-header'
+  ];
+  var revealEls = document.querySelectorAll(revealSelectors.join(','));
 
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
+  // Adiciona classe .reveal antes do observer disparar (evita FOUC)
+  revealEls.forEach(function (el) { el.classList.add('reveal'); });
 
-  document.querySelectorAll('.service-card, .doctor-card, .blog-card, .payment-card, .trust-item, .faq-item, .review-card').forEach(function (el) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-  });
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  // Add animation class styles
-  var style = document.createElement('style');
-  style.textContent = '.animate-in { opacity: 1 !important; transform: translateY(0) !important; }';
-  document.head.appendChild(style);
+    revealEls.forEach(function (el) { observer.observe(el); });
+  } else {
+    // Fallback: navegadores sem IntersectionObserver mostram tudo imediatamente
+    revealEls.forEach(function (el) { el.classList.add('visible'); });
+  }
 });
