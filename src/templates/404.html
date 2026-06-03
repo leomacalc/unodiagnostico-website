@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página não encontrada | {{SITE_NAME}}</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="theme-color" content="#005a87">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #003f5f 0%, #005a87 100%);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 560px;
+      text-align: center;
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 32px;
+      background: #abce5f;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    .logo img { width: 96px; height: 96px; }
+    .code {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 6rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #abce5f;
+      margin-bottom: 8px;
+      letter-spacing: -4px;
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 32px;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .btn-primary {
+      background: #abce5f;
+      color: #003f5f;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(171, 206, 95, 0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    @media (max-width: 480px) {
+      .code { font-size: 4.5rem; }
+      h1 { font-size: 1.4rem; }
+      .buttons { flex-direction: column; }
+      .btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="logo">
+      <picture>
+        <source srcset="/images/logos/logo-verde.webp" type="image/webp">
+        <img src="/images/logos/logo-verde.png" alt="{{SITE_NAME}}" width="512" height="512">
+      </picture>
+    </div>
+    <div class="code">404</div>
+    <h1>Página não encontrada</h1>
+    <p>A página que você procura não existe ou foi movida. Mas podemos te ajudar — nossa equipe está disponível todos os dias das 7h às 22h pelo WhatsApp.</p>
+    <div class="buttons">
+      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-primary">
+        {{ICON_WHATSAPP}} Falar pelo WhatsApp
+      </a>
+      <a href="/" class="btn btn-outline">Voltar para o início</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{SEO_TITLE}}</title>
+  <meta name="description" content="{{SEO_DESCRIPTION}}">
+  <meta name="keywords" content="{{SEO_KEYWORDS}}">
+  <link rel="canonical" href="https://unodiagnostico.com/{{SLUG}}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#005a87">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{SEO_TITLE}}">
+  <meta property="og:description" content="{{SEO_DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://unodiagnostico.com/{{SLUG}}">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Uno Diagnóstico">
+  <meta property="og:image" content="https://unodiagnostico.com/images/og-image.png">
+  <meta property="og:image:secure_url" content="https://unodiagnostico.com/images/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Uno Diagnóstico — {{EXAM_NAME}} em Maracanaú/CE">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{SEO_TITLE}}">
+  <meta name="twitter:description" content="{{SEO_DESCRIPTION}}">
+  <meta name="twitter:image" content="https://unodiagnostico.com/images/og-image.png">
+  <meta name="twitter:image:alt" content="Uno Diagnóstico — {{EXAM_NAME}} em Maracanaú/CE">
+
+  <!-- Fonts (com preconnect + preload pra reduzir FOIT e melhorar LCP) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Preload do logo -->
+  <link rel="preload" as="image" href="/images/logos/logo-verde.webp" type="image/webp">
+
+  <!-- Schema.org MedicalProcedure -->
+  <script type="application/ld+json">
+    {{SCHEMA_MEDICAL}}
+  </script>
+  <script type="application/ld+json">
+    {{SCHEMA_FAQ}}
+  </script>
+  <script type="application/ld+json">
+    {{SCHEMA_BREADCRUMB}}
+  </script>
+
+  <!-- Google Ads + Analytics Tag -->
+  <!-- gtag.js carrega uma vez e serve tanto para Google Ads quanto para GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-5779130943"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-5779130943');
+
+    // Google Analytics 4 — substitua G-XXXXXXXXXX pelo seu Measurement ID real
+    // Para obter o ID: analytics.google.com → Admin → Data Streams → seu site → Measurement ID
+    gtag('config', 'G-4T951CHR0E');
+
+    function trackWhatsappClick(location){
+      try { gtag('event', 'whatsapp_click', { 'landing_page': '{{SLUG}}', 'location': location || 'unknown' }); } catch(e) {}
+      return true;
+    }
+  </script>
+
+  <!-- Inline CSS -->
+  <style>
+    {{LANDING_CSS}}
+  </style>
+</head>
+<body data-whatsapp="{{WHATSAPP}}">
+
+  <!-- ========== HEADER (minimal, conversion-focused) ========== -->
+  <header class="lp-header">
+    <div class="lp-container">
+      <a href="https://unodiagnostico.com" class="lp-logo">
+        <picture>
+          <source srcset="/images/logos/logo-verde.webp" type="image/webp">
+          <img src="/images/logos/logo-verde.png" alt="{{SITE_NAME}}" width="512" height="512" fetchpriority="high">
+        </picture>
+      </a>
+      <div class="lp-header-phone">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('header')" class="lp-btn lp-btn-whatsapp lp-btn-sm">
+          {{ICON_WHATSAPP}} {{PHONE}}
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="lp-hero">
+    <div class="lp-container">
+      <div class="lp-hero-content">
+        <span class="lp-hero-badge">{{HERO_BADGE}}</span>
+        <h1>{{HERO_HEADLINE}}</h1>
+        <p class="lp-hero-subtitle">{{HERO_SUBTITLE}}</p>
+
+        <div class="lp-hero-buttons">
+          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('hero_primary')" class="lp-btn lp-btn-whatsapp lp-btn-lg">
+            {{ICON_WHATSAPP}} {{HERO_CTA_PRIMARY}}
+          </a>
+          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('hero_secondary')" class="lp-btn lp-btn-outline lp-btn-lg">
+            {{HERO_CTA_SECONDARY}}
+          </a>
+        </div>
+
+        <ul class="lp-hero-trust">
+          {{HERO_TRUST_HTML}}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TRUST BAR ========== -->
+  <section class="lp-trust-bar">
+    <div class="lp-container">
+      <div class="lp-trust-grid">
+        <div class="lp-trust-item">
+          <div class="lp-trust-number">{{STATS_YEARS}}</div>
+          <div class="lp-trust-label">anos de experiência</div>
+        </div>
+        <div class="lp-trust-item">
+          <div class="lp-trust-number">{{STATS_EXAMS}}</div>
+          <div class="lp-trust-label">exames realizados</div>
+        </div>
+        <div class="lp-trust-item">
+          <div class="lp-trust-number">{{GOOGLE_RATING}}★</div>
+          <div class="lp-trust-label">{{GOOGLE_TOTAL_REVIEWS}} avaliações no Google</div>
+        </div>
+        <div class="lp-trust-item">
+          <div class="lp-trust-number">7</div>
+          <div class="lp-trust-label">dias por semana</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="lp-section lp-about">
+    <div class="lp-container">
+      <div class="lp-about-grid">
+        <div class="lp-about-text">
+          <h2>{{ABOUT_TITLE}}</h2>
+          {{ABOUT_PARAGRAPHS_HTML}}
+          <div class="lp-cta-row">
+            <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('about')" class="lp-btn lp-btn-whatsapp">
+              {{ICON_WHATSAPP}} Tirar dúvidas pelo WhatsApp
+            </a>
+          </div>
+        </div>
+        <div class="lp-about-visual">
+          <div class="lp-about-icon">{{EXAM_ICON}}</div>
+          <h3>{{EXAM_NAME}}</h3>
+          <p>Uno Diagnóstico — Maracanaú/CE</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INDICATIONS ========== -->
+  <section class="lp-section lp-indications">
+    <div class="lp-container">
+      <div class="lp-section-header">
+        <h2>{{INDICATIONS_TITLE}}</h2>
+        <p>{{INDICATIONS_SUBTITLE}}</p>
+      </div>
+      <div class="lp-indications-grid">
+        {{INDICATIONS_HTML}}
+      </div>
+      <div class="lp-section-cta">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('indications')" class="lp-btn lp-btn-whatsapp lp-btn-lg">
+          {{ICON_WHATSAPP}} Agendar meu exame pelo WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA BANNER ========== -->
+  <section class="lp-cta-banner">
+    <div class="lp-container">
+      <div class="lp-cta-banner-content">
+        <div>
+          <h2>Já tem o pedido médico em mãos?</h2>
+          <p>Envie pelo WhatsApp e nossa equipe retorna com horário e orientações de preparo.</p>
+        </div>
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('banner')" class="lp-btn lp-btn-white lp-btn-lg">
+          {{ICON_WHATSAPP}} Enviar pedido médico
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DIFFERENTIALS ========== -->
+  <section class="lp-section lp-differentials">
+    <div class="lp-container">
+      <div class="lp-section-header">
+        <h2>{{DIFFERENTIALS_TITLE}}</h2>
+      </div>
+      <div class="lp-differentials-grid">
+        {{DIFFERENTIALS_HTML}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROCESS ========== -->
+  <section class="lp-section lp-process">
+    <div class="lp-container">
+      <div class="lp-section-header">
+        <h2>{{PROCESS_TITLE}}</h2>
+      </div>
+      <div class="lp-process-grid">
+        {{PROCESS_HTML}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PREPARATION ========== -->
+  <section class="lp-section lp-preparation">
+    <div class="lp-container">
+      <div class="lp-preparation-inner">
+        <h2>{{PREPARATION_TITLE}}</h2>
+        <p class="lp-preparation-intro">{{PREPARATION_INTRO}}</p>
+        <ul class="lp-preparation-list">
+          {{PREPARATION_HTML}}
+        </ul>
+        <p class="lp-preparation-note">{{PREPARATION_NOTE}}</p>
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('preparation')" class="lp-btn lp-btn-whatsapp lp-btn-lg">
+          {{ICON_WHATSAPP}} Confirmar preparo com a equipe
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== REVIEWS ========== -->
+  <section class="lp-section lp-reviews">
+    <div class="lp-container">
+      <div class="lp-section-header">
+        <h2>O que nossos pacientes dizem</h2>
+        <div class="lp-google-badge">
+          <svg viewBox="0 0 24 24" width="26" height="26"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <span><strong>{{GOOGLE_RATING}}</strong> {{GOOGLE_STARS_HTML}} &middot; {{GOOGLE_TOTAL_REVIEWS}} avaliações</span>
+        </div>
+      </div>
+      <div class="lp-reviews-grid">
+        {{REVIEWS_HTML}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INSURANCE ========== -->
+  <section class="lp-section lp-insurance">
+    <div class="lp-container">
+      <div class="lp-section-header">
+        <h2>Convênios e formas de pagamento</h2>
+        <p>Aceitamos os principais convênios e atendimento particular via PIX, cartão de crédito (parcelado), débito e dinheiro.</p>
+      </div>
+      <div class="lp-insurance-grid">
+        {{INSURANCE_HTML}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DOCTORS ========== -->
+  <section class="lp-section lp-doctors">
+    <div class="lp-container">
+      <div class="lp-section-header">
+        <h2>Corpo clínico especializado</h2>
+        <p>Todos os exames são laudados por médicos radiologistas com título de especialista.</p>
+      </div>
+      <div class="lp-doctors-grid">
+        {{DOCTORS_HTML}}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FAQ ========== -->
+  <section class="lp-section lp-faq">
+    <div class="lp-container">
+      <div class="lp-section-header">
+        <h2>Perguntas frequentes sobre {{EXAM_SHORT}}</h2>
+      </div>
+      <div class="lp-faq-list">
+        {{FAQ_HTML}}
+      </div>
+      <div class="lp-section-cta">
+        <p>Não encontrou sua dúvida? Fale diretamente com nossa equipe:</p>
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('faq')" class="lp-btn lp-btn-whatsapp lp-btn-lg">
+          {{ICON_WHATSAPP}} Falar pelo WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LOCATION ========== -->
+  <section class="lp-location">
+    <div class="lp-location-inner">
+      <div class="lp-location-info">
+        <h3>{{UNIT_NAME}}</h3>
+        <div class="lp-location-item">
+          <div class="lp-location-icon">{{ICON_LOCATION}}</div>
+          <p>{{ADDRESS_FULL}}</p>
+        </div>
+        <div class="lp-location-item">
+          <div class="lp-location-icon">{{ICON_CLOCK}}</div>
+          <p>{{HOURS}}</p>
+        </div>
+        <div class="lp-location-item">
+          <div class="lp-location-icon">{{ICON_PHONE}}</div>
+          <p><a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('location')">{{PHONE}}</a></p>
+        </div>
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('location_cta')" class="lp-btn lp-btn-whatsapp lp-btn-lg" style="margin-top:20px">
+          {{ICON_WHATSAPP}} Agendar pelo WhatsApp
+        </a>
+      </div>
+      <div class="lp-location-map">
+        <iframe
+          src="https://www.google.com/maps?q=Avenida+I+Business+Place+Torre+2+Jereissati+Maracanau+CE+61900-320&output=embed"
+          width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localização Uno Diagnóstico em Maracanaú">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FINAL CTA ========== -->
+  <section class="lp-final-cta">
+    <div class="lp-container">
+      <h2>Pronto para agendar sua {{EXAM_SHORT}}?</h2>
+      <p>Nossa equipe está disponível todos os dias das 7h às 22h para atender você.</p>
+      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('final')" class="lp-btn lp-btn-whatsapp lp-btn-xl">
+        {{ICON_WHATSAPP}} Agendar pelo WhatsApp agora
+      </a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="lp-footer">
+    <div class="lp-container">
+      <div class="lp-footer-top">
+        <a href="https://unodiagnostico.com" class="lp-footer-logo">
+          <picture>
+            <source srcset="/images/logos/logo-branco.webp" type="image/webp">
+            <img src="/images/logos/logo-branco.png" alt="{{SITE_NAME}}" width="512" height="512" loading="lazy">
+          </picture>
+        </a>
+        <div class="lp-footer-links">
+          <a href="https://unodiagnostico.com">Site principal</a>
+          <a href="{{RESULTS_URL}}" target="_blank" rel="noopener">Resultados de exames</a>
+          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('footer')">WhatsApp</a>
+        </div>
+      </div>
+      <div class="lp-footer-bottom">
+        <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
+        <p>{{LEGAL_NAME}}</p>
+        <p>&copy; {{YEAR}} {{SITE_NAME}}. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== FLOATING WHATSAPP ========== -->
+  <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('floating')" class="lp-whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+    {{ICON_WHATSAPP_LARGE}}
+  </a>
+
+  <!-- ========== MOBILE STICKY CTA ========== -->
+  <div class="lp-mobile-sticky">
+    <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('sticky')" class="lp-btn lp-btn-whatsapp lp-btn-block">
+      {{ICON_WHATSAPP}} Agendar {{EXAM_SHORT}} pelo WhatsApp
+    </a>
+  </div>
+
+  <!-- ========== Micro-interações (reveal on scroll + header shadow) ========== -->
+  <script>
+    (function () {
+      var selectors = ['.lp-indication-card', '.lp-differential-card', '.lp-process-step',
+                       '.lp-review-card', '.lp-doctor-card', '.lp-insurance-logo',
+                       '.lp-trust-item', '.lp-section-header'];
+      var els = document.querySelectorAll(selectors.join(','));
+      els.forEach(function (el) { el.classList.add('lp-reveal'); });
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(function (el) { obs.observe(el); });
+      } else {
+        els.forEach(function (el) { el.classList.add('visible'); });
+      }
+      var header = document.querySelector('.lp-header');
+      if (header) {
+        window.addEventListener('scroll', function () {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+      }
+    })();
+  </script>
+
+</body>
+</html>
