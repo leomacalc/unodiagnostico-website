@@ -20,11 +20,27 @@ const doctors = loadJSON('doctors.json');
 const insurance = loadJSON('insurance.json');
 const blogPosts = loadJSON('blog-posts.json');
 const reviews = loadJSON('reviews.json');
+const equipment = fs.existsSync(path.join(__dirname, 'data', 'equipment.json'))
+  ? loadJSON('equipment.json')
+  : { section_title: '', section_subtitle: '', items: [] };
 
 // --- Load Template ---
 const template = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'index.html'), 'utf-8');
+const landingTemplate = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'landing.html'), 'utf-8');
+const template404 = fs.readFileSync(path.join(__dirname, 'src', 'templates', '404.html'), 'utf-8');
 const css = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'main.css'), 'utf-8');
+const landingCss = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'landing.css'), 'utf-8');
 const js = fs.readFileSync(path.join(__dirname, 'src', 'js', 'main.js'), 'utf-8');
+
+// --- Load Landing Pages Data ---
+function loadLandingPages() {
+  const dir = path.join(__dirname, 'data', 'landing-pages');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir)
+    .filter(function (f) { return f.endsWith('.json'); })
+    .map(function (f) { return JSON.parse(fs.readFileSync(path.join(dir, f), 'utf-8')); });
+}
+const landingPages = loadLandingPages();
 
 // --- Icon SVGs ---
 const icons = {
@@ -56,13 +72,74 @@ function escapeHTML(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// --- Cache-buster: adiciona ?v=TIMESTAMP nas URLs de imagem local ---
+// Evita que browsers fiquem presos em caches antigos quando um arquivo é atualizado.
+// Aplica apenas em URLs relativas (src="images/...", srcset="images/..." ou src="/images/...");
+// NÃO toca em URLs absolutas (https://...) como og:image, que vão pro scraper social.
+const BUILD_VERSION = Date.now().toString();
+function addCacheBuster(html) {
+  return html.replace(
+    /((?:src|href|srcset)\s*=\s*["'])(\/?images\/[^"'?#\s]+\.(?:png|jpg|jpeg|svg|webp|gif|ico))(["'])/g,
+    '$1$2?v=' + BUILD_VERSION + '$3'
+  );
+}
+
+// --- Helper: lê dimensões de PNG direto do header binário (sem lib externa) ---
+// Bytes 16-23 do header PNG contêm width/height (uint32 big-endian) após a assinatura.
+function getPngSize(filePath) {
+  try {
+    var buf = Buffer.alloc(24);
+    var fd = fs.openSync(filePath, 'r');
+    fs.readSync(fd, buf, 0, 24, 0);
+    fs.closeSync(fd);
+    // Validar assinatura PNG (primeiros 8 bytes)
+    var sig = buf.slice(0, 8);
+    if (sig[0] !== 0x89 || sig[1] !== 0x50 || sig[2] !== 0x4E || sig[3] !== 0x47) return null;
+    return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+  } catch (e) {
+    return null;
+  }
+}
+
+// --- Helper: gera <picture> com WebP (source) + PNG/JPG fallback (img) ---
+// Uso: pictureTag('images/insurance/camed.png', 'Convênio CAMED', 'loading="lazy"')
+// Declara automaticamente width/height lendo do PNG (Core Web Vitals: elimina CLS).
+// Se não existir o .webp correspondente, emite apenas <img> normal.
+function pictureTag(srcPng, alt, extraAttrs) {
+  extraAttrs = extraAttrs || '';
+  var webpSrc = srcPng.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+  var pngFull = path.join(__dirname, 'public', srcPng.replace(/^\//, ''));
+  var webpFull = path.join(__dirname, 'public', webpSrc.replace(/^\//, ''));
+  var size = getPngSize(pngFull);
+  var dimAttrs = size ? ' width="' + size.width + '" height="' + size.height + '"' : '';
+  var hasWebp = fs.existsSync(webpFull);
+  var imgEl = '<img src="' + srcPng + '" alt="' + alt + '"' + dimAttrs + ' ' + extraAttrs + '>';
+  if (!hasWebp) return imgEl;
+  return '<picture>' +
+    '<source srcset="' + webpSrc + '" type="image/webp">' +
+    imgEl +
+    '</picture>';
+}
+
 // --- Generate HTML Sections ---
 function generateServicesHTML() {
+  // Mapeia service.id → landing slug quando houver landing page correspondente
+  var landingSlugByServiceId = {};
+  landingPages.forEach(function (lp) {
+    var matched = services.find(function (s) { return s.id === lp.slug || s.name === lp.exam_name; });
+    if (matched) landingSlugByServiceId[matched.id] = lp.slug;
+  });
+
   return services.map(function (s) {
+    var landingSlug = landingSlugByServiceId[s.id];
+    var landingLink = landingSlug
+      ? '<a href="/' + landingSlug + '/" class="service-card-link" onclick="event.stopPropagation()" aria-label="Saiba mais sobre ' + escapeHTML(s.name) + '">Saiba mais &rarr;</a>'
+      : '';
     return '<div class="service-card" data-service="' + s.id + '" data-title="' + escapeHTML(s.name) + '" data-description="' + escapeHTML(s.description) + '" data-preparations=\'' + escapeHTML(JSON.stringify(s.preparations)) + '\'>' +
       '<div class="service-icon">' + (icons[s.icon] || '') + '</div>' +
       '<h3>' + s.name + '</h3>' +
       '<p>' + s.short_description + '</p>' +
+      landingLink +
       '</div>';
   }).join('\n            ');
 }
@@ -70,7 +147,7 @@ function generateServicesHTML() {
 function generateDoctorsHTML() {
   return doctors.map(function (d) {
     const photoHTML = d.photo
-      ? '<img src="' + d.photo + '" alt="' + escapeHTML(d.name) + ' - Médico Radiologista em Maracanaú" loading="lazy">'
+      ? pictureTag(d.photo, escapeHTML(d.name) + ' - Médico Radiologista em Maracanaú', 'loading="lazy"')
       : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="64" height="64"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
 
     const qualificationsHTML = d.qualifications.map(function (q) {
@@ -88,10 +165,29 @@ function generateDoctorsHTML() {
   }).join('\n            ');
 }
 
+function generateEquipmentHTML() {
+  if (!equipment.items || !equipment.items.length) return '';
+  return equipment.items.map(function (e) {
+    var badgeHTML = e.badge ? '<span class="equipment-card-badge">' + escapeHTML(e.badge) + '</span>' : '';
+    return '<article class="equipment-card">' +
+      '<div class="equipment-card-image">' +
+      pictureTag(e.photo, escapeHTML(e.name) + ' - Uno Diagnostico', 'loading="lazy"') +
+      badgeHTML +
+      '</div>' +
+      '<div class="equipment-card-body">' +
+      '<h3>' + escapeHTML(e.name) + '</h3>' +
+      '<p>' + escapeHTML(e.description) + '</p>' +
+      '</div>' +
+      '</article>';
+  }).join('\n        ');
+}
+
 function generateInsuranceHTML() {
   let html = '';
   insurance.partners.forEach(function (p) {
-    html += '<div class="insurance-logo"><img src="' + p.logo + '" alt="Convênio ' + escapeHTML(p.name) + ' aceito na Uno Diagnóstico" loading="lazy"></div>';
+    html += '<div class="insurance-logo">' +
+      pictureTag(p.logo, 'Convênio ' + escapeHTML(p.name) + ' aceito na Uno Diagnóstico', 'loading="lazy"') +
+      '</div>';
   });
   if (insurance.accepts_private) {
     html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
@@ -255,6 +351,9 @@ const replacements = {
   '{{SERVICES_HTML}}': generateServicesHTML(),
   '{{DOCTORS_HTML}}': generateDoctorsHTML(),
   '{{INSURANCE_HTML}}': generateInsuranceHTML(),
+  '{{EQUIPMENT_HTML}}': generateEquipmentHTML(),
+  '{{EQUIPMENT_TITLE}}': equipment.section_title || 'Nossos Equipamentos',
+  '{{EQUIPMENT_SUBTITLE}}': equipment.section_subtitle || '',
   '{{GOOGLE_RATING}}': reviews.google_rating.toString(),
   '{{GOOGLE_STARS_HTML}}': generateGoogleStarsHTML(reviews.google_rating),
   '{{GOOGLE_TOTAL_REVIEWS}}': reviews.google_total_reviews.toLocaleString('pt-BR'),
@@ -286,11 +385,25 @@ Object.keys(replacements).forEach(function (key) {
 
 // --- Write Output ---
 const distDir = path.join(__dirname, 'dist');
-if (!fs.existsSync(distDir)) {
-  fs.mkdirSync(distDir, { recursive: true });
+// Limpa dist/ antes de rebuildar pra evitar arquivos órfãos de builds anteriores
+// (ex: HEIC copiado antes do filtro ALLOWED_EXT existir). Ignora erros de lock
+// do OneDrive — nesse caso só os arquivos novos sobrescrevem os relevantes.
+if (fs.existsSync(distDir)) {
+  try {
+    fs.rmSync(distDir, { recursive: true, force: true });
+  } catch (e) {
+    console.warn('Aviso: não foi possível limpar dist/ completamente (OneDrive lock?). Build continua.');
+  }
 }
+fs.mkdirSync(distDir, { recursive: true });
 
-fs.writeFileSync(path.join(distDir, 'index.html'), html);
+fs.writeFileSync(path.join(distDir, 'index.html'), addCacheBuster(html));
+
+// Formatos válidos pra web — ignora HEIC, originais brutos, backups etc.
+var ALLOWED_EXT = new Set([
+  '.png', '.jpg', '.jpeg', '.webp', '.svg', '.gif', '.ico',
+  '.xml', '.txt', '.pdf', '.woff', '.woff2', '.ttf', '.otf', '.json'
+]);
 
 // Copy public folder if exists
 const publicDir = path.join(__dirname, 'public');
@@ -303,14 +416,280 @@ function copyDir(src, dest) {
   entries.forEach(function (entry) {
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
+    // Pula pastas que começam com _ ou . (backups, internos)
+    if (entry.name.startsWith('_') || entry.name.startsWith('.')) return;
     if (entry.isDirectory()) {
       if (!fs.existsSync(destPath)) fs.mkdirSync(destPath, { recursive: true });
       copyDir(srcPath, destPath);
     } else {
+      var ext = path.extname(entry.name).toLowerCase();
+      if (!ALLOWED_EXT.has(ext)) return; // pula HEIC, psd, etc.
       fs.copyFileSync(srcPath, destPath);
     }
   });
 }
+
+// --- Build Landing Pages ---
+function buildLandingPage(lp) {
+  var heroTrustHTML = (lp.hero.trust_badges || []).map(function (b) {
+    return '<li>' + escapeHTML(b) + '</li>';
+  }).join('');
+
+  var aboutParagraphsHTML = (lp.about.paragraphs || []).map(function (p) {
+    return '<p>' + escapeHTML(p) + '</p>';
+  }).join('');
+
+  var indicationsHTML = (lp.indications.items || []).map(function (item) {
+    return '<div class="lp-indication-card">' +
+      '<h3>' + escapeHTML(item.title) + '</h3>' +
+      '<p>' + escapeHTML(item.text) + '</p>' +
+      '</div>';
+  }).join('\n        ');
+
+  var differentialsHTML = (lp.differentials.items || []).map(function (item) {
+    return '<div class="lp-differential-card">' +
+      '<h3>' + escapeHTML(item.title) + '</h3>' +
+      '<p>' + escapeHTML(item.text) + '</p>' +
+      '</div>';
+  }).join('\n        ');
+
+  var processHTML = (lp.process.steps || []).map(function (step) {
+    return '<div class="lp-process-step">' +
+      '<div class="lp-process-number">' + escapeHTML(step.number) + '</div>' +
+      '<h3>' + escapeHTML(step.title) + '</h3>' +
+      '<p>' + escapeHTML(step.text) + '</p>' +
+      '</div>';
+  }).join('\n        ');
+
+  var preparationHTML = (lp.preparation.items || []).map(function (it) {
+    return '<li>' + escapeHTML(it) + '</li>';
+  }).join('');
+
+  var faqHTML = (lp.faq || []).map(function (item) {
+    return '<details class="lp-faq-item">' +
+      '<summary>' + escapeHTML(item.question) + '</summary>' +
+      '<div class="lp-faq-answer">' + escapeHTML(item.answer) + '</div>' +
+      '</details>';
+  }).join('\n        ');
+
+  // Reviews (reuse from main reviews.json, show top 3)
+  var lpReviewsHTML = reviews.reviews.slice(0, 3).map(function (r) {
+    var initial = r.name.charAt(0).toUpperCase();
+    var starsHTML = '';
+    for (var i = 0; i < r.rating; i++) starsHTML += '★';
+    return '<div class="lp-review-card">' +
+      '<div class="lp-review-header">' +
+      '<div class="lp-review-avatar">' + initial + '</div>' +
+      '<div class="lp-review-name">' + escapeHTML(r.name) + '</div>' +
+      '</div>' +
+      '<div class="lp-review-stars">' + starsHTML + '</div>' +
+      '<p class="lp-review-text">' + escapeHTML(r.text) + '</p>' +
+      '<span class="lp-review-time">' + escapeHTML(r.time) + '</span>' +
+      '</div>';
+  }).join('\n        ');
+
+  // Insurance (reuse)
+  var lpInsuranceHTML = '';
+  insurance.partners.forEach(function (p) {
+    lpInsuranceHTML += '<div class="lp-insurance-logo">' +
+      pictureTag('/' + p.logo, 'Convênio ' + escapeHTML(p.name), 'loading="lazy"') +
+      '</div>';
+  });
+  if (insurance.accepts_private) {
+    lpInsuranceHTML += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'insurance\')" class="lp-insurance-private"><h3>' + escapeHTML(insurance.private_label) + '</h3><p>Consulte valores pelo WhatsApp</p></a>';
+  }
+
+  // Doctors (reuse — all)
+  var lpDoctorsHTML = doctors.map(function (d) {
+    var photoHTML = d.photo
+      ? pictureTag('/' + d.photo, escapeHTML(d.name), 'loading="lazy"')
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="56" height="56"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
+    var qualHTML = (d.qualifications || []).slice(0, 3).map(function (q) { return '<li>' + escapeHTML(q) + '</li>'; }).join('');
+    return '<div class="lp-doctor-card">' +
+      '<div class="lp-doctor-photo">' + photoHTML + '</div>' +
+      '<div class="lp-doctor-info">' +
+      '<h3>' + escapeHTML(d.name) + '</h3>' +
+      '<div class="lp-doctor-specialty">' + escapeHTML(d.specialty) + '</div>' +
+      '<div class="lp-doctor-crm">' + escapeHTML(d.crm) + ' / ' + escapeHTML(d.rqe) + '</div>' +
+      '<ul class="lp-doctor-qualifications">' + qualHTML + '</ul>' +
+      '</div></div>';
+  }).join('\n        ');
+
+  // Exam icon — reuse services.json icon mapping
+  var examIcon = '';
+  var matchedService = services.find(function (s) { return s.id === lp.slug || s.name === lp.exam_name; });
+  if (matchedService && icons[matchedService.icon]) {
+    examIcon = icons[matchedService.icon].replace('width="28" height="28"', 'width="56" height="56"');
+  } else {
+    examIcon = icons['ct-scan'].replace('width="28" height="28"', 'width="56" height="56"');
+  }
+
+  // Schema.org MedicalProcedure
+  var schemaMedical = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "MedicalProcedure",
+    "name": lp.exam_name,
+    "description": lp.seo.description,
+    "procedureType": "Diagnostic",
+    "howPerformed": lp.about.paragraphs ? lp.about.paragraphs[0] : '',
+    "preparation": (lp.preparation.items || []).join('; '),
+    "url": "https://unodiagnostico.com/" + lp.slug,
+    "provider": {
+      "@type": "MedicalClinic",
+      "name": site.name,
+      "telephone": site.phone,
+      "url": "https://unodiagnostico.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": site.address.street + ', ' + site.address.complement,
+        "addressLocality": site.address.city,
+        "addressRegion": site.address.state,
+        "postalCode": site.address.cep,
+        "addressCountry": "BR"
+      }
+    }
+  }, null, 2);
+
+  var schemaFAQ = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": (lp.faq || []).map(function (item) {
+      return {
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": { "@type": "Answer", "text": item.answer }
+      };
+    })
+  }, null, 2);
+
+  var schemaBreadcrumb = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://unodiagnostico.com" },
+      { "@type": "ListItem", "position": 2, "name": "Exames", "item": "https://unodiagnostico.com#exames" },
+      { "@type": "ListItem", "position": 3, "name": lp.exam_name, "item": "https://unodiagnostico.com/" + lp.slug }
+    ]
+  }, null, 2);
+
+  var lpReplacements = {
+    '{{SLUG}}': lp.slug,
+    '{{EXAM_NAME}}': lp.exam_name,
+    '{{EXAM_SHORT}}': lp.exam_short || lp.exam_name,
+    '{{EXAM_ICON}}': examIcon,
+    '{{SEO_TITLE}}': lp.seo.title,
+    '{{SEO_DESCRIPTION}}': lp.seo.description,
+    '{{SEO_KEYWORDS}}': lp.seo.keywords,
+    '{{HERO_BADGE}}': lp.hero.badge,
+    '{{HERO_HEADLINE}}': lp.hero.headline,
+    '{{HERO_SUBTITLE}}': lp.hero.subtitle,
+    '{{HERO_CTA_PRIMARY}}': lp.hero.cta_primary,
+    '{{HERO_CTA_SECONDARY}}': lp.hero.cta_secondary,
+    '{{HERO_TRUST_HTML}}': heroTrustHTML,
+    '{{ABOUT_TITLE}}': lp.about.title,
+    '{{ABOUT_PARAGRAPHS_HTML}}': aboutParagraphsHTML,
+    '{{INDICATIONS_TITLE}}': lp.indications.title,
+    '{{INDICATIONS_SUBTITLE}}': lp.indications.subtitle || '',
+    '{{INDICATIONS_HTML}}': indicationsHTML,
+    '{{DIFFERENTIALS_TITLE}}': lp.differentials.title,
+    '{{DIFFERENTIALS_HTML}}': differentialsHTML,
+    '{{PROCESS_TITLE}}': lp.process.title,
+    '{{PROCESS_HTML}}': processHTML,
+    '{{PREPARATION_TITLE}}': lp.preparation.title,
+    '{{PREPARATION_INTRO}}': lp.preparation.intro || '',
+    '{{PREPARATION_HTML}}': preparationHTML,
+    '{{PREPARATION_NOTE}}': lp.preparation.note || '',
+    '{{FAQ_HTML}}': faqHTML,
+    '{{REVIEWS_HTML}}': lpReviewsHTML,
+    '{{INSURANCE_HTML}}': lpInsuranceHTML,
+    '{{DOCTORS_HTML}}': lpDoctorsHTML,
+    '{{SCHEMA_MEDICAL}}': schemaMedical,
+    '{{SCHEMA_FAQ}}': schemaFAQ,
+    '{{SCHEMA_BREADCRUMB}}': schemaBreadcrumb,
+    '{{LANDING_CSS}}': landingCss,
+    // Shared site values
+    '{{SITE_NAME}}': site.name,
+    '{{PHONE}}': site.phone,
+    '{{WHATSAPP}}': site.whatsapp,
+    '{{WHATSAPP_LINK}}': site.social.whatsapp_link,
+    '{{ADDRESS_FULL}}': site.address.full,
+    '{{UNIT_NAME}}': site.unit_name,
+    '{{HOURS}}': site.hours,
+    '{{TECHNICAL_DIRECTOR}}': site.technical_director,
+    '{{LEGAL_NAME}}': site.legal_name,
+    '{{RESULTS_URL}}': site.results_url,
+    '{{STATS_YEARS}}': site.stats ? site.stats.years : '7+',
+    '{{STATS_EXAMS}}': site.stats ? site.stats.exams : '200mil+',
+    '{{GOOGLE_RATING}}': reviews.google_rating.toString(),
+    '{{GOOGLE_STARS_HTML}}': generateGoogleStarsHTML(reviews.google_rating),
+    '{{GOOGLE_TOTAL_REVIEWS}}': reviews.google_total_reviews.toLocaleString('pt-BR'),
+    '{{ICON_WHATSAPP}}': icons.whatsapp,
+    '{{ICON_WHATSAPP_LARGE}}': icons['whatsapp-large'],
+    '{{ICON_PHONE}}': icons.phone,
+    '{{ICON_LOCATION}}': icons.location,
+    '{{ICON_CLOCK}}': icons.clock,
+    '{{YEAR}}': new Date().getFullYear().toString()
+  };
+
+  var lpHTML = landingTemplate;
+  Object.keys(lpReplacements).forEach(function (key) {
+    lpHTML = lpHTML.split(key).join(lpReplacements[key]);
+  });
+
+  var outDir = path.join(distDir, lp.slug);
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  var finalLpHTML = addCacheBuster(lpHTML);
+  fs.writeFileSync(path.join(outDir, 'index.html'), finalLpHTML);
+  return finalLpHTML.length;
+}
+
+landingPages.forEach(function (lp) {
+  var size = buildLandingPage(lp);
+  console.log('  + landing /' + lp.slug + ' (' + Math.round(size / 1024) + ' KB)');
+});
+
+// --- Gerar sitemap.xml ---
+function generateSitemap() {
+  var today = new Date().toISOString().split('T')[0];
+  var urls = [
+    { loc: 'https://unodiagnostico.com/', priority: '1.0', changefreq: 'weekly' }
+  ];
+  landingPages.forEach(function (lp) {
+    urls.push({
+      loc: 'https://unodiagnostico.com/' + lp.slug + '/',
+      priority: '0.8',
+      changefreq: 'monthly'
+    });
+  });
+  var xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+  urls.forEach(function (u) {
+    xml += '  <url>\n';
+    xml += '    <loc>' + u.loc + '</loc>\n';
+    xml += '    <lastmod>' + today + '</lastmod>\n';
+    xml += '    <changefreq>' + u.changefreq + '</changefreq>\n';
+    xml += '    <priority>' + u.priority + '</priority>\n';
+    xml += '  </url>\n';
+  });
+  xml += '</urlset>\n';
+  return xml;
+}
+
+function generateRobots() {
+  return 'User-agent: *\nAllow: /\n\nSitemap: https://unodiagnostico.com/sitemap.xml\n';
+}
+
+fs.writeFileSync(path.join(distDir, 'sitemap.xml'), generateSitemap());
+fs.writeFileSync(path.join(distDir, 'robots.txt'), generateRobots());
+console.log('  + sitemap.xml (' + (1 + landingPages.length) + ' URLs)');
+console.log('  + robots.txt');
+
+var html404 = template404
+  .split('{{SITE_NAME}}').join(site.name)
+  .split('{{WHATSAPP_LINK}}').join(site.social.whatsapp_link)
+  .split('{{ICON_WHATSAPP}}').join(icons.whatsapp);
+fs.writeFileSync(path.join(distDir, '404.html'), addCacheBuster(html404));
+console.log('  + 404.html');
 
 console.log('Build complete! Output in /dist');
 console.log('  - index.html (' + Math.round(html.length / 1024) + ' KB)');
@@ -319,4 +698,7 @@ console.log('  - ' + doctors.length + ' doctors');
 console.log('  - ' + blogPosts.length + ' blog posts');
 console.log('  - ' + insurance.partners.length + ' insurance partners');
 console.log('  - ' + (site.faq ? site.faq.length : 0) + ' FAQ items');
-console.log('  - ' + reviews.reviews.length + ' reviews (Google ' + reviews.google_rating + '★)');
+console.log('  - ' + reviews.reviews.length + ' reviews (Google ' + reviews.google_rating + ')');
+console.log('  - ' + landingPages.length + ' landing pages');
+console.log('  - ' + equipment.items.length + ' equipment items');
+console.log('  - cache-buster version: ' + BUILD_VERSION);
