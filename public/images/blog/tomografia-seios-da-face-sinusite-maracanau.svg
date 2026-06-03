@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bgSF" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentSF" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="screenSF" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0a2540;stop-opacity:0.95" />
+      <stop offset="60%" style="stop-color:#031426;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#000814;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="boneSF" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" style="stop-color:#eaf3ff;stop-opacity:0.95" />
+      <stop offset="70%" style="stop-color:#bcd9f5;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#8fb8e0;stop-opacity:0.6" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgSF)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- CT viewer screen (left side) showing coronal facial sinuses -->
+  <g transform="translate(60 50)">
+    <rect x="0" y="0" width="280" height="240" rx="10" fill="url(#screenSF)" stroke="#abce5f" stroke-width="2.5" opacity="0.95"/>
+
+    <!-- Top clips -->
+    <rect x="50" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.7"/>
+    <rect x="208" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.7"/>
+
+    <!-- Skull / facial outline (coronal) -->
+    <path d="M 140 40 Q 70 45 62 110 Q 58 160 90 200 Q 140 224 190 200 Q 222 160 218 110 Q 210 45 140 40 Z"
+          fill="url(#boneSF)" opacity="0.5" stroke="#cfe7ff" stroke-width="2.5"/>
+
+    <!-- Orbits (eye sockets) -->
+    <ellipse cx="108" cy="98" rx="22" ry="18" fill="url(#screenSF)" stroke="#cfe7ff" stroke-width="2" opacity="0.85"/>
+    <ellipse cx="172" cy="98" rx="22" ry="18" fill="url(#screenSF)" stroke="#cfe7ff" stroke-width="2" opacity="0.85"/>
+
+    <!-- Frontal sinuses (healthy, air-filled = dark) -->
+    <path d="M 120 60 Q 140 52 160 60 L 158 78 Q 140 70 122 78 Z" fill="url(#screenSF)" stroke="#cfe7ff" stroke-width="1.6" opacity="0.85"/>
+
+    <!-- Nasal septum + nasal cavity -->
+    <path d="M 140 108 L 140 150" stroke="#cfe7ff" stroke-width="2.2" opacity="0.7"/>
+    <path d="M 128 110 Q 122 130 128 148" fill="none" stroke="#cfe7ff" stroke-width="1.6" opacity="0.6"/>
+    <path d="M 152 110 Q 158 130 152 148" fill="none" stroke="#cfe7ff" stroke-width="1.6" opacity="0.6"/>
+
+    <!-- Left maxillary sinus (healthy, air-filled = dark) -->
+    <path d="M 95 120 Q 80 128 82 152 Q 90 170 116 166 Q 124 145 116 124 Q 105 118 95 120 Z"
+          fill="url(#screenSF)" stroke="#cfe7ff" stroke-width="1.8" opacity="0.85"/>
+
+    <!-- Right maxillary sinus (opacified / inflamed = highlighted) -->
+    <path d="M 185 120 Q 200 128 198 152 Q 190 170 164 166 Q 156 145 164 124 Q 175 118 185 120 Z"
+          fill="#ff8a65" stroke="#ffb59b" stroke-width="1.8" opacity="0.55"/>
+    <path d="M 185 138 Q 196 142 196 154 Q 190 166 168 162 Q 164 150 168 138 Z" fill="#ff8a65" opacity="0.75"/>
+
+    <!-- Label arrow pointing to opacified sinus -->
+    <g>
+      <path d="M 232 120 L 200 142" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 204 138 L 199 143 L 204 147" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>
+      <text x="234" y="116" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#ff8a65">SINUSITE</text>
+    </g>
+
+    <!-- Labels -->
+    <text x="14" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95">TC</text>
+    <text x="266" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95" text-anchor="end">COR</text>
+    <text x="140" y="232" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700"
+          fill="#abce5f" text-anchor="middle" opacity="0.95">SEIOS DA FACE • UNO DIAGNÓSTICO</text>
+  </g>
+
+  <!-- CT scanner gantry icon (right side) -->
+  <g transform="translate(530 110)">
+    <ellipse cx="60" cy="60" rx="80" ry="62" fill="#abce5f" opacity="0.18" stroke="#abce5f" stroke-width="2.5"/>
+    <ellipse cx="60" cy="60" rx="55" ry="42" fill="#ffffff" opacity="0.95"/>
+    <ellipse cx="60" cy="60" rx="36" ry="27" fill="url(#screenSF)" stroke="#005a87" stroke-width="1.5" opacity="0.9"/>
+    <ellipse cx="60" cy="60" rx="20" ry="14" fill="#abce5f" opacity="0.35"/>
+
+    <!-- Patient table -->
+    <rect x="20" y="118" width="80" height="10" rx="4" fill="#ffffff" opacity="0.8"/>
+
+    <!-- Scan beam arcs -->
+    <g stroke="#abce5f" stroke-width="2" fill="none" opacity="0.55">
+      <path d="M -12 32 Q -28 60 -12 88"/>
+      <path d="M -22 22 Q -42 60 -22 98"/>
+      <path d="M 132 32 Q 148 60 132 88"/>
+      <path d="M 142 22 Q 162 60 142 98"/>
+    </g>
+
+    <!-- Sparkles -->
+    <circle cx="10" cy="10" r="2.5" fill="#abce5f" opacity="0.75"/>
+    <circle cx="115" cy="15" r="2" fill="#c8e47a" opacity="0.65"/>
+    <circle cx="20" cy="112" r="2" fill="#abce5f" opacity="0.55"/>
+    <circle cx="115" cy="112" r="2.5" fill="#c8e47a" opacity="0.7"/>
+  </g>
+
+  <!-- Decorative wave -->
+  <g opacity="0.4" fill="none" stroke="#abce5f" stroke-width="2.5" stroke-linecap="round">
+    <path d="M 480 220 Q 540 240 590 260 Q 640 275 700 245"/>
+    <circle cx="700" cy="245" r="6" fill="#abce5f" stroke="none" opacity="0.85"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="325" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Tomografia de seios da face</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="358" font-family="Open Sans, Arial, sans-serif" font-size="14" font-weight="400"
+        fill="#c8e47a" text-anchor="middle">Quando investigar a sinusite que não passa</text>
+
+  <!-- Accent line -->
+  <rect x="280" y="372" width="240" height="3" rx="1.5" fill="url(#accentSF)" opacity="0.85"/>
+</svg>
