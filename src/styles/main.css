@@ -1903,6 +1903,14 @@ h1, h2, h3, h4 {
 @media (max-width: 640px) {
   .hero-image { max-height: 240px; }
 }
+/* Os selos do topo (nota do Google, "Todos os dias", "PIX e Cartão") ocupam quase a coluna inteira.
+   Sem folga, 1 ou 2 px de diferença entre a fonte de reserva e a fonte final (varia de aparelho
+   para aparelho) jogavam o último selo para a linha de baixo com a página já na tela, e o topo
+   inteiro pulava (CLS de 0,23 no teste de computador do PageSpeed). A folga avança só sobre o
+   espaço vazio entre o texto e a foto. Se entrar um 4º selo, medir de novo. */
+@media (min-width: 1150px) {
+  .hero-split .hero-trust { margin-right: -40px; }
+}
 
 /* ============================================
    SEÇÃO EQUIPAMENTOS
