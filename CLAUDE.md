@@ -218,7 +218,11 @@ Abre em http://localhost:3000
 12. **Nada que mude de altura depois que a página abre.** O carrossel do topo da home empilha os
     slides na mesma célula de grid (`.hero-slide`, troca por `opacity`) — não voltar para
     `display: none`. Toda `<img>` precisa de `width`/`height`. Era isso que reprovava o site
-    no Core Web Vitals (CLS).
+    no Core Web Vitals (CLS). Texto que cabe "no limite" da linha também pula: a largura muda
+    1 a 3% entre a fonte de reserva e a final, e de aparelho para aparelho. Os selos do topo da
+    home têm 40 px de folga no computador por isso (comentário no fim do bloco do hero, em
+    `main.css`) — se mudar o texto deles ou acrescentar um selo, conferir que seguem em uma
+    linha só entre 1200 e 1920 px de largura.
 13. **Links entre páginas são automáticos:** rodapé de todas as páginas lista os exames
     (`examLinksHTML()`), e os cards da home apontam para a landing com texto "Saiba mais sobre <exame>".
     Landing nova entra sozinha no rodapé; o card da home só ganha o link se, em `services.json`,
