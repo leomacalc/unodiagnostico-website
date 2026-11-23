@@ -452,7 +452,10 @@ p { color: var(--lp-text-light); }
   transition: filter .2s ease;
 }
 .lp-insurance-logo:hover { filter: grayscale(0%); }
-.lp-insurance-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+/* O <picture> gerado pelo build fica entre a caixa e o <img>, e altura em % nao
+   resolve dentro de um pai de altura automatica — por isso os limites sao absolutos. */
+.lp-insurance-logo picture { display: contents; }
+.lp-insurance-logo img { max-width: 140px; max-height: 72px; width: auto; height: auto; object-fit: contain; }
 .lp-insurance-private {
   background: var(--lp-primary-light);
   border: 2px dashed var(--lp-primary);
