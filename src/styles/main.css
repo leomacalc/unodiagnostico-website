@@ -1565,12 +1565,18 @@ h1, h2, h3, h4 {
 
 /* Slide de lançamento da Ressonância Magnética: fundo conceitual com overlay */
 .hero-slide-ressonancia {
-  background-image:
-    linear-gradient(rgba(0, 63, 95, 0.72), rgba(0, 63, 95, 0.72)),
-    url('images/gallery/ressonancia-banner.webp');
+  background-image: linear-gradient(rgba(0, 63, 95, 0.72), rgba(0, 63, 95, 0.72));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+/* A imagem de fundo só entra quando o main.js marca o slide com .bg-ready (depois que a
+   página terminou de carregar, ou na primeira troca de slide). Assim ela não é baixada
+   junto com a foto do topo, que é o que o Google mede como carregamento principal (LCP). */
+.hero-slide-ressonancia.bg-ready {
+  background-image:
+    linear-gradient(rgba(0, 63, 95, 0.72), rgba(0, 63, 95, 0.72)),
+    url('images/gallery/ressonancia-banner.webp');
 }
 .hero-slide-ressonancia .hero-slide-announcement h2 em {
   color: var(--color-secondary);
