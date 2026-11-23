@@ -36,11 +36,10 @@
   <meta name="twitter:image" content="{{OG_IMAGE_URL}}">
   <meta name="twitter:image:alt" content="Uno Diagnóstico — {{EXAM_NAME}} em Maracanaú/CE">
 
-  <!-- Fonts (com preconnect + preload pra reduzir FOIT e melhorar LCP) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Fontes: hospedadas no próprio site (/fonts), sem depender do Google Fonts.
+       Preload das duas fontes variáveis; os @font-face e os fallbacks ficam no CSS. -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-latin-wght-normal.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/open-sans-latin-wght-normal.woff2" crossorigin>
 
   <!-- Preload do logo -->
   <link rel="preload" as="image" href="/images/logos/logo-verde.webp" type="image/webp">
@@ -56,21 +55,24 @@
     {{SCHEMA_BREADCRUMB}}
   </script>
 
-  <!-- Google Ads + Analytics Tag -->
-  <!-- gtag.js carrega uma vez e serve tanto para Google Ads quanto para GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-5779130943"></script>
+  <!-- Google Ads + Analytics (gtag.js carrega uma vez e serve aos dois) -->
+  <!-- IDs em data/site.json > "tracking". {{ADS_TAG_ID}} é o ID de conversão da conta, não o número da conta. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ADS_TAG_ID}}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'AW-5779130943');
+    gtag('config', '{{ADS_TAG_ID}}');
+    gtag('config', '{{GA4_ID}}');
 
-    // Google Analytics 4 — substitua G-XXXXXXXXXX pelo seu Measurement ID real
-    // Para obter o ID: analytics.google.com → Admin → Data Streams → seu site → Measurement ID
-    gtag('config', 'G-4T951CHR0E');
-
+    // Clique em qualquer botão de WhatsApp:
+    //  1) evento whatsapp_click no GA4 ('location' = qual botão; 'landing_page' = qual página);
+    //  2) conversão "Whatsapp" no Google Ads (send_to = ID de conversão/rótulo da ação).
     function trackWhatsappClick(location){
-      try { gtag('event', 'whatsapp_click', { 'landing_page': '{{SLUG}}', 'location': location || 'unknown' }); } catch(e) {}
+      try {
+        gtag('event', 'whatsapp_click', { 'send_to': '{{GA4_ID}}', 'landing_page': '{{SLUG}}', 'location': location || 'unknown' });
+        gtag('event', 'conversion', { 'send_to': '{{ADS_WHATSAPP_SEND_TO}}' });
+      } catch(e) {}
       return true;
     }
   </script>
@@ -103,15 +105,14 @@
   <section class="lp-hero{{HERO_CLASS}}">
     <div class="lp-container">
       <div class="lp-hero-content">
-        <span class="lp-hero-badge">{{HERO_BADGE}}</span>
-        <h1>{{HERO_HEADLINE}}</h1>
+        {{HERO_HEADING_HTML}}
         <p class="lp-hero-subtitle">{{HERO_SUBTITLE}}</p>
 
         <div class="lp-hero-buttons">
           <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('hero_primary')" class="lp-btn lp-btn-whatsapp lp-btn-lg">
             {{ICON_WHATSAPP}} {{HERO_CTA_PRIMARY}}
           </a>
-          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('hero_secondary')" class="lp-btn lp-btn-outline lp-btn-lg">
+          <a href="{{WHATSAPP_LINK_SECONDARY}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('hero_secondary')" class="lp-btn lp-btn-outline lp-btn-lg">
             {{HERO_CTA_SECONDARY}}
           </a>
         </div>
@@ -137,7 +138,7 @@
           <div class="lp-trust-label">exames realizados</div>
         </div>
         <div class="lp-trust-item">
-          <div class="lp-trust-number">{{GOOGLE_RATING}}★</div>
+          <div class="lp-trust-number">{{GOOGLE_RATING_BR}}★</div>
           <div class="lp-trust-label">{{GOOGLE_TOTAL_REVIEWS}} avaliações no Google</div>
         </div>
         <div class="lp-trust-item">
@@ -251,7 +252,7 @@
         <h2>O que nossos pacientes dizem</h2>
         <div class="lp-google-badge">
           <svg viewBox="0 0 24 24" width="26" height="26"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          <span><strong>{{GOOGLE_RATING}}</strong> {{GOOGLE_STARS_HTML}} &middot; {{GOOGLE_TOTAL_REVIEWS}} avaliações</span>
+          <span><strong>{{GOOGLE_RATING_BR}}</strong> {{GOOGLE_STARS_HTML}} &middot; {{GOOGLE_TOTAL_REVIEWS}} avaliações</span>
         </div>
       </div>
       <div class="lp-reviews-grid">
@@ -311,7 +312,7 @@
         <h3>{{UNIT_NAME}}</h3>
         <div class="lp-location-item">
           <div class="lp-location-icon">{{ICON_LOCATION}}</div>
-          <p>{{ADDRESS_FULL}}</p>
+          <p>{{ADDRESS_FULL}}<br><a href="{{MAPS_URL}}" target="_blank" rel="noopener" style="font-weight:600;text-decoration:underline">Como chegar (Google Maps) &rarr;</a></p>
         </div>
         <div class="lp-location-item">
           <div class="lp-location-icon">{{ICON_CLOCK}}</div>
@@ -339,7 +340,7 @@
   <!-- ========== FINAL CTA ========== -->
   <section class="lp-final-cta">
     <div class="lp-container">
-      <h2>Pronto para agendar sua {{EXAM_SHORT}}?</h2>
+      <h2>Pronto para agendar seu exame de {{EXAM_SHORT_LC}}?</h2>
       <p>Nossa equipe está disponível todos os dias das 7h às 22h para atender você.</p>
       <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('final')" class="lp-btn lp-btn-whatsapp lp-btn-xl">
         {{ICON_WHATSAPP}} Agendar pelo WhatsApp agora
@@ -363,6 +364,10 @@
           <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('footer')">WhatsApp</a>
         </div>
       </div>
+      <nav class="lp-footer-exams" aria-label="Outros exames">
+        <span class="lp-footer-exams-title">Outros exames em Maracanaú</span>
+        {{FOOTER_EXAMS_HTML}} <a href="/blog/">Blog</a>
+      </nav>
       <div class="lp-footer-bottom">
         <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
         <p>{{LEGAL_NAME}}</p>

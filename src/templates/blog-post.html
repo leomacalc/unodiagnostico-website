@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{POST_SEO_TITLE}}</title>
-  <meta name="description" content="{{POST_EXCERPT}}">
+  <meta name="description" content="{{POST_META_DESCRIPTION}}">
   <link rel="canonical" href="{{CANONICAL_URL}}">
 
   <!-- Favicon -->
@@ -31,11 +31,10 @@
   <meta name="twitter:description" content="{{POST_EXCERPT}}">
   <meta name="twitter:image" content="{{POST_IMAGE_URL}}">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Fontes: hospedadas no próprio site (/fonts), sem depender do Google Fonts.
+       Preload das duas fontes variáveis; os @font-face e os fallbacks ficam no CSS. -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-latin-wght-normal.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/open-sans-latin-wght-normal.woff2" crossorigin>
 
   <!-- Schema.org -->
   <script type="application/ld+json">
@@ -45,17 +44,24 @@
     {{SCHEMA_BREADCRUMB}}
   </script>
 
-  <!-- Google Ads + Analytics Tag -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-5779130943"></script>
+  <!-- Google Ads + Analytics (gtag.js carrega uma vez e serve aos dois) -->
+  <!-- IDs em data/site.json > "tracking". {{ADS_TAG_ID}} é o ID de conversão da conta, não o número da conta. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ADS_TAG_ID}}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'AW-5779130943');
-    gtag('config', 'G-4T951CHR0E');
+    gtag('config', '{{ADS_TAG_ID}}');
+    gtag('config', '{{GA4_ID}}');
 
+    // Clique em qualquer botão de WhatsApp:
+    //  1) evento whatsapp_click no GA4 ('location' = qual botão; 'landing_page' = qual página);
+    //  2) conversão "Whatsapp" no Google Ads (send_to = ID de conversão/rótulo da ação).
     function trackWhatsappClick(location){
-      try { gtag('event', 'whatsapp_click', { 'landing_page': 'blog/{{POST_SLUG}}', 'location': location || 'unknown' }); } catch(e) {}
+      try {
+        gtag('event', 'whatsapp_click', { 'send_to': '{{GA4_ID}}', 'landing_page': 'blog/{{POST_SLUG}}', 'location': location || 'unknown' });
+        gtag('event', 'conversion', { 'send_to': '{{ADS_WHATSAPP_SEND_TO}}' });
+      } catch(e) {}
       return true;
     }
   </script>
@@ -132,6 +138,8 @@
           {{POST_CONTENT}}
         </div>
 
+        {{POST_EXAMS_HTML}}
+
         <aside class="post-cta">
           <h2>Precisa realizar um exame de imagem em Maracanaú?</h2>
           <p>Nossa equipe atende todos os dias das 7h às 22h. Envie o seu pedido médico pelo WhatsApp que verificamos convênio ou valor particular e já agendamos.</p>
@@ -173,6 +181,10 @@
           <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('footer')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
         </div>
       </div>
+      <nav class="footer-exams" aria-label="Exames">
+        <span class="footer-exams-title">Exames em Maracanaú</span>
+        {{FOOTER_EXAMS_HTML}}
+      </nav>
       <div class="footer-bottom">
         <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
         <p>{{LEGAL_NAME}}</p>
