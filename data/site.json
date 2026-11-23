@@ -4,7 +4,12 @@
   "description": "Clínica de diagnóstico por imagem em Maracanaú/CE, oferecendo exames com tecnologia de ponta e equipe médica especializada.",
   "phone": "(85) 2181-6818",
   "whatsapp": "558521816818",
-  "whatsapp_message": "Olá, gostaria de mais informações sobre a Uno Diagnósticos",
+  "whatsapp_message": "Olá! Vim pelo site da Uno Diagnóstico e gostaria de mais informações.",
+  "whatsapp_messages": {
+    "price": "Olá! Vim pelo site da Uno Diagnóstico e gostaria de consultar valores de exames.",
+    "blog": "Olá! Vim pelo blog da Uno Diagnóstico e gostaria de agendar um exame.",
+    "exam_prefix": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar: "
+  },
   "email": "contato@unodiagnostico.com",
   "address": {
     "street": "Avenida I",
@@ -15,6 +20,10 @@
     "cep": "61900-320",
     "full": "Avenida I, Business Place Torre 2, ao lado da UNIMED - Jereissati, Setor A - Maracanaú/CE, 61900-320"
   },
+  "geo": {
+    "latitude": -3.8707165,
+    "longitude": -38.6190201
+  },
   "hours": "Todos os dias | 7h às 22h",
   "unit_name": "Unidade Maracanaú",
   "technical_director": "Dr. Leonardo Alcântara, CRM 10914/RQE 7848",
@@ -23,7 +32,12 @@
   "social": {
     "instagram": "https://instagram.com/unodiagnostico",
     "facebook": "https://m.facebook.com/unodiagnostico/",
-    "whatsapp_link": "https://api.whatsapp.com/send?phone=558521816818&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20Uno%20Diagn%C3%B3sticos"
+    "whatsapp_link": "https://api.whatsapp.com/send?phone=558521816818&text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Uno%20Diagn%C3%B3stico%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+  },
+  "tracking": {
+    "google_ads_tag_id": "AW-715533760",
+    "google_ads_whatsapp_send_to": "AW-715533760/KKyuCPnntfcCEMDbmNUC",
+    "ga4_id": "G-4T951CHR0E"
   },
   "stats": {
     "years": "7+",
@@ -66,7 +80,7 @@
   ],
   "seo": {
     "title": "Uno Diagnóstico | Ressonância e Exames de Imagem em Maracanaú/CE",
-    "description": "Ressonância magnética já em operação em Maracanaú. Também realizamos tomografia, radiografia digital, ultrassonografia, ecocardiograma, mamografia, densitometria óssea e biópsias. Aceitamos convênios, PIX e cartão. Agende pelo WhatsApp: (85) 2181-6818.",
+    "description": "Ressonância magnética, tomografia, ultrassom, raio-X, mamografia, ecocardiograma e densitometria em Maracanaú. Todos os dias, 7h às 22h. Agende pelo WhatsApp.",
     "keywords": "ressonância magnética Maracanaú, ressonância Maracanaú, diagnóstico por imagem Maracanaú, radiografia digital Maracanaú, tomografia Maracanaú CE, ultrassonografia Maracanaú, ecocardiograma Maracanaú, mamografia Maracanaú, densitometria óssea Maracanaú, clínica de imagem Maracanaú, exame de imagem Ceará, biópsias guiadas imagem"
   }
 }
