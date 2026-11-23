@@ -6,7 +6,7 @@
   <title>{{SITE_TITLE}}</title>
   <meta name="description" content="{{SITE_DESCRIPTION}}">
   <meta name="keywords" content="{{SITE_KEYWORDS}}">
-  <link rel="canonical" href="https://unodiagnostico.com">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -19,11 +19,11 @@
   <meta property="og:title" content="{{SITE_TITLE}}">
   <meta property="og:description" content="{{SITE_DESCRIPTION}}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://unodiagnostico.com">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Uno Diagnóstico">
-  <meta property="og:image" content="https://unodiagnostico.com/images/og-image.png">
-  <meta property="og:image:secure_url" content="https://unodiagnostico.com/images/og-image.png">
+  <meta property="og:image" content="{{OG_IMAGE_URL}}">
+  <meta property="og:image:secure_url" content="{{OG_IMAGE_URL}}">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{SITE_TITLE}}">
   <meta name="twitter:description" content="{{SITE_DESCRIPTION}}">
-  <meta name="twitter:image" content="https://unodiagnostico.com/images/og-image.png">
+  <meta name="twitter:image" content="{{OG_IMAGE_URL}}">
   <meta name="twitter:image:alt" content="Uno Diagnóstico — Clínica de diagnóstico por imagem em Maracanaú/CE">
 
   <!-- Fonts (com preconnect + preload pra reduzir FOIT e melhorar LCP) -->
@@ -62,9 +62,15 @@
     gtag('js', new Date());
     gtag('config', 'AW-5779130943');
 
-    // Google Analytics 4 — substitua G-XXXXXXXXXX pelo seu Measurement ID real
-    // Para obter o ID: analytics.google.com → Admin → Data Streams → seu site → Measurement ID
+    // Google Analytics 4
     gtag('config', 'G-4T951CHR0E');
+
+    // Conversao: dispara evento no Google Ads/GA4 a cada clique em WhatsApp.
+    // 'location' identifica QUAL botao foi clicado, permitindo comparar CTAs.
+    function trackWhatsappClick(location){
+      try { gtag('event', 'whatsapp_click', { 'landing_page': 'home', 'location': location || 'unknown' }); } catch(e) {}
+      return true;
+    }
   </script>
 
   <!-- Inline CSS -->
@@ -90,12 +96,12 @@
           <li><a href="#equipamentos">Equipamentos</a></li>
           <li><a href="#convenios">Convênios</a></li>
           <li><a href="#corpo-clinico">Corpo Clínico</a></li>
-          <li><a href="#blog">Blog</a></li>
+          <li><a href="/blog/">Blog</a></li>
         </ul>
       </nav>
 
       <div class="header-cta">
-        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('header')" class="btn btn-whatsapp btn-sm">
           {{ICON_WHATSAPP}} Agendar Exame
         </a>
       </div>
@@ -112,11 +118,11 @@
     <a href="#equipamentos">Equipamentos</a>
     <a href="#convenios">Convênios</a>
     <a href="#corpo-clinico">Corpo Clínico</a>
-    <a href="#blog">Blog</a>
+    <a href="/blog/">Blog</a>
     <div class="mobile-nav-social">
       <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
       <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
-      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
+      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('menu-mobile')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
     </div>
   </nav>
 
@@ -128,9 +134,9 @@
           <div class="hero-split">
             <div class="hero-content">
               <h1>Diagnóstico por imagem com <em>precisão</em> e <em>credibilidade</em> em Maracanaú</h1>
-              <p>Radiografia digital, tomografia, ultrassonografia, mamografia, densitometria óssea e biópsias. Equipamentos modernos e equipe médica especializada. Atendemos todos os dias das 7h às 22h.</p>
+              <p>Ressonância magnética, tomografia, radiografia digital, ultrassonografia, mamografia, densitometria óssea e biópsias. Equipamentos modernos e equipe médica especializada. Atendemos todos os dias das 7h às 22h.</p>
               <div class="hero-buttons">
-                <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+                <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('hero')" class="btn btn-whatsapp btn-lg">
                   {{ICON_WHATSAPP}} Agende seu Exame pelo WhatsApp
                 </a>
                 <a href="{{RESULTS_URL}}" target="_blank" rel="noopener" class="btn btn-secondary">
@@ -155,7 +161,7 @@
             <div class="hero-image">
               <picture>
                 <source srcset="images/gallery/fachada.webp" type="image/webp">
-                <img src="images/gallery/fachada.jpg" alt="Fachada da Uno Diagnóstico em Maracanaú/CE" width="1799" height="1200" fetchpriority="high">
+                <img src="images/gallery/fachada.jpg" alt="Fachada da Uno Diagnóstico em Maracanaú/CE" width="1200" height="800" fetchpriority="high">
               </picture>
             </div>
           </div>
@@ -164,12 +170,15 @@
       <div class="hero-slide hero-slide-ressonancia">
         <div class="container">
           <div class="hero-slide-announcement">
-            <span class="announcement-badge">Em Breve</span>
-            <h2>Ressonância Magnética <em>de alta definição</em></h2>
-            <p>A Uno Diagnóstico está ampliando seus serviços e em breve contará com Ressonância Magnética. Mais tecnologia a serviço do seu diagnóstico — com a mesma credibilidade de sempre.</p>
+            <span class="announcement-badge">Novidade &middot; Já em operação</span>
+            <h2>Ressonância Magnética <em>de alta definição, aqui em Maracanaú</em></h2>
+            <p>Chegou a ressonância magnética da Uno Diagnóstico. Crânio, coluna, articulações, abdome e pelve com imagens de alta definição, sem radiação e sem precisar ir a Fortaleza — com a mesma equipe e a credibilidade de sempre.</p>
             <div class="hero-buttons" style="justify-content:center">
-              <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
-                {{ICON_WHATSAPP}} Quero ser avisado quando chegar
+              <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('hero-ressonancia')" class="btn btn-whatsapp btn-lg">
+                {{ICON_WHATSAPP}} Agendar minha Ressonância
+              </a>
+              <a href="/ressonancia-magnetica/" class="btn btn-secondary">
+                Saiba mais sobre o exame
               </a>
             </div>
           </div>
@@ -217,7 +226,7 @@
             {{SERVICES_HTML}}
       </div>
       <div class="section-cta">
-        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('exames')" class="btn btn-whatsapp btn-lg">
           {{ICON_WHATSAPP}} Agendar Exame pelo WhatsApp
         </a>
       </div>
@@ -245,7 +254,7 @@
           <h2>Precisa realizar um exame?</h2>
           <p>Agende agora pelo WhatsApp. Atendimento rápido e sem burocracia.</p>
         </div>
-        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('cta-banner')" class="btn btn-whatsapp btn-lg">
           {{ICON_WHATSAPP}} Falar com Atendimento
         </a>
       </div>
@@ -323,7 +332,7 @@
       </div>
       <div class="section-cta">
         <p class="payment-note">Dúvidas sobre valores ou parcelamento? Fale com a gente:</p>
-        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('pagamento')" class="btn btn-whatsapp btn-lg">
           {{ICON_WHATSAPP}} Consultar Valores pelo WhatsApp
         </a>
       </div>
@@ -355,7 +364,7 @@
       </div>
       <div class="section-cta">
         <p class="faq-more">Ainda tem dúvidas? Fale diretamente com nossa equipe:</p>
-        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('faq')" class="btn btn-whatsapp btn-lg">
           {{ICON_WHATSAPP}} Tirar Dúvidas pelo WhatsApp
         </a>
       </div>
@@ -371,6 +380,9 @@
       </div>
       <div class="blog-grid">
             {{BLOG_HTML}}
+      </div>
+      <div class="section-cta">
+        <a href="/blog/" class="btn btn-secondary">Ver todos os posts do blog</a>
       </div>
     </div>
   </section>
@@ -390,7 +402,7 @@
         </div>
         <div class="map-info-item">
           <div class="map-info-icon">{{ICON_PHONE}}</div>
-          <p><a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" style="color:var(--color-secondary)">{{PHONE}}</a></p>
+          <p><a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('mapa-telefone')" style="color:var(--color-secondary)">{{PHONE}}</a></p>
         </div>
       </div>
       <div class="footer-map-embed">
@@ -412,7 +424,7 @@
         <div class="footer-social">
           <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
           <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
-          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
+          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('footer')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -431,7 +443,7 @@
       <p id="modal-description"></p>
       <h4>Preparo para o exame:</h4>
       <ul id="modal-preparations"></ul>
-      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp" style="margin-top:20px;width:100%;justify-content:center">
+      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('modal-exame')" class="btn btn-whatsapp" style="margin-top:20px;width:100%;justify-content:center">
         {{ICON_WHATSAPP}} Agendar este Exame
       </a>
     </div>
@@ -445,20 +457,20 @@
       <div class="blog-modal-date" id="blog-modal-date"></div>
       <h3 id="blog-modal-title"></h3>
       <div id="blog-modal-content" class="blog-modal-body"></div>
-      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp" style="margin-top:24px;width:100%;justify-content:center">
+      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('modal-blog')" class="btn btn-whatsapp" style="margin-top:24px;width:100%;justify-content:center">
         {{ICON_WHATSAPP}} Agendar Exame pelo WhatsApp
       </a>
     </div>
   </div>
 
   <!-- ========== FLOATING WHATSAPP ========== -->
-  <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+  <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('flutuante')" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
     {{ICON_WHATSAPP_LARGE}}
   </a>
 
   <!-- ========== MOBILE STICKY CTA ========== -->
   <div class="mobile-sticky-cta">
-    <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" class="btn btn-whatsapp btn-block">
+    <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('sticky-mobile')" class="btn btn-whatsapp btn-block">
       {{ICON_WHATSAPP}} Agendar Exame pelo WhatsApp
     </a>
   </div>

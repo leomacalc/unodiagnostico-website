@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{POST_SEO_TITLE}}</title>
+  <meta name="description" content="{{POST_EXCERPT}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#005a87">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{POST_TITLE}}">
+  <meta property="og:description" content="{{POST_EXCERPT}}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Uno Diagnóstico">
+  <meta property="og:image" content="{{POST_IMAGE_URL}}">
+  <meta property="og:image:alt" content="{{POST_TITLE}}">
+  <meta property="article:published_time" content="{{POST_DATE_ISO}}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{POST_TITLE}}">
+  <meta name="twitter:description" content="{{POST_EXCERPT}}">
+  <meta name="twitter:image" content="{{POST_IMAGE_URL}}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+    {{SCHEMA_ARTICLE}}
+  </script>
+  <script type="application/ld+json">
+    {{SCHEMA_BREADCRUMB}}
+  </script>
+
+  <!-- Google Ads + Analytics Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-5779130943"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-5779130943');
+    gtag('config', 'G-4T951CHR0E');
+
+    function trackWhatsappClick(location){
+      try { gtag('event', 'whatsapp_click', { 'landing_page': 'blog/{{POST_SLUG}}', 'location': location || 'unknown' }); } catch(e) {}
+      return true;
+    }
+  </script>
+
+  <style>
+    {{CSS}}
+  </style>
+</head>
+<body data-whatsapp="{{WHATSAPP}}">
+
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <picture>
+          <source srcset="/images/logos/logo-verde.webp" type="image/webp">
+          <img src="/images/logos/logo-verde.png" alt="{{SITE_NAME}} - Clínica de Diagnóstico por Imagem em Maracanaú" width="512" height="512" fetchpriority="high">
+        </picture>
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="/#exames">Exames</a></li>
+          <li><a href="/#equipamentos">Equipamentos</a></li>
+          <li><a href="/#convenios">Convênios</a></li>
+          <li><a href="/#corpo-clinico">Corpo Clínico</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="header-cta">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('header')" class="btn btn-whatsapp btn-sm">
+          {{ICON_WHATSAPP}} Agendar Exame
+        </a>
+      </div>
+
+      <button class="mobile-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav">
+    <a href="/#exames">Exames</a>
+    <a href="/#equipamentos">Equipamentos</a>
+    <a href="/#convenios">Convênios</a>
+    <a href="/#corpo-clinico">Corpo Clínico</a>
+    <a href="/blog/">Blog</a>
+    <div class="mobile-nav-social">
+      <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
+      <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
+      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('menu-mobile')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
+    </div>
+  </nav>
+
+  <main class="post-page">
+    <div class="container post-container">
+      <nav class="post-breadcrumb" aria-label="Você está aqui">
+        <a href="/">Início</a> <span aria-hidden="true">›</span>
+        <a href="/blog/">Blog</a> <span aria-hidden="true">›</span>
+        <span>{{POST_TITLE}}</span>
+      </nav>
+
+      <article class="post-article">
+        <header class="post-header">
+          <time class="post-date" datetime="{{POST_DATE_ISO}}">{{POST_DATE}}</time>
+          <h1>{{POST_TITLE}}</h1>
+          <p class="post-lead">{{POST_EXCERPT}}</p>
+        </header>
+
+        <figure class="post-figure">
+          <img src="{{POST_IMAGE}}" alt="{{POST_TITLE}}" width="800" height="400" fetchpriority="high">
+        </figure>
+
+        <div class="post-body">
+          {{POST_CONTENT}}
+        </div>
+
+        <aside class="post-cta">
+          <h2>Precisa realizar um exame de imagem em Maracanaú?</h2>
+          <p>Nossa equipe atende todos os dias das 7h às 22h. Envie o seu pedido médico pelo WhatsApp que verificamos convênio ou valor particular e já agendamos.</p>
+          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('post-cta')" class="btn btn-whatsapp btn-lg">
+            {{ICON_WHATSAPP}} Agendar pelo WhatsApp
+          </a>
+        </aside>
+
+        <footer class="post-meta">
+          <p>Conteúdo revisado pela equipe médica da Uno Diagnóstico. Direção Técnica: {{TECHNICAL_DIRECTOR}}.</p>
+          <p class="post-disclaimer">Este texto tem caráter informativo e não substitui a consulta médica. Somente o seu médico pode indicar o exame adequado ao seu caso.</p>
+        </footer>
+      </article>
+
+      <nav class="post-nav" aria-label="Outros posts">
+        {{POST_PREV}}
+        {{POST_NEXT}}
+      </nav>
+
+      <section class="post-related">
+        <h2>Leia também</h2>
+        <div class="blog-grid">
+          {{POST_RELATED}}
+        </div>
+        <div class="section-cta">
+          <a href="/blog/" class="btn btn-secondary">Ver todos os posts</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo"><picture><source srcset="/images/logos/logo-branco.webp" type="image/webp"><img src="/images/logos/logo-branco.png" alt="{{SITE_NAME}}" width="512" height="512" loading="lazy"></picture></div>
+        <div class="footer-social">
+          <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
+          <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
+          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('footer')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
+        <p>{{LEGAL_NAME}}</p>
+        <p>&copy; {{YEAR}} {{SITE_NAME}}. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('flutuante')" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+    {{ICON_WHATSAPP_LARGE}}
+  </a>
+
+  <div class="mobile-sticky-cta">
+    <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('sticky-mobile')" class="btn btn-whatsapp btn-block">
+      {{ICON_WHATSAPP}} Agendar Exame pelo WhatsApp
+    </a>
+  </div>
+
+  <script>
+    (function () {
+      var header = document.querySelector('.header');
+      if (header) {
+        window.addEventListener('scroll', function () {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+      }
+
+      // Menu mobile (o main.js do site principal nao e' carregado aqui)
+      var toggle = document.querySelector('.mobile-toggle');
+      var nav = document.querySelector('.mobile-nav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function () {
+          var open = nav.classList.toggle('active');
+          toggle.classList.toggle('active', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            nav.classList.remove('active');
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -6,7 +6,7 @@
   <title>{{SEO_TITLE}}</title>
   <meta name="description" content="{{SEO_DESCRIPTION}}">
   <meta name="keywords" content="{{SEO_KEYWORDS}}">
-  <link rel="canonical" href="https://unodiagnostico.com/{{SLUG}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -19,11 +19,11 @@
   <meta property="og:title" content="{{SEO_TITLE}}">
   <meta property="og:description" content="{{SEO_DESCRIPTION}}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://unodiagnostico.com/{{SLUG}}">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Uno Diagnóstico">
-  <meta property="og:image" content="https://unodiagnostico.com/images/og-image.png">
-  <meta property="og:image:secure_url" content="https://unodiagnostico.com/images/og-image.png">
+  <meta property="og:image" content="{{OG_IMAGE_URL}}">
+  <meta property="og:image:secure_url" content="{{OG_IMAGE_URL}}">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -33,7 +33,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{SEO_TITLE}}">
   <meta name="twitter:description" content="{{SEO_DESCRIPTION}}">
-  <meta name="twitter:image" content="https://unodiagnostico.com/images/og-image.png">
+  <meta name="twitter:image" content="{{OG_IMAGE_URL}}">
   <meta name="twitter:image:alt" content="Uno Diagnóstico — {{EXAM_NAME}} em Maracanaú/CE">
 
   <!-- Fonts (com preconnect + preload pra reduzir FOIT e melhorar LCP) -->
@@ -85,7 +85,7 @@
   <!-- ========== HEADER (minimal, conversion-focused) ========== -->
   <header class="lp-header">
     <div class="lp-container">
-      <a href="https://unodiagnostico.com" class="lp-logo">
+      <a href="{{SITE_URL}}" class="lp-logo">
         <picture>
           <source srcset="/images/logos/logo-verde.webp" type="image/webp">
           <img src="/images/logos/logo-verde.png" alt="{{SITE_NAME}}" width="512" height="512" fetchpriority="high">
@@ -350,14 +350,14 @@
   <footer class="lp-footer">
     <div class="lp-container">
       <div class="lp-footer-top">
-        <a href="https://unodiagnostico.com" class="lp-footer-logo">
+        <a href="{{SITE_URL}}" class="lp-footer-logo">
           <picture>
             <source srcset="/images/logos/logo-branco.webp" type="image/webp">
             <img src="/images/logos/logo-branco.png" alt="{{SITE_NAME}}" width="512" height="512" loading="lazy">
           </picture>
         </a>
         <div class="lp-footer-links">
-          <a href="https://unodiagnostico.com">Site principal</a>
+          <a href="{{SITE_URL}}">Site principal</a>
           <a href="{{RESULTS_URL}}" target="_blank" rel="noopener">Resultados de exames</a>
           <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('footer')">WhatsApp</a>
         </div>

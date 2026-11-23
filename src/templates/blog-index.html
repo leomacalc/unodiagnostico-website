@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BLOG_SEO_TITLE}}</title>
+  <meta name="description" content="{{BLOG_SEO_DESCRIPTION}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#005a87">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{BLOG_SEO_TITLE}}">
+  <meta property="og:description" content="{{BLOG_SEO_DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Uno Diagnóstico">
+  <meta property="og:image" content="{{OG_IMAGE_URL}}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+    {{SCHEMA_BLOG}}
+  </script>
+  <script type="application/ld+json">
+    {{SCHEMA_BREADCRUMB}}
+  </script>
+
+  <!-- Google Ads + Analytics Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-5779130943"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-5779130943');
+    gtag('config', 'G-4T951CHR0E');
+
+    function trackWhatsappClick(location){
+      try { gtag('event', 'whatsapp_click', { 'landing_page': 'blog', 'location': location || 'unknown' }); } catch(e) {}
+      return true;
+    }
+  </script>
+
+  <style>
+    {{CSS}}
+  </style>
+</head>
+<body data-whatsapp="{{WHATSAPP}}">
+
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <picture>
+          <source srcset="/images/logos/logo-verde.webp" type="image/webp">
+          <img src="/images/logos/logo-verde.png" alt="{{SITE_NAME}} - Clínica de Diagnóstico por Imagem em Maracanaú" width="512" height="512" fetchpriority="high">
+        </picture>
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="/#exames">Exames</a></li>
+          <li><a href="/#equipamentos">Equipamentos</a></li>
+          <li><a href="/#convenios">Convênios</a></li>
+          <li><a href="/#corpo-clinico">Corpo Clínico</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="header-cta">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('header')" class="btn btn-whatsapp btn-sm">
+          {{ICON_WHATSAPP}} Agendar Exame
+        </a>
+      </div>
+
+      <button class="mobile-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav">
+    <a href="/#exames">Exames</a>
+    <a href="/#equipamentos">Equipamentos</a>
+    <a href="/#convenios">Convênios</a>
+    <a href="/#corpo-clinico">Corpo Clínico</a>
+    <a href="/blog/">Blog</a>
+    <div class="mobile-nav-social">
+      <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
+      <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
+      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('menu-mobile')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
+    </div>
+  </nav>
+
+  <main class="post-page">
+    <div class="container post-container">
+      <nav class="post-breadcrumb" aria-label="Você está aqui">
+        <a href="/">Início</a> <span aria-hidden="true">›</span>
+        <span>Blog</span>
+      </nav>
+
+      <div class="section-header">
+        <h1>Blog: Saúde e Diagnóstico por Imagem</h1>
+        <p>Artigos sobre exames, preparo, sintomas e prevenção, escritos pela equipe da Uno Diagnóstico em Maracanaú.</p>
+      </div>
+
+      <div class="blog-grid blog-grid-index">
+        {{BLOG_LIST_HTML}}
+      </div>
+
+      <aside class="post-cta">
+        <h2>Ficou com dúvida sobre qual exame fazer?</h2>
+        <p>Envie o seu pedido médico pelo WhatsApp. Nossa equipe confirma o preparo, verifica o convênio e agenda o seu exame.</p>
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('blog-cta')" class="btn btn-whatsapp btn-lg">
+          {{ICON_WHATSAPP}} Falar com a equipe
+        </a>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo"><picture><source srcset="/images/logos/logo-branco.webp" type="image/webp"><img src="/images/logos/logo-branco.png" alt="{{SITE_NAME}}" width="512" height="512" loading="lazy"></picture></div>
+        <div class="footer-social">
+          <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
+          <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
+          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('footer')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
+        <p>{{LEGAL_NAME}}</p>
+        <p>&copy; {{YEAR}} {{SITE_NAME}}. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('flutuante')" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+    {{ICON_WHATSAPP_LARGE}}
+  </a>
+
+  <div class="mobile-sticky-cta">
+    <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('sticky-mobile')" class="btn btn-whatsapp btn-block">
+      {{ICON_WHATSAPP}} Agendar Exame pelo WhatsApp
+    </a>
+  </div>
+
+  <script>
+    (function () {
+      var header = document.querySelector('.header');
+      if (header) {
+        window.addEventListener('scroll', function () {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+      }
+
+      // Menu mobile (o main.js do site principal nao e' carregado aqui)
+      var toggle = document.querySelector('.mobile-toggle');
+      var nav = document.querySelector('.mobile-nav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function () {
+          var open = nav.classList.toggle('active');
+          toggle.classList.toggle('active', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            nav.classList.remove('active');
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
