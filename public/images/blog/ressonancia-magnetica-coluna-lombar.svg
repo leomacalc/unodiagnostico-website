@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bgRM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentRM" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="screenRM" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0a2540;stop-opacity:0.95" />
+      <stop offset="60%" style="stop-color:#031426;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#000814;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="vertGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.92" />
+      <stop offset="100%" style="stop-color:#cfe7ff;stop-opacity:0.7" />
+    </linearGradient>
+    <radialGradient id="discGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:0.55" />
+      <stop offset="100%" style="stop-color:#abce5f;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgRM)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- MRI viewer screen (left side) showing sagittal lumbar spine -->
+  <g transform="translate(60 50)">
+    <rect x="0" y="0" width="280" height="240" rx="10" fill="url(#screenRM)" stroke="#abce5f" stroke-width="2.5" opacity="0.95"/>
+
+    <!-- Top clips -->
+    <rect x="50" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.7"/>
+    <rect x="208" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.7"/>
+
+    <!-- Spinal cord (thin line behind vertebrae) -->
+    <path d="M 145 25 Q 145 130 145 215" fill="none" stroke="#c8e47a" stroke-width="3" opacity="0.55"/>
+
+    <!-- Lumbar vertebrae (5 main vertebrae L1-L5) with discs -->
+    <g>
+      <!-- L1 -->
+      <rect x="115" y="35" width="60" height="22" rx="4" fill="url(#vertGrad)" opacity="0.92"/>
+      <rect x="115" y="58" width="60" height="6" rx="2" fill="#abce5f" opacity="0.8"/>
+      <!-- L2 -->
+      <rect x="115" y="66" width="60" height="22" rx="4" fill="url(#vertGrad)" opacity="0.92"/>
+      <rect x="115" y="89" width="60" height="6" rx="2" fill="#abce5f" opacity="0.8"/>
+      <!-- L3 -->
+      <rect x="115" y="97" width="60" height="22" rx="4" fill="url(#vertGrad)" opacity="0.92"/>
+      <rect x="115" y="120" width="60" height="6" rx="2" fill="#abce5f" opacity="0.8"/>
+      <!-- L4 — with herniated disc highlight -->
+      <rect x="115" y="128" width="60" height="22" rx="4" fill="url(#vertGrad)" opacity="0.92"/>
+      <ellipse cx="190" cy="156" rx="14" ry="6" fill="url(#discGlow)"/>
+      <rect x="115" y="151" width="60" height="8" rx="2" fill="#ff8a65" opacity="0.95"/>
+      <path d="M 175 155 Q 188 156 196 158" fill="none" stroke="#ff8a65" stroke-width="3" stroke-linecap="round" opacity="0.95"/>
+      <!-- L5 -->
+      <rect x="115" y="160" width="60" height="22" rx="4" fill="url(#vertGrad)" opacity="0.92"/>
+      <rect x="115" y="183" width="60" height="6" rx="2" fill="#abce5f" opacity="0.8"/>
+      <!-- Sacrum -->
+      <path d="M 115 191 L 175 191 L 165 215 L 125 215 Z" fill="url(#vertGrad)" opacity="0.9"/>
+    </g>
+
+    <!-- Spinous processes (back) -->
+    <g fill="url(#vertGrad)" opacity="0.85">
+      <rect x="100" y="42" width="14" height="6" rx="2"/>
+      <rect x="100" y="73" width="14" height="6" rx="2"/>
+      <rect x="100" y="104" width="14" height="6" rx="2"/>
+      <rect x="100" y="135" width="14" height="6" rx="2"/>
+      <rect x="100" y="167" width="14" height="6" rx="2"/>
+    </g>
+
+    <!-- Label arrow pointing to hernia -->
+    <g>
+      <path d="M 230 156 L 205 156" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 210 152 L 204 156 L 210 160" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>
+      <text x="234" y="153" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#ff8a65">HÉRNIA</text>
+      <text x="234" y="164" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#ff8a65">L4-L5</text>
+    </g>
+
+    <!-- Labels -->
+    <text x="14" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95">RM T2</text>
+    <text x="260" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95" text-anchor="end">SAG</text>
+    <text x="140" y="232" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700"
+          fill="#abce5f" text-anchor="middle" opacity="0.95">COLUNA LOMBAR • UNO DIAGNÓSTICO</text>
+  </g>
+
+  <!-- MRI machine icon (right side) -->
+  <g transform="translate(530 110)">
+    <!-- Machine body -->
+    <ellipse cx="60" cy="60" rx="80" ry="60" fill="#abce5f" opacity="0.18" stroke="#abce5f" stroke-width="2.5"/>
+    <ellipse cx="60" cy="60" rx="55" ry="40" fill="#ffffff" opacity="0.95"/>
+    <!-- Tunnel -->
+    <ellipse cx="60" cy="60" rx="38" ry="26" fill="url(#screenRM)" stroke="#005a87" stroke-width="1.5" opacity="0.9"/>
+    <!-- Inner glow -->
+    <ellipse cx="60" cy="60" rx="22" ry="14" fill="#abce5f" opacity="0.35"/>
+
+    <!-- Magnetic field arcs -->
+    <g stroke="#abce5f" stroke-width="2" fill="none" opacity="0.55">
+      <path d="M -10 30 Q -25 60 -10 90"/>
+      <path d="M -20 20 Q -40 60 -20 100"/>
+      <path d="M 130 30 Q 145 60 130 90"/>
+      <path d="M 140 20 Q 160 60 140 100"/>
+    </g>
+
+    <!-- Sparkles -->
+    <circle cx="10" cy="10" r="2.5" fill="#abce5f" opacity="0.75"/>
+    <circle cx="115" cy="15" r="2" fill="#c8e47a" opacity="0.65"/>
+    <circle cx="20" cy="115" r="2" fill="#abce5f" opacity="0.55"/>
+    <circle cx="115" cy="118" r="2.5" fill="#c8e47a" opacity="0.7"/>
+  </g>
+
+  <!-- Decorative wave -->
+  <g opacity="0.4" fill="none" stroke="#abce5f" stroke-width="2.5" stroke-linecap="round">
+    <path d="M 480 220 Q 540 240 590 260 Q 640 275 700 245"/>
+    <circle cx="700" cy="245" r="6" fill="#abce5f" stroke="none" opacity="0.85"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="325" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Ressonância magnética da coluna lombar</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="358" font-family="Open Sans, Arial, sans-serif" font-size="14" font-weight="400"
+        fill="#c8e47a" text-anchor="middle">O exame essencial para dor nas costas e hérnia de disco</text>
+
+  <!-- Accent line -->
+  <rect x="280" y="372" width="240" height="3" rx="1.5" fill="url(#accentRM)" opacity="0.85"/>
+</svg>

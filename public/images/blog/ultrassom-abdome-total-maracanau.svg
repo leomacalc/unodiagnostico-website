@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="liverGrad" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#e6f4ff;stop-opacity:0.95" />
+      <stop offset="60%" style="stop-color:#abce5f;stop-opacity:0.85" />
+      <stop offset="100%" style="stop-color:#7ba640;stop-opacity:0.9" />
+    </radialGradient>
+    <linearGradient id="screenPanel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.18" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- Abdomen silhouette (subtle) -->
+  <g opacity="0.16">
+    <path d="M 120 80 Q 110 175 140 260 Q 160 300 230 300 Q 300 300 320 260 Q 350 175 330 80 Z"
+          fill="#ffffff" stroke="none"/>
+  </g>
+
+  <!-- Abdominal organs cluster -->
+  <g transform="translate(225 180)">
+    <!-- Liver (large, top) -->
+    <path d="M -75 -45 Q -20 -70 60 -55 Q 75 -30 55 -5 Q 10 5 -40 0 Q -75 -12 -75 -45 Z"
+          fill="url(#liverGrad)" stroke="#ffffff" stroke-width="2" opacity="0.92"/>
+    <!-- Gallbladder -->
+    <ellipse cx="10" cy="8" rx="14" ry="9" fill="#c8e47a" stroke="#ffffff" stroke-width="1.5" opacity="0.9" transform="rotate(20 10 8)"/>
+    <!-- Right kidney (bean shape) -->
+    <path d="M -55 20 Q -70 25 -68 45 Q -66 65 -48 62 Q -40 60 -42 45 Q -44 35 -40 28 Q -46 18 -55 20 Z"
+          fill="url(#liverGrad)" stroke="#ffffff" stroke-width="2" opacity="0.9"/>
+    <!-- Left kidney (bean shape) -->
+    <path d="M 55 20 Q 70 25 68 45 Q 66 65 48 62 Q 40 60 42 45 Q 44 35 40 28 Q 46 18 55 20 Z"
+          fill="url(#liverGrad)" stroke="#ffffff" stroke-width="2" opacity="0.9"/>
+    <!-- Bladder (bottom) -->
+    <path d="M -22 70 Q 0 60 22 70 Q 26 88 0 92 Q -26 88 -22 70 Z"
+          fill="#abce5f" stroke="#ffffff" stroke-width="1.8" opacity="0.85"/>
+  </g>
+
+  <!-- Sound waves emitting from probe -->
+  <g opacity="0.55">
+    <path d="M 175 130 Q 205 118 235 130" fill="none" stroke="#abce5f" stroke-width="2"/>
+    <path d="M 168 140 Q 205 126 242 140" fill="none" stroke="#abce5f" stroke-width="2"/>
+    <path d="M 162 150 Q 205 134 248 150" fill="none" stroke="#abce5f" stroke-width="2"/>
+  </g>
+
+  <!-- Ultrasound probe (transducer) -->
+  <g transform="translate(180 72)">
+    <rect x="0" y="0" width="44" height="58" rx="9" fill="#ffffff" opacity="0.95"/>
+    <rect x="5" y="5" width="34" height="38" rx="5" fill="#005a87" opacity="0.85"/>
+    <rect x="2" y="46" width="40" height="10" rx="3" fill="#abce5f" opacity="0.95"/>
+    <path d="M 22 0 Q 50 -22 95 -8" fill="none" stroke="#ffffff" stroke-width="3.5" opacity="0.85"/>
+    <circle cx="13" cy="26" r="2.5" fill="#ffffff" opacity="0.7"/>
+    <circle cx="31" cy="26" r="2.5" fill="#ffffff" opacity="0.7"/>
+  </g>
+
+  <!-- Ultrasound monitor screen at right -->
+  <g transform="translate(450 80)">
+    <rect x="0" y="0" width="280" height="190" rx="12" fill="url(#screenPanel)" stroke="#abce5f" stroke-width="2" opacity="0.95"/>
+    <path d="M 140 15 L 30 170 L 250 170 Z" fill="#0a1d2e" opacity="0.6"/>
+    <!-- Echo speckles -->
+    <g fill="#ffffff" opacity="0.35">
+      <circle cx="80" cy="80" r="1.2"/>
+      <circle cx="100" cy="110" r="1"/>
+      <circle cx="120" cy="60" r="1.4"/>
+      <circle cx="140" cy="95" r="1.2"/>
+      <circle cx="160" cy="130" r="1"/>
+      <circle cx="180" cy="75" r="1.3"/>
+      <circle cx="200" cy="115" r="1"/>
+      <circle cx="90" cy="140" r="1.2"/>
+      <circle cx="170" cy="155" r="1.1"/>
+      <circle cx="220" cy="140" r="1.2"/>
+      <circle cx="60" cy="120" r="1"/>
+      <circle cx="195" cy="55" r="1.2"/>
+      <circle cx="125" cy="155" r="1.1"/>
+    </g>
+    <!-- Organ contour on screen (liver-like) -->
+    <path d="M 90 90 Q 140 78 185 92 Q 195 108 170 120 Q 125 128 100 118 Q 82 105 90 90 Z"
+          fill="#123047" stroke="#abce5f" stroke-width="1.6" opacity="0.9"/>
+    <!-- Screen label -->
+    <text x="140" y="184" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" text-anchor="middle" opacity="0.95">ABDOME TOTAL • MODO B</text>
+    <!-- Info bar -->
+    <text x="14" y="28" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="600"
+          fill="#ffffff" opacity="0.7">3.5 MHz • 12 cm</text>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="320" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Ultrassom de abdome total</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="355" font-family="Open Sans, Arial, sans-serif" font-size="15" font-weight="400"
+        fill="#c8e47a" text-anchor="middle">Fígado • Vesícula • Rins • Pâncreas • Baço • Bexiga</text>
+
+  <!-- Bottom accent line -->
+  <rect x="280" y="370" width="240" height="3" rx="1.5" fill="url(#accent)" opacity="0.85"/>
+</svg>

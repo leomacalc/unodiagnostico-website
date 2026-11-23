@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="heartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.96" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:0.85" />
+    </linearGradient>
+    <radialGradient id="pulseGlow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:0.55" />
+      <stop offset="100%" style="stop-color:#abce5f;stop-opacity:0" />
+    </radialGradient>
+    <linearGradient id="cuffGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.92" />
+      <stop offset="100%" style="stop-color:#e8efd5;stop-opacity:0.92" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- Glow behind heart -->
+  <circle cx="225" cy="190" r="145" fill="url(#pulseGlow)"/>
+
+  <!-- Pulse rings around the heart -->
+  <circle cx="225" cy="190" r="120" fill="none" stroke="#abce5f" stroke-width="2" opacity="0.55"/>
+  <circle cx="225" cy="190" r="140" fill="none" stroke="#abce5f" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- Heart icon -->
+  <g transform="translate(225 190)">
+    <path d="M 0 50
+             C -45 25 -75 -5 -75 -30
+             C -75 -55 -55 -70 -35 -70
+             C -18 -70 -6 -60 0 -45
+             C 6 -60 18 -70 35 -70
+             C 55 -70 75 -55 75 -30
+             C 75 -5 45 25 0 50 Z"
+          fill="url(#heartGrad)" stroke="#ffffff" stroke-width="2.5" opacity="0.95"/>
+
+    <!-- ECG line inside heart -->
+    <path d="M -50 0 L -25 0 L -15 -20 L -5 25 L 5 -15 L 15 5 L 25 0 L 50 0"
+          fill="none" stroke="#ff5252" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
+  </g>
+
+  <!-- Blood pressure cuff with gauge (right of heart) -->
+  <g transform="translate(425 140)">
+    <!-- Cuff body -->
+    <rect x="0" y="20" width="120" height="44" rx="10" fill="url(#cuffGrad)" stroke="#ffffff" stroke-width="1.5" opacity="0.95"/>
+    <!-- Cuff stripes -->
+    <line x1="20" y1="20" x2="20" y2="64" stroke="#005a87" stroke-width="1.2" opacity="0.45"/>
+    <line x1="50" y1="20" x2="50" y2="64" stroke="#005a87" stroke-width="1.2" opacity="0.45"/>
+    <line x1="80" y1="20" x2="80" y2="64" stroke="#005a87" stroke-width="1.2" opacity="0.45"/>
+    <line x1="100" y1="20" x2="100" y2="64" stroke="#005a87" stroke-width="1.2" opacity="0.45"/>
+
+    <!-- Tube to gauge -->
+    <path d="M 120 42 Q 145 42 150 18 Q 152 6 138 0" stroke="#abce5f" stroke-width="3" fill="none" opacity="0.85" stroke-linecap="round"/>
+
+    <!-- Gauge -->
+    <circle cx="130" cy="-12" r="26" fill="#ffffff" stroke="#005a87" stroke-width="2" opacity="0.95"/>
+    <circle cx="130" cy="-12" r="22" fill="none" stroke="#abce5f" stroke-width="1.5" opacity="0.6"/>
+    <!-- Needle pointing high (hypertension!) -->
+    <line x1="130" y1="-12" x2="148" y2="-26" stroke="#ff5252" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="130" cy="-12" r="2.5" fill="#005a87"/>
+    <text x="130" y="9" font-family="Montserrat, Arial, sans-serif" font-size="8" font-weight="700" fill="#005a87" text-anchor="middle">mmHg</text>
+  </g>
+
+  <!-- Big BP reading "140/90" badge -->
+  <g transform="translate(415 220)">
+    <rect x="0" y="0" width="150" height="50" rx="10" fill="#ff5252" opacity="0.9"/>
+    <text x="75" y="22" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="700"
+          fill="#ffffff" text-anchor="middle" letter-spacing="1">PRESSÃO ALTA</text>
+    <text x="75" y="42" font-family="Montserrat, Arial, sans-serif" font-size="18" font-weight="800"
+          fill="#ffffff" text-anchor="middle">140 / 90</text>
+  </g>
+
+  <!-- "17 de maio" date tag -->
+  <g transform="translate(595 95)">
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="#abce5f" opacity="0.92"/>
+    <text x="65" y="22" font-family="Montserrat, Arial, sans-serif" font-size="12" font-weight="800"
+          fill="#003f6b" text-anchor="middle">17 DE MAIO</text>
+  </g>
+
+  <!-- Decorative pulse wave bottom -->
+  <g opacity="0.5" fill="none" stroke="#abce5f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 100 295 L 160 295 L 175 275 L 190 315 L 205 280 L 220 295 L 280 295"/>
+    <circle cx="280" cy="295" r="5" fill="#abce5f" stroke="none" opacity="0.85"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="335" font-family="Montserrat, Arial, sans-serif" font-size="22" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Dia Mundial da Hipertensão</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="362" font-family="Open Sans, Arial, sans-serif" font-size="14" font-weight="400"
+        fill="#c8e47a" text-anchor="middle">Exames de imagem para proteger seus órgãos-alvo</text>
+
+  <!-- Bottom accent line -->
+  <rect x="260" y="378" width="280" height="3" rx="1.5" fill="url(#accent)" opacity="0.85"/>
+</svg>

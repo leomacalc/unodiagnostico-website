@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bgOM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentOM" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="screenOM" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0a2540;stop-opacity:0.95" />
+      <stop offset="60%" style="stop-color:#031426;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#000814;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="boneOM" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.92" />
+      <stop offset="100%" style="stop-color:#cfe7ff;stop-opacity:0.7" />
+    </linearGradient>
+    <radialGradient id="tearOM" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#ff8a65;stop-opacity:0.55" />
+      <stop offset="100%" style="stop-color:#ff8a65;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgOM)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- Imaging viewer screen (left side) showing shoulder joint -->
+  <g transform="translate(60 50)">
+    <rect x="0" y="0" width="280" height="240" rx="10" fill="url(#screenOM)" stroke="#abce5f" stroke-width="2.5" opacity="0.95"/>
+
+    <!-- Top clips -->
+    <rect x="50" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.7"/>
+    <rect x="208" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.7"/>
+
+    <!-- Scapula / glenoid (upper left) -->
+    <path d="M 55 55 L 120 70 Q 140 78 138 100 L 130 130 Q 120 122 100 120 L 60 112 Q 45 105 48 80 Z"
+          fill="url(#boneOM)" opacity="0.9"/>
+    <!-- Acromion overhang -->
+    <path d="M 120 68 L 205 60 Q 220 60 218 72 L 210 84 L 130 92 Z" fill="url(#boneOM)" opacity="0.9"/>
+
+    <!-- Humeral head (ball) -->
+    <circle cx="170" cy="135" r="46" fill="url(#boneOM)" opacity="0.92"/>
+    <!-- Humerus shaft -->
+    <path d="M 148 172 Q 150 205 162 218 L 208 218 Q 205 195 200 168 Z" fill="url(#boneOM)" opacity="0.9"/>
+
+    <!-- Rotator cuff tendon (green) draping over the humeral head -->
+    <path d="M 132 96 Q 150 82 178 88 Q 205 96 210 118"
+          fill="none" stroke="#abce5f" stroke-width="9" stroke-linecap="round" opacity="0.75"/>
+
+    <!-- Subacromial bursa hint -->
+    <path d="M 132 90 Q 165 78 205 82" fill="none" stroke="#c8e47a" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Tear / lesion highlight on the cuff -->
+    <ellipse cx="168" cy="90" rx="16" ry="10" fill="url(#tearOM)"/>
+    <path d="M 160 90 L 176 90" stroke="#ff8a65" stroke-width="3" stroke-linecap="round" opacity="0.95"/>
+
+    <!-- Label arrow pointing to lesion -->
+    <g>
+      <path d="M 95 62 L 158 88" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 152 82 L 159 88 L 152 94" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>
+      <text x="30" y="52" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#ff8a65">LESÃO DO</text>
+      <text x="30" y="63" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#ff8a65">MANGUITO</text>
+    </g>
+
+    <!-- Labels -->
+    <text x="14" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95">RM / US</text>
+    <text x="260" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95" text-anchor="end">OMBRO</text>
+    <text x="140" y="232" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700"
+          fill="#abce5f" text-anchor="middle" opacity="0.95">MANGUITO ROTADOR • UNO DIAGNÓSTICO</text>
+  </g>
+
+  <!-- Ultrasound probe icon (right side) with sound waves -->
+  <g transform="translate(560 120)">
+    <!-- Probe body -->
+    <rect x="30" y="0" width="44" height="70" rx="12" fill="#ffffff" opacity="0.95"/>
+    <rect x="38" y="14" width="28" height="34" rx="6" fill="#005a87" opacity="0.85"/>
+    <!-- Probe face -->
+    <rect x="30" y="70" width="44" height="12" rx="4" fill="#abce5f" opacity="0.9"/>
+    <!-- Cable -->
+    <path d="M 52 0 Q 52 -22 78 -28" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+
+    <!-- Sound wave beam -->
+    <g stroke="#abce5f" fill="none" stroke-linecap="round" opacity="0.6">
+      <path d="M 34 96 Q 52 108 70 96" stroke-width="3"/>
+      <path d="M 26 112 Q 52 130 78 112" stroke-width="3" opacity="0.75"/>
+      <path d="M 18 128 Q 52 152 86 128" stroke-width="3" opacity="0.5"/>
+    </g>
+    <circle cx="52" cy="90" r="3" fill="#c8e47a" opacity="0.85"/>
+
+    <!-- Sparkles -->
+    <circle cx="0" cy="10" r="2.5" fill="#abce5f" opacity="0.7"/>
+    <circle cx="100" cy="30" r="2" fill="#c8e47a" opacity="0.6"/>
+    <circle cx="10" cy="60" r="2" fill="#abce5f" opacity="0.55"/>
+  </g>
+
+  <!-- Decorative wave -->
+  <g opacity="0.4" fill="none" stroke="#abce5f" stroke-width="2.5" stroke-linecap="round">
+    <path d="M 480 240 Q 540 258 590 275 Q 640 288 700 258"/>
+    <circle cx="700" cy="258" r="6" fill="#abce5f" stroke="none" opacity="0.85"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="325" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Dor no ombro e manguito rotador</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="358" font-family="Open Sans, Arial, sans-serif" font-size="14" font-weight="400"
+        fill="#c8e47a" text-anchor="middle">Ultrassom e ressonância no diagnóstico de bursite e lesões</text>
+
+  <!-- Accent line -->
+  <rect x="260" y="372" width="280" height="3" rx="1.5" fill="url(#accentOM)" opacity="0.85"/>
+</svg>

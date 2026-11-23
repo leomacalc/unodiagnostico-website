@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="headGrad" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#e6f4ff;stop-opacity:0.95" />
+      <stop offset="60%" style="stop-color:#abce5f;stop-opacity:0.85" />
+      <stop offset="100%" style="stop-color:#7ba640;stop-opacity:0.9" />
+    </radialGradient>
+    <linearGradient id="screenPanel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.18" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- Baby silhouette lying on side, hips flexed (M position) -->
+  <g opacity="0.18" fill="#ffffff">
+    <circle cx="118" cy="150" r="34"/>
+    <path d="M 138 176 Q 176 182 196 214 Q 212 240 210 268 L 168 274 Q 164 244 146 228 Q 128 212 122 190 Z"/>
+    <path d="M 196 250 Q 232 246 246 274 Q 258 298 240 316 Q 224 330 210 314 Q 226 300 220 286 Q 212 270 190 274 Z"/>
+    <path d="M 186 282 Q 216 296 214 324 Q 212 348 190 352 Q 172 354 168 338 Q 186 332 186 318 Q 186 302 168 296 Z"/>
+    <path d="M 128 178 Q 100 196 96 224 Q 94 244 108 250 Q 120 254 124 242 Q 112 234 116 220 Q 120 202 140 194 Z"/>
+  </g>
+
+  <!-- Sound waves emitting from probe toward hip -->
+  <g opacity="0.55">
+    <path d="M 152 236 Q 182 224 212 236" fill="none" stroke="#abce5f" stroke-width="2"/>
+    <path d="M 145 246 Q 182 232 219 246" fill="none" stroke="#abce5f" stroke-width="2"/>
+    <path d="M 139 256 Q 182 240 225 256" fill="none" stroke="#abce5f" stroke-width="2"/>
+  </g>
+
+  <!-- Hip joint highlight (ball in socket) -->
+  <circle cx="182" cy="286" r="28" fill="none" stroke="#c8e47a" stroke-width="2.5" opacity="0.85"/>
+  <circle cx="182" cy="286" r="40" fill="none" stroke="#c8e47a" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="182" cy="286" r="12" fill="url(#headGrad)" opacity="0.95"/>
+
+  <!-- Ultrasound linear probe -->
+  <g transform="translate(157 174)">
+    <rect x="0" y="0" width="50" height="56" rx="9" fill="#ffffff" opacity="0.95"/>
+    <rect x="6" y="5" width="38" height="36" rx="5" fill="#005a87" opacity="0.85"/>
+    <rect x="2" y="45" width="46" height="9" rx="3" fill="#abce5f" opacity="0.95"/>
+    <path d="M 25 0 Q 54 -24 100 -10" fill="none" stroke="#ffffff" stroke-width="3.5" opacity="0.85"/>
+    <circle cx="15" cy="24" r="2.5" fill="#ffffff" opacity="0.7"/>
+    <circle cx="35" cy="24" r="2.5" fill="#ffffff" opacity="0.7"/>
+  </g>
+
+  <!-- Ultrasound monitor screen at right (Graf method) -->
+  <g transform="translate(450 80)">
+    <rect x="0" y="0" width="280" height="190" rx="12" fill="url(#screenPanel)" stroke="#abce5f" stroke-width="2" opacity="0.95"/>
+    <path d="M 140 15 L 30 170 L 250 170 Z" fill="#0a1d2e" opacity="0.6"/>
+
+    <!-- Echo speckles -->
+    <g fill="#ffffff" opacity="0.35">
+      <circle cx="80" cy="85" r="1.2"/>
+      <circle cx="103" cy="112" r="1"/>
+      <circle cx="122" cy="62" r="1.4"/>
+      <circle cx="146" cy="98" r="1.2"/>
+      <circle cx="163" cy="132" r="1"/>
+      <circle cx="182" cy="78" r="1.3"/>
+      <circle cx="202" cy="118" r="1"/>
+      <circle cx="92" cy="142" r="1.2"/>
+      <circle cx="172" cy="155" r="1.1"/>
+      <circle cx="220" cy="142" r="1.2"/>
+      <circle cx="62" cy="124" r="1"/>
+      <circle cx="196" cy="58" r="1.2"/>
+      <circle cx="127" cy="155" r="1.1"/>
+    </g>
+
+    <!-- Iliac bone baseline (vertical reference line) -->
+    <path d="M 96 44 L 96 150" stroke="#c8e47a" stroke-width="2.2" opacity="0.9"/>
+    <!-- Bony roof line (acetabular roof) -->
+    <path d="M 96 104 L 178 66" stroke="#c8e47a" stroke-width="2" opacity="0.8"/>
+    <!-- Acetabular socket curve -->
+    <path d="M 96 104 Q 122 150 172 152" fill="none" stroke="#abce5f" stroke-width="2.6" opacity="0.95"/>
+    <!-- Femoral head (cartilaginous, echo-poor) -->
+    <circle cx="142" cy="120" r="30" fill="#123047" stroke="#ffffff" stroke-width="1.6" opacity="0.85"/>
+    <circle cx="142" cy="120" r="30" fill="url(#headGrad)" opacity="0.35"/>
+    <!-- Alpha angle marker -->
+    <path d="M 96 104 m 14 0 a 14 14 0 0 0 12 -6" fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.85"/>
+    <text x="216" y="92" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#c8e47a" text-anchor="middle" opacity="0.95">ângulo α &gt; 60°</text>
+
+    <!-- Screen label -->
+    <text x="140" y="184" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" text-anchor="middle" opacity="0.95">QUADRIL • MÉTODO DE GRAF</text>
+    <!-- Info bar -->
+    <text x="14" y="28" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="600"
+          fill="#ffffff" opacity="0.7">LINEAR 12 MHz</text>
+  </g>
+
+  <!-- Title -->
+  <text x="430" y="320" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Ultrassom de quadril do bebê</text>
+
+  <!-- Subtitle -->
+  <text x="430" y="355" font-family="Open Sans, Arial, sans-serif" font-size="15" font-weight="400"
+        fill="#c8e47a" text-anchor="middle">Displasia do desenvolvimento • 4ª a 6ª semana de vida</text>
+
+  <!-- Bottom accent line -->
+  <rect x="300" y="370" width="260" height="3" rx="1.5" fill="url(#accent)" opacity="0.85"/>
+</svg>

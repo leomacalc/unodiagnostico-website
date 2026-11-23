@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd84a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffb800;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#e8efd5;stop-opacity:0.95" />
+    </linearGradient>
+    <radialGradient id="scanGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffd84a;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#ffd84a;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#ffd84a" opacity="0.10"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots pattern -->
+  <circle cx="600" cy="40" r="4" fill="#ffd84a" opacity="0.55"/>
+  <circle cx="625" cy="55" r="3" fill="#ffd84a" opacity="0.45"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.35"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- Maio Amarelo ribbon (top-right) -->
+  <g transform="translate(640 70) rotate(15)">
+    <path d="M 0 0 L 22 0 L 32 60 L 22 70 L 11 60 L 0 70 L -10 60 L 0 0 Z" fill="url(#yellowGrad)" stroke="#7d5a00" stroke-width="1.5" opacity="0.92"/>
+    <path d="M 11 12 L 11 56" stroke="#7d5a00" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- CT Scanner ring (donut/gantry) -->
+  <g transform="translate(280 195)">
+    <!-- Glow behind scanner -->
+    <circle cx="0" cy="0" r="160" fill="url(#scanGlow)"/>
+
+    <!-- Outer gantry ring -->
+    <circle cx="0" cy="0" r="120" fill="none" stroke="url(#ringGrad)" stroke-width="22" opacity="0.95"/>
+    <!-- Inner aperture (where the patient goes) -->
+    <circle cx="0" cy="0" r="92" fill="#001f38" opacity="0.55"/>
+
+    <!-- Rotating scan beam markers -->
+    <g opacity="0.85">
+      <circle cx="0" cy="-110" r="6" fill="#ffd84a"/>
+      <circle cx="78" cy="-78" r="5" fill="#ffd84a" opacity="0.7"/>
+      <circle cx="110" cy="0" r="4" fill="#ffd84a" opacity="0.5"/>
+      <circle cx="-78" cy="78" r="5" fill="#ffd84a" opacity="0.7"/>
+      <circle cx="-110" cy="0" r="4" fill="#ffd84a" opacity="0.5"/>
+    </g>
+
+    <!-- Scan beam -->
+    <path d="M 0 -110 L -40 90 L 40 90 Z" fill="#ffd84a" opacity="0.18"/>
+    <line x1="0" y1="-110" x2="0" y2="110" stroke="#ffd84a" stroke-width="1.5" opacity="0.6" stroke-dasharray="4 4"/>
+
+    <!-- Patient table extending right -->
+    <rect x="80" y="-14" width="220" height="28" rx="4" fill="url(#ringGrad)" opacity="0.9"/>
+    <rect x="80" y="-14" width="220" height="6" rx="3" fill="#005a87" opacity="0.4"/>
+
+    <!-- Head silhouette inside scanner aperture -->
+    <g transform="translate(0 0)">
+      <!-- Skull profile -->
+      <ellipse cx="0" cy="-5" rx="42" ry="50" fill="url(#ringGrad)" stroke="#005a87" stroke-width="2" opacity="0.95"/>
+      <!-- Brain hint (gentle curve inside) -->
+      <path d="M -28 -20 Q -14 -36 0 -28 Q 14 -36 28 -20 Q 32 -4 26 12 Q 14 28 0 24 Q -14 28 -26 12 Q -32 -4 -28 -20 Z"
+            fill="#abce5f" opacity="0.55" stroke="#005a87" stroke-width="1"/>
+      <!-- Sulci/fissure lines -->
+      <path d="M 0 -32 Q 0 -8 0 16" fill="none" stroke="#005a87" stroke-width="1.5" opacity="0.5"/>
+      <path d="M -16 -20 Q -10 -8 -14 8" fill="none" stroke="#005a87" stroke-width="1" opacity="0.4"/>
+      <path d="M 16 -20 Q 10 -8 14 8" fill="none" stroke="#005a87" stroke-width="1" opacity="0.4"/>
+    </g>
+
+    <!-- Top label dots -->
+    <g transform="translate(0 -130)">
+      <circle cx="-14" cy="0" r="3" fill="#ffd84a" opacity="0.9"/>
+      <circle cx="0" cy="0" r="3" fill="#ffd84a" opacity="0.9"/>
+      <circle cx="14" cy="0" r="3" fill="#ffd84a" opacity="0.9"/>
+    </g>
+  </g>
+
+  <!-- CT image slice preview (right panel) -->
+  <g transform="translate(560 110)">
+    <rect x="0" y="0" width="170" height="170" rx="10" fill="#001f38" stroke="#abce5f" stroke-width="2" opacity="0.95"/>
+    <!-- Brain CT mock - skull -->
+    <ellipse cx="85" cy="85" rx="62" ry="68" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.85"/>
+    <!-- Brain tissue -->
+    <ellipse cx="85" cy="85" rx="54" ry="60" fill="#ffffff" opacity="0.18"/>
+    <!-- Midline -->
+    <line x1="85" y1="20" x2="85" y2="150" stroke="#ffffff" stroke-width="1" opacity="0.55"/>
+    <!-- Ventricles (butterfly) -->
+    <path d="M 70 70 Q 78 60 85 65 Q 92 60 100 70 Q 98 88 85 92 Q 72 88 70 70 Z" fill="#001f38" stroke="#abce5f" stroke-width="1" opacity="0.9"/>
+    <!-- Marker dots -->
+    <circle cx="60" cy="55" r="2" fill="#ffd84a" opacity="0.8"/>
+    <circle cx="110" cy="60" r="2" fill="#ffd84a" opacity="0.8"/>
+
+    <!-- Scale grid corners -->
+    <path d="M 8 8 L 8 18 M 8 8 L 18 8" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+    <path d="M 162 8 L 162 18 M 162 8 L 152 8" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+    <path d="M 8 162 L 8 152 M 8 162 L 18 162" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+    <path d="M 162 162 L 162 152 M 162 162 L 152 162" stroke="#abce5f" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- Label -->
+    <text x="85" y="160" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#ffd84a" text-anchor="middle" opacity="0.95">TC DE CRÂNIO</text>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="320" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Maio Amarelo: tomografia após acidente</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="355" font-family="Open Sans, Arial, sans-serif" font-size="15" font-weight="400"
+        fill="#ffd84a" text-anchor="middle">Diagnóstico rápido de trauma • Crânio • Coluna • Tórax</text>
+
+  <!-- Bottom accent line -->
+  <rect x="280" y="370" width="240" height="3" rx="1.5" fill="url(#accent)" opacity="0.85"/>
+</svg>

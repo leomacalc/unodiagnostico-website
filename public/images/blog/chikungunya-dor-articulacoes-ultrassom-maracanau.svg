@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bgCK" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentCK" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e47a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="screenCK" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0a2540;stop-opacity:0.95" />
+      <stop offset="60%" style="stop-color:#031426;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#000814;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="boneCK" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.92" />
+      <stop offset="100%" style="stop-color:#cfe7ff;stop-opacity:0.7" />
+    </linearGradient>
+    <radialGradient id="inflamCK" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#ff8a65;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ff8a65;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgCK)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#abce5f" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- Imaging viewer screen (left) showing an inflamed joint / tendon sheath -->
+  <g transform="translate(60 50)">
+    <rect x="0" y="0" width="280" height="240" rx="10" fill="url(#screenCK)" stroke="#abce5f" stroke-width="2.5" opacity="0.95"/>
+
+    <!-- Top clips -->
+    <rect x="50" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.7"/>
+    <rect x="208" y="-6" width="22" height="12" rx="2" fill="#ffffff" opacity="0.7"/>
+
+    <!-- Proximal bone (upper) -->
+    <path d="M 70 48 L 118 48 Q 124 82 128 108 Q 112 122 96 122 Q 78 122 66 110 Q 66 78 70 48 Z"
+          fill="url(#boneCK)" opacity="0.9"/>
+    <!-- Distal bone (lower) -->
+    <path d="M 74 168 Q 90 152 110 152 Q 128 152 140 166 Q 136 196 132 222 L 82 222 Q 78 196 74 168 Z"
+          fill="url(#boneCK)" opacity="0.9"/>
+
+    <!-- Joint effusion (derrame articular) between bones -->
+    <ellipse cx="102" cy="142" rx="44" ry="22" fill="url(#inflamCK)"/>
+    <ellipse cx="102" cy="142" rx="30" ry="13" fill="#0a2540" opacity="0.85"/>
+    <ellipse cx="102" cy="142" rx="30" ry="13" fill="none" stroke="#ff8a65" stroke-width="2" opacity="0.85"/>
+
+    <!-- Tendon with thickened sheath (tenossinovite) on the right -->
+    <path d="M 186 40 L 186 214" stroke="#abce5f" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+    <path d="M 186 40 L 186 214" stroke="#c8e47a" stroke-width="22" stroke-linecap="round" opacity="0.18"/>
+    <path d="M 172 62 Q 164 120 172 190" fill="none" stroke="#ff8a65" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 200 62 Q 208 120 200 190" fill="none" stroke="#ff8a65" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- Doppler hypervascularization marks -->
+    <circle cx="196" cy="100" r="3.5" fill="#ff8a65" opacity="0.9"/>
+    <circle cx="178" cy="126" r="3" fill="#ff8a65" opacity="0.8"/>
+    <circle cx="197" cy="150" r="3" fill="#ff8a65" opacity="0.75"/>
+
+    <!-- Label arrow to effusion -->
+    <g>
+      <path d="M 46 196 L 84 154" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 78 152 L 85 153 L 84 160" fill="none" stroke="#ff8a65" stroke-width="2" stroke-linecap="round"/>
+      <text x="14" y="212" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#ff8a65">DERRAME</text>
+      <text x="14" y="223" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#ff8a65">ARTICULAR</text>
+    </g>
+
+    <!-- Labels -->
+    <text x="14" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95">US • DOPPLER</text>
+    <text x="266" y="20" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#abce5f" opacity="0.95" text-anchor="end">ARTICULAÇÃO</text>
+    <text x="228" y="232" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700"
+          fill="#abce5f" text-anchor="middle" opacity="0.95">TENOSSINOVITE</text>
+  </g>
+
+  <!-- Mosquito silhouette + probe (right side) -->
+  <g transform="translate(556 96)">
+    <!-- Mosquito -->
+    <g opacity="0.85">
+      <ellipse cx="60" cy="26" rx="20" ry="7" fill="#ffffff" opacity="0.9" transform="rotate(-18 60 26)"/>
+      <circle cx="40" cy="20" r="7" fill="#ffffff" opacity="0.9"/>
+      <path d="M 33 17 L 20 10" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+      <path d="M 45 24 Q 60 4 84 6" fill="none" stroke="#abce5f" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+      <path d="M 48 28 Q 66 14 90 20" fill="none" stroke="#abce5f" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+      <path d="M 52 32 L 46 46" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+      <path d="M 62 34 L 60 50" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+      <path d="M 72 32 L 78 46" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    </g>
+
+    <!-- Probe body -->
+    <g transform="translate(30 70)">
+      <rect x="16" y="0" width="44" height="66" rx="12" fill="#ffffff" opacity="0.95"/>
+      <rect x="24" y="14" width="28" height="32" rx="6" fill="#005a87" opacity="0.85"/>
+      <rect x="16" y="66" width="44" height="12" rx="4" fill="#abce5f" opacity="0.9"/>
+      <path d="M 38 0 Q 38 -18 62 -24" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+
+      <!-- Sound wave beam -->
+      <g stroke="#abce5f" fill="none" stroke-linecap="round" opacity="0.6">
+        <path d="M 20 92 Q 38 104 56 92" stroke-width="3"/>
+        <path d="M 12 108 Q 38 126 64 108" stroke-width="3" opacity="0.75"/>
+        <path d="M 4 124 Q 38 148 72 124" stroke-width="3" opacity="0.5"/>
+      </g>
+      <circle cx="38" cy="86" r="3" fill="#c8e47a" opacity="0.85"/>
+    </g>
+
+    <!-- Sparkles -->
+    <circle cx="0" cy="70" r="2.5" fill="#abce5f" opacity="0.7"/>
+    <circle cx="118" cy="96" r="2" fill="#c8e47a" opacity="0.6"/>
+    <circle cx="10" cy="130" r="2" fill="#abce5f" opacity="0.55"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="325" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Dor nas articulações após chikungunya</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="358" font-family="Open Sans, Arial, sans-serif" font-size="14" font-weight="400"
+        fill="#c8e47a" text-anchor="middle">Ultrassom com Doppler e ressonância na investigação da fase crônica</text>
+
+  <!-- Accent line -->
+  <rect x="260" y="372" width="280" height="3" rx="1.5" fill="url(#accentCK)" opacity="0.85"/>
+</svg>

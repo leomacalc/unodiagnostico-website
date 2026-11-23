@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffd166;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffe08a;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="liverGrad" cx="40%" cy="40%" r="70%">
+      <stop offset="0%" style="stop-color:#ffd7c2;stop-opacity:0.98" />
+      <stop offset="55%" style="stop-color:#e8956a;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#a85a35;stop-opacity:0.92" />
+    </radialGradient>
+    <linearGradient id="screenPanel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.18" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#ffd166" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#ffd166" opacity="0.1"/>
+
+  <!-- Decorative dots -->
+  <circle cx="600" cy="40" r="4" fill="#ffd166" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#ffd166" opacity="0.4"/>
+  <circle cx="615" cy="75" r="5" fill="#ffd166" opacity="0.3"/>
+  <circle cx="650" cy="35" r="3" fill="#ffd166" opacity="0.5"/>
+
+  <!-- Torso silhouette outline (subtle) -->
+  <g opacity="0.15">
+    <path d="M 120 80 Q 110 130 115 180 Q 120 230 130 280 L 320 280 Q 330 230 335 180 Q 340 130 330 80 Z"
+          fill="#ffffff" stroke="none"/>
+  </g>
+
+  <!-- Liver organ -->
+  <g transform="translate(225 175)">
+    <path d="M -85 -25 Q -90 -45 -65 -55 Q -30 -62 10 -58 Q 50 -55 75 -40 Q 90 -25 85 5 Q 80 30 60 45 Q 30 58 -5 55 Q -45 50 -70 35 Q -90 15 -85 -25 Z"
+          fill="url(#liverGrad)" stroke="#ffffff" stroke-width="2" opacity="0.95"/>
+    <path d="M -5 -55 Q 0 -10 5 50" fill="none" stroke="#a85a35" stroke-width="1.6" opacity="0.6"/>
+    <!-- Gallbladder -->
+    <ellipse cx="20" cy="38" rx="9" ry="14" fill="#ffd166" stroke="#ffffff" stroke-width="1.4" opacity="0.9"/>
+  </g>
+
+  <!-- Sound waves emitting toward liver -->
+  <g opacity="0.55">
+    <path d="M 165 110 Q 200 100 235 110" fill="none" stroke="#ffd166" stroke-width="2"/>
+    <path d="M 160 122 Q 200 110 240 122" fill="none" stroke="#ffd166" stroke-width="2"/>
+    <path d="M 155 135 Q 200 120 245 135" fill="none" stroke="#ffd166" stroke-width="2"/>
+  </g>
+
+  <!-- Ultrasound probe -->
+  <g transform="translate(178 55)">
+    <rect x="0" y="0" width="44" height="58" rx="9" fill="#ffffff" opacity="0.95"/>
+    <rect x="5" y="5" width="34" height="38" rx="5" fill="#005a87" opacity="0.85"/>
+    <rect x="2" y="46" width="40" height="10" rx="3" fill="#ffd166" opacity="0.95"/>
+    <path d="M 22 0 Q 50 -22 95 -8" fill="none" stroke="#ffffff" stroke-width="3.5" opacity="0.85"/>
+    <circle cx="13" cy="26" r="2.5" fill="#ffffff" opacity="0.7"/>
+    <circle cx="31" cy="26" r="2.5" fill="#ffffff" opacity="0.7"/>
+  </g>
+
+  <!-- Ultrasound monitor screen at right -->
+  <g transform="translate(450 62)">
+    <rect x="0" y="0" width="280" height="180" rx="12" fill="url(#screenPanel)" stroke="#ffd166" stroke-width="2" opacity="0.95"/>
+    <path d="M 140 15 L 30 160 L 250 160 Z" fill="#0a1d2e" opacity="0.6"/>
+    <g fill="#ffd166" opacity="0.5">
+      <circle cx="80" cy="80" r="1.5"/>
+      <circle cx="100" cy="105" r="1.4"/>
+      <circle cx="120" cy="60" r="1.6"/>
+      <circle cx="140" cy="90" r="1.5"/>
+      <circle cx="160" cy="120" r="1.4"/>
+      <circle cx="180" cy="75" r="1.6"/>
+      <circle cx="200" cy="110" r="1.4"/>
+      <circle cx="90" cy="135" r="1.5"/>
+      <circle cx="170" cy="148" r="1.4"/>
+      <circle cx="60" cy="115" r="1.4"/>
+      <circle cx="195" cy="55" r="1.5"/>
+      <circle cx="125" cy="145" r="1.4"/>
+    </g>
+    <ellipse cx="140" cy="95" rx="70" ry="50" fill="#ffd166" opacity="0.1"/>
+    <text x="140" y="176" font-family="Montserrat, Arial, sans-serif" font-size="10" font-weight="700"
+          fill="#ffd166" text-anchor="middle" opacity="0.95">FÍGADO • MODO B</text>
+    <text x="14" y="28" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="600"
+          fill="#ffffff" opacity="0.7">3.5 MHz • ABD</text>
+  </g>
+
+  <!-- Yellow awareness ribbon (laço amarelo) -->
+  <g transform="translate(690 300)" opacity="0.95">
+    <path d="M 0 0 Q -14 -26 -8 -40 Q -2 -30 6 -22 Q 12 -14 18 -8 Q 6 -6 0 0 Z"
+          fill="url(#accent)" stroke="#ffffff" stroke-width="1.5"/>
+    <path d="M 0 0 Q 14 -26 8 -40 Q 2 -30 -6 -22 Q -12 -14 -18 -8 Q -6 -6 0 0 Z"
+          fill="#ffe08a" stroke="#ffffff" stroke-width="1.5"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="318" font-family="Montserrat, Arial, sans-serif" font-size="26" font-weight="800"
+        fill="#ffffff" text-anchor="middle">Julho Amarelo</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="353" font-family="Open Sans, Arial, sans-serif" font-size="15" font-weight="400"
+        fill="#ffe08a" text-anchor="middle">Hepatites virais • Ultrassom do fígado • Diagnóstico precoce</text>
+
+  <!-- Bottom accent line -->
+  <rect x="280" y="370" width="240" height="3" rx="1.5" fill="url(#accent)" opacity="0.85"/>
+</svg>
