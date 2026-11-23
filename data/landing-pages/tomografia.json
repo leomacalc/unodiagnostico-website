@@ -3,10 +3,12 @@
   "exam_name": "Tomografia Computadorizada",
   "exam_short": "Tomografia",
   "seo": {
-    "title": "Tomografia Computadorizada em Maracanaú | Uno Diagnóstico - Agende pelo WhatsApp",
+    "title": "Tomografia Computadorizada em Maracanaú | Uno Diagnóstico",
     "description": "Tomografia computadorizada em Maracanaú com laudo rápido e equipe especializada. Atendemos convênios e particular (PIX e cartão). Agende pelo WhatsApp: (85) 2181-6818.",
     "keywords": "tomografia Maracanaú, tomografia computadorizada Maracanaú, TC Maracanaú, tomografia Ceará, exame de tomografia Maracanaú, clínica de tomografia Maracanaú, tomografia de crânio, tomografia de tórax, tomografia de abdome, tomografia particular Maracanaú"
   },
+  "whatsapp_message": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar uma tomografia.",
+  "whatsapp_message_price": "Olá! Vim pelo site da Uno Diagnóstico e gostaria de saber o valor particular da tomografia.",
   "hero": {
     "badge": "Tomografia Computadorizada em Maracanaú",
     "headline": "Diagnóstico rápido e preciso com <em>tomografia de alta resolução</em>",

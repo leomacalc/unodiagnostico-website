@@ -3,10 +3,12 @@
   "exam_name": "Mamografia",
   "exam_short": "Mamografia",
   "seo": {
-    "title": "Mamografia em Maracanaú | Uno Diagnóstico - Rastreamento e Diagnóstico",
+    "title": "Mamografia Digital em Maracanaú | Uno Diagnóstico",
     "description": "Mamografia em Maracanaú com tecnologia digital, conforto e privacidade. Rastreamento, diagnóstico e acompanhamento do câncer de mama. Laudo em 1 dia útil. Agende pelo WhatsApp: (85) 2181-6818.",
     "keywords": "mamografia Maracanaú, mamografia digital Maracanaú, mamografia particular Maracanaú, rastreamento câncer de mama Maracanaú, clínica de mamografia Maracanaú, mamografia convênio Maracanaú, outubro rosa Maracanaú, exame de mama Maracanaú"
   },
+  "whatsapp_message": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar uma mamografia.",
+  "whatsapp_message_price": "Olá! Vim pelo site da Uno Diagnóstico e gostaria de saber o valor particular da mamografia.",
   "hero": {
     "badge": "Mamografia em Maracanaú",
     "headline": "<em>Detecção precoce</em> salva vidas. Sua mamografia com conforto e agilidade.",
