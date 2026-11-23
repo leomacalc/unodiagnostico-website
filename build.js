@@ -60,6 +60,47 @@ function assetUrl(pathname) {
   return SITE_URL + '/' + String(pathname).replace(/^\/+/, '');
 }
 
+// --- Medicao (Google Ads + GA4) ---
+// O ID da tag do Google Ads e' o "ID de conversao" da conta (AW-715533760), NAO o
+// numero da conta (577-913-0943). O send_to e' o rotulo da acao de conversao
+// "Whatsapp" (Google Ads > Metas > Conversoes > Whatsapp > Fontes de dados > Gerenciar).
+// Os valores vivem em data/site.json ("tracking"); os de baixo sao so' reserva.
+var tracking = site.tracking || {};
+var ADS_TAG_ID = tracking.google_ads_tag_id || 'AW-715533760';
+var ADS_WHATSAPP_SEND_TO = tracking.google_ads_whatsapp_send_to || 'AW-715533760/KKyuCPnntfcCEMDbmNUC';
+var GA4_ID = tracking.ga4_id || 'G-4T951CHR0E';
+
+// --- Links de WhatsApp com mensagem pre-preenchida ---
+// Cada pagina abre a conversa ja' dizendo de onde a pessoa veio e o que quer
+// (agendar tal exame, consultar valor...). Os textos ficam em data/site.json
+// ("whatsapp_messages") e em cada data/landing-pages/<slug>.json.
+function waLink(message) {
+  return 'https://api.whatsapp.com/send?phone=' + site.whatsapp + '&text=' + encodeURIComponent(message);
+}
+var waMessages = site.whatsapp_messages || {};
+var WA_MSG_DEFAULT = site.whatsapp_message || 'Olá! Vim pelo site da Uno Diagnóstico e gostaria de mais informações.';
+var WA_MSG_PRICE = waMessages.price || 'Olá! Vim pelo site da Uno Diagnóstico e gostaria de consultar valores de exames.';
+var WA_MSG_BLOG = waMessages.blog || 'Olá! Vim pelo blog da Uno Diagnóstico e gostaria de agendar um exame.';
+var WA_MSG_EXAM_PREFIX = waMessages.exam_prefix || 'Olá! Vim pelo site da Uno Diagnóstico e quero agendar: ';
+var WA_LINK_DEFAULT = waLink(WA_MSG_DEFAULT);
+var WA_LINK_PRICE = waLink(WA_MSG_PRICE);
+var WA_LINK_BLOG = waLink(WA_MSG_BLOG);
+
+function lcFirst(str) {
+  str = String(str || '');
+  return str.charAt(0).toLowerCase() + str.slice(1);
+}
+
+// Corta um texto no limite de caracteres sem partir palavra (meta description).
+function truncateText(text, max) {
+  text = String(text || '').replace(/\s+/g, ' ').trim();
+  if (text.length <= max) return text;
+  var cut = text.slice(0, max - 1);
+  var lastSpace = cut.lastIndexOf(' ');
+  if (lastSpace > max * 0.6) cut = cut.slice(0, lastSpace);
+  return cut.replace(/[\s,;:.\-–—]+$/, '') + '…';
+}
+
 // --- Icon SVGs ---
 const icons = {
   'xray': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="7" x2="12" y2="17"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="9" y1="14" x2="15" y2="14"/></svg>',
@@ -121,16 +162,64 @@ function getPngSize(filePath) {
   }
 }
 
+// --- Helper: le dimensoes de JPEG (marcador SOF) considerando a rotacao EXIF ---
+function getJpegSize(filePath) {
+  try {
+    var buf = fs.readFileSync(filePath);
+    if (buf[0] !== 0xFF || buf[1] !== 0xD8) return null;
+    var orientation = 1;
+    var i = 2;
+    while (i + 9 < buf.length) {
+      if (buf[i] !== 0xFF) { i++; continue; }
+      var marker = buf[i + 1];
+      if (marker === 0xFF) { i++; continue; }
+      if (marker === 0xD8 || marker === 0x01 || (marker >= 0xD0 && marker <= 0xD7)) { i += 2; continue; }
+      if (marker === 0xD9 || marker === 0xDA) break;
+      var segLen = buf.readUInt16BE(i + 2);
+      // APP1/Exif: procura a tag de orientacao (0x0112) no IFD0
+      if (marker === 0xE1 && buf.toString('latin1', i + 4, i + 10) === 'Exif\u0000\u0000') {
+        var tiff = i + 10;
+        var le = buf.toString('latin1', tiff, tiff + 2) === 'II';
+        var rd16 = function (o) { return le ? buf.readUInt16LE(o) : buf.readUInt16BE(o); };
+        var rd32 = function (o) { return le ? buf.readUInt32LE(o) : buf.readUInt32BE(o); };
+        var ifd = tiff + rd32(tiff + 4);
+        var n = rd16(ifd);
+        for (var k = 0; k < n; k++) {
+          var entry = ifd + 2 + k * 12;
+          if (entry + 12 > buf.length) break;
+          if (rd16(entry) === 0x0112) { orientation = rd16(entry + 8); break; }
+        }
+      }
+      // SOF0..SOF15, exceto DHT (C4), JPG (C8) e DAC (CC)
+      if (marker >= 0xC0 && marker <= 0xCF && marker !== 0xC4 && marker !== 0xC8 && marker !== 0xCC) {
+        var h = buf.readUInt16BE(i + 5);
+        var w = buf.readUInt16BE(i + 7);
+        return orientation >= 5 && orientation <= 8 ? { width: h, height: w } : { width: w, height: h };
+      }
+      i += 2 + segLen;
+    }
+  } catch (e) { /* cai no null abaixo */ }
+  return null;
+}
+
+// Dimensoes de PNG ou JPEG; null para outros formatos ou arquivo ausente.
+function getImageSize(filePath) {
+  var ext = path.extname(filePath).toLowerCase();
+  if (ext === '.png') return getPngSize(filePath);
+  if (ext === '.jpg' || ext === '.jpeg') return getJpegSize(filePath);
+  return null;
+}
+
 // --- Helper: gera <picture> com WebP (source) + PNG/JPG fallback (img) ---
 // Uso: pictureTag('images/insurance/camed.png', 'Convênio CAMED', 'loading="lazy"')
-// Declara automaticamente width/height lendo do PNG (Core Web Vitals: elimina CLS).
+// Declara automaticamente width/height lendo do PNG/JPEG (Core Web Vitals: elimina CLS).
 // Se não existir o .webp correspondente, emite apenas <img> normal.
 function pictureTag(srcPng, alt, extraAttrs) {
   extraAttrs = extraAttrs || '';
   var webpSrc = srcPng.replace(/\.(png|jpg|jpeg)$/i, '.webp');
   var pngFull = path.join(__dirname, 'public', srcPng.replace(/^\//, ''));
   var webpFull = path.join(__dirname, 'public', webpSrc.replace(/^\//, ''));
-  var size = getPngSize(pngFull);
+  var size = getImageSize(pngFull);
   var dimAttrs = size ? ' width="' + size.width + '" height="' + size.height + '"' : '';
   var hasWebp = fs.existsSync(webpFull);
   var imgEl = '<img src="' + srcPng + '" alt="' + alt + '"' + dimAttrs + ' ' + extraAttrs + '>';
@@ -141,19 +230,39 @@ function pictureTag(srcPng, alt, extraAttrs) {
     '</picture>';
 }
 
+// --- Links internos: exames que tem pagina propria ---
+// Ordem = a dos cards da home (services.json); landings sem card correspondente vao no fim.
+function landingForService(s) {
+  return landingPages.find(function (lp) { return lp.slug === s.id || lp.exam_name === s.name; }) || null;
+}
+var examPages = (function () {
+  var list = [];
+  services.forEach(function (s) {
+    var lp = landingForService(s);
+    if (lp && list.indexOf(lp) === -1) list.push(lp);
+  });
+  landingPages.forEach(function (lp) { if (list.indexOf(lp) === -1) list.push(lp); });
+  return list;
+})();
+
+// Links de texto para todas as paginas de exame (rodape de todas as paginas).
+// Garante que cada pagina de exame receba link de todas as outras e de cada post.
+function examLinksHTML(excludeSlug) {
+  return examPages
+    .filter(function (lp) { return lp.slug !== excludeSlug; })
+    .map(function (lp) { return '<a href="/' + lp.slug + '/">' + escapeHTML(lp.exam_name) + '</a>'; })
+    .join(' ');
+}
+
 // --- Generate HTML Sections ---
 function generateServicesHTML() {
-  // Mapeia service.id → landing slug quando houver landing page correspondente
-  var landingSlugByServiceId = {};
-  landingPages.forEach(function (lp) {
-    var matched = services.find(function (s) { return s.id === lp.slug || s.name === lp.exam_name; });
-    if (matched) landingSlugByServiceId[matched.id] = lp.slug;
-  });
-
   return services.map(function (s) {
-    var landingSlug = landingSlugByServiceId[s.id];
+    var lp = landingForService(s);
+    var landingSlug = lp ? lp.slug : null;
+    // Texto do link cita o exame ("Saiba mais sobre tomografia") — ancora descritiva
+    // ajuda o Google a entender a pagina de destino.
     var landingLink = landingSlug
-      ? '<a href="/' + landingSlug + '/" class="service-card-link" onclick="event.stopPropagation()" aria-label="Saiba mais sobre ' + escapeHTML(s.name) + '">Saiba mais &rarr;</a>'
+      ? '<a href="/' + landingSlug + '/" class="service-card-link" onclick="event.stopPropagation()">Saiba mais sobre ' + escapeHTML(lcFirst(lp.exam_short || lp.exam_name)) + ' &rarr;</a>'
       : '';
     return '<div class="service-card" data-service="' + s.id + '" data-title="' + escapeHTML(s.name) + '" data-description="' + escapeHTML(s.description) + '" data-preparations=\'' + escapeHTML(JSON.stringify(s.preparations)) + '\'>' +
       '<div class="service-icon">' + (icons[s.icon] || '') + '</div>' +
@@ -222,7 +331,7 @@ function generateInsuranceHTML() {
       '</div>';
   });
   if (insurance.accepts_private) {
-    html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'convenios\')" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
+    html += '<a href="' + WA_LINK_PRICE + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'convenios\')" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
   }
   return html;
 }
@@ -298,10 +407,25 @@ function generateFAQHTML() {
   }).join('\n        ');
 }
 
+// Identificador unico da clinica no schema.org: as paginas de exame e os posts
+// apontam para ele, entao o Google entende que e' tudo a mesma entidade.
+var CLINIC_ID = SITE_URL + '/#clinica';
+
+// Coordenada do ponto da clinica no Google Maps (data/site.json > "geo").
+var geo = site.geo || { latitude: -3.8707165, longitude: -38.6190201 };
+
+// Link do Maps que abre a ficha da clinica (place_id em data/reviews.json),
+// e nao uma busca generica pelo endereco.
+function mapsUrl() {
+  var base = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(site.name + ' ' + site.address.city);
+  return reviews.google_place_id ? base + '&query_place_id=' + encodeURIComponent(reviews.google_place_id) : base;
+}
+
 function generateSchemaOrg() {
   var schema = {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
+    "@id": CLINIC_ID,
     "name": site.name,
     "description": site.seo.description,
     "url": siteUrl(),
@@ -311,7 +435,7 @@ function generateSchemaOrg() {
     "logo": assetUrl('images/logos/logo-verde.png'),
     "priceRange": "$$",
     "sameAs": [site.social.instagram, site.social.facebook],
-    "hasMap": "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(site.address.full),
+    "hasMap": mapsUrl(),
     "areaServed": [
       { "@type": "City", "name": "Maracanaú" },
       { "@type": "City", "name": "Fortaleza" },
@@ -329,8 +453,8 @@ function generateSchemaOrg() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "-3.8764",
-      "longitude": "-38.6254"
+      "latitude": String(geo.latitude),
+      "longitude": String(geo.longitude)
     },
     "openingHours": "Mo-Su 07:00-22:00",
     "medicalSpecialty": "Diagnostic Radiology",
@@ -420,7 +544,15 @@ const replacements = {
   '{{SITE_DESCRIPTION_SHORT}}': site.description,
   '{{PHONE}}': site.phone,
   '{{WHATSAPP}}': site.whatsapp,
-  '{{WHATSAPP_LINK}}': site.social.whatsapp_link,
+  '{{WHATSAPP_LINK_PRICE}}': WA_LINK_PRICE,
+  '{{WHATSAPP_LINK_RM}}': waLink((landingPages.find(function (lp) { return lp.slug === 'ressonancia-magnetica'; }) || {}).whatsapp_message || WA_MSG_DEFAULT),
+  '{{WHATSAPP_LINK}}': WA_LINK_DEFAULT,
+  '{{WHATSAPP_EXAM_PREFIX}}': escapeHTML(WA_MSG_EXAM_PREFIX),
+  '{{ADS_TAG_ID}}': ADS_TAG_ID,
+  '{{ADS_WHATSAPP_SEND_TO}}': ADS_WHATSAPP_SEND_TO,
+  '{{GA4_ID}}': GA4_ID,
+  '{{FOOTER_EXAMS_HTML}}': examLinksHTML(null),
+  '{{MAPS_URL}}': mapsUrl(),
   '{{EMAIL}}': site.email,
   '{{ADDRESS_FULL}}': site.address.full,
   '{{UNIT_NAME}}': site.unit_name,
@@ -437,6 +569,7 @@ const replacements = {
   '{{EQUIPMENT_TITLE}}': equipment.section_title || 'Nossos Equipamentos',
   '{{EQUIPMENT_SUBTITLE}}': equipment.section_subtitle || '',
   '{{GOOGLE_RATING}}': reviews.google_rating.toString(),
+  '{{GOOGLE_RATING_BR}}': reviews.google_rating.toLocaleString('pt-BR'),
   '{{GOOGLE_STARS_HTML}}': generateGoogleStarsHTML(reviews.google_rating),
   '{{GOOGLE_TOTAL_REVIEWS}}': reviews.google_total_reviews.toLocaleString('pt-BR'),
   '{{REVIEWS_HTML}}': generateReviewsHTML(),
@@ -512,6 +645,19 @@ function copyDir(src, dest) {
 
 // --- Build Landing Pages ---
 function buildLandingPage(lp) {
+  // Mensagens de WhatsApp desta pagina (data/landing-pages/<slug>.json):
+  //   whatsapp_message        -> botoes de agendar
+  //   whatsapp_message_price  -> botoes de "consultar valor"
+  var examLc = lcFirst(lp.exam_short || lp.exam_name);
+  var lpWaLink = waLink(lp.whatsapp_message || (WA_MSG_EXAM_PREFIX + lp.exam_name + '.'));
+  var lpWaPriceLink = waLink(lp.whatsapp_message_price || ('Olá! Vim pelo site da Uno Diagnóstico e gostaria de saber o valor particular: ' + lp.exam_name + '.'));
+  // O segundo botao do topo: mensagem propria (whatsapp_message_secondary) se houver;
+  // senao, a de valor quando o texto do botao fala em valor/preco; senao, a de agendar.
+  var secondaryIsPrice = /valor|pre[cç]o|quanto/i.test(lp.hero.cta_secondary || '');
+  var lpWaSecondaryLink = lp.whatsapp_message_secondary
+    ? waLink(lp.whatsapp_message_secondary)
+    : (secondaryIsPrice ? lpWaPriceLink : lpWaLink);
+
   var heroTrustHTML = (lp.hero.trust_badges || []).map(function (b) {
     return '<li>' + escapeHTML(b) + '</li>';
   }).join('');
@@ -576,7 +722,7 @@ function buildLandingPage(lp) {
       '</div>';
   });
   if (insurance.accepts_private) {
-    lpInsuranceHTML += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'insurance\')" class="lp-insurance-private"><h3>' + escapeHTML(insurance.private_label) + '</h3><p>Consulte valores pelo WhatsApp</p></a>';
+    lpInsuranceHTML += '<a href="' + lpWaPriceLink + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'insurance\')" class="lp-insurance-private"><h3>' + escapeHTML(insurance.private_label) + '</h3><p>Consulte valores pelo WhatsApp</p></a>';
   }
 
   // Doctors (reuse — all)
@@ -616,6 +762,7 @@ function buildLandingPage(lp) {
     "url": siteUrl(lp.slug),
     "provider": {
       "@type": "MedicalClinic",
+      "@id": CLINIC_ID,
       "name": site.name,
       "telephone": site.phone,
       "url": siteUrl(),
@@ -657,13 +804,31 @@ function buildLandingPage(lp) {
   var examOgRel = 'images/exames/' + lp.slug + '-og.jpg';
   var hasExamImg = fs.existsSync(path.join(__dirname, 'public', examImgRel));
   var hasExamOg = fs.existsSync(path.join(__dirname, 'public', examOgRel));
+  // width/height (lidos do arquivo) reservam o espaco da foto antes de ela carregar: sem salto de layout.
   var heroImageHTML = hasExamImg
-    ? '<figure class="lp-hero-image"><img src="/' + examImgRel + '" alt="' + escapeHTML(lp.exam_name) + ' na Uno Diagnóstico em Maracanaú/CE" fetchpriority="high"></figure>'
+    ? '<figure class="lp-hero-image">' + pictureTag('/' + examImgRel, escapeHTML(lp.exam_name) + ' na Uno Diagnóstico em Maracanaú/CE', 'fetchpriority="high" decoding="async"') + '</figure>'
     : '';
+
+  // Titulo principal (h1). Quando o titulo nao cita a cidade, o selo ("Exame em Maracanau")
+  // entra no mesmo <h1>, com o mesmo visual: o h1 passa a dizer exame + cidade sem mudar o texto.
+  var headlineHasCity = (lp.hero.headline || '').indexOf(site.address.city) !== -1;
+  var mergeBadge = lp.hero.badge_in_h1 === true || (lp.hero.badge_in_h1 !== false && !headlineHasCity);
+  var heroHeadingHTML = mergeBadge
+    ? '<h1><span class="lp-hero-badge">' + lp.hero.badge + '</span> <span class="lp-hero-headline">' + lp.hero.headline + '</span></h1>'
+    : '<span class="lp-hero-badge">' + lp.hero.badge + '</span>\n        <h1>' + lp.hero.headline + '</h1>';
 
   var lpReplacements = {
     '{{OG_IMAGE_TYPE}}': hasExamOg ? 'image/jpeg' : 'image/png',
     '{{HERO_IMAGE_HTML}}': heroImageHTML,
+    '{{HERO_HEADING_HTML}}': heroHeadingHTML,
+    '{{EXAM_SHORT_LC}}': examLc,
+    '{{WHATSAPP_LINK_PRICE}}': lpWaPriceLink,
+    '{{WHATSAPP_LINK_SECONDARY}}': lpWaSecondaryLink,
+    '{{ADS_TAG_ID}}': ADS_TAG_ID,
+    '{{ADS_WHATSAPP_SEND_TO}}': ADS_WHATSAPP_SEND_TO,
+    '{{GA4_ID}}': GA4_ID,
+    '{{FOOTER_EXAMS_HTML}}': examLinksHTML(lp.slug),
+    '{{MAPS_URL}}': mapsUrl(),
     '{{HERO_CLASS}}': hasExamImg ? ' lp-hero--with-image' : '',
     '{{SLUG}}': lp.slug,
     '{{EXAM_NAME}}': lp.exam_name,
@@ -706,7 +871,7 @@ function buildLandingPage(lp) {
     '{{SITE_NAME}}': site.name,
     '{{PHONE}}': site.phone,
     '{{WHATSAPP}}': site.whatsapp,
-    '{{WHATSAPP_LINK}}': site.social.whatsapp_link,
+    '{{WHATSAPP_LINK}}': lpWaLink,
     '{{ADDRESS_FULL}}': site.address.full,
     '{{UNIT_NAME}}': site.unit_name,
     '{{HOURS}}': site.hours,
@@ -716,6 +881,7 @@ function buildLandingPage(lp) {
     '{{STATS_YEARS}}': site.stats ? site.stats.years : '7+',
     '{{STATS_EXAMS}}': site.stats ? site.stats.exams : '200mil+',
     '{{GOOGLE_RATING}}': reviews.google_rating.toString(),
+    '{{GOOGLE_RATING_BR}}': reviews.google_rating.toLocaleString('pt-BR'),
     '{{GOOGLE_STARS_HTML}}': generateGoogleStarsHTML(reviews.google_rating),
     '{{GOOGLE_TOTAL_REVIEWS}}': reviews.google_total_reviews.toLocaleString('pt-BR'),
     '{{ICON_WHATSAPP}}': icons.whatsapp,
@@ -751,7 +917,11 @@ var blogCommon = {
   '{{SITE_NAME}}': site.name,
   '{{PHONE}}': site.phone,
   '{{WHATSAPP}}': site.whatsapp,
-  '{{WHATSAPP_LINK}}': site.social.whatsapp_link,
+  '{{WHATSAPP_LINK}}': WA_LINK_BLOG,
+  '{{ADS_TAG_ID}}': ADS_TAG_ID,
+  '{{ADS_WHATSAPP_SEND_TO}}': ADS_WHATSAPP_SEND_TO,
+  '{{GA4_ID}}': GA4_ID,
+  '{{FOOTER_EXAMS_HTML}}': examLinksHTML(null),
   '{{INSTAGRAM}}': site.social.instagram,
   '{{FACEBOOK}}': site.social.facebook,
   '{{RESULTS_URL}}': site.results_url,
@@ -785,6 +955,42 @@ function postNavLink(post, kind) {
     '<strong>' + escapeHTML(post.title) + '</strong></a>';
 }
 
+// Exames com pagina propria citados no post (titulo/resumo pesam mais que o corpo).
+// Vira o bloco "Exames citados neste artigo", com link para cada pagina de exame.
+var EXAM_KEYWORDS = {
+  'ressonancia-magnetica': /resson[aâ]ncia/gi,
+  'tomografia': /tomografia/gi,
+  'ultrassonografia': /ultrass|doppler/gi,
+  'mamografia': /mamografia/gi,
+  'densitometria-ossea': /densitometria|osteoporose/gi,
+  'ecocardiografia': /ecocardiogra/gi,
+  'radiografia-digital': /raio[\s-]?x|radiografia/gi
+};
+function relatedExamPages(post) {
+  var head = (post.title || '') + ' ' + (post.excerpt || '') + ' ' + postSlug(post).replace(/-/g, ' ');
+  var body = post.content || '';
+  return examPages.map(function (lp) {
+    var re = EXAM_KEYWORDS[lp.slug];
+    if (!re) return { lp: lp, score: 0 };
+    var inHead = (head.match(re) || []).length;
+    var inBody = (body.match(re) || []).length;
+    return { lp: lp, score: inHead * 5 + inBody };
+  }).filter(function (x) { return x.score >= 3; })
+    .sort(function (a, b) { return b.score - a.score; })
+    .slice(0, 3)
+    .map(function (x) { return x.lp; });
+}
+function postExamsHTML(post) {
+  var related = relatedExamPages(post);
+  if (!related.length) return '';
+  return '<aside class="post-exams">' +
+    '<h2>Exames citados neste artigo</h2>' +
+    '<ul>' + related.map(function (lp) {
+      return '<li><a href="/' + lp.slug + '/">' + escapeHTML(lp.exam_name) + ' em ' + escapeHTML(site.address.city) + '</a></li>';
+    }).join('') + '</ul>' +
+    '</aside>';
+}
+
 function buildBlogPost(post, index) {
   // blogPosts esta ordenado do mais novo pro mais antigo
   var newer = blogPosts[index - 1] || null;
@@ -805,6 +1011,7 @@ function buildBlogPost(post, index) {
     "author": { "@type": "Organization", "name": site.name, "url": siteUrl() },
     "publisher": {
       "@type": "MedicalClinic",
+      "@id": CLINIC_ID,
       "name": site.name,
       "url": siteUrl(),
       "logo": { "@type": "ImageObject", "url": assetUrl('images/logos/logo-verde.png') }
@@ -825,6 +1032,9 @@ function buildBlogPost(post, index) {
     '{{POST_TITLE}}': escapeHTML(post.title),
     '{{POST_SEO_TITLE}}': escapeHTML(post.title) + ' | Uno Diagnóstico',
     '{{POST_EXCERPT}}': escapeHTML(post.excerpt),
+    // Descricao para buscadores: mesmo resumo, cortado em ~155 caracteres sem partir palavra
+    '{{POST_META_DESCRIPTION}}': escapeHTML(truncateText(post.excerpt, 155)),
+    '{{POST_EXAMS_HTML}}': postExamsHTML(post),
     '{{POST_SLUG}}': postSlug(post),
     '{{POST_DATE}}': formatDate(post.date),
     '{{POST_DATE_ISO}}': post.date,
@@ -850,7 +1060,7 @@ function buildBlogIndex() {
     "description": "Artigos sobre exames de imagem, preparo, sintomas e prevenção.",
     "url": siteUrl('blog'),
     "inLanguage": "pt-BR",
-    "publisher": { "@type": "MedicalClinic", "name": site.name, "url": siteUrl() },
+    "publisher": { "@type": "MedicalClinic", "@id": CLINIC_ID, "name": site.name, "url": siteUrl() },
     "blogPost": blogPosts.map(function (p) {
       return {
         "@type": "BlogPosting",
@@ -929,7 +1139,7 @@ console.log('  + robots.txt');
 
 var html404 = template404
   .split('{{SITE_NAME}}').join(site.name)
-  .split('{{WHATSAPP_LINK}}').join(site.social.whatsapp_link)
+  .split('{{WHATSAPP_LINK}}').join(WA_LINK_DEFAULT)
   .split('{{ICON_WHATSAPP}}').join(icons.whatsapp);
 fs.writeFileSync(path.join(distDir, '404.html'), addCacheBuster(html404));
 console.log('  + 404.html');

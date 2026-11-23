@@ -38,9 +38,11 @@ O site é construído a partir de **arquivos JSON de dados** + **templates HTML*
 │       └── main.js          # JavaScript do site principal
 │
 ├── public/                  # Arquivos estáticos (copiados direto para dist/)
+│   ├── fonts/               # Montserrat e Open Sans (woff2 variável) — ver "Fontes"
 │   └── images/              # Imagens do site
 │       ├── gallery/         # Fotos do espaço
 │       ├── equipment/       # Fotos dos aparelhos (cards de Equipamentos)
+│       ├── exames/          # Foto do topo de cada landing: <slug>.jpg + <slug>.webp
 │       └── blog/            # Imagens dos posts
 │
 ├── dist/                    # ⬅ SAÍDA DO BUILD (gerado automaticamente, NÃO editar)
@@ -55,7 +57,17 @@ O site é construído a partir de **arquivos JSON de dados** + **templates HTML*
 ## Como Atualizar o Site
 
 ### Atualizar informações gerais (telefone, endereço, horário)
-Editar `data/site.json`
+Editar `data/site.json`. Campos que o build usa além dos óbvios:
+- `whatsapp_message`: mensagem que já vem escrita quando a pessoa clica num botão de WhatsApp da home.
+- `whatsapp_messages`: `price` (botões de valor), `blog` (botões do blog) e `exam_prefix`
+  (o botão "Agendar este Exame" do modal vira `exam_prefix` + nome do exame).
+- `geo`: latitude/longitude do schema.org — é a coordenada da ficha da clínica no Google Maps.
+- `tracking`: IDs do Google Ads e do GA4 (ver "Tracking de conversão").
+Os links de WhatsApp são montados pelo build (`waLink()`); `social.whatsapp_link` não é mais usado.
+
+A nota e o total de avaliações do Google ficam em `data/reviews.json` (`google_rating`,
+`google_total_reviews`) e aparecem no topo da home e nas landings. Atualizar à mão de tempos
+em tempos, conferindo na ficha do Google (último ajuste: 23/11/2026, 1.713 avaliações).
 
 ### Adicionar/editar um exame
 Editar `data/services.json` — cada exame tem:
@@ -117,12 +129,25 @@ Adicionar ao início do array em `data/blog-posts.json`:
 **Regras do `slug`:** único entre todos os posts, kebab-case, e **não mudar depois de publicado**
 (a URL já indexada quebra). O `image` aponta para um SVG em `public/images/blog/`.
 
+**O build faz sozinho em cada post:** a descrição para o Google (o `excerpt` cortado em ~155
+caracteres, sem partir palavra) e a caixa "Exames citados neste artigo", com link para as páginas
+de exame que o texto menciona (palavras-chave em `EXAM_KEYWORDS`, no `build.js`).
+
 ### Criar uma nova landing page de exame (campanha)
 As landing pages ficam em URLs tipo `unodiagnostico.com/<slug>` e são 100% geradas a partir de um único arquivo JSON em `data/landing-pages/`.
 
 **Passo a passo:**
 1. Copie `data/landing-pages/tomografia.json` como modelo e renomeie para `<slug>.json` (ex: `ultrassonografia.json`).
-2. Preencha todos os campos: `slug`, `exam_name`, `seo`, `hero`, `about`, `indications`, `differentials`, `preparation`, `process`, `faq`.
+2. Preencha todos os campos: `slug`, `exam_name`, `exam_short`, `seo`, `whatsapp_message`, `whatsapp_message_price`, `hero`, `about`, `indications`, `differentials`, `preparation`, `process`, `faq`.
+   - `seo.title`: no máximo 60 caracteres, no formato "<Exame> em Maracanaú | Uno Diagnóstico" (título maior é cortado no Google).
+   - `whatsapp_message`: mensagem dos botões de agendar ("...quero agendar uma tomografia.").
+     `whatsapp_message_price`: mensagem dos botões de valor. `whatsapp_message_secondary` (opcional):
+     mensagem do segundo botão do topo quando ele não é de valor (ex.: "Tirar dúvidas").
+   - `hero.badge` + `hero.headline`: quando o título não cita a cidade, o build coloca o selo
+     ("<Exame> em Maracanaú") dentro do `<h1>`, sem mudar o visual, para o título principal
+     dizer exame + cidade. Forçar com `hero.badge_in_h1: true/false` se precisar.
+   - Foto do topo: `public/images/exames/<slug>.jpg` + `<slug>.webp` (o build lê largura/altura
+     do arquivo e monta o `<picture>`; sem a foto, a landing sai só com texto).
 3. Rode `node build.js` — a landing é gerada em `dist/<slug>/index.html` automaticamente.
 4. A landing reutiliza automaticamente: reviews do Google (`reviews.json`), convênios (`insurance.json`), corpo clínico (`doctors.json`) e dados gerais (`site.json`).
 
@@ -143,9 +168,8 @@ As landing pages ficam em URLs tipo `unodiagnostico.com/<slug>` e são 100% gera
 - CTA final grande
 - WhatsApp flutuante + sticky mobile
 - Schema.org MedicalProcedure para SEO
-- Tracking de conversão no Google Ads em TODOS os cliques de WhatsApp (evento `whatsapp_click` com `location` identificando em qual botão clicou)
-
-**Importante:** o tracking `trackWhatsappClick()` emite evento no Google Ads (tag `AW-5779130943`) permitindo configurar conversões específicas por landing page na campanha.
+- Tracking de conversão em TODOS os cliques de WhatsApp (ver "Tracking de conversão")
+- Rodapé com link para as outras páginas de exame (automático)
 
 ### Alterar visual/design
 - Cores e fontes: variáveis CSS no topo de `src/styles/main.css` (`:root { ... }`)
@@ -191,6 +215,14 @@ Abre em http://localhost:3000
     LocalBusiness vinda de terceiro não é elegível a rich result e pode gerar ação manual.
 11. **Valide SVG antes de publicar** (`python -c "import xml.dom.minidom as m; m.parse(arquivo)"`) —
     XML inválido quebra o card do blog silenciosamente.
+12. **Nada que mude de altura depois que a página abre.** O carrossel do topo da home empilha os
+    slides na mesma célula de grid (`.hero-slide`, troca por `opacity`) — não voltar para
+    `display: none`. Toda `<img>` precisa de `width`/`height`. Era isso que reprovava o site
+    no Core Web Vitals (CLS).
+13. **Links entre páginas são automáticos:** rodapé de todas as páginas lista os exames
+    (`examLinksHTML()`), e os cards da home apontam para a landing com texto "Saiba mais sobre <exame>".
+    Landing nova entra sozinha no rodapé; o card da home só ganha o link se, em `services.json`,
+    o `id` do exame for igual ao `slug` da landing ou o `name` for igual ao `exam_name` dela.
 
 ---
 
@@ -204,17 +236,39 @@ Nunca escrever `https://unodiagnostico.com/...` à mão em template ou script: u
 
 ## Tracking de conversão
 
-Todas as páginas (home, landings e blog) têm `trackWhatsappClick(location)`, que dispara o
-evento `whatsapp_click` no Google Ads (`AW-5779130943`) e no GA4 (`G-4T951CHR0E`), com
-`landing_page` identificando a página e `location` identificando o botão (`header`, `hero`,
-`flutuante`, `sticky-mobile`, `footer`...). **Ao adicionar qualquer CTA novo de WhatsApp,
-incluir `onclick="return trackWhatsappClick('nome-do-lugar')"`** — senão o clique não é medido.
+Todas as páginas (home, landings e blog) têm `trackWhatsappClick(location)`. Cada clique dispara:
+1. o evento `whatsapp_click` no GA4 (`G-4T951CHR0E`), com `landing_page` identificando a página e
+   `location` identificando o botão (`header`, `hero`, `flutuante`, `sticky-mobile`, `footer`...);
+2. a conversão "Whatsapp" do Google Ads (`send_to: AW-715533760/KKyuCPnntfcCEMDbmNUC`).
+
+Os IDs ficam em `data/site.json` > `tracking` e entram nos templates por `{{ADS_TAG_ID}}`,
+`{{ADS_WHATSAPP_SEND_TO}}` e `{{GA4_ID}}` — não escrever ID à mão em template.
+
+> **Atenção:** o ID da tag do Google Ads é `AW-715533760` (ID de conversão). `577-913-0943` é o
+> *número da conta* e não serve como tag: de abril a novembro de 2026 o site usou `AW-5779130943`
+> por engano e nenhuma conversão do site chegou ao Google Ads.
+
+**Ao adicionar qualquer CTA novo de WhatsApp, incluir
+`onclick="return trackWhatsappClick('nome-do-lugar')"`** — senão o clique não é medido.
+(A página 404 é a única sem medição.)
+
+## Fontes
+
+Montserrat (títulos) e Open Sans (texto) ficam em `public/fonts/` (woff2 variável, licença OFL) e
+são carregadas do próprio site — não usar Google Fonts (uma conexão a menos e sem troca de layout).
+- Cada template faz `<link rel="preload" as="font" ... crossorigin>` das duas.
+- Os `@font-face` ficam no topo de `src/styles/main.css` e `src/styles/landing.css`, junto com as
+  fontes de reserva ("... Fallback Roboto/Arial"): elas ajustam a fonte do aparelho (`size-adjust`)
+  para ocupar o mesmo espaço da fonte final, então o texto não muda de linha quando ela carrega.
+  Os valores foram medidos com os textos reais do site; não mexer sem medir de novo.
+- A página 404 é a exceção: continua com Google Fonts.
 
 ## Imagens
 
 - Logos de convênio são exibidos a 60px de altura → salvar com no máximo 180px de altura
 - A fachada da home é o LCP → manter em 1200x800, JPEG q82 + WebP
-- Sempre gerar o `.webp` ao lado do `.png`/`.jpg` (o build monta o `<picture>` sozinho)
+- Sempre gerar o `.webp` ao lado do `.png`/`.jpg` (o build monta o `<picture>` sozinho) — vale
+  também para as fotos de exame das landings (`public/images/exames/`)
 - Se mudar a dimensão da fachada, atualizar `width`/`height` no `src/templates/index.html`
 
 ## Links Externos Importantes
