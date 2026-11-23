@@ -1,0 +1,48 @@
+{
+  "section_title": "Nossos Equipamentos",
+  "section_subtitle": "Tecnologia de ponta para diagnósticos precisos. Conheça alguns dos equipamentos da Uno Diagnóstico.",
+  "items": [
+    {
+      "id": "ressonancia",
+      "name": "Ressonância Magnética",
+      "photo": "images/equipment/ressonancia.jpg",
+      "badge": "Novo",
+      "description": "Ressonância magnética Siemens Healthineers, já em operação em Maracanaú. Exame sem radiação para crânio, coluna, articulações, abdome e pelve, com imagens de alta definição e laudo assinado por médico radiologista."
+    },
+    {
+      "id": "tomografo",
+      "name": "Tomógrafo Multislice",
+      "photo": "images/equipment/tomografo.jpg",
+      "badge": "Multislice",
+      "description": "Tomografia computadorizada de alta resolução para exames rápidos e detalhados, com baixa dose de radiação."
+    },
+    {
+      "id": "mamografo",
+      "name": "Mamógrafo Digital",
+      "photo": "images/equipment/mamografo.jpg",
+      "badge": "Digital",
+      "description": "Mamografia digital de campo completo, com imagens nítidas e maior conforto no exame para rastreamento e diagnóstico."
+    },
+    {
+      "id": "raiox",
+      "name": "Radiografia Digital",
+      "photo": "images/equipment/raiox.jpg",
+      "badge": "Digital",
+      "description": "Raio-X digital com resultados rápidos e imagens em alta definição para diagnóstico de fraturas, pulmão e mais."
+    },
+    {
+      "id": "ultrassom",
+      "name": "Ultrassom com Doppler",
+      "photo": "images/equipment/ultrassom.jpg",
+      "badge": "Doppler",
+      "description": "Ultrassonografia geral, obstétrica, vascular e com Doppler colorido, realizada por médicos especialistas."
+    },
+    {
+      "id": "densitometria",
+      "name": "Densitômetro Ósseo",
+      "photo": "images/equipment/densitometria.jpg",
+      "badge": "DXA",
+      "description": "Densitometria óssea (DXA) para diagnóstico de osteoporose e avaliação da saúde óssea com precisão."
+    }
+  ]
+}

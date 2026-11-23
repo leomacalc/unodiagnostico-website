@@ -1,5 +1,21 @@
 [
   {
+    "id": "ressonancia-magnetica",
+    "name": "Ressonância Magnética",
+    "icon": "mri",
+    "short_description": "Já em operação em Maracanaú. Exame de alta definição, sem radiação, para crânio, coluna, articulações, abdome e pelve.",
+    "description": "A ressonância magnética utiliza campo magnético e ondas de rádio — sem qualquer radiação ionizante — para gerar imagens de altíssima definição das estruturas do corpo. É o exame mais detalhado para avaliar cérebro e medula, coluna, articulações (joelho, ombro, quadril, tornozelo, punho), além de abdome e pelve. Agora você realiza sua ressonância aqui em Maracanaú, sem precisar se deslocar até Fortaleza, com laudo assinado por médico radiologista e resultado no portal online.",
+    "preparations": [
+      "Jejum de 4 a 6 horas apenas nos exames com contraste e nos de abdome/pelve — nossa equipe confirma no agendamento",
+      "Avise se possui marca-passo, implante coclear, clipe de aneurisma, neuroestimulador, bomba de insulina ou fragmento metálico no corpo",
+      "Retire joias, relógio, piercings, próteses dentárias removíveis, aparelho auditivo e cartões magnéticos antes do exame",
+      "Nos exames com contraste, informe alergias e doença renal e traga dosagem de creatinina recente (últimos 30 dias)",
+      "Informe se está grávida ou amamentando",
+      "Se tiver claustrofobia, avise a equipe — temos protocolos para tornar o exame mais confortável",
+      "Traga o pedido médico e exames anteriores da mesma região para comparação"
+    ]
+  },
+  {
     "id": "radiografia-digital",
     "name": "Radiografia Digital",
     "icon": "xray",
@@ -36,6 +52,21 @@
       "Ultrassom pélvico: bexiga cheia (beber 4-6 copos de água 1h antes)",
       "Ultrassom de tireoide: não é necessário preparo especial",
       "Traga exames anteriores, se houver"
+    ]
+  },
+  {
+    "id": "ecocardiografia",
+    "name": "Ecocardiografia",
+    "icon": "heart",
+    "short_description": "Ultrassom do coração para avaliar câmaras, válvulas e força de contração, sem radiação e sem preparo.",
+    "description": "O ecocardiograma é um ultrassom do coração: usa ondas sonoras para mostrar, em tempo real, o tamanho das câmaras cardíacas, a espessura das paredes, o funcionamento das válvulas e a força de contração do músculo cardíaco. É indolor, não usa radiação e é o exame de primeira linha na investigação de sopro, dor no peito, falta de ar, hipertensão e insuficiência cardíaca, além de fazer parte do check-up cardiológico.",
+    "preparations": [
+      "Não é necessário jejum",
+      "Mantenha sua medicação habitual, salvo orientação médica em contrário",
+      "Use roupas confortáveis — será necessário expor o tórax durante o exame",
+      "Evite cremes ou óleos na região do tórax no dia do exame",
+      "Traga exames cardiológicos anteriores (eco, eletrocardiograma, holter) para comparação",
+      "Leve o pedido médico com a indicação do exame"
     ]
   },
   {
