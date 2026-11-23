@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="Uno Diagnóstico">
   <meta property="og:image" content="{{OG_IMAGE_URL}}">
   <meta property="og:image:secure_url" content="{{OG_IMAGE_URL}}">
-  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:type" content="{{OG_IMAGE_TYPE}}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Uno Diagnóstico — {{EXAM_NAME}} em Maracanaú/CE">
@@ -100,7 +100,7 @@
   </header>
 
   <!-- ========== HERO ========== -->
-  <section class="lp-hero">
+  <section class="lp-hero{{HERO_CLASS}}">
     <div class="lp-container">
       <div class="lp-hero-content">
         <span class="lp-hero-badge">{{HERO_BADGE}}</span>
@@ -120,6 +120,7 @@
           {{HERO_TRUST_HTML}}
         </ul>
       </div>
+  {{HERO_IMAGE_HTML}}
     </div>
   </section>
 
