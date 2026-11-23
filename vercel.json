@@ -2,10 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
-  "functions": {
-    "api/transcribe.js": { "memory": 1024, "maxDuration": 30 },
-    "api/format.js": { "memory": 512, "maxDuration": 30 }
-  },
   "headers": [
     {
       "source": "/(.*)",
@@ -19,7 +15,7 @@
     {
       "source": "/images/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
       ]
     }
   ],

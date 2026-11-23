@@ -28,6 +28,8 @@ const equipment = fs.existsSync(path.join(__dirname, 'data', 'equipment.json'))
 const template = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'index.html'), 'utf-8');
 const landingTemplate = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'landing.html'), 'utf-8');
 const template404 = fs.readFileSync(path.join(__dirname, 'src', 'templates', '404.html'), 'utf-8');
+const blogPostTemplate = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'blog-post.html'), 'utf-8');
+const blogIndexTemplate = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'blog-index.html'), 'utf-8');
 const css = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'main.css'), 'utf-8');
 const landingCss = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'landing.css'), 'utf-8');
 const js = fs.readFileSync(path.join(__dirname, 'src', 'js', 'main.js'), 'utf-8');
@@ -42,6 +44,22 @@ function loadLandingPages() {
 }
 const landingPages = loadLandingPages();
 
+// --- URL canonica do site ---
+// unodiagnostico.com (apex) e o host oficial. A Vercel redireciona www -> apex.
+// Toda URL absoluta do site (canonical, og:url, schema.org, sitemap) sai daqui,
+// sempre COM barra final, pra bater exatamente com o que o servidor entrega.
+const SITE_URL = 'https://unodiagnostico.com';
+function siteUrl(pathname) {
+  if (!pathname) return SITE_URL + '/';
+  var p = String(pathname).replace(/^\/+/, '');
+  if (p.indexOf('#') === 0) return SITE_URL + '/' + p;
+  if (!/\/$/.test(p)) p += '/';
+  return SITE_URL + '/' + p;
+}
+function assetUrl(pathname) {
+  return SITE_URL + '/' + String(pathname).replace(/^\/+/, '');
+}
+
 // --- Icon SVGs ---
 const icons = {
   'xray': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="7" x2="12" y2="17"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="9" y1="14" x2="15" y2="14"/></svg>',
@@ -49,6 +67,8 @@ const icons = {
   'ultrasound': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M2 12a5 5 0 0 0 5 5 8 8 0 0 1 5 2 8 8 0 0 1 5-2 5 5 0 0 0 5-5V7h-5a8 8 0 0 0-5 2 8 8 0 0 0-5-2H2Z"/><path d="M6 11c1.5 0 3 .5 3 2-2 0-3 0-3-2Z"/></svg>',
   'ct-scan': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>',
   'bone': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M17 10c.7-.7 1.69 0 2.5 0a2.5 2.5 0 1 0 0-5 .5.5 0 0 1-.5-.5 2.5 2.5 0 1 0-5 0c0 .81.7 1.8 0 2.5l-7 7c-.7.7-1.69 0-2.5 0a2.5 2.5 0 0 0 0 5c.28 0 .5.22.5.5a2.5 2.5 0 1 0 5 0c0-.81-.7-1.8 0-2.5Z"/></svg>',
+  'heart': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.7 1-1a5.5 5.5 0 0 0 0-7.7z"/><polyline points="3.5 12.5 8 12.5 9.8 9.4 12.2 15 14 12.5 18.5 12.5"/></svg>',
+  'mri': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><rect x="2" y="6" width="20" height="12" rx="3"/><rect x="8" y="9" width="8" height="6" rx="3"/><line x1="2" y1="20" x2="6" y2="20"/><line x1="18" y1="20" x2="22" y2="20"/><line x1="12" y1="2" x2="12" y2="6"/></svg>',
   'mammography': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"/><path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/><circle cx="12" cy="12" r="2"/></svg>',
   'phone': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
   'mail': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>',
@@ -165,13 +185,25 @@ function generateDoctorsHTML() {
   }).join('\n            ');
 }
 
+// Fallback: se a foto do equipamento ainda não existe em public/, usa o banner
+// abstrato da marca em vez de gerar um <img> quebrado. Avisa no console do build.
+var EQUIPMENT_PHOTO_FALLBACK = 'images/gallery/ressonancia-banner.png';
+function equipmentPhoto(photo) {
+  if (!photo) return EQUIPMENT_PHOTO_FALLBACK;
+  var full = path.join(__dirname, 'public', photo.replace(/^\//, ''));
+  var webp = full.replace(/\.(png|jpg|jpeg)$/i, '.webp');
+  if (fs.existsSync(full) || fs.existsSync(webp)) return photo;
+  console.warn('  ! Foto de equipamento ausente: public/' + photo + ' — usando imagem padrao');
+  return EQUIPMENT_PHOTO_FALLBACK;
+}
+
 function generateEquipmentHTML() {
   if (!equipment.items || !equipment.items.length) return '';
   return equipment.items.map(function (e) {
     var badgeHTML = e.badge ? '<span class="equipment-card-badge">' + escapeHTML(e.badge) + '</span>' : '';
     return '<article class="equipment-card">' +
       '<div class="equipment-card-image">' +
-      pictureTag(e.photo, escapeHTML(e.name) + ' - Uno Diagnostico', 'loading="lazy"') +
+      pictureTag(equipmentPhoto(e.photo), escapeHTML(e.name) + ' - Uno Diagnostico', 'loading="lazy"') +
       badgeHTML +
       '</div>' +
       '<div class="equipment-card-body">' +
@@ -190,28 +222,67 @@ function generateInsuranceHTML() {
       '</div>';
   });
   if (insurance.accepts_private) {
-    html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
+    html += '<a href="' + site.social.whatsapp_link + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'convenios\')" class="insurance-private"><h3>' + insurance.private_label + '</h3><p>Consulte valores e condições</p></a>';
   }
   return html;
 }
 
+// --- Blog: cada post tem URL propria em /blog/<slug>/ ---
+function postSlug(post) {
+  return post.slug || post.id;
+}
+function postPath(post) {
+  return 'blog/' + postSlug(post);
+}
+
+// Converte o texto puro do post (blocos separados por \n\n) em HTML semantico.
+// Regras: bloco iniciado por "•" vira <ul>; linha curta sem pontuacao final vira
+// <h2> (sao os subtitulos dos posts); o resto vira <p>.
+function renderPostContent(text) {
+  if (!text) return '';
+  return String(text).split(/\n{2,}/).map(function (raw) {
+    var block = raw.trim();
+    if (!block) return '';
+    var lines = block.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+
+    if (lines[0].charAt(0) === '•') {
+      var items = lines.map(function (l) {
+        return '<li>' + escapeHTML(l.replace(/^•\s*/, '')) + '</li>';
+      }).join('');
+      return '<ul>' + items + '</ul>';
+    }
+
+    var isHeading = lines.length === 1 &&
+      block.length <= 95 &&
+      !/[.;:!]$/.test(block) &&
+      block.indexOf('•') === -1;
+    if (isHeading) return '<h2>' + escapeHTML(block) + '</h2>';
+
+    // Linhas do tipo "MITO: ..." / "VERDADE: ..." ganham o rotulo em negrito
+    return '<p>' + lines.map(function (l) {
+      return escapeHTML(l).replace(/^([A-ZÁÂÃÀÉÊÍÓÔÕÚÇ]{3,15}:)/, '<strong>$1</strong>');
+    }).join('<br>') + '</p>';
+  }).filter(Boolean).join('\n          ');
+}
+
+function blogCardHTML(post) {
+  var href = '/' + postPath(post) + '/';
+  var imageHTML = post.image
+    ? '<img src="/' + post.image.replace(/^\//, '') + '" alt="' + escapeHTML(post.title) + '" loading="lazy">'
+    : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:2rem">&#128196;</div>';
+  return '<article class="blog-card">' +
+    '<a href="' + href + '" class="blog-image" aria-hidden="true" tabindex="-1">' + imageHTML + '</a>' +
+    '<div class="blog-content">' +
+    '<div class="blog-date" data-date="' + post.date + '">' + formatDate(post.date) + '</div>' +
+    '<h3><a href="' + href + '">' + escapeHTML(post.title) + '</a></h3>' +
+    '<p>' + escapeHTML(post.excerpt) + '</p>' +
+    '<a href="' + href + '" class="blog-link">Ler mais &rarr;</a>' +
+    '</div>' +
+    '</article>';
+}
+
 function generateBlogHTML() {
-  return blogPosts.slice(0, 3).map(function (post) {
-    var imageHTML = post.image
-      ? '<img src="' + post.image + '" alt="' + escapeHTML(post.title) + '" loading="lazy">'
-      : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:2rem">&#128196;</div>';
-    var contentFormatted = post.content.replace(/\n/g, '<br>');
-    return '<div class="blog-card" data-blog-id="' + post.id + '">' +
-      '<div class="blog-image">' + imageHTML + '</div>' +
-      '<div class="blog-content">' +
-      '<div class="blog-date" data-date="' + post.date + '">' + formatDate(post.date) + '</div>' +
-      '<h3>' + post.title + '</h3>' +
-      '<p>' + post.excerpt + '</p>' +
-      '<a href="#" class="blog-link" data-blog="' + post.id + '">Ler mais &rarr;</a>' +
-      '</div>' +
-      '<div class="blog-full-content" style="display:none">' + contentFormatted + '</div>' +
-      '</div>';
-  }).join('\n            ');
+  return blogPosts.slice(0, 3).map(blogCardHTML).join('\n            ');
 }
 
 function generateFAQHTML() {
@@ -233,9 +304,21 @@ function generateSchemaOrg() {
     "@type": "MedicalClinic",
     "name": site.name,
     "description": site.seo.description,
-    "url": "https://unodiagnostico.com",
+    "url": siteUrl(),
     "telephone": site.phone,
     "email": site.email,
+    "image": assetUrl('images/og-image.png'),
+    "logo": assetUrl('images/logos/logo-verde.png'),
+    "priceRange": "$$",
+    "sameAs": [site.social.instagram, site.social.facebook],
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(site.address.full),
+    "areaServed": [
+      { "@type": "City", "name": "Maracanaú" },
+      { "@type": "City", "name": "Fortaleza" },
+      { "@type": "City", "name": "Pacatuba" },
+      { "@type": "City", "name": "Maranguape" },
+      { "@type": "AdministrativeArea", "name": "Região Metropolitana de Fortaleza" }
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": site.address.street + ', ' + site.address.complement,
@@ -252,11 +335,14 @@ function generateSchemaOrg() {
     "openingHours": "Mo-Su 07:00-22:00",
     "medicalSpecialty": "Diagnostic Radiology",
     "availableService": services.map(function (s) {
-      return {
+      var lp = landingPages.find(function (l) { return l.slug === s.id || l.exam_name === s.name; });
+      var entry = {
         "@type": "MedicalTest",
         "name": s.name,
         "description": s.short_description
       };
+      if (lp) entry.url = siteUrl(lp.slug);
+      return entry;
     }),
     "paymentAccepted": "Cash, Credit Card, Debit Card, PIX",
     "currenciesAccepted": "BRL"
@@ -281,12 +367,6 @@ function generateSchemaFAQ() {
     })
   };
   return JSON.stringify(schema, null, 2);
-}
-
-function generateContactSubjects() {
-  return site.contact_form_subjects.map(function (s) {
-    return '<option value="' + escapeHTML(s) + '">' + s + '</option>';
-  }).join('\n                  ');
 }
 
 function generateGoogleStarsHTML(rating) {
@@ -320,7 +400,6 @@ function generateReviewsHTML() {
       '</div>' +
       '<div class="review-stars">' + starsHTML + '</div>' +
       '<p class="review-text">' + escapeHTML(r.text) + '</p>' +
-      '<span class="review-time">' + escapeHTML(r.time) + '</span>' +
       '</div>';
   }).join('\n        ');
 }
@@ -333,6 +412,9 @@ const replacements = {
   '{{SITE_TITLE}}': site.seo.title,
   '{{SITE_DESCRIPTION}}': site.seo.description,
   '{{SITE_KEYWORDS}}': site.seo.keywords,
+  '{{CANONICAL_URL}}': siteUrl(),
+  '{{OG_IMAGE_URL}}': assetUrl('images/og-image.png'),
+  '{{SITE_URL}}': SITE_URL,
   '{{SITE_NAME}}': site.name,
   '{{SITE_TAGLINE}}': site.tagline,
   '{{SITE_DESCRIPTION_SHORT}}': site.description,
@@ -365,7 +447,6 @@ const replacements = {
   '{{STATS_YEARS}}': site.stats ? site.stats.years : '5+',
   '{{STATS_EXAMS}}': site.stats ? site.stats.exams : '50mil+',
   '{{STATS_EQUIPMENT}}': site.stats ? site.stats.equipment : '6+',
-  '{{CONTACT_SUBJECTS}}': generateContactSubjects(),
   '{{CSS}}': css,
   '{{JS}}': js,
   '{{ICON_INSTAGRAM}}': icons.instagram,
@@ -484,7 +565,6 @@ function buildLandingPage(lp) {
       '</div>' +
       '<div class="lp-review-stars">' + starsHTML + '</div>' +
       '<p class="lp-review-text">' + escapeHTML(r.text) + '</p>' +
-      '<span class="lp-review-time">' + escapeHTML(r.time) + '</span>' +
       '</div>';
   }).join('\n        ');
 
@@ -533,12 +613,12 @@ function buildLandingPage(lp) {
     "procedureType": "Diagnostic",
     "howPerformed": lp.about.paragraphs ? lp.about.paragraphs[0] : '',
     "preparation": (lp.preparation.items || []).join('; '),
-    "url": "https://unodiagnostico.com/" + lp.slug,
+    "url": siteUrl(lp.slug),
     "provider": {
       "@type": "MedicalClinic",
       "name": site.name,
       "telephone": site.phone,
-      "url": "https://unodiagnostico.com",
+      "url": siteUrl(),
       "address": {
         "@type": "PostalAddress",
         "streetAddress": site.address.street + ', ' + site.address.complement,
@@ -566,9 +646,9 @@ function buildLandingPage(lp) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://unodiagnostico.com" },
-      { "@type": "ListItem", "position": 2, "name": "Exames", "item": "https://unodiagnostico.com#exames" },
-      { "@type": "ListItem", "position": 3, "name": lp.exam_name, "item": "https://unodiagnostico.com/" + lp.slug }
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": siteUrl() },
+      { "@type": "ListItem", "position": 2, "name": "Exames", "item": SITE_URL + '/#exames' },
+      { "@type": "ListItem", "position": 3, "name": lp.exam_name, "item": siteUrl(lp.slug) }
     ]
   }, null, 2);
 
@@ -580,6 +660,9 @@ function buildLandingPage(lp) {
     '{{SEO_TITLE}}': lp.seo.title,
     '{{SEO_DESCRIPTION}}': lp.seo.description,
     '{{SEO_KEYWORDS}}': lp.seo.keywords,
+    '{{CANONICAL_URL}}': siteUrl(lp.slug),
+    '{{OG_IMAGE_URL}}': assetUrl('images/og-image.png'),
+    '{{SITE_URL}}': SITE_URL,
     '{{HERO_BADGE}}': lp.hero.badge,
     '{{HERO_HEADLINE}}': lp.hero.headline,
     '{{HERO_SUBTITLE}}': lp.hero.subtitle,
@@ -648,25 +731,173 @@ landingPages.forEach(function (lp) {
   console.log('  + landing /' + lp.slug + ' (' + Math.round(size / 1024) + ' KB)');
 });
 
+// --- Build Blog (indice + uma pagina por post) ---
+var blogCommon = {
+  '{{CSS}}': css,
+  '{{SITE_URL}}': SITE_URL,
+  '{{OG_IMAGE_URL}}': assetUrl('images/og-image.png'),
+  '{{SITE_NAME}}': site.name,
+  '{{PHONE}}': site.phone,
+  '{{WHATSAPP}}': site.whatsapp,
+  '{{WHATSAPP_LINK}}': site.social.whatsapp_link,
+  '{{INSTAGRAM}}': site.social.instagram,
+  '{{FACEBOOK}}': site.social.facebook,
+  '{{RESULTS_URL}}': site.results_url,
+  '{{TECHNICAL_DIRECTOR}}': site.technical_director,
+  '{{LEGAL_NAME}}': site.legal_name,
+  '{{ICON_WHATSAPP}}': icons.whatsapp,
+  '{{ICON_WHATSAPP_LARGE}}': icons['whatsapp-large'],
+  '{{ICON_INSTAGRAM}}': icons.instagram,
+  '{{ICON_FACEBOOK}}': icons.facebook,
+  '{{YEAR}}': new Date().getFullYear().toString()
+};
+
+function applyTemplate(tpl, map) {
+  var out = tpl;
+  Object.keys(map).forEach(function (k) { out = out.split(k).join(map[k]); });
+  return out;
+}
+
+function writePage(relDir, html) {
+  var outDir = path.join(distDir, relDir);
+  fs.mkdirSync(outDir, { recursive: true });
+  var final = addCacheBuster(html);
+  fs.writeFileSync(path.join(outDir, 'index.html'), final);
+  return final.length;
+}
+
+function postNavLink(post, kind) {
+  if (!post) return '';
+  return '<a class="post-nav-link ' + kind + '" href="/' + postPath(post) + '/">' +
+    '<span>' + (kind === 'prev' ? 'Post anterior' : 'Próximo post') + '</span>' +
+    '<strong>' + escapeHTML(post.title) + '</strong></a>';
+}
+
+function buildBlogPost(post, index) {
+  // blogPosts esta ordenado do mais novo pro mais antigo
+  var newer = blogPosts[index - 1] || null;
+  var older = blogPosts[index + 1] || null;
+  var related = blogPosts.filter(function (p) { return p !== post; }).slice(0, 3);
+  var imageUrl = assetUrl(post.image || 'images/og-image.png');
+
+  var schemaArticle = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": imageUrl,
+    "datePublished": post.date,
+    "dateModified": post.date,
+    "inLanguage": "pt-BR",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": siteUrl(postPath(post)) },
+    "author": { "@type": "Organization", "name": site.name, "url": siteUrl() },
+    "publisher": {
+      "@type": "MedicalClinic",
+      "name": site.name,
+      "url": siteUrl(),
+      "logo": { "@type": "ImageObject", "url": assetUrl('images/logos/logo-verde.png') }
+    }
+  }, null, 2);
+
+  var schemaBreadcrumb = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": siteUrl() },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": siteUrl('blog') },
+      { "@type": "ListItem", "position": 3, "name": post.title, "item": siteUrl(postPath(post)) }
+    ]
+  }, null, 2);
+
+  var map = Object.assign({}, blogCommon, {
+    '{{POST_TITLE}}': escapeHTML(post.title),
+    '{{POST_SEO_TITLE}}': escapeHTML(post.title) + ' | Uno Diagnóstico',
+    '{{POST_EXCERPT}}': escapeHTML(post.excerpt),
+    '{{POST_SLUG}}': postSlug(post),
+    '{{POST_DATE}}': formatDate(post.date),
+    '{{POST_DATE_ISO}}': post.date,
+    '{{POST_IMAGE}}': '/' + (post.image || 'images/og-image.png').replace(/^\//, ''),
+    '{{POST_IMAGE_URL}}': imageUrl,
+    '{{POST_CONTENT}}': renderPostContent(post.content),
+    '{{POST_PREV}}': postNavLink(older, 'prev'),
+    '{{POST_NEXT}}': postNavLink(newer, 'next'),
+    '{{POST_RELATED}}': related.map(blogCardHTML).join('\n          '),
+    '{{CANONICAL_URL}}': siteUrl(postPath(post)),
+    '{{SCHEMA_ARTICLE}}': schemaArticle,
+    '{{SCHEMA_BREADCRUMB}}': schemaBreadcrumb
+  });
+
+  return writePage(postPath(post), applyTemplate(blogPostTemplate, map));
+}
+
+function buildBlogIndex() {
+  var schemaBlog = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Blog da Uno Diagnóstico",
+    "description": "Artigos sobre exames de imagem, preparo, sintomas e prevenção.",
+    "url": siteUrl('blog'),
+    "inLanguage": "pt-BR",
+    "publisher": { "@type": "MedicalClinic", "name": site.name, "url": siteUrl() },
+    "blogPost": blogPosts.map(function (p) {
+      return {
+        "@type": "BlogPosting",
+        "headline": p.title,
+        "datePublished": p.date,
+        "url": siteUrl(postPath(p))
+      };
+    })
+  }, null, 2);
+
+  var schemaBreadcrumb = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": siteUrl() },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": siteUrl('blog') }
+    ]
+  }, null, 2);
+
+  var map = Object.assign({}, blogCommon, {
+    '{{BLOG_SEO_TITLE}}': 'Blog sobre Exames de Imagem | Uno Diagnóstico Maracanaú',
+    '{{BLOG_SEO_DESCRIPTION}}': 'Artigos sobre ressonância, tomografia, ultrassom, mamografia e densitometria: quando fazer, como se preparar e o que cada exame mostra. Escritos pela equipe da Uno Diagnóstico em Maracanaú/CE.',
+    '{{CANONICAL_URL}}': siteUrl('blog'),
+    '{{BLOG_LIST_HTML}}': blogPosts.map(blogCardHTML).join('\n        '),
+    '{{SCHEMA_BLOG}}': schemaBlog,
+    '{{SCHEMA_BREADCRUMB}}': schemaBreadcrumb
+  });
+
+  return writePage('blog', applyTemplate(blogIndexTemplate, map));
+}
+
+var blogIndexSize = buildBlogIndex();
+console.log('  + /blog/ (' + Math.round(blogIndexSize / 1024) + ' KB, ' + blogPosts.length + ' posts)');
+blogPosts.forEach(function (post, i) { buildBlogPost(post, i); });
+console.log('  + ' + blogPosts.length + ' paginas de post em /blog/<slug>/');
+
 // --- Gerar sitemap.xml ---
 function generateSitemap() {
   var today = new Date().toISOString().split('T')[0];
   var urls = [
-    { loc: 'https://unodiagnostico.com/', priority: '1.0', changefreq: 'weekly' }
+    { loc: siteUrl(), priority: '1.0', changefreq: 'weekly' }
   ];
   landingPages.forEach(function (lp) {
     urls.push({
-      loc: 'https://unodiagnostico.com/' + lp.slug + '/',
+      loc: siteUrl(lp.slug),
       priority: '0.8',
       changefreq: 'monthly'
     });
+  });
+  urls.push({ loc: siteUrl('blog'), priority: '0.7', changefreq: 'weekly' });
+  blogPosts.forEach(function (p) {
+    urls.push({ loc: siteUrl(postPath(p)), priority: '0.6', changefreq: 'yearly', lastmod: p.date });
   });
   var xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   urls.forEach(function (u) {
     xml += '  <url>\n';
     xml += '    <loc>' + u.loc + '</loc>\n';
-    xml += '    <lastmod>' + today + '</lastmod>\n';
+    xml += '    <lastmod>' + (u.lastmod || today) + '</lastmod>\n';
     xml += '    <changefreq>' + u.changefreq + '</changefreq>\n';
     xml += '    <priority>' + u.priority + '</priority>\n';
     xml += '  </url>\n';
@@ -676,12 +907,12 @@ function generateSitemap() {
 }
 
 function generateRobots() {
-  return 'User-agent: *\nAllow: /\n\nSitemap: https://unodiagnostico.com/sitemap.xml\n';
+  return 'User-agent: *\nAllow: /\n\nSitemap: ' + assetUrl('sitemap.xml') + '\n';
 }
 
 fs.writeFileSync(path.join(distDir, 'sitemap.xml'), generateSitemap());
 fs.writeFileSync(path.join(distDir, 'robots.txt'), generateRobots());
-console.log('  + sitemap.xml (' + (1 + landingPages.length) + ' URLs)');
+console.log('  + sitemap.xml (' + (2 + landingPages.length + blogPosts.length) + ' URLs)');
 console.log('  + robots.txt');
 
 var html404 = template404
