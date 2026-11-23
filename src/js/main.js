@@ -49,9 +49,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (serviceCards.length && modalOverlay) {
     serviceCards.forEach(function (card) {
+      // Acessibilidade: o card e' um <div> clicavel — precisa ser alcancavel
+      // por teclado e anunciado como botao pelos leitores de tela.
+      if (!card.hasAttribute('role')) card.setAttribute('role', 'button');
+      if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '0');
+      var cardTitle = card.getAttribute('data-title');
+      if (cardTitle && !card.hasAttribute('aria-label')) {
+        card.setAttribute('aria-label', 'Ver preparo do exame: ' + cardTitle);
+      }
       card.addEventListener('click', function () {
         var serviceId = this.getAttribute('data-service');
         showServiceModal(serviceId);
+      });
+      card.addEventListener('keydown', function (e) {
+        // Nao intercepta o link "Saiba mais" quando ele e' que esta focado
+        if (e.target !== this) return;
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          showServiceModal(this.getAttribute('data-service'));
+        }
       });
     });
 
@@ -195,18 +211,36 @@ document.addEventListener('DOMContentLoaded', function () {
   // --- FAQ Accordion ---
   var faqQuestions = document.querySelectorAll('.faq-question');
   faqQuestions.forEach(function (question) {
-    question.addEventListener('click', function () {
-      var faqItem = this.parentElement;
+    // Acessibilidade: cabecalho clicavel vira botao operavel por teclado
+    if (!question.hasAttribute('role')) question.setAttribute('role', 'button');
+    if (!question.hasAttribute('tabindex')) question.setAttribute('tabindex', '0');
+    question.setAttribute('aria-expanded', 'false');
+
+    function toggleFaq(el) {
+      var faqItem = el.parentElement;
       var wasOpen = faqItem.classList.contains('open');
 
       // Close all other items
       document.querySelectorAll('.faq-item.open').forEach(function (item) {
         item.classList.remove('open');
+        var q = item.querySelector('.faq-question');
+        if (q) q.setAttribute('aria-expanded', 'false');
       });
 
       // Toggle clicked item
       if (!wasOpen) {
         faqItem.classList.add('open');
+        el.setAttribute('aria-expanded', 'true');
+      } else {
+        el.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    question.addEventListener('click', function () { toggleFaq(this); });
+    question.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        toggleFaq(this);
       }
     });
   });
