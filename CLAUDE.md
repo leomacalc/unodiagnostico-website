@@ -256,11 +256,14 @@ Os IDs ficam em `data/site.json` > `tracking` e entram nos templates por `{{ADS_
 
 Montserrat (títulos) e Open Sans (texto) ficam em `public/fonts/` (woff2 variável, licença OFL) e
 são carregadas do próprio site — não usar Google Fonts (uma conexão a menos e sem troca de layout).
-- Cada template faz `<link rel="preload" as="font" ... crossorigin>` das duas.
+- **Não pré-carregar as fontes** (`<link rel="preload" as="font">`): o navegador segura o primeiro
+  desenho da página esperando a fonte (medido em celular lento: ~0,2 s a mais, e o PageSpeed chega
+  a mostrar 2 s de tela em branco). O CSS já pede as fontes cedo o bastante.
 - Os `@font-face` ficam no topo de `src/styles/main.css` e `src/styles/landing.css`, junto com as
   fontes de reserva ("... Fallback Roboto/Arial"): elas ajustam a fonte do aparelho (`size-adjust`)
   para ocupar o mesmo espaço da fonte final, então o texto não muda de linha quando ela carrega.
-  Os valores foram medidos com os textos reais do site; não mexer sem medir de novo.
+  Os valores foram medidos com os textos reais do site; não mexer sem medir de novo. Elas levam
+  `font-display: swap` para o texto nunca ficar invisível enquanto o aparelho localiza a fonte.
 - A página 404 é a exceção: continua com Google Fonts.
 
 ## Imagens
