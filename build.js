@@ -652,7 +652,19 @@ function buildLandingPage(lp) {
     ]
   }, null, 2);
 
+  // Foto do exame: public/images/exames/<slug>.jpg (destaque) e <slug>-og.jpg (1200x630, compartilhamento)
+  var examImgRel = 'images/exames/' + lp.slug + '.jpg';
+  var examOgRel = 'images/exames/' + lp.slug + '-og.jpg';
+  var hasExamImg = fs.existsSync(path.join(__dirname, 'public', examImgRel));
+  var hasExamOg = fs.existsSync(path.join(__dirname, 'public', examOgRel));
+  var heroImageHTML = hasExamImg
+    ? '<figure class="lp-hero-image"><img src="/' + examImgRel + '" alt="' + escapeHTML(lp.exam_name) + ' na Uno Diagnóstico em Maracanaú/CE" fetchpriority="high"></figure>'
+    : '';
+
   var lpReplacements = {
+    '{{OG_IMAGE_TYPE}}': hasExamOg ? 'image/jpeg' : 'image/png',
+    '{{HERO_IMAGE_HTML}}': heroImageHTML,
+    '{{HERO_CLASS}}': hasExamImg ? ' lp-hero--with-image' : '',
     '{{SLUG}}': lp.slug,
     '{{EXAM_NAME}}': lp.exam_name,
     '{{EXAM_SHORT}}': lp.exam_short || lp.exam_name,
@@ -661,7 +673,7 @@ function buildLandingPage(lp) {
     '{{SEO_DESCRIPTION}}': lp.seo.description,
     '{{SEO_KEYWORDS}}': lp.seo.keywords,
     '{{CANONICAL_URL}}': siteUrl(lp.slug),
-    '{{OG_IMAGE_URL}}': assetUrl('images/og-image.png'),
+    '{{OG_IMAGE_URL}}': assetUrl(hasExamOg ? examOgRel : 'images/og-image.png'),
     '{{SITE_URL}}': SITE_URL,
     '{{HERO_BADGE}}': lp.hero.badge,
     '{{HERO_HEADLINE}}': lp.hero.headline,
