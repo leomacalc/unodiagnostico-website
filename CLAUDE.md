@@ -266,7 +266,12 @@ são carregadas do próprio site — não usar Google Fonts (uma conexão a meno
 ## Imagens
 
 - Logos de convênio são exibidos a 60px de altura → salvar com no máximo 180px de altura
-- A fachada da home é o LCP → manter em 1200x800, JPEG q82 + WebP
+- A fachada da home é o LCP → manter em 1200x800, JPEG q82 + WebP. Ela tem versões menores
+  (`fachada-640.webp`, `fachada-800.webp`, `fachada-960.webp`, WebP q80) listadas no `srcset` do
+  `<picture>` e no `<link rel="preload">` do `src/templates/index.html` — o celular baixa só a que
+  precisa. **Se trocar a foto da fachada, gerar de novo as três versões menores.**
+- O fundo do slide da ressonância (`ressonancia-banner.webp`) só é baixado depois que a página
+  carrega: o `main.js` põe a classe `.bg-ready` no slide. Fundo de slide novo segue o mesmo padrão.
 - Sempre gerar o `.webp` ao lado do `.png`/`.jpg` (o build monta o `<picture>` sozinho) — vale
   também para as fotos de exame das landings (`public/images/exames/`)
 - Se mudar a dimensão da fachada, atualizar `width`/`height` no `src/templates/index.html`
