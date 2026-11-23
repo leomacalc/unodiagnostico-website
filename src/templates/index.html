@@ -36,10 +36,9 @@
   <meta name="twitter:image" content="{{OG_IMAGE_URL}}">
   <meta name="twitter:image:alt" content="Uno Diagnóstico — Clínica de diagnóstico por imagem em Maracanaú/CE">
 
-  <!-- Fontes: hospedadas no próprio site (/fonts), sem depender do Google Fonts.
-       Preload das duas fontes variáveis; os @font-face e os fallbacks ficam no CSS. -->
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-latin-wght-normal.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/open-sans-latin-wght-normal.woff2" crossorigin>
+  <!-- Fontes: hospedadas no próprio site (/fonts); os @font-face e as fontes de reserva ficam no CSS.
+       Sem <link rel="preload"> de propósito: fonte pré-carregada segura o primeiro desenho da página
+       (medido: ~0,2 s a mais no celular) e a fonte de reserva já ocupa o mesmo espaço da final. -->
 
   <!-- Preload da foto do hero (LCP real do index) -->
   <link rel="preload" as="image" type="image/webp" imagesrcset="images/gallery/fachada-640.webp 640w, images/gallery/fachada-800.webp 800w, images/gallery/fachada-960.webp 960w, images/gallery/fachada.webp 1200w" imagesizes="(max-width: 960px) calc(100vw - 48px), 522px" fetchpriority="high">

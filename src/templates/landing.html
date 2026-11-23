@@ -36,10 +36,9 @@
   <meta name="twitter:image" content="{{OG_IMAGE_URL}}">
   <meta name="twitter:image:alt" content="Uno Diagnóstico — {{EXAM_NAME}} em Maracanaú/CE">
 
-  <!-- Fontes: hospedadas no próprio site (/fonts), sem depender do Google Fonts.
-       Preload das duas fontes variáveis; os @font-face e os fallbacks ficam no CSS. -->
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/montserrat-latin-wght-normal.woff2" crossorigin>
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/open-sans-latin-wght-normal.woff2" crossorigin>
+  <!-- Fontes: hospedadas no próprio site (/fonts); os @font-face e as fontes de reserva ficam no CSS.
+       Sem <link rel="preload"> de propósito: fonte pré-carregada segura o primeiro desenho da página
+       (medido: ~0,2 s a mais no celular) e a fonte de reserva já ocupa o mesmo espaço da final. -->
 
   <!-- Preload do logo -->
   <link rel="preload" as="image" href="/images/logos/logo-verde.webp" type="image/webp">
