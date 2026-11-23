@@ -95,6 +95,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     modalTitle.textContent = title;
     modalDescription.textContent = description;
+
+    // Botao "Agendar este Exame": a conversa no WhatsApp ja abre citando o exame escolhido
+    // (o prefixo da mensagem vem de data/site.json > whatsapp_messages.exam_prefix)
+    var modalWhatsapp = document.getElementById('modal-whatsapp');
+    var waPrefix = modalWhatsapp ? modalWhatsapp.getAttribute('data-wa-prefix') : '';
+    if (modalWhatsapp && waPrefix) {
+      var waBase = modalWhatsapp.getAttribute('href').split('&text=')[0];
+      modalWhatsapp.setAttribute('href', waBase + '&text=' + encodeURIComponent(waPrefix + title + '.'));
+    }
+
     modalPreparations.innerHTML = preparations
       .map(function (p) { return '<li>' + p + '</li>'; })
       .join('');
