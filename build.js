@@ -483,7 +483,7 @@ fs.writeFileSync(path.join(distDir, 'index.html'), addCacheBuster(html));
 // Formatos válidos pra web — ignora HEIC, originais brutos, backups etc.
 var ALLOWED_EXT = new Set([
   '.png', '.jpg', '.jpeg', '.webp', '.svg', '.gif', '.ico',
-  '.xml', '.txt', '.pdf', '.woff', '.woff2', '.ttf', '.otf', '.json'
+  '.xml', '.txt', '.csv', '.pdf', '.woff', '.woff2', '.ttf', '.otf', '.json'
 ]);
 
 // Copy public folder if exists
