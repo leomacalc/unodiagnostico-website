@@ -3,6 +3,46 @@
    AI-Managed Static Site
    ============================================ */
 
+/* ============================================
+   FONTES (hospedadas no próprio site, em /fonts)
+   Montserrat e Open Sans variáveis (licença OFL). O preload fica no <head>
+   de cada template. Os "Fallback" abaixo ajustam a fonte do sistema
+   (Roboto no Android, Arial no iOS/Windows) para ocupar o mesmo espaço da
+   fonte final: o texto não muda de tamanho nem de linha quando ela carrega.
+   ============================================ */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/montserrat-latin-wght-normal.woff2') format('woff2-variations'),
+       url('/fonts/montserrat-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('/fonts/open-sans-latin-wght-normal.woff2') format('woff2-variations'),
+       url('/fonts/open-sans-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face { font-family: 'Montserrat Fallback Roboto'; font-weight: 100 500; src: local('Roboto'), local('Roboto-Regular'); size-adjust: 112%; ascent-override: 86.4%; descent-override: 22.4%; line-gap-override: 0%; }
+@font-face { font-family: 'Montserrat Fallback Roboto'; font-weight: 600; src: local('Roboto Bold'), local('Roboto-Bold'), local('Roboto'); size-adjust: 114.2%; ascent-override: 84.8%; descent-override: 22%; line-gap-override: 0%; }
+@font-face { font-family: 'Montserrat Fallback Roboto'; font-weight: 700; src: local('Roboto Bold'), local('Roboto-Bold'), local('Roboto'); size-adjust: 117%; ascent-override: 82.7%; descent-override: 21.5%; line-gap-override: 0%; }
+@font-face { font-family: 'Montserrat Fallback Roboto'; font-weight: 800 900; src: local('Roboto Bold'), local('Roboto-Bold'), local('Roboto'); size-adjust: 117.6%; ascent-override: 82.3%; descent-override: 21.3%; line-gap-override: 0%; }
+@font-face { font-family: 'Montserrat Fallback Arial'; font-weight: 100 500; src: local('Arial'), local('ArialMT'); size-adjust: 111.4%; ascent-override: 86.9%; descent-override: 22.5%; line-gap-override: 0%; }
+@font-face { font-family: 'Montserrat Fallback Arial'; font-weight: 600; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 105.3%; ascent-override: 91.9%; descent-override: 23.8%; line-gap-override: 0%; }
+@font-face { font-family: 'Montserrat Fallback Arial'; font-weight: 700; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 109.9%; ascent-override: 88.1%; descent-override: 22.8%; line-gap-override: 0%; }
+@font-face { font-family: 'Montserrat Fallback Arial'; font-weight: 800 900; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 111.5%; ascent-override: 86.8%; descent-override: 22.5%; line-gap-override: 0%; }
+@font-face { font-family: 'Open Sans Fallback Roboto'; font-weight: 100 500; src: local('Roboto'), local('Roboto-Regular'); size-adjust: 104.6%; ascent-override: 102.2%; descent-override: 28%; line-gap-override: 0%; }
+@font-face { font-family: 'Open Sans Fallback Roboto'; font-weight: 600; src: local('Roboto Bold'), local('Roboto-Bold'), local('Roboto'); size-adjust: 105.7%; ascent-override: 101.1%; descent-override: 27.7%; line-gap-override: 0%; }
+@font-face { font-family: 'Open Sans Fallback Roboto'; font-weight: 700 900; src: local('Roboto Bold'), local('Roboto-Bold'), local('Roboto'); size-adjust: 104.6%; ascent-override: 102.2%; descent-override: 28%; line-gap-override: 0%; }
+@font-face { font-family: 'Open Sans Fallback Arial'; font-weight: 100 500; src: local('Arial'), local('ArialMT'); size-adjust: 104.3%; ascent-override: 102.5%; descent-override: 28.1%; line-gap-override: 0%; }
+@font-face { font-family: 'Open Sans Fallback Arial'; font-weight: 600; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 101.7%; ascent-override: 105.1%; descent-override: 28.8%; line-gap-override: 0%; }
+@font-face { font-family: 'Open Sans Fallback Arial'; font-weight: 700 900; src: local('Arial Bold'), local('Arial-BoldMT'); size-adjust: 104.2%; ascent-override: 102.6%; descent-override: 28.1%; line-gap-override: 0%; }
+
 /* --- CSS Variables (easy to update) --- */
 :root {
   --color-primary: #005a87;
@@ -18,8 +58,8 @@
   --color-bg-light: #f5f7fa;
   --color-bg-dark: #1a2a3a;
   --color-border: #e0e0e0;
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Open Sans', sans-serif;
+  --font-heading: 'Montserrat', 'Montserrat Fallback Roboto', 'Montserrat Fallback Arial', sans-serif;
+  --font-body: 'Open Sans', 'Open Sans Fallback Roboto', 'Open Sans Fallback Arial', sans-serif;
   --max-width: 1200px;
   --header-height: 80px;
   --transition: 0.3s ease;
@@ -174,6 +214,11 @@ h1, h2, h3, h4 {
   z-index: 1000;
   transition: background var(--transition), box-shadow var(--transition-smooth), backdrop-filter var(--transition);
 }
+
+/* Menu do celular: só existe abaixo de 768px (regras no @media lá embaixo).
+   Sem esta linha ele ficava no fluxo da página no desktop: uma faixa invisível de ~50px
+   atrás do cabeçalho, que empurrava o topo do site para baixo. */
+.mobile-nav { display: none; }
 
 .header.scrolled {
   background: rgba(255, 255, 255, 0.96);
@@ -1508,10 +1553,14 @@ h1, h2, h3, h4 {
 }
 
 /* --- Hero Carousel --- */
+/* Os slides ficam empilhados na mesma célula do grid: a altura do carrossel é
+   sempre a do slide mais alto, então trocar de slide não desloca o resto da
+   página (era a principal causa de CLS da home). */
 .hero-carousel {
   position: relative;
   width: 100%;
   overflow: hidden;
+  display: grid;
 }
 
 /* Slide de lançamento da Ressonância Magnética: fundo conceitual com overlay */
@@ -1532,14 +1581,24 @@ h1, h2, h3, h4 {
 }
 
 .hero-slide {
-  display: none;
+  grid-area: 1 / 1;
+  display: flex;
+  min-width: 0;
   min-height: 560px;
   align-items: center;
-  padding: 0;
+  /* respiro acima/abaixo: sem ele o título encostava no cabeçalho quando o conteúdo
+     passava da altura mínima (celular e telas médias). Embaixo sobra uma faixa própria
+     para as bolinhas do carrossel (.hero-dots), que assim não encostam no conteúdo. */
+  padding: 28px 0 52px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0s linear 0.6s;
 }
 
 .hero-slide.active {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s ease;
 }
 
 .hero-slide .container {
@@ -2075,3 +2134,59 @@ h1, h2, h3, h4 {
   .post-nav { grid-template-columns: 1fr; }
   .post-nav-link.next { text-align: left; }
 }
+
+/* ============================================
+   LINKS INTERNOS (exames no rodapé e nos posts)
+   Gerados pelo build.js a partir de data/landing-pages/.
+   ============================================ */
+.footer-exams {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 0.9rem;
+  line-height: 2.2;
+}
+.footer-exams-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+.footer-exams a {
+  display: inline-block;
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.88);
+  white-space: nowrap;
+}
+.footer-exams a:hover { color: var(--color-secondary); }
+
+.post-exams {
+  margin: 40px 0 0;
+  padding: 24px 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg-light);
+}
+.post-exams h2 { font-size: 1.1rem; color: var(--color-primary-dark); margin-bottom: 14px; }
+.post-exams ul { display: flex; flex-wrap: wrap; gap: 10px 12px; padding: 0; margin: 0; list-style: none; }
+.post-exams li { margin: 0; padding: 0; }
+.post-exams li::before { content: none; }
+.post-exams a {
+  display: inline-block;
+  padding: 9px 18px;
+  border-radius: 50px;
+  background: #fff;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background var(--transition), color var(--transition);
+}
+.post-exams a:hover { background: var(--color-primary); color: #fff; }
+
