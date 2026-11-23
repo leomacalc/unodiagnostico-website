@@ -42,7 +42,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/open-sans-latin-wght-normal.woff2" crossorigin>
 
   <!-- Preload da foto do hero (LCP real do index) -->
-  <link rel="preload" as="image" href="images/gallery/fachada.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" imagesrcset="images/gallery/fachada-640.webp 640w, images/gallery/fachada-800.webp 800w, images/gallery/fachada-960.webp 960w, images/gallery/fachada.webp 1200w" imagesizes="(max-width: 960px) calc(100vw - 48px), 522px" fetchpriority="high">
 
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -163,7 +163,9 @@
             </div>
             <div class="hero-image">
               <picture>
-                <source srcset="images/gallery/fachada.webp" type="image/webp">
+                <!-- Vários tamanhos: o navegador baixa o menor que serve para a tela (celular não baixa a foto de 1200px).
+                     Se mexer aqui, repetir os mesmos srcset/sizes no <link rel="preload"> do <head>. -->
+                <source type="image/webp" srcset="images/gallery/fachada-640.webp 640w, images/gallery/fachada-800.webp 800w, images/gallery/fachada-960.webp 960w, images/gallery/fachada.webp 1200w" sizes="(max-width: 960px) calc(100vw - 48px), 522px">
                 <img src="images/gallery/fachada.jpg" alt="Fachada da Uno Diagnóstico em Maracanaú/CE" width="1200" height="800" fetchpriority="high">
               </picture>
             </div>
