@@ -136,7 +136,14 @@ document.addEventListener('DOMContentLoaded', function () {
   var currentSlide = 0;
   var slideInterval = null;
 
+  // Imagens de fundo dos slides (CSS .bg-ready) so sao baixadas depois que a pagina
+  // terminou de carregar, ou na primeira troca: nao disputam banda com a foto do topo.
+  function loadSlideBackgrounds() {
+    heroSlides.forEach(function (slide) { slide.classList.add('bg-ready'); });
+  }
+
   function showSlide(index) {
+    loadSlideBackgrounds();
     heroSlides.forEach(function (slide, i) {
       slide.classList.toggle('active', i === index);
     });
@@ -152,6 +159,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (heroSlides.length > 1) {
     slideInterval = setInterval(nextSlide, 5000);
+
+    if (document.readyState === 'complete') {
+      setTimeout(loadSlideBackgrounds, 1500);
+    } else {
+      window.addEventListener('load', function () { setTimeout(loadSlideBackgrounds, 1500); });
+    }
 
     heroDots.forEach(function (dot) {
       dot.addEventListener('click', function () {
