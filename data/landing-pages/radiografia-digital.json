@@ -1,0 +1,158 @@
+{
+  "slug": "radiografia-digital",
+  "exam_name": "Radiografia Digital",
+  "exam_short": "Raio-X",
+  "seo": {
+    "title": "Radiografia Digital (Raio-X) em Maracanaú | Uno Diagnóstico - Agende pelo WhatsApp",
+    "description": "Raio-X digital em Maracanaú com alta resolução e menor dose de radiação. Atendemos todos os dias das 7h às 22h. Laudo em 1 dia útil. Agende pelo WhatsApp: (85) 2181-6818.",
+    "keywords": "raio-x Maracanaú, radiografia Maracanaú, radiografia digital Maracanaú, RX Maracanaú, raio-x particular Maracanaú, clínica de raio-x Maracanaú, raio-x de tórax Maracanaú, raio-x de coluna Maracanaú"
+  },
+  "hero": {
+    "badge": "Radiografia Digital em Maracanaú",
+    "headline": "Raio-X digital com <em>alta resolução</em> e laudo rápido",
+    "subtitle": "Radiografia digital com equipamento moderno, imagens de alta definição e menor dose de radiação. Atendemos todos os dias das 7h às 22h, sem necessidade de agendamento prévio na maioria dos casos.",
+    "cta_primary": "Fale com a gente pelo WhatsApp",
+    "cta_secondary": "Consultar valor particular",
+    "trust_badges": [
+      "Laudo em 1 dia útil",
+      "Atendimento no mesmo dia",
+      "7 dias por semana, 7h às 22h",
+      "Convênios + particular"
+    ]
+  },
+  "about": {
+    "title": "O que é a Radiografia Digital?",
+    "paragraphs": [
+      "A radiografia digital — conhecida popularmente como raio-X — é um dos exames de imagem mais realizados e rápidos da medicina. Utiliza raios-X de baixa dose para gerar imagens dos ossos e estruturas internas do corpo.",
+      "A versão digital substitui o filme tradicional por sensores digitais, o que traz vantagens importantes: imagens de altíssima resolução, menor dose de radiação para o paciente, possibilidade de ajuste fino da imagem pelo radiologista e entrega muito mais rápida do resultado.",
+      "Na Uno Diagnóstico, realizamos radiografia digital de todas as regiões do corpo, com laudo assinado por médicos radiologistas especialistas. O exame costuma ser rápido (poucos minutos) e em muitos casos não requer agendamento prévio."
+    ]
+  },
+  "indications": {
+    "title": "Quando fazer uma radiografia?",
+    "subtitle": "A radiografia é indicada em diversas situações. Veja as mais comuns:",
+    "items": [
+      {
+        "title": "Raio-X de Tórax",
+        "text": "Avaliação dos pulmões, coração e estruturas torácicas. Indicado em tosses persistentes, pneumonia, check-up e avaliação pré-operatória."
+      },
+      {
+        "title": "Raio-X de Coluna",
+        "text": "Avaliação de dores lombares, cervicais, alterações posturais, escoliose e traumas."
+      },
+      {
+        "title": "Raio-X de Ossos e Articulações",
+        "text": "Investigação de fraturas, luxações, artrose, tendinites e alterações articulares em geral."
+      },
+      {
+        "title": "Raio-X de Seios da Face",
+        "text": "Avaliação de sinusites e alterações dos seios paranasais."
+      },
+      {
+        "title": "Raio-X de Abdome",
+        "text": "Útil na investigação de obstruções intestinais, cálculos e corpo estranho."
+      },
+      {
+        "title": "Raio-X para Check-up",
+        "text": "Exames pré-operatórios e de rotina solicitados por médicos de diversas especialidades."
+      }
+    ]
+  },
+  "differentials": {
+    "title": "Por que fazer seu raio-X na Uno Diagnóstico?",
+    "items": [
+      {
+        "title": "Equipamento digital moderno",
+        "text": "Imagens de altíssima resolução com menor exposição à radiação em comparação ao raio-X convencional em filme."
+      },
+      {
+        "title": "Atendimento no mesmo dia",
+        "text": "Na maioria dos casos você pode vir sem agendamento prévio — basta chegar com o pedido médico."
+      },
+      {
+        "title": "Laudo em 1 dia útil",
+        "text": "Você recebe o laudo rápido, pronto para levar à consulta com seu médico."
+      },
+      {
+        "title": "Radiologistas especialistas",
+        "text": "Todos os laudos são assinados por médicos radiologistas com título de especialista."
+      },
+      {
+        "title": "Convênios + particular",
+        "text": "Aceitamos LivSaúde, Unimed, CAMED, FUSEx, ISSEC e atendimento particular com PIX, cartão e dinheiro."
+      },
+      {
+        "title": "7 dias por semana",
+        "text": "Funcionamos todos os dias das 7h às 22h — ideal pra urgências e encaixes de última hora."
+      }
+    ]
+  },
+  "preparation": {
+    "title": "Como se preparar para o raio-X",
+    "intro": "O preparo para a maioria dos raios-X é muito simples. Veja as orientações gerais:",
+    "items": [
+      "Não é necessário jejum (exceto casos específicos indicados pelo médico)",
+      "Informe ao técnico se estiver grávida ou com suspeita de gravidez",
+      "Remova objetos metálicos da região a ser examinada (colares, brincos, piercings, sutiãs com aro)",
+      "Use roupas confortáveis e sem detalhes metálicos na região do exame",
+      "Traga exames anteriores da mesma região, se houver",
+      "Leve o pedido médico"
+    ],
+    "note": "Em caso de dúvida sobre o preparo do seu exame específico, fale com nossa equipe pelo WhatsApp antes de vir."
+  },
+  "process": {
+    "title": "Como é feito o exame",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Chegada à clínica",
+        "text": "Na maioria dos casos, você pode vir direto, sem agendamento prévio. Basta trazer o pedido médico."
+      },
+      {
+        "number": "2",
+        "title": "Recepção rápida",
+        "text": "Nossa equipe te recebe, confere o pedido e te encaminha para a sala de exame."
+      },
+      {
+        "number": "3",
+        "title": "Realização do raio-X",
+        "text": "O exame é muito rápido — poucos minutos. Você apenas posiciona a região indicada e o técnico faz as imagens."
+      },
+      {
+        "number": "4",
+        "title": "Laudo em 1 dia útil",
+        "text": "O laudo assinado pelo radiologista fica disponível em 1 dia útil no portal de resultados online."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "Preciso agendar o raio-X?",
+      "answer": "Na maioria dos casos, não. Você pode vir direto à clínica com o pedido médico. Em alguns exames específicos (como os que exigem preparo), o agendamento é recomendado — fale com nossa equipe pelo WhatsApp se tiver dúvida."
+    },
+    {
+      "question": "O raio-X faz mal à saúde?",
+      "answer": "A radiação usada na radiografia é baixa e considerada segura para diagnóstico. A radiografia digital moderna reduz ainda mais essa dose. Os benefícios diagnósticos superam amplamente os riscos mínimos. Gestantes devem sempre informar o técnico antes do exame."
+    },
+    {
+      "question": "Quanto tempo demora o exame?",
+      "answer": "A maioria dos raios-X leva entre 5 e 10 minutos. Exames mais complexos (múltiplas incidências) podem levar até 15 minutos."
+    },
+    {
+      "question": "Preciso de pedido médico?",
+      "answer": "Sim. Todo exame que utiliza radiação exige solicitação médica contendo o tipo de exame e a região a ser examinada."
+    },
+    {
+      "question": "Posso fazer raio-X grávida?",
+      "answer": "Em gestantes, o raio-X só é realizado em situações de necessidade, com proteção adequada. Sempre informe a suspeita ou confirmação de gravidez antes do exame."
+    },
+    {
+      "question": "Em quanto tempo recebo o resultado?",
+      "answer": "O laudo fica disponível em 1 dia útil no portal online. Em casos urgentes, avise no atendimento para priorização."
+    },
+    {
+      "question": "Qual o valor do raio-X particular?",
+      "answer": "Os valores variam conforme a região e quantidade de incidências. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro. Consulte valores pelo WhatsApp."
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "slug": "ecocardiografia",
+  "exam_name": "Ecocardiografia",
+  "exam_short": "Ecocardiograma",
+  "seo": {
+    "title": "Ecocardiograma em Maracanaú | Uno Diagnóstico - Agende pelo WhatsApp",
+    "description": "Ecocardiograma (eco) em Maracanaú com equipe especializada, laudo rápido e ambiente acolhedor. Avaliação completa do coração. Agende pelo WhatsApp: (85) 2181-6818.",
+    "keywords": "ecocardiograma Maracanaú, ecocardiografia Maracanaú, eco doppler cardíaco Maracanaú, exame do coração Maracanaú, ecocardiograma particular Maracanaú, clínica de ecocardiograma Maracanaú, eco Maracanaú, ultrassom do coração Maracanaú"
+  },
+  "hero": {
+    "badge": "Ecocardiograma em Maracanaú",
+    "headline": "Avalie o seu <em>coração</em> com precisão e rapidez",
+    "subtitle": "O ecocardiograma é o exame não-invasivo mais completo para avaliar o coração. Indolor, sem radiação e com resultado confiável. Na Uno Diagnóstico, você faz seu eco com equipe especializada e recebe o laudo em 1 dia útil.",
+    "cta_primary": "Agende seu Ecocardiograma pelo WhatsApp",
+    "cta_secondary": "Consultar valor particular",
+    "trust_badges": [
+      "Laudo em 1 dia útil",
+      "Sem radiação, sem dor",
+      "Atendimento acolhedor",
+      "Convênios + particular"
+    ]
+  },
+  "about": {
+    "title": "O que é o Ecocardiograma?",
+    "paragraphs": [
+      "O ecocardiograma — também conhecido como eco, eco-doppler cardíaco ou ultrassom do coração — é um exame de imagem que utiliza ondas sonoras de alta frequência para gerar imagens em tempo real do coração em funcionamento. É o exame não-invasivo mais completo para avaliar a estrutura e a função cardíaca.",
+      "Com o ecocardiograma é possível avaliar o tamanho das câmaras cardíacas, a espessura e contratilidade do músculo, o funcionamento das válvulas, a presença de líquido ao redor do coração e a direção do fluxo sanguíneo — tudo isso de forma indolor, rápida e sem radiação.",
+      "Na Uno Diagnóstico, o ecocardiograma é realizado com equipamento moderno e laudo assinado por médico especializado. É um exame seguro, rápido e com alto valor diagnóstico, fundamental tanto em check-up cardiológico quanto na investigação de sintomas."
+    ]
+  },
+  "indications": {
+    "title": "Quando fazer o ecocardiograma?",
+    "subtitle": "O eco é indicado em diversas situações clínicas. Veja as principais:",
+    "items": [
+      {
+        "title": "Dor no peito ou falta de ar",
+        "text": "Investigação de sintomas como dor torácica, falta de ar em esforço, palpitações e desmaios."
+      },
+      {
+        "title": "Hipertensão arterial",
+        "text": "Pacientes hipertensos devem avaliar periodicamente a repercussão da pressão alta sobre o coração."
+      },
+      {
+        "title": "Sopro cardíaco",
+        "text": "A investigação de sopro pelo estetoscópio frequentemente é complementada com ecocardiograma."
+      },
+      {
+        "title": "Avaliação de válvulas cardíacas",
+        "text": "Diagnóstico e acompanhamento de estenoses, insuficiências e outras doenças valvares."
+      },
+      {
+        "title": "Insuficiência cardíaca",
+        "text": "Essencial no diagnóstico e acompanhamento da insuficiência cardíaca, avaliando a função de bombeamento."
+      },
+      {
+        "title": "Check-up cardiológico",
+        "text": "Parte da avaliação cardiológica de rotina em atletas, idosos e pessoas com fatores de risco."
+      }
+    ]
+  },
+  "differentials": {
+    "title": "Por que fazer seu ecocardiograma na Uno Diagnóstico?",
+    "items": [
+      {
+        "title": "Equipamento moderno",
+        "text": "Aparelho atualizado, com doppler colorido e recursos para uma avaliação cardíaca completa."
+      },
+      {
+        "title": "Laudo em 1 dia útil",
+        "text": "Você recebe o resultado rápido, pronto para levar à consulta com o cardiologista."
+      },
+      {
+        "title": "Sem radiação, sem dor",
+        "text": "O eco utiliza ultrassom — totalmente seguro, podendo ser repetido quantas vezes forem necessárias."
+      },
+      {
+        "title": "Atendimento acolhedor",
+        "text": "Recepção rápida, ambiente confortável e equipe treinada para explicar cada etapa do exame."
+      },
+      {
+        "title": "Convênios + particular",
+        "text": "Aceitamos LivSaúde, Unimed, CAMED, FUSEx, ISSEC e atendimento particular com PIX, cartão e dinheiro."
+      },
+      {
+        "title": "Resultado online",
+        "text": "Acesse o laudo pelo portal de resultados, a qualquer hora e de qualquer lugar."
+      }
+    ]
+  },
+  "preparation": {
+    "title": "Como se preparar para o ecocardiograma",
+    "intro": "O ecocardiograma tem preparo muito simples. Veja as orientações:",
+    "items": [
+      "Não é necessário jejum",
+      "Você pode manter sua medicação habitual, salvo orientação médica em contrário",
+      "Use roupas confortáveis — será necessário expor o tórax durante o exame",
+      "Evite cremes ou óleos na região do tórax no dia do exame",
+      "Traga exames cardiológicos anteriores (eco, eletro, holter) para comparação",
+      "Leve o pedido médico com a indicação do exame"
+    ],
+    "note": "Em caso de dúvidas sobre o preparo ou sobre o uso de medicações, fale com nossa equipe pelo WhatsApp antes do exame."
+  },
+  "process": {
+    "title": "Como é feito o exame",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Agendamento pelo WhatsApp",
+        "text": "Envie o pedido médico e nossa equipe retorna com os horários disponíveis para o exame."
+      },
+      {
+        "number": "2",
+        "title": "Recepção e preparo",
+        "text": "Na clínica, você é acomodado em ambiente reservado e confortável, com explicações sobre cada etapa."
+      },
+      {
+        "number": "3",
+        "title": "Realização do eco",
+        "text": "Você fica deitado, um gel é aplicado no tórax e o transdutor é deslizado suavemente sobre a pele. O exame dura em média 20 a 30 minutos."
+      },
+      {
+        "number": "4",
+        "title": "Laudo em 1 dia útil",
+        "text": "O laudo assinado pelo médico fica disponível no portal de resultados online em 1 dia útil."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "O ecocardiograma dói?",
+      "answer": "Não. O ecocardiograma é um exame totalmente indolor. Você sente apenas o contato do transdutor com um gel morno sobre o tórax."
+    },
+    {
+      "question": "Qual a diferença entre ecocardiograma e eletrocardiograma?",
+      "answer": "São exames complementares e diferentes. O eletrocardiograma (ECG) avalia a parte elétrica do coração através de eletrodos na pele. O ecocardiograma (ECO) usa ultrassom para visualizar a estrutura e o funcionamento mecânico do coração em imagens."
+    },
+    {
+      "question": "Quanto tempo dura o exame?",
+      "answer": "O eco dura em média 20 a 30 minutos. Exames mais detalhados podem levar um pouco mais de tempo."
+    },
+    {
+      "question": "Preciso de pedido médico?",
+      "answer": "Sim. O ecocardiograma exige solicitação médica contendo a indicação clínica do exame."
+    },
+    {
+      "question": "Posso fazer o eco tomando meus remédios?",
+      "answer": "Sim, você deve manter sua medicação habitual. Se houver alguma orientação específica do seu médico para suspender algo, siga-a. Em caso de dúvida, avise nossa equipe no agendamento."
+    },
+    {
+      "question": "O eco serve para diagnosticar infarto?",
+      "answer": "O eco é muito útil na avaliação das consequências de um infarto — detecta áreas do músculo cardíaco que deixaram de contrair bem. Porém, o diagnóstico agudo de infarto é feito principalmente com eletrocardiograma e exames de sangue. O eco complementa a investigação."
+    },
+    {
+      "question": "Qual o valor do ecocardiograma particular?",
+      "answer": "Consulte valores atualizados pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
+    }
+  ]
+}

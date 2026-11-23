@@ -1,0 +1,159 @@
+{
+  "slug": "ultrassonografia",
+  "exam_name": "Ultrassonografia e Doppler",
+  "exam_short": "Ultrassonografia",
+  "seo": {
+    "title": "Ultrassonografia em Maracanaú | Uno Diagnóstico - Agende pelo WhatsApp",
+    "description": "Ultrassonografia e Doppler em Maracanaú com médicos radiologistas especialistas. Abdominal, pélvico, tireoide, obstétrico, morfológico e mais. Agende pelo WhatsApp: (85) 2181-6818.",
+    "keywords": "ultrassonografia Maracanaú, ultrassom Maracanaú, ultrassom abdominal Maracanaú, ultrassom pélvico, ultrassom de tireoide Maracanaú, ultrassom obstétrico, morfológico Maracanaú, doppler Maracanaú, clínica de ultrassom Maracanaú, ultrassom particular Maracanaú"
+  },
+  "hero": {
+    "badge": "Ultrassonografia e Doppler em Maracanaú",
+    "headline": "Ultrassom com <em>agilidade</em> e <em>precisão</em> em Maracanaú",
+    "subtitle": "Ultrassonografia e Doppler realizados por médicos radiologistas especialistas, com laudo em 1 dia útil. Abdominal, pélvico, tireoide, obstétrico, morfológico, doppler e muito mais.",
+    "cta_primary": "Agende seu Ultrassom pelo WhatsApp",
+    "cta_secondary": "Consultar valor particular",
+    "trust_badges": [
+      "Laudo em 1 dia útil",
+      "Sem radiação, sem dor",
+      "7 dias por semana, 7h às 22h",
+      "Convênios + particular (PIX e cartão)"
+    ]
+  },
+  "about": {
+    "title": "O que é a Ultrassonografia?",
+    "paragraphs": [
+      "A ultrassonografia é um exame de imagem que utiliza ondas sonoras de alta frequência para gerar imagens em tempo real dos órgãos e estruturas do corpo. É um exame seguro, indolor e que não utiliza radiação — por isso é o exame de escolha para crianças, gestantes e acompanhamento frequente.",
+      "O Doppler é uma técnica complementar que avalia o fluxo sanguíneo nos vasos, essencial para investigar tromboses, varizes, obstruções arteriais e alterações circulatórias.",
+      "Na Uno Diagnóstico, todos os ultrassons são realizados por médicos radiologistas com título de especialista, garantindo precisão no diagnóstico e rapidez na entrega do laudo."
+    ]
+  },
+  "indications": {
+    "title": "Tipos de ultrassonografia que realizamos",
+    "subtitle": "Atendemos praticamente todas as modalidades de ultrassom. Veja as principais:",
+    "items": [
+      {
+        "title": "Ultrassom Abdominal Total",
+        "text": "Avalia fígado, vesícula biliar, pâncreas, baço, rins e vias urinárias. Indicado em dores abdominais, cálculos e rotinas de check-up."
+      },
+      {
+        "title": "Ultrassom Pélvico e Transvaginal",
+        "text": "Avaliação do útero, ovários e bexiga. Importante em dores pélvicas, sangramento anormal e investigação ginecológica."
+      },
+      {
+        "title": "Ultrassom de Tireoide",
+        "text": "Análise detalhada da glândula tireoide, incluindo nódulos, bócio e alterações morfológicas."
+      },
+      {
+        "title": "Ultrassom Obstétrico e Morfológico",
+        "text": "Acompanhamento da gestação em todos os trimestres, com avaliação do crescimento fetal e exame morfológico de 1º e 2º trimestre."
+      },
+      {
+        "title": "Ultrassom de Mamas",
+        "text": "Complementar à mamografia, essencial em mamas densas e no acompanhamento de nódulos."
+      },
+      {
+        "title": "Ultrassom Doppler Vascular",
+        "text": "Avalia artérias e veias de membros, carótidas e vasos viscerais. Indicado em suspeita de trombose, varizes e insuficiência vascular."
+      }
+    ]
+  },
+  "differentials": {
+    "title": "Por que fazer seu ultrassom na Uno Diagnóstico?",
+    "items": [
+      {
+        "title": "Laudo em 1 dia útil",
+        "text": "Você recebe seu resultado rápido, sem precisar esperar semanas. Ideal para quem tem consulta médica marcada."
+      },
+      {
+        "title": "Radiologistas especialistas",
+        "text": "Todos os exames são realizados e laudados por médicos radiologistas com título de especialista (RQE)."
+      },
+      {
+        "title": "Resultado online",
+        "text": "Acesse o laudo diretamente pelo nosso portal de resultados, a qualquer hora e de qualquer lugar."
+      },
+      {
+        "title": "Atendimento 7 dias por semana",
+        "text": "Funcionamos todos os dias das 7h às 22h, inclusive finais de semana e feriados."
+      },
+      {
+        "title": "Convênios + particular",
+        "text": "Aceitamos LivSaúde, Unimed, CAMED, FUSEx, ISSEC e atendimento particular com PIX, cartão e dinheiro."
+      },
+      {
+        "title": "Sem radiação",
+        "text": "O ultrassom é totalmente seguro — ideal para crianças, gestantes e pacientes que precisam de acompanhamento frequente."
+      }
+    ]
+  },
+  "preparation": {
+    "title": "Como se preparar para o ultrassom",
+    "intro": "O preparo varia conforme a região a ser examinada. Siga as orientações abaixo de acordo com o seu exame e, em caso de dúvida, fale com nossa equipe pelo WhatsApp.",
+    "items": [
+      "Ultrassom abdominal: jejum de 6 a 8 horas",
+      "Ultrassom pélvico (via abdominal): beber 4 a 6 copos de água 1 hora antes e manter a bexiga cheia",
+      "Ultrassom transvaginal: bexiga vazia, sem preparo especial",
+      "Ultrassom de tireoide e mamas: sem preparo necessário",
+      "Ultrassom obstétrico: sem preparo para 2º e 3º trimestre; bexiga cheia no 1º trimestre",
+      "Ultrassom Doppler: sem preparo na maioria dos casos",
+      "Traga o pedido médico e exames anteriores da mesma região"
+    ],
+    "note": "Nossa equipe confirma o preparo específico do seu exame no momento do agendamento pelo WhatsApp."
+  },
+  "process": {
+    "title": "Como é feito o exame",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Agendamento pelo WhatsApp",
+        "text": "Envie o pedido médico e nossa equipe retorna com horários disponíveis e orientações de preparo."
+      },
+      {
+        "number": "2",
+        "title": "Chegada à clínica",
+        "text": "Recepção ágil e sem burocracia. O médico radiologista te recebe e explica o procedimento."
+      },
+      {
+        "number": "3",
+        "title": "Realização do ultrassom",
+        "text": "O exame é indolor e dura em média 15 a 30 minutos, dependendo da região examinada."
+      },
+      {
+        "number": "4",
+        "title": "Laudo e resultado online",
+        "text": "O laudo assinado pelo radiologista fica disponível em 1 dia útil no portal."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "O ultrassom dói ou tem algum risco?",
+      "answer": "Não. O ultrassom é um exame totalmente indolor e seguro. Não utiliza radiação, podendo ser repetido quantas vezes for necessário, inclusive em crianças e gestantes."
+    },
+    {
+      "question": "Quanto tempo dura um ultrassom?",
+      "answer": "A maioria dos exames dura entre 15 e 30 minutos. Ultrassons mais complexos, como o Doppler vascular ou morfológico fetal, podem levar até 45 minutos."
+    },
+    {
+      "question": "Preciso de pedido médico para fazer ultrassom?",
+      "answer": "Sim. O ultrassom exige pedido médico contendo o tipo de exame e, quando aplicável, a hipótese diagnóstica."
+    },
+    {
+      "question": "Qual a diferença entre ultrassom abdominal total e abdominal superior?",
+      "answer": "O abdominal superior avalia apenas fígado, vesícula, pâncreas e baço. O abdominal total inclui também rins, bexiga e estruturas pélvicas. Seu médico indicará qual é o mais adequado."
+    },
+    {
+      "question": "Posso levar acompanhante durante o exame?",
+      "answer": "Sim, especialmente em ultrassons obstétricos onde os pais costumam fazer questão de ver o bebê juntos. Para outros exames, também é permitido conforme sua preferência."
+    },
+    {
+      "question": "Em quanto tempo recebo o laudo?",
+      "answer": "O laudo fica disponível em 1 dia útil no nosso portal de resultados online. Em casos urgentes, sinalize no agendamento para prioridade."
+    },
+    {
+      "question": "Qual o valor do ultrassom particular?",
+      "answer": "Os valores variam conforme o tipo de exame. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro. Consulte valores atualizados pelo WhatsApp."
+    }
+  ]
+}

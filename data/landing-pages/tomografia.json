@@ -1,0 +1,159 @@
+{
+  "slug": "tomografia",
+  "exam_name": "Tomografia Computadorizada",
+  "exam_short": "Tomografia",
+  "seo": {
+    "title": "Tomografia Computadorizada em Maracanaú | Uno Diagnóstico - Agende pelo WhatsApp",
+    "description": "Tomografia computadorizada em Maracanaú com laudo rápido e equipe especializada. Atendemos convênios e particular (PIX e cartão). Agende pelo WhatsApp: (85) 2181-6818.",
+    "keywords": "tomografia Maracanaú, tomografia computadorizada Maracanaú, TC Maracanaú, tomografia Ceará, exame de tomografia Maracanaú, clínica de tomografia Maracanaú, tomografia de crânio, tomografia de tórax, tomografia de abdome, tomografia particular Maracanaú"
+  },
+  "hero": {
+    "badge": "Tomografia Computadorizada em Maracanaú",
+    "headline": "Diagnóstico rápido e preciso com <em>tomografia de alta resolução</em>",
+    "subtitle": "Equipamento moderno, equipe médica especializada e laudo entregue em 1 dia útil. Atendemos todos os dias das 7h às 22h, com convênios e atendimento particular.",
+    "cta_primary": "Agende sua Tomografia pelo WhatsApp",
+    "cta_secondary": "Consultar valor particular",
+    "trust_badges": [
+      "Laudo em 1 dia útil",
+      "7 dias por semana, 7h às 22h",
+      "Convênios + particular (PIX e cartão)",
+      "Radiologistas titulados"
+    ]
+  },
+  "about": {
+    "title": "O que é a Tomografia Computadorizada?",
+    "paragraphs": [
+      "A Tomografia Computadorizada (TC) é um exame de imagem que combina raios-X com processamento computacional avançado para produzir imagens detalhadas do interior do corpo em cortes finos e tridimensionais.",
+      "Diferente da radiografia convencional, a tomografia permite visualizar com precisão ossos, órgãos internos, vasos sanguíneos e tecidos moles, sendo fundamental no diagnóstico de diversas condições — de traumas e tumores a doenças vasculares e inflamatórias.",
+      "Na Uno Diagnóstico, realizamos tomografia em Maracanaú com equipamentos modernos, protocolos otimizados para reduzir a dose de radiação e laudo assinado por médicos radiologistas especialistas."
+    ]
+  },
+  "indications": {
+    "title": "Para que serve a tomografia?",
+    "subtitle": "A tomografia computadorizada é indicada em diversas situações clínicas. Veja os principais tipos que realizamos:",
+    "items": [
+      {
+        "title": "Tomografia de Crânio",
+        "text": "Avalia traumas, AVC, dores de cabeça persistentes, tumores cerebrais e alterações da coluna cervical alta."
+      },
+      {
+        "title": "Tomografia de Tórax",
+        "text": "Indicada para investigar nódulos pulmonares, infecções, enfisema, fibrose, tumores e alterações da pleura."
+      },
+      {
+        "title": "Tomografia de Abdome e Pelve",
+        "text": "Avalia fígado, rins, pâncreas, intestino, bexiga e útero. Útil em dores abdominais, cálculos e investigação oncológica."
+      },
+      {
+        "title": "Tomografia de Coluna",
+        "text": "Análise detalhada de hérnias de disco, fraturas, alterações degenerativas e pós-operatório de coluna."
+      },
+      {
+        "title": "Tomografia dos Seios da Face",
+        "text": "Diagnóstico de sinusites, pólipos, desvios de septo e alterações dos seios paranasais."
+      },
+      {
+        "title": "Tomografia de Articulações",
+        "text": "Avaliação óssea detalhada de joelho, tornozelo, ombro, punho e demais articulações, inclusive em casos de trauma."
+      }
+    ]
+  },
+  "differentials": {
+    "title": "Por que fazer sua tomografia na Uno Diagnóstico?",
+    "items": [
+      {
+        "title": "Equipamento moderno",
+        "text": "Tomógrafo atual com protocolos otimizados para imagens de alta resolução com menor dose de radiação."
+      },
+      {
+        "title": "Laudo especializado",
+        "text": "Todos os exames são laudados por médicos radiologistas com título de especialista (RQE)."
+      },
+      {
+        "title": "Resultado online",
+        "text": "Acesse seu laudo e suas imagens diretamente pelo nosso portal de resultados, a qualquer hora."
+      },
+      {
+        "title": "Atendimento 7 dias por semana",
+        "text": "Funcionamos todos os dias das 7h às 22h, inclusive finais de semana e feriados."
+      },
+      {
+        "title": "Convênios + particular",
+        "text": "Aceitamos LivSaúde, Unimed, CAMED, FUSEx, ISSEC e particular com pagamento via PIX, cartão ou dinheiro."
+      },
+      {
+        "title": "Localização privilegiada",
+        "text": "Ao lado da UNIMED, no Business Place Torre 2, em Jereissati — Maracanaú. Fácil acesso e estacionamento na região."
+      }
+    ]
+  },
+  "preparation": {
+    "title": "Como se preparar para a tomografia",
+    "intro": "O preparo varia conforme o tipo de exame solicitado. De forma geral, siga as orientações abaixo e, em caso de dúvida, fale com nossa equipe pelo WhatsApp.",
+    "items": [
+      "Jejum de 4 a 6 horas para exames com contraste endovenoso",
+      "Informe alergias, especialmente a iodo ou a contrastes iodados",
+      "Traga exame de creatinina recente (últimos 30 dias), se solicitado",
+      "Informe se possui diabetes, problemas renais ou cardíacos",
+      "Avise imediatamente se houver suspeita de gravidez",
+      "Leve o pedido médico e exames anteriores da mesma região",
+      "Use roupas confortáveis e evite acessórios metálicos"
+    ],
+    "note": "Nossa equipe entra em contato antes do exame confirmando o preparo específico para o seu caso."
+  },
+  "process": {
+    "title": "Como é feito o exame",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Agendamento pelo WhatsApp",
+        "text": "Envie o pedido médico e nossa equipe retorna com horários disponíveis e orientações de preparo."
+      },
+      {
+        "number": "2",
+        "title": "Chegada à clínica",
+        "text": "Recepção rápida. Você será acomodado e o técnico explicará cada etapa do procedimento."
+      },
+      {
+        "number": "3",
+        "title": "Realização do exame",
+        "text": "O exame é indolor e rápido — na maioria dos casos, dura apenas alguns minutos dentro do tomógrafo."
+      },
+      {
+        "number": "4",
+        "title": "Laudo e resultado online",
+        "text": "O laudo é elaborado por radiologista especialista e fica disponível em 1 dia útil no portal."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "A tomografia computadorizada dói?",
+      "answer": "Não. A tomografia é um exame indolor. Quando há indicação de contraste endovenoso, você sentirá apenas a picada da punção venosa, semelhante a um exame de sangue."
+    },
+    {
+      "question": "Quanto tempo dura o exame de tomografia?",
+      "answer": "A aquisição das imagens costuma durar poucos minutos. Considerando preparo, posicionamento e eventual uso de contraste, o tempo total na clínica fica entre 20 e 40 minutos na maioria dos casos."
+    },
+    {
+      "question": "Preciso de pedido médico para fazer tomografia?",
+      "answer": "Sim. A tomografia é um exame que utiliza radiação e, por isso, exige solicitação médica contendo o tipo de exame e a região a ser examinada."
+    },
+    {
+      "question": "A tomografia usa contraste? É seguro?",
+      "answer": "Depende da indicação clínica. Quando necessário, utilizamos contraste iodado endovenoso, que é seguro na grande maioria dos pacientes. Informe alergias e doenças renais previamente; avaliamos cada caso individualmente."
+    },
+    {
+      "question": "Em quanto tempo recebo o laudo da tomografia?",
+      "answer": "O laudo fica disponível em 1 dia útil no nosso portal de resultados online. Em casos urgentes, sinalize no agendamento para prioridade."
+    },
+    {
+      "question": "Posso fazer tomografia grávida?",
+      "answer": "Em gestantes, a tomografia só é realizada em situações específicas de extrema necessidade, após avaliação médica. Sempre informe se há suspeita de gravidez antes do exame."
+    },
+    {
+      "question": "Qual o valor da tomografia particular na Uno Diagnóstico?",
+      "answer": "Os valores variam conforme a região a ser examinada e a necessidade de contraste. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro. Consulte valores atualizados pelo WhatsApp."
+    }
+  ]
+}
