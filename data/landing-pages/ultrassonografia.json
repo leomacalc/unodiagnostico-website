@@ -12,11 +12,11 @@
   "hero": {
     "badge": "Ultrassonografia e Doppler em Maracanaú",
     "headline": "Ultrassom com <em>agilidade</em> e <em>precisão</em> em Maracanaú",
-    "subtitle": "Ultrassonografia e Doppler realizados por médicos radiologistas especialistas, com laudo em 1 dia útil. Abdominal, pélvico, tireoide, obstétrico, morfológico, doppler e muito mais.",
+    "subtitle": "Ultrassonografia e Doppler realizados por médicos radiologistas especialistas, com laudo em até 40 minutos. Abdominal, pélvico, tireoide, obstétrico, morfológico, doppler e muito mais.",
     "cta_primary": "Agende seu Ultrassom pelo WhatsApp",
     "cta_secondary": "Consultar valor particular",
     "trust_badges": [
-      "Laudo em 1 dia útil",
+      "Laudo em até 40 minutos",
       "Sem radiação, sem dor",
       "7 dias por semana, 7h às 22h",
       "Convênios + particular (PIX e cartão)"
@@ -64,8 +64,8 @@
     "title": "Por que fazer seu ultrassom na Uno Diagnóstico?",
     "items": [
       {
-        "title": "Laudo em 1 dia útil",
-        "text": "Você recebe seu resultado rápido, sem precisar esperar semanas. Ideal para quem tem consulta médica marcada."
+        "title": "Laudo em até 40 minutos",
+        "text": "O laudo fica pronto em até 40 minutos após o exame, no mesmo dia. Ideal para quem tem consulta médica marcada."
       },
       {
         "title": "Radiologistas especialistas",
@@ -124,7 +124,7 @@
       {
         "number": "4",
         "title": "Laudo e resultado online",
-        "text": "O laudo assinado pelo radiologista fica disponível em 1 dia útil no portal."
+        "text": "O laudo assinado pelo radiologista fica pronto em até 40 minutos e também fica disponível no portal de resultados."
       }
     ]
   },
@@ -151,7 +151,7 @@
     },
     {
       "question": "Em quanto tempo recebo o laudo?",
-      "answer": "O laudo fica disponível em 1 dia útil no nosso portal de resultados online. Em casos urgentes, sinalize no agendamento para prioridade."
+      "answer": "O laudo fica pronto em até 40 minutos após o exame e também fica disponível no nosso portal de resultados online."
     },
     {
       "question": "Qual o valor do ultrassom particular?",

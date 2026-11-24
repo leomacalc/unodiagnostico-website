@@ -12,7 +12,7 @@
   "hero": {
     "badge": "Tomografia Computadorizada em Maracanaú",
     "headline": "Diagnóstico rápido e preciso com <em>tomografia de alta resolução</em>",
-    "subtitle": "Equipamento moderno, equipe médica especializada e laudo entregue em 1 dia útil. Atendemos todos os dias das 7h às 22h, com convênios e atendimento particular.",
+    "subtitle": "Equipamento moderno, equipe médica especializada e laudo em 1 dia útil nos exames eletivos e em até 2 horas nas urgências. Atendemos todos os dias das 7h às 22h, com convênios e atendimento particular.",
     "cta_primary": "Agende sua Tomografia pelo WhatsApp",
     "cta_secondary": "Consultar valor particular",
     "trust_badges": [
@@ -69,7 +69,7 @@
       },
       {
         "title": "Laudo especializado",
-        "text": "Todos os exames são laudados por médicos radiologistas com título de especialista (RQE)."
+        "text": "Todos os exames são laudados por médicos radiologistas com título de especialista (RQE). Laudo em 1 dia útil nos exames eletivos e em até 2 horas nas urgências."
       },
       {
         "title": "Resultado online",
@@ -124,7 +124,7 @@
       {
         "number": "4",
         "title": "Laudo e resultado online",
-        "text": "O laudo é elaborado por radiologista especialista e fica disponível em 1 dia útil no portal."
+        "text": "O laudo é elaborado por radiologista especialista e fica disponível em 1 dia útil no portal — nas urgências, em até 2 horas."
       }
     ]
   },
@@ -147,7 +147,11 @@
     },
     {
       "question": "Em quanto tempo recebo o laudo da tomografia?",
-      "answer": "O laudo fica disponível em 1 dia útil no nosso portal de resultados online. Em casos urgentes, sinalize no agendamento para prioridade."
+      "answer": "Nos exames eletivos, o laudo fica disponível em 1 dia útil no nosso portal de resultados online. Nas tomografias de urgência, o laudo sai em até 2 horas — avise no agendamento."
+    },
+    {
+      "question": "Vocês fazem tomografia com sedação?",
+      "answer": "Não. A Uno Diagnóstico não realiza exames sob sedação."
     },
     {
       "question": "Posso fazer tomografia grávida?",

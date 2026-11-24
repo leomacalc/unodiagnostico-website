@@ -5,7 +5,7 @@
   "seo": {
     "title": "Ressonância Magnética em Maracanaú | Uno Diagnóstico",
     "description": "Ressonância magnética em Maracanaú, já em operação na Uno Diagnóstico. Crânio, coluna, joelho, ombro, abdome e pelve com alta definição, sem radiação e sem precisar ir a Fortaleza. Convênios e particular. Agende pelo WhatsApp.",
-    "keywords": "ressonância magnética Maracanaú, ressonância Maracanaú, RM Maracanaú, ressonância particular Maracanaú, clínica de ressonância Maracanaú, ressonância magnética de joelho Maracanaú, ressonância de coluna Maracanaú, ressonância de crânio Maracanaú, ressonância Ceará, ressonância magnética perto de mim"
+    "keywords": "ressonância magnética Maracanaú, ressonância Maracanaú, RM Maracanaú, ressonância particular Maracanaú, clínica de ressonância Maracanaú, ressonância magnética de joelho Maracanaú, ressonância de coluna Maracanaú, ressonância de crânio Maracanaú, angiorressonância Maracanaú, ressonância Ceará, ressonância magnética perto de mim"
   },
   "whatsapp_message": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar uma ressonância magnética.",
   "whatsapp_message_price": "Olá! Vim pelo site da Uno Diagnóstico e gostaria de saber o valor particular da ressonância magnética.",
@@ -27,7 +27,7 @@
     "title": "O que é a ressonância magnética?",
     "paragraphs": [
       "A ressonância magnética é um exame de imagem que usa um campo magnético e ondas de rádio — e nenhuma radiação ionizante — para gerar imagens muito detalhadas do interior do corpo. É o exame mais preciso para avaliar cérebro, medula, coluna, músculos, ligamentos, tendões e cartilagens, além de trazer informações complementares às da tomografia e do ultrassom em abdome e pelve.",
-      "Durante anos, pacientes de Maracanaú e região precisaram se deslocar até Fortaleza para fazer ressonância: tempo em trânsito, custo com transporte, dificuldade para idosos e pessoas com mobilidade reduzida e demora na marcação. Esse cenário mudou — a ressonância da Uno Diagnóstico já está em operação aqui, na Avenida I, no Jereissati.",
+      "Durante anos, pacientes de Maracanaú e região precisaram se deslocar até Fortaleza para fazer ressonância: tempo em trânsito, custo com transporte, dificuldade para idosos e pessoas com mobilidade reduzida e demora na marcação. Esse cenário mudou — a ressonância da Uno Diagnóstico já está em operação aqui, no Feira Center (open mall), no Jereissati.",
       "O exame é conduzido por equipe técnica treinada e laudado por médicos radiologistas com título de especialista, seguindo os mesmos padrões de qualidade, rapidez e acolhimento que a Uno já pratica há mais de 7 anos nos demais exames."
     ]
   },
@@ -58,6 +58,10 @@
       {
         "title": "Ressonância de Pelve",
         "text": "Avaliação de útero, ovários, próstata e demais estruturas pélvicas com alta resolução de contraste entre os tecidos."
+      },
+      {
+        "title": "Angiorressonância",
+        "text": "Estudo das artérias e veias por ressonância, sem radiação e sem contraste. Ajuda a investigar aneurismas, estreitamentos e malformações dos vasos. Consulte pelo WhatsApp as regiões disponíveis."
       }
     ]
   },
@@ -77,8 +81,8 @@
         "text": "A mesma equipe médica que você já conhece e confia na Uno Diagnóstico, com título de especialista e RQE."
       },
       {
-        "title": "Laudo rápido e online",
-        "text": "Mantemos o mesmo padrão de entrega ágil dos demais exames, com resultado disponível no nosso portal de resultados."
+        "title": "Laudo em 1 dia útil",
+        "text": "Nos exames eletivos, o laudo assinado por médico radiologista fica disponível em 1 dia útil no nosso portal de resultados."
       },
       {
         "title": "Ambiente acolhedor",
@@ -92,12 +96,11 @@
   },
   "preparation": {
     "title": "Como se preparar para a ressonância",
-    "intro": "O preparo varia conforme a região examinada e o uso ou não de contraste. Em geral:",
+    "intro": "O preparo varia conforme a região examinada. No momento, a ressonância da Uno é realizada apenas sem contraste. Em geral:",
     "items": [
-      "Jejum de 4 a 6 horas apenas nos exames com contraste e nos de abdome e pelve — nossa equipe confirma no agendamento",
+      "Jejum de 4 a 6 horas nos exames de abdome e pelve — nossa equipe confirma no agendamento",
       "Avise se possui marca-passo, implante coclear, clipe de aneurisma, neuroestimulador, bomba de insulina ou fragmento metálico no corpo",
       "Retire joias, relógio, piercings, próteses dentárias removíveis, aparelho auditivo e cartões magnéticos antes de entrar na sala",
-      "Nos exames com contraste, informe alergias e doença renal e traga dosagem de creatinina recente (últimos 30 dias)",
       "Informe se está grávida ou amamentando",
       "Se tiver claustrofobia, avise a equipe no agendamento — temos protocolos para tornar o exame mais confortável",
       "Traga o pedido médico e exames anteriores da mesma região para comparação",
@@ -116,7 +119,7 @@
       {
         "number": "2",
         "title": "Receba o preparo",
-        "text": "Você recebe por escrito as orientações específicas do seu exame: jejum, contraste, documentos e cuidados com objetos metálicos."
+        "text": "Você recebe por escrito as orientações específicas do seu exame: jejum, documentos e cuidados com objetos metálicos."
       },
       {
         "number": "3",
@@ -126,18 +129,30 @@
       {
         "number": "4",
         "title": "Retire o laudo online",
-        "text": "O laudo é assinado por médico radiologista e fica disponível no nosso portal de resultados, acessível de qualquer lugar."
+        "text": "O laudo é assinado por médico radiologista e fica disponível em 1 dia útil no nosso portal de resultados, acessível de qualquer lugar."
       }
     ]
   },
   "faq": [
     {
       "question": "A ressonância magnética já está funcionando na Uno Diagnóstico?",
-      "answer": "Sim. A ressonância magnética já está em operação na nossa unidade de Maracanaú, na Avenida I, Business Place Torre 2, ao lado da UNIMED. Você pode agendar pelo WhatsApp (85) 2181-6818, todos os dias das 7h às 22h."
+      "answer": "Sim. A ressonância magnética já está em operação em Maracanaú, no espaço da Uno Diagnóstico no Feira Center (open mall): Av. Yolanda Pontes Vidal Queiroz, 17, lojas 102 e 103, Jereissati I. Os demais exames continuam na unidade da Avenida I, Business Place Torre 2, ao lado da UNIMED. Você pode agendar pelo WhatsApp (85) 2181-6818, todos os dias das 7h às 22h."
     },
     {
       "question": "Quais tipos de ressonância vocês realizam?",
-      "answer": "Realizamos as principais modalidades: crânio e encéfalo, coluna (cervical, torácica e lombar), articulações (joelho, ombro, quadril, tornozelo, punho, cotovelo), abdome e pelve. Se tiver dúvida se o seu pedido médico é contemplado, envie uma foto do pedido pelo WhatsApp que confirmamos na hora."
+      "answer": "Realizamos as principais modalidades: crânio e encéfalo, coluna (cervical, torácica e lombar), articulações (joelho, ombro, quadril, tornozelo, punho, cotovelo), abdome e pelve, além de angiorressonância. No momento, todos os exames são feitos sem contraste. Se tiver dúvida se o seu pedido médico é contemplado, envie uma foto do pedido pelo WhatsApp que confirmamos na hora."
+    },
+    {
+      "question": "Vocês fazem ressonância com contraste?",
+      "answer": "No momento, não. A ressonância da Uno Diagnóstico é realizada apenas sem contraste. Se o seu pedido médico indicar contraste, fale com a nossa equipe pelo WhatsApp (85) 2181-6818 antes de agendar."
+    },
+    {
+      "question": "Vocês fazem ressonância com sedação ou anestesia?",
+      "answer": "Não. A Uno Diagnóstico não realiza exames sob sedação. Se você tem claustrofobia ou dificuldade para ficar parado, avise a equipe no agendamento para orientarmos a melhor forma de fazer o exame."
+    },
+    {
+      "question": "Em quanto tempo sai o laudo da ressonância?",
+      "answer": "Nos exames eletivos, o laudo fica disponível em 1 dia útil no nosso portal de resultados online."
     },
     {
       "question": "A ressonância magnética dói ou faz mal?",
@@ -145,7 +160,7 @@
     },
     {
       "question": "Quanto tempo demora o exame?",
-      "answer": "A maioria dos exames leva de 20 a 40 minutos, dependendo da região estudada e da necessidade de contraste. É importante chegar com antecedência para o preenchimento do questionário de segurança."
+      "answer": "A maioria dos exames leva de 20 a 40 minutos, dependendo da região estudada. É importante chegar com antecedência para o preenchimento do questionário de segurança."
     },
     {
       "question": "Tenho claustrofobia. Consigo fazer o exame?",
@@ -169,7 +184,14 @@
     },
     {
       "question": "Quanto custa a ressonância particular?",
-      "answer": "O valor depende da região examinada e do uso de contraste. Consulte pelo WhatsApp (85) 2181-6818 informando o exame do seu pedido médico — passamos o valor na hora. Aceitamos PIX, cartão de crédito com parcelamento, débito e dinheiro."
+      "answer": "O valor depende da região examinada. Consulte pelo WhatsApp (85) 2181-6818 informando o exame do seu pedido médico — passamos o valor na hora. Aceitamos PIX, cartão de crédito com parcelamento, débito e dinheiro."
     }
-  ]
+  ],
+  "location": {
+    "unit_name": "Ressonância magnética no Feira Center",
+    "full": "Av. Yolanda Pontes Vidal Queiroz, 17, lojas 102 e 103 — Feira Center (open mall), Jereissati I, Maracanaú/CE, 61900-410",
+    "maps_query": "Shopping Feira Center Maracanaú",
+    "maps_place_id": "ChIJl98tug5TxwcRq7WXTv66_SA",
+    "note": "A ressonância é feita neste espaço. Os demais exames continuam na unidade da Avenida I, Business Place Torre 2."
+  }
 }

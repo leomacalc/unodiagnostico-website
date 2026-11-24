@@ -18,7 +18,7 @@
     "trust_badges": [
       "Laudo em 1 dia útil",
       "Atendimento acolhedor",
-      "7 dias por semana",
+      "Segunda a sábado",
       "Convênios + particular"
     ]
   },
@@ -84,8 +84,8 @@
         "text": "Aceitamos LivSaúde, Unimed, CAMED, FUSEx, ISSEC e atendimento particular com PIX, cartão e dinheiro."
       },
       {
-        "title": "Atendimento 7 dias por semana",
-        "text": "Funcionamos todos os dias das 7h às 22h, ideal para quem tem rotina apertada e precisa encaixar o exame."
+        "title": "Horário da mamografia",
+        "text": "De segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h. O agendamento pelo WhatsApp funciona todos os dias."
       }
     ]
   },
@@ -142,6 +142,10 @@
       "answer": "O exame em si dura cerca de 10 a 15 minutos. Considerando recepção e preparo, o tempo total na clínica fica em torno de 30 minutos."
     },
     {
+      "question": "Qual é o horário da mamografia?",
+      "answer": "A mamografia é realizada de segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h. O agendamento pelo WhatsApp funciona todos os dias, das 7h às 22h."
+    },
+    {
       "question": "Posso fazer mamografia com implante de silicone?",
       "answer": "Sim. A mamografia pode ser realizada em pacientes com implante, com técnicas específicas para visualizar o tecido mamário ao redor da prótese. Informe no agendamento."
     },
@@ -157,5 +161,10 @@
       "question": "Qual o valor da mamografia particular?",
       "answer": "Os valores variam conforme o tipo de mamografia (rastreamento ou diagnóstica) e se há complemento com ultrassom. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro. Consulte valores atualizados pelo WhatsApp."
     }
-  ]
+  ],
+  "hours": {
+    "text": "Mamografia: segunda a sexta, 8h às 18h | sábado, 8h às 12h",
+    "days_per_week": "6",
+    "cta": "A mamografia é realizada de segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h. Agende pelo WhatsApp."
+  }
 }
