@@ -55,7 +55,7 @@
     },
     {
       "question": "A Uno Diagnóstico já faz ressonância magnética?",
-      "answer": "Sim. A ressonância magnética já está em operação na Uno Diagnóstico, em Maracanaú. Você não precisa mais se deslocar até Fortaleza: realizamos ressonância de crânio, coluna, articulações (joelho, ombro, quadril, tornozelo, punho), abdome e pelve, com laudo assinado por médico radiologista. Agende pelo WhatsApp (85) 2181-6818."
+      "answer": "Sim. A ressonância magnética já está em operação em Maracanaú, no espaço da Uno Diagnóstico no Feira Center (open mall), na Av. Yolanda Pontes Vidal Queiroz, 17, lojas 102 e 103. Você não precisa mais se deslocar até Fortaleza: realizamos ressonância de crânio, coluna, articulações (joelho, ombro, quadril, tornozelo, punho), abdome e pelve, além de angiorressonância, com laudo assinado por médico radiologista. No momento, os exames são feitos sem contraste. Agende pelo WhatsApp (85) 2181-6818."
     },
     {
       "question": "Preciso de pedido médico para realizar um exame?",
@@ -63,11 +63,11 @@
     },
     {
       "question": "Quais convênios são aceitos?",
-      "answer": "Atualmente aceitamos LivSaúde, Unimed, CAMED, FUSEx e ISSEC. Também realizamos atendimento particular com pagamento via PIX, cartão de crédito, cartão de débito ou dinheiro."
+      "answer": "Atualmente aceitamos LivSaúde, Unimed, CAMED, FUSEx e ISSEC. Temos parceria com o Cartão de Todos e a AmorSaúde, com desconto em exames para quem tem o cartão. Também realizamos atendimento particular com pagamento via PIX, cartão de crédito, cartão de débito ou dinheiro."
     },
     {
       "question": "Quanto tempo demora para receber o resultado do exame?",
-      "answer": "O prazo varia conforme o tipo de exame. Radiografias costumam ficar prontas no mesmo dia. Ultrassonografias e tomografias em até 3 dias úteis. Os resultados ficam disponíveis online em nosso portal de resultados."
+      "answer": "O prazo varia conforme o exame. Ultrassonografia: laudo em até 40 minutos. Tomografia, ressonância, mamografia, densitometria e radiografia eletivas: 1 dia útil. Tomografia de urgência: até 2 horas. Os resultados ficam disponíveis online em nosso portal de resultados."
     },
     {
       "question": "Quais formas de pagamento são aceitas para atendimento particular?",
@@ -75,12 +75,18 @@
     },
     {
       "question": "Onde fica a Uno Diagnóstico?",
-      "answer": "Estamos localizados na Avenida I, Business Place Torre 2, ao lado da UNIMED, no bairro Jereissati, Setor A, em Maracanaú/CE, CEP 61900-320. Funcionamos todos os dias das 7h às 22h."
+      "answer": "Estamos localizados na Avenida I, Business Place Torre 2, ao lado da UNIMED, no bairro Jereissati, Setor A, em Maracanaú/CE, CEP 61900-320. A ressonância magnética é feita no nosso espaço no Feira Center (open mall), na Av. Yolanda Pontes Vidal Queiroz, 17, lojas 102 e 103, Jereissati I. Funcionamos todos os dias das 7h às 22h; a mamografia é realizada de segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h."
     }
   ],
   "seo": {
     "title": "Uno Diagnóstico | Ressonância e Exames de Imagem em Maracanaú/CE",
     "description": "Ressonância magnética, tomografia, ultrassom, raio-X, mamografia, ecocardiograma e densitometria em Maracanaú. Todos os dias, 7h às 22h. Agende pelo WhatsApp.",
     "keywords": "ressonância magnética Maracanaú, ressonância Maracanaú, diagnóstico por imagem Maracanaú, radiografia digital Maracanaú, tomografia Maracanaú CE, ultrassonografia Maracanaú, ecocardiograma Maracanaú, mamografia Maracanaú, densitometria óssea Maracanaú, clínica de imagem Maracanaú, exame de imagem Ceará, biópsias guiadas imagem"
+  },
+  "second_unit": {
+    "label": "Ressonância magnética",
+    "full": "Av. Yolanda Pontes Vidal Queiroz, 17, lojas 102 e 103 — Feira Center (open mall), Jereissati I, Maracanaú/CE, 61900-410",
+    "maps_query": "Shopping Feira Center Maracanaú",
+    "maps_place_id": "ChIJl98tug5TxwcRq7WXTv66_SA"
   }
 }

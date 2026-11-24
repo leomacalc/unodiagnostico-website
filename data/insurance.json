@@ -27,5 +27,16 @@
       "name": "ISSEC",
       "logo": "images/insurance/issec.png"
     }
-  ]
+  ],
+  "partnerships": [
+    {
+      "id": "cartao-de-todos",
+      "name": "Cartão de Todos"
+    },
+    {
+      "id": "amorsaude",
+      "name": "AmorSaúde"
+    }
+  ],
+  "partnerships_note": "Desconto em exames para quem tem o cartão."
 }
