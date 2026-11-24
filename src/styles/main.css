@@ -992,6 +992,25 @@ h1, h2, h3, h4 {
   color: var(--color-text-white);
 }
 
+/* Parcerias (não são convênios): uma linha de texto abaixo dos logos */
+.insurance-partnerships {
+  max-width: 760px;
+  margin: 32px auto 0;
+  text-align: center;
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+.insurance-partnerships strong {
+  color: var(--color-primary);
+}
+
+.insurance-partnerships a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 /* --- Payment Methods --- */
 .payment {
   background: var(--color-bg-light);
