@@ -294,6 +294,7 @@
       <div class="insurance-content">
             {{INSURANCE_HTML}}
       </div>
+      {{PARTNERSHIPS_HTML}}
     </div>
   </section>
 
@@ -400,6 +401,7 @@
           <div class="map-info-icon">{{ICON_LOCATION}}</div>
           <p>{{ADDRESS_FULL}}<br><a href="{{MAPS_URL}}" target="_blank" rel="noopener" style="color:var(--color-secondary);font-weight:600">Como chegar (Google Maps) &rarr;</a></p>
         </div>
+        {{SECOND_UNIT_HTML}}
         <div class="map-info-item">
           <div class="map-info-icon">{{ICON_CLOCK}}</div>
           <p>{{HOURS}}</p>
@@ -411,7 +413,7 @@
       </div>
       <div class="footer-map-embed">
         <iframe
-          src="https://www.google.com/maps?q=Avenida+I+Business+Place+Torre+2+Jereissati+Maracanau+CE+61900-320&output=embed"
+          src="{{MAPS_EMBED_URL}}"
           width="100%" height="300" style="border:0" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           title="Localização Uno Diagnóstico em Maracanaú">

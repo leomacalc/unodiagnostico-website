@@ -141,7 +141,7 @@
           <div class="lp-trust-label">{{GOOGLE_TOTAL_REVIEWS}} avaliações no Google</div>
         </div>
         <div class="lp-trust-item">
-          <div class="lp-trust-number">7</div>
+          <div class="lp-trust-number">{{TRUST_DAYS}}</div>
           <div class="lp-trust-label">dias por semana</div>
         </div>
       </div>
@@ -270,6 +270,7 @@
       <div class="lp-insurance-grid">
         {{INSURANCE_HTML}}
       </div>
+      {{PARTNERSHIPS_HTML}}
     </div>
   </section>
 
@@ -311,7 +312,7 @@
         <h3>{{UNIT_NAME}}</h3>
         <div class="lp-location-item">
           <div class="lp-location-icon">{{ICON_LOCATION}}</div>
-          <p>{{ADDRESS_FULL}}<br><a href="{{MAPS_URL}}" target="_blank" rel="noopener" style="font-weight:600;text-decoration:underline">Como chegar (Google Maps) &rarr;</a></p>
+          <p>{{ADDRESS_FULL}}<br><a href="{{MAPS_URL}}" target="_blank" rel="noopener" style="font-weight:600;text-decoration:underline">Como chegar (Google Maps) &rarr;</a>{{LOCATION_NOTE_HTML}}</p>
         </div>
         <div class="lp-location-item">
           <div class="lp-location-icon">{{ICON_CLOCK}}</div>
@@ -327,7 +328,7 @@
       </div>
       <div class="lp-location-map">
         <iframe
-          src="https://www.google.com/maps?q=Avenida+I+Business+Place+Torre+2+Jereissati+Maracanau+CE+61900-320&output=embed"
+          src="{{MAPS_EMBED_URL}}"
           width="100%" height="100%" style="border:0" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           title="Localização Uno Diagnóstico em Maracanaú">
@@ -340,7 +341,7 @@
   <section class="lp-final-cta">
     <div class="lp-container">
       <h2>Pronto para agendar seu exame de {{EXAM_SHORT_LC}}?</h2>
-      <p>Nossa equipe está disponível todos os dias das 7h às 22h para atender você.</p>
+      <p>{{FINAL_CTA_TEXT}}</p>
       <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('final')" class="lp-btn lp-btn-whatsapp lp-btn-xl">
         {{ICON_WHATSAPP}} Agendar pelo WhatsApp agora
       </a>
