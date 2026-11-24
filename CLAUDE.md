@@ -39,6 +39,7 @@ O site é construído a partir de **arquivos JSON de dados** + **templates HTML*
 │
 ├── public/                  # Arquivos estáticos (copiados direto para dist/)
 │   ├── fonts/               # Montserrat e Open Sans (woff2 variável) — ver "Fontes"
+│   ├── produtos-chatgpt.csv # Feed de produtos dos anúncios no ChatGPT (exames com preço e horário)
 │   └── images/              # Imagens do site
 │       ├── gallery/         # Fotos do espaço
 │       ├── equipment/       # Fotos dos aparelhos (cards de Equipamentos)
@@ -224,7 +225,9 @@ Abre em http://localhost:3000
 9. **Coerência de exame novo**: ao ativar/desativar um exame, varra TODOS os pontos — `services.json`,
    `equipment.json`, FAQ e `seo` em `site.json`, slide do hero em `src/templates/index.html`,
    a landing em `data/landing-pages/` e os posts em `blog-posts.json` (que costumam ter um
-   parágrafo institucional repetido citando a lista de exames).
+   parágrafo institucional repetido citando a lista de exames). Vale também para mudança de
+   horário, preço ou endereço: o feed `public/produtos-chatgpt.csv` (anúncios no ChatGPT) repete
+   horário e exame em cada produto.
 10. **Não marcar `aggregateRating` no schema.org** com a nota do Google: avaliação própria de
     LocalBusiness vinda de terceiro não é elegível a rich result e pode gerar ação manual.
 11. **Valide SVG antes de publicar** (`python -c "import xml.dom.minidom as m; m.parse(arquivo)"`) —
@@ -245,8 +248,8 @@ Abre em http://localhost:3000
     contradiga, a não ser que ele diga que mudou:
     - **Ressonância: só sem contraste, por enquanto.** Nada de orientação de contraste (jejum por
       causa de contraste, creatinina, gadolínio) em texto de ressonância — essas orientações são
-      da tomografia. Inclui angiorressonância. Dizer "alta definição"; nunca citar Tesla nem
-      "alto campo".
+      da tomografia. Inclui angiorressonância arterial. Dizer "alta definição"; nunca citar
+      Tesla nem "alto campo".
     - **Onde é feita a ressonância:** Feira Center (open mall), Av. Yolanda Pontes Vidal Queiroz,
       17, lojas 102 e 103, Jereissati I, CEP 61900-410. Os demais exames seguem na Avenida I,
       Business Place Torre 2.
