@@ -63,6 +63,8 @@ Editar `data/site.json`. Campos que o build usa além dos óbvios:
   (o botão "Agendar este Exame" do modal vira `exam_prefix` + nome do exame).
 - `geo`: latitude/longitude do schema.org — é a coordenada da ficha da clínica no Google Maps.
 - `tracking`: IDs do Google Ads e do GA4 (ver "Tracking de conversão").
+- `second_unit` (opcional): segundo endereço mostrado na home, abaixo do principal — hoje o espaço
+  da ressonância no Feira Center. Campos: `label`, `full`, `maps_query`, `maps_place_id`.
 Os links de WhatsApp são montados pelo build (`waLink()`); `social.whatsapp_link` não é mais usado.
 
 A nota e o total de avaliações do Google ficam em `data/reviews.json` (`google_rating`,
@@ -101,6 +103,10 @@ Editar `data/insurance.json` — adicionar ao array `partners`:
 ```json
 { "id": "nome-convenio", "name": "Nome do Convênio", "logo": "images/nome-logo.png" }
 ```
+
+**Parcerias (não são convênios):** array `partnerships` (`id`, `name`) e `partnerships_note`, no
+mesmo arquivo. Saem como uma linha de texto abaixo dos logos, na home e nas landings, sem logo e
+com link de WhatsApp. Hoje: Cartão de Todos e AmorSaúde (desconto em exames para quem tem o cartão).
 
 ### Publicar um post no blog
 Cada post vira uma página própria em `unodiagnostico.com/blog/<slug>/`, entra no índice `/blog/`
@@ -148,6 +154,14 @@ As landing pages ficam em URLs tipo `unodiagnostico.com/<slug>` e são 100% gera
      dizer exame + cidade. Forçar com `hero.badge_in_h1: true/false` se precisar.
    - Foto do topo: `public/images/exames/<slug>.jpg` + `<slug>.webp` (o build lê largura/altura
      do arquivo e monta o `<picture>`; sem a foto, a landing sai só com texto).
+   - `location` (opcional): para exame feito fora da unidade principal. Troca o nome, o endereço,
+     o link "Como chegar" e o mapa da seção de localização. Campos: `unit_name`, `full`,
+     `maps_query` (o que o Google Maps procura — usar o nome do lugar quando o Maps ainda não
+     conhece o endereço), `maps_place_id` (opcional) e `note` (aviso em letra menor).
+     Hoje só a ressonância usa (Feira Center).
+   - `hours` (opcional): para exame com horário próprio. `text` (seção de localização),
+     `days_per_week` (número da faixa de estatísticas; padrão 7) e `cta` (frase acima do botão
+     final). Hoje só a mamografia usa.
 3. Rode `node build.js` — a landing é gerada em `dist/<slug>/index.html` automaticamente.
 4. A landing reutiliza automaticamente: reviews do Google (`reviews.json`), convênios (`insurance.json`), corpo clínico (`doctors.json`) e dados gerais (`site.json`).
 
@@ -227,6 +241,25 @@ Abre em http://localhost:3000
     (`examLinksHTML()`), e os cards da home apontam para a landing com texto "Saiba mais sobre <exame>".
     Landing nova entra sozinha no rodapé; o card da home só ganha o link se, em `services.json`,
     o `id` do exame for igual ao `slug` da landing ou o `name` for igual ao `exam_name` dela.
+14. **Fatos da clínica confirmados pelo Dr. Leonardo em 23/11/2026** — não publicar nada que
+    contradiga, a não ser que ele diga que mudou:
+    - **Ressonância: só sem contraste, por enquanto.** Nada de orientação de contraste (jejum por
+      causa de contraste, creatinina, gadolínio) em texto de ressonância — essas orientações são
+      da tomografia. Inclui angiorressonância. Dizer "alta definição"; nunca citar Tesla nem
+      "alto campo".
+    - **Onde é feita a ressonância:** Feira Center (open mall), Av. Yolanda Pontes Vidal Queiroz,
+      17, lojas 102 e 103, Jereissati I, CEP 61900-410. Os demais exames seguem na Avenida I,
+      Business Place Torre 2.
+    - **A clínica não faz exame sob sedação.**
+    - **Prazo de laudo:** ultrassom em até 40 minutos; tomografia, ressonância, mamografia,
+      densitometria e raio-X eletivos em 1 dia útil; tomografia de urgência em até 2 horas.
+      (Ecocardiograma e biópsias: prazo ainda não confirmado.)
+    - **Mamografia:** segunda a sexta, 8h às 18h, e sábado, 8h às 12h. A clínica abre todos os
+      dias, das 7h às 22h.
+    - **Convênios:** LivSaúde, Unimed, CAMED, FUSEx e ISSEC. **Parcerias:** Cartão de Todos e AmorSaúde.
+    - **Não faz endoscopia nem eletroneuromiografia.** Não citar esses exames em texto novo, para
+      o site não aparecer nessas buscas.
+    - A página de ditado de laudos (`/laudos.html`) e as funções `/api` saíram do site nessa data.
 
 ---
 

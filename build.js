@@ -336,6 +336,20 @@ function generateInsuranceHTML() {
   return html;
 }
 
+// Parcerias (data/insurance.json > "partnerships"): nao sao convenios. Aparecem em uma linha de
+// texto abaixo dos logos, na home e nas paginas de exame, sem logo. Lista vazia = nao aparece.
+function partnershipsHTML(cssClass, waHref) {
+  var names = (insurance.partnerships || []).map(function (p) { return p.name; }).filter(Boolean);
+  if (!names.length) return '';
+  var list = names.length > 1
+    ? names.slice(0, -1).join(', ') + ' e ' + names[names.length - 1]
+    : names[0];
+  var note = insurance.partnerships_note ? ' ' + escapeHTML(insurance.partnerships_note) : '';
+  return '<p class="' + cssClass + '"><strong>' + (names.length > 1 ? 'Parcerias' : 'Parceria') + ':</strong> ' +
+    escapeHTML(list) + '.' + note +
+    ' <a href="' + waHref + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'parcerias\')">Consulte as condições pelo WhatsApp</a>.</p>';
+}
+
 // --- Blog: cada post tem URL propria em /blog/<slug>/ ---
 function postSlug(post) {
   return post.slug || post.id;
@@ -419,6 +433,30 @@ var geo = site.geo || { latitude: -3.8707165, longitude: -38.6190201 };
 function mapsUrl() {
   var base = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(site.name + ' ' + site.address.city);
   return reviews.google_place_id ? base + '&query_place_id=' + encodeURIComponent(reviews.google_place_id) : base;
+}
+
+// Outro endereco (exame feito fora da unidade principal, ex.: ressonancia no Feira Center).
+// "maps_query" e' o que o Google Maps procura; "maps_place_id" (opcional) abre a ficha exata do lugar.
+function mapsUrlFor(loc) {
+  var base = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(loc.maps_query || loc.full);
+  return loc.maps_place_id ? base + '&query_place_id=' + encodeURIComponent(loc.maps_place_id) : base;
+}
+
+// Mapa embutido (iframe) das paginas. Sem argumento, mostra a unidade principal.
+var MAPS_EMBED_QUERY = 'Avenida I Business Place Torre 2 Jereissati Maracanau CE 61900-320';
+function mapsEmbedUrl(query) {
+  return 'https://www.google.com/maps?q=' + encodeURIComponent(query || MAPS_EMBED_QUERY).replace(/%20/g, '+') + '&output=embed';
+}
+
+// Segundo endereco na home (data/site.json > "second_unit"), logo abaixo do endereco principal.
+function secondUnitHTML() {
+  var u = site.second_unit;
+  if (!u || !u.full) return '';
+  return '<div class="map-info-item">' +
+    '<div class="map-info-icon">' + icons.location + '</div>' +
+    '<p>' + (u.label ? '<strong>' + escapeHTML(u.label) + ':</strong> ' : '') + escapeHTML(u.full) +
+    '<br><a href="' + mapsUrlFor(u) + '" target="_blank" rel="noopener" style="color:var(--color-secondary);font-weight:600">Como chegar (Google Maps) &rarr;</a></p>' +
+    '</div>';
 }
 
 function generateSchemaOrg() {
@@ -553,6 +591,9 @@ const replacements = {
   '{{GA4_ID}}': GA4_ID,
   '{{FOOTER_EXAMS_HTML}}': examLinksHTML(null),
   '{{MAPS_URL}}': mapsUrl(),
+  '{{MAPS_EMBED_URL}}': mapsEmbedUrl(),
+  '{{SECOND_UNIT_HTML}}': secondUnitHTML(),
+  '{{PARTNERSHIPS_HTML}}': partnershipsHTML('insurance-partnerships', WA_LINK_PRICE),
   '{{EMAIL}}': site.email,
   '{{ADDRESS_FULL}}': site.address.full,
   '{{UNIT_NAME}}': site.unit_name,
@@ -657,6 +698,15 @@ function buildLandingPage(lp) {
   var lpWaSecondaryLink = lp.whatsapp_message_secondary
     ? waLink(lp.whatsapp_message_secondary)
     : (secondaryIsPrice ? lpWaPriceLink : lpWaLink);
+
+  // Local e horario proprios desta pagina (opcionais no JSON; sem eles vale o da unidade principal):
+  //   "location": { unit_name, full, maps_query, maps_place_id, note } -> exame feito em outro endereco
+  //   "hours":    { text, days_per_week, cta }                        -> exame com horario proprio
+  var lpLoc = lp.location && lp.location.full ? lp.location : null;
+  var lpHours = lp.hours || {};
+  var lpLocationNoteHTML = lpLoc && lpLoc.note
+    ? '<span class="lp-location-note">' + escapeHTML(lpLoc.note) + '</span>'
+    : '';
 
   var heroTrustHTML = (lp.hero.trust_badges || []).map(function (b) {
     return '<li>' + escapeHTML(b) + '</li>';
@@ -828,7 +878,12 @@ function buildLandingPage(lp) {
     '{{ADS_WHATSAPP_SEND_TO}}': ADS_WHATSAPP_SEND_TO,
     '{{GA4_ID}}': GA4_ID,
     '{{FOOTER_EXAMS_HTML}}': examLinksHTML(lp.slug),
-    '{{MAPS_URL}}': mapsUrl(),
+    '{{MAPS_URL}}': lpLoc ? mapsUrlFor(lpLoc) : mapsUrl(),
+    '{{MAPS_EMBED_URL}}': mapsEmbedUrl(lpLoc ? (lpLoc.maps_query || lpLoc.full) : null),
+    '{{LOCATION_NOTE_HTML}}': lpLocationNoteHTML,
+    '{{TRUST_DAYS}}': escapeHTML(String(lpHours.days_per_week || '7')),
+    '{{FINAL_CTA_TEXT}}': escapeHTML(lpHours.cta || 'Nossa equipe está disponível todos os dias das 7h às 22h para atender você.'),
+    '{{PARTNERSHIPS_HTML}}': partnershipsHTML('lp-insurance-partnerships', lpWaPriceLink),
     '{{HERO_CLASS}}': hasExamImg ? ' lp-hero--with-image' : '',
     '{{SLUG}}': lp.slug,
     '{{EXAM_NAME}}': lp.exam_name,
@@ -872,9 +927,9 @@ function buildLandingPage(lp) {
     '{{PHONE}}': site.phone,
     '{{WHATSAPP}}': site.whatsapp,
     '{{WHATSAPP_LINK}}': lpWaLink,
-    '{{ADDRESS_FULL}}': site.address.full,
-    '{{UNIT_NAME}}': site.unit_name,
-    '{{HOURS}}': site.hours,
+    '{{ADDRESS_FULL}}': lpLoc ? escapeHTML(lpLoc.full) : site.address.full,
+    '{{UNIT_NAME}}': lpLoc && lpLoc.unit_name ? escapeHTML(lpLoc.unit_name) : site.unit_name,
+    '{{HOURS}}': lpHours.text ? escapeHTML(lpHours.text) : site.hours,
     '{{TECHNICAL_DIRECTOR}}': site.technical_director,
     '{{LEGAL_NAME}}': site.legal_name,
     '{{RESULTS_URL}}': site.results_url,
