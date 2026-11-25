@@ -74,6 +74,15 @@
       } catch(e) {}
       return true;
     }
+
+    // Clique no telefone (link tel:): evento phone_click no GA4, com os mesmos parâmetros.
+    // Não conta como a conversão "Whatsapp" do Google Ads.
+    function trackPhoneClick(location){
+      try {
+        gtag('event', 'phone_click', { 'send_to': '{{GA4_ID}}', 'landing_page': '{{SLUG}}', 'location': location || 'unknown' });
+      } catch(e) {}
+      return true;
+    }
   </script>
 
   <!-- Inline CSS -->
@@ -320,7 +329,7 @@
         </div>
         <div class="lp-location-item">
           <div class="lp-location-icon">{{ICON_PHONE}}</div>
-          <p><a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('location')">{{PHONE}}</a></p>
+          <p><a href="{{PHONE_TEL}}" onclick="return trackPhoneClick('location')">{{PHONE}}</a></p>
         </div>
         <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('location_cta')" class="lp-btn lp-btn-whatsapp lp-btn-lg" style="margin-top:20px">
           {{ICON_WHATSAPP}} Agendar pelo WhatsApp
@@ -369,6 +378,7 @@
         {{FOOTER_EXAMS_HTML}} <a href="/blog/">Blog</a>
       </nav>
       <div class="lp-footer-bottom">
+        <p>Telefone: <a href="{{PHONE_TEL}}" onclick="return trackPhoneClick('footer')">{{PHONE}}</a></p>
         <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
         <p>{{LEGAL_NAME}}</p>
         <p>&copy; {{YEAR}} {{SITE_NAME}}. Todos os direitos reservados.</p>

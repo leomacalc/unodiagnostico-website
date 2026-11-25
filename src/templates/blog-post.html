@@ -63,6 +63,15 @@
       } catch(e) {}
       return true;
     }
+
+    // Clique no telefone (link tel:): evento phone_click no GA4, com os mesmos parâmetros.
+    // Não conta como a conversão "Whatsapp" do Google Ads.
+    function trackPhoneClick(location){
+      try {
+        gtag('event', 'phone_click', { 'send_to': '{{GA4_ID}}', 'landing_page': 'blog/{{POST_SLUG}}', 'location': location || 'unknown' });
+      } catch(e) {}
+      return true;
+    }
   </script>
 
   <style>
@@ -185,6 +194,7 @@
         {{FOOTER_EXAMS_HTML}}
       </nav>
       <div class="footer-bottom">
+        <p>Telefone: <a href="{{PHONE_TEL}}" onclick="return trackPhoneClick('footer')">{{PHONE}}</a></p>
         <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
         <p>{{LEGAL_NAME}}</p>
         <p>&copy; {{YEAR}} {{SITE_NAME}}. Todos os direitos reservados.</p>
