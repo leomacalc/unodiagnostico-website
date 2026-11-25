@@ -44,6 +44,117 @@ function loadLandingPages() {
 }
 const landingPages = loadLandingPages();
 
+// --- Preco particular "a partir de" ---
+// Fonte unica: public/produtos-chatgpt.csv, o feed de produtos dos anuncios no ChatGPT. Cada
+// produto aponta (coluna "url") para a pagina do exame; o "a partir de" de uma pagina e' o menor
+// preco entre os produtos disponiveis que apontam para ela. Mudou o preco no feed, mudou no site.
+// Sem feed, ou sem produto para a pagina, ela sai com "sob consulta".
+// Para fixar ou esconder em uma pagina: "price_from" no JSON da landing (numero = valor fixo;
+// false = nao mostrar).
+function parseCSV(text) {
+  var rows = [], row = [], field = '', inQuotes = false;
+  for (var i = 0; i < text.length; i++) {
+    var c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; } else { inQuotes = false; }
+      } else {
+        field += c;
+      }
+    } else if (c === '"') {
+      inQuotes = true;
+    } else if (c === ',') {
+      row.push(field); field = '';
+    } else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++;
+      row.push(field); field = '';
+      if (row.length > 1 || row[0] !== '') rows.push(row);
+      row = [];
+    } else {
+      field += c;
+    }
+  }
+  row.push(field);
+  if (row.length > 1 || row[0] !== '') rows.push(row);
+  return rows;
+}
+
+var PRICE_FEED = path.join(__dirname, 'public', 'produtos-chatgpt.csv');
+var priceFromBySlug = (function () {
+  var map = {};
+  if (!fs.existsSync(PRICE_FEED)) {
+    console.warn('  ! Feed de produtos ausente (public/produtos-chatgpt.csv) — paginas saem sem preco');
+    return map;
+  }
+  var rows = parseCSV(fs.readFileSync(PRICE_FEED, 'utf-8').replace(/^\uFEFF/, ''));
+  var head = rows.shift() || [];
+  var iUrl = head.indexOf('url'), iPrice = head.indexOf('price'), iAvail = head.indexOf('availability');
+  if (iUrl < 0 || iPrice < 0) {
+    console.warn('  ! Feed de produtos sem as colunas "url" e "price" — paginas saem sem preco');
+    return map;
+  }
+  rows.forEach(function (r) {
+    if (iAvail >= 0 && r[iAvail] && r[iAvail].trim() !== 'in_stock') return;
+    var price = /^(\d+(?:\.\d{1,2})?)\s*BRL$/.exec((r[iPrice] || '').trim());
+    var slug = /^https?:\/\/[^/]+\/([a-z0-9-]+)\/?$/.exec((r[iUrl] || '').trim());
+    if (!price || !slug) return;
+    var value = parseFloat(price[1]);
+    if (!(value > 0)) return;
+    if (!(slug[1] in map) || value < map[slug[1]]) map[slug[1]] = value;
+  });
+  return map;
+})();
+
+// 150 -> "R$ 150"; 1000 -> "R$ 1.000"; 99.9 -> "R$ 99,90" (espaco que nao quebra linha).
+function formatBRL(value) {
+  var cents = Math.round(value * 100);
+  var whole = String(Math.floor(cents / 100)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  var dec = cents % 100;
+  return 'R$\u00a0' + whole + (dec ? ',' + (dec < 10 ? '0' : '') + dec : '');
+}
+
+// Menor preco particular da pagina de exame (numero) ou null.
+function priceFromFor(lp) {
+  if (lp.price_from === false) return null;
+  if (typeof lp.price_from === 'number' && lp.price_from > 0) return lp.price_from;
+  return priceFromBySlug[lp.slug] || null;
+}
+
+// Texto que entra onde o JSON da landing escreve {{PRICE_FROM}}.
+function priceFromText(lp) {
+  var value = priceFromFor(lp);
+  return value ? 'a partir de ' + formatBRL(value) : 'sob consulta';
+}
+
+// Copia um objeto de dados trocando um marcador em todos os textos.
+function fillToken(node, token, value) {
+  if (typeof node === 'string') return node.split(token).join(value);
+  if (Array.isArray(node)) return node.map(function (item) { return fillToken(item, token, value); });
+  if (node && typeof node === 'object') {
+    var copy = {};
+    Object.keys(node).forEach(function (key) { copy[key] = fillToken(node[key], token, value); });
+    return copy;
+  }
+  return node;
+}
+
+// Lista de precos da home: onde a FAQ de data/site.json escreve {{PRICE_LIST}} entra
+// "raio-X R$ 110; mamografia R$ 150; ...", do menor para o maior. Sem nenhum preco
+// conhecido, a pergunta que usa a lista nao e' publicada.
+var priceListText = landingPages
+  .map(function (lp) { return { name: lcFirst(lp.exam_short || lp.exam_name), value: priceFromFor(lp) }; })
+  .filter(function (item) { return item.value; })
+  .sort(function (x, y) { return x.value - y.value || (x.name < y.name ? -1 : x.name > y.name ? 1 : 0); })
+  .map(function (item) { return item.name + ' ' + formatBRL(item.value); })
+  .join('; ');
+if (site.faq) {
+  site.faq = fillToken(
+    site.faq.filter(function (item) {
+      return priceListText || (item.question + ' ' + item.answer).indexOf('{{PRICE_LIST}}') < 0;
+    }),
+    '{{PRICE_LIST}}', priceListText);
+}
+
 // --- URL canonica do site ---
 // unodiagnostico.com (apex) e o host oficial. A Vercel redireciona www -> apex.
 // Toda URL absoluta do site (canonical, og:url, schema.org, sitemap) sai daqui,
@@ -264,10 +375,16 @@ function generateServicesHTML() {
     var landingLink = landingSlug
       ? '<a href="/' + landingSlug + '/" class="service-card-link" onclick="event.stopPropagation()">Saiba mais sobre ' + escapeHTML(lcFirst(lp.exam_short || lp.exam_name)) + ' &rarr;</a>'
       : '';
+    // Preco particular: so' para exame que tem pagina propria e produto no feed.
+    var priceFrom = lp ? priceFromFor(lp) : null;
+    var priceLine = priceFrom
+      ? '<p class="service-card-price">Particular a partir de <strong>' + formatBRL(priceFrom) + '</strong></p>'
+      : '';
     return '<div class="service-card" data-service="' + s.id + '" data-title="' + escapeHTML(s.name) + '" data-description="' + escapeHTML(s.description) + '" data-preparations=\'' + escapeHTML(JSON.stringify(s.preparations)) + '\'>' +
       '<div class="service-icon">' + (icons[s.icon] || '') + '</div>' +
       '<h3>' + s.name + '</h3>' +
       '<p>' + s.short_description + '</p>' +
+      priceLine +
       landingLink +
       '</div>';
   }).join('\n            ');
@@ -686,6 +803,14 @@ function copyDir(src, dest) {
 
 // --- Build Landing Pages ---
 function buildLandingPage(lp) {
+  // Preco particular: {{PRICE_FROM}} em qualquer texto do JSON vira "a partir de R$ X"
+  // (ou "sob consulta" quando o feed nao tem produto para esta pagina).
+  var lpPriceFrom = priceFromFor(lp);
+  if (!lpPriceFrom && lp.price_from !== false) {
+    console.warn('  ! Sem preco no feed para /' + lp.slug + '/ — a pagina sai com "sob consulta"');
+  }
+  lp = fillToken(lp, '{{PRICE_FROM}}', priceFromText(lp));
+
   // Mensagens de WhatsApp desta pagina (data/landing-pages/<slug>.json):
   //   whatsapp_message        -> botoes de agendar
   //   whatsapp_message_price  -> botoes de "consultar valor"
@@ -694,7 +819,7 @@ function buildLandingPage(lp) {
   var lpWaPriceLink = waLink(lp.whatsapp_message_price || ('Olá! Vim pelo site da Uno Diagnóstico e gostaria de saber o valor particular: ' + lp.exam_name + '.'));
   // O segundo botao do topo: mensagem propria (whatsapp_message_secondary) se houver;
   // senao, a de valor quando o texto do botao fala em valor/preco; senao, a de agendar.
-  var secondaryIsPrice = /valor|pre[cç]o|quanto/i.test(lp.hero.cta_secondary || '');
+  var secondaryIsPrice = /valor|pre[cç]o|quanto|particular|a partir de|sob consulta/i.test(lp.hero.cta_secondary || '');
   var lpWaSecondaryLink = lp.whatsapp_message_secondary
     ? waLink(lp.whatsapp_message_secondary)
     : (secondaryIsPrice ? lpWaPriceLink : lpWaLink);
@@ -772,7 +897,11 @@ function buildLandingPage(lp) {
       '</div>';
   });
   if (insurance.accepts_private) {
-    lpInsuranceHTML += '<a href="' + lpWaPriceLink + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'insurance\')" class="lp-insurance-private"><h3>' + escapeHTML(insurance.private_label) + '</h3><p>Consulte valores pelo WhatsApp</p></a>';
+    lpInsuranceHTML += '<a href="' + lpWaPriceLink + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'insurance\')" class="lp-insurance-private">' +
+      (lpPriceFrom
+        ? '<h3>Particular a partir de ' + formatBRL(lpPriceFrom) + '</h3><p>Consulte o valor do seu exame pelo WhatsApp</p>'
+        : '<h3>' + escapeHTML(insurance.private_label) + '</h3><p>Consulte valores pelo WhatsApp</p>') +
+      '</a>';
   }
 
   // Doctors (reuse — all)
@@ -1206,6 +1335,7 @@ console.log('  - ' + doctors.length + ' doctors');
 console.log('  - ' + blogPosts.length + ' blog posts');
 console.log('  - ' + insurance.partners.length + ' insurance partners');
 console.log('  - ' + (site.faq ? site.faq.length : 0) + ' FAQ items');
+console.log('  - precos "a partir de": ' + (priceListText ? priceListText.replace(/\u00a0/g, ' ') : 'nenhum (feed sem produtos)'));
 console.log('  - ' + reviews.reviews.length + ' reviews (Google ' + reviews.google_rating + ')');
 console.log('  - ' + landingPages.length + ' landing pages');
 console.log('  - ' + equipment.items.length + ' equipment items');

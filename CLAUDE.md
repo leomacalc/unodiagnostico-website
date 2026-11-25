@@ -40,6 +40,7 @@ O site é construído a partir de **arquivos JSON de dados** + **templates HTML*
 ├── public/                  # Arquivos estáticos (copiados direto para dist/)
 │   ├── fonts/               # Montserrat e Open Sans (woff2 variável) — ver "Fontes"
 │   ├── produtos-chatgpt.csv # Feed de produtos dos anúncios no ChatGPT (exames com preço e horário)
+│   │                        #   e fonte dos preços "a partir de" que o site mostra
 │   └── images/              # Imagens do site
 │       ├── gallery/         # Fotos do espaço
 │       ├── equipment/       # Fotos dos aparelhos (cards de Equipamentos)
@@ -140,6 +141,27 @@ Adicionar ao início do array em `data/blog-posts.json`:
 caracteres, sem partir palavra) e a caixa "Exames citados neste artigo", com link para as páginas
 de exame que o texto menciona (palavras-chave em `EXAM_KEYWORDS`, no `build.js`).
 
+### Preço particular "a partir de"
+O site mostra, por exame, o menor valor particular ("a partir de R$ X"). **O número não é escrito
+em nenhum JSON nem template:** o build lê `public/produtos-chatgpt.csv` (o feed dos anúncios no
+ChatGPT) e, para cada página de exame, usa o menor `price` entre os produtos `in_stock` cuja `url`
+aponta para ela. **Para mudar um preço, editar só o feed** e rodar o build.
+
+Onde aparece:
+- Páginas de exame: no texto do JSON, o marcador `{{PRICE_FROM}}` vira "a partir de R$ 350"
+  (ou "sob consulta", se o feed não tiver produto para a página). Hoje está no segundo botão do
+  topo (`hero.cta_secondary`: "Particular {{PRICE_FROM}}"), na pergunta de valor da FAQ e, na
+  ressonância, no primeiro selo do topo (lá o segundo botão é "Tirar dúvidas"). O cartão
+  "Particular" da seção de convênios recebe o preço sozinho.
+- Home: cada cartão de exame que tem página própria ganha a linha "Particular a partir de R$ X",
+  e a FAQ de `data/site.json` tem o marcador `{{PRICE_LIST}}` (a lista de todos os exames, do
+  menor para o maior). Sem nenhum preço no feed, a pergunta que usa a lista não é publicada.
+
+Ajustes por página, no JSON da landing: `"price_from": 280` fixa um valor; `"price_from": false`
+esconde o preço. O build lista os preços em uso no fim da saída e avisa quando uma página fica
+sem preço. Frase que leva o marcador precisa funcionar com as duas saídas ("Tomografia
+particular: {{PRICE_FROM}}." serve; "custa {{PRICE_FROM}}" não).
+
 ### Criar uma nova landing page de exame (campanha)
 As landing pages ficam em URLs tipo `unodiagnostico.com/<slug>` e são 100% geradas a partir de um único arquivo JSON em `data/landing-pages/`.
 
@@ -163,6 +185,8 @@ As landing pages ficam em URLs tipo `unodiagnostico.com/<slug>` e são 100% gera
    - `hours` (opcional): para exame com horário próprio. `text` (seção de localização),
      `days_per_week` (número da faixa de estatísticas; padrão 7) e `cta` (frase acima do botão
      final). Hoje só a mamografia usa.
+   - Preço: usar `{{PRICE_FROM}}` no texto e ter ao menos um produto do exame no feed com a `url`
+     da página (ver "Preço particular"). `price_from` (opcional) fixa ou esconde o valor.
 3. Rode `node build.js` — a landing é gerada em `dist/<slug>/index.html` automaticamente.
 4. A landing reutiliza automaticamente: reviews do Google (`reviews.json`), convênios (`insurance.json`), corpo clínico (`doctors.json`) e dados gerais (`site.json`).
 
@@ -226,8 +250,8 @@ Abre em http://localhost:3000
    `equipment.json`, FAQ e `seo` em `site.json`, slide do hero em `src/templates/index.html`,
    a landing em `data/landing-pages/` e os posts em `blog-posts.json` (que costumam ter um
    parágrafo institucional repetido citando a lista de exames). Vale também para mudança de
-   horário, preço ou endereço: o feed `public/produtos-chatgpt.csv` (anúncios no ChatGPT) repete
-   horário e exame em cada produto.
+   horário ou endereço: o feed `public/produtos-chatgpt.csv` (anúncios no ChatGPT) repete
+   horário e exame em cada produto. Preço é o contrário: mora só no feed, e o site lê de lá.
 10. **Não marcar `aggregateRating` no schema.org** com a nota do Google: avaliação própria de
     LocalBusiness vinda de terceiro não é elegível a rich result e pode gerar ação manual.
 11. **Valide SVG antes de publicar** (`python -c "import xml.dom.minidom as m; m.parse(arquivo)"`) —
@@ -239,7 +263,9 @@ Abre em http://localhost:3000
     1 a 3% entre a fonte de reserva e a final, e de aparelho para aparelho. Os selos do topo da
     home têm 40 px de folga no computador por isso (comentário no fim do bloco do hero, em
     `main.css`) — se mudar o texto deles ou acrescentar um selo, conferir que seguem em uma
-    linha só entre 1200 e 1920 px de largura.
+    linha só entre 1200 e 1920 px de largura. Nas páginas de exame, os dois botões do topo
+    ficam sempre um embaixo do outro (lado a lado, caber ou não dependia da fonte em tablet) e
+    o segundo botão encolhe abaixo de 360 px de tela para o texto com preço caber em uma linha.
 13. **Links entre páginas são automáticos:** rodapé de todas as páginas lista os exames
     (`examLinksHTML()`), e os cards da home apontam para a landing com texto "Saiba mais sobre <exame>".
     Landing nova entra sozinha no rodapé; o card da home só ganha o link se, em `services.json`,
@@ -264,6 +290,9 @@ Abre em http://localhost:3000
     - **Não faz endoscopia nem eletroneuromiografia.** Não citar esses exames em texto novo, para
       o site não aparecer nessas buscas.
     - A página de ditado de laudos (`/laudos.html`) e as funções `/api` saíram do site nessa data.
+    - **Preço no site (autorizado em 24/11/2026):** só o valor particular "a partir de" por
+      exame, tirado do feed. Tabela completa de valores e preço no schema.org (`offers`) não
+      foram autorizados.
 
 ---
 
