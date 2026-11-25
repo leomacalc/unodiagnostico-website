@@ -60,6 +60,9 @@ O site é construído a partir de **arquivos JSON de dados** + **templates HTML*
 
 ### Atualizar informações gerais (telefone, endereço, horário)
 Editar `data/site.json`. Campos que o build usa além dos óbvios:
+- `phone`: o número como aparece na página. O build monta a partir dele o link de ligação
+  (`tel:+55...`, marcador `{{PHONE_TEL}}`) e o telefone do schema.org, em formato internacional.
+  `phone_e164` (opcional) troca o número do link, se um dia o telefone de ligação for outro.
 - `whatsapp_message`: mensagem que já vem escrita quando a pessoa clica num botão de WhatsApp da home.
 - `whatsapp_messages`: `price` (botões de valor), `blog` (botões do blog) e `exam_prefix`
   (o botão "Agendar este Exame" do modal vira `exam_prefix` + nome do exame).
@@ -291,8 +294,9 @@ Abre em http://localhost:3000
       o site não aparecer nessas buscas.
     - A página de ditado de laudos (`/laudos.html`) e as funções `/api` saíram do site nessa data.
     - **Preço no site (autorizado em 24/11/2026):** só o valor particular "a partir de" por
-      exame, tirado do feed. Tabela completa de valores e preço no schema.org (`offers`) não
-      foram autorizados.
+      exame, tirado do feed. A tabela completa de valores foi proposta e recusada em
+      25/11/2026; preço no schema.org (`offers`) não foi autorizado.
+    - **O (85) 2181-6818 atende ligação** (confirmado em 25/11/2026), além de ser o WhatsApp.
 
 ---
 
@@ -321,6 +325,14 @@ Os IDs ficam em `data/site.json` > `tracking` e entram nos templates por `{{ADS_
 **Ao adicionar qualquer CTA novo de WhatsApp, incluir
 `onclick="return trackWhatsappClick('nome-do-lugar')"`** — senão o clique não é medido.
 (A página 404 é a única sem medição.)
+
+**Telefone:** todo link de ligação usa `href="{{PHONE_TEL}}"` e
+`onclick="return trackPhoneClick('nome-do-lugar')"`. O clique dispara o evento `phone_click` no
+GA4, com os mesmos `landing_page` e `location`; **não** dispara a conversão "Whatsapp" do Google
+Ads. Hoje o número é link de ligação no bloco de endereço (home e páginas de exame) e no rodapé
+de todas as páginas. Nas respostas da FAQ o build faz sozinho (`linkPhone()`): o número citado
+vira link de ligação, ou de WhatsApp quando a frase diz "WhatsApp" logo antes dele. Os botões
+verdes, inclusive o do topo das páginas de exame que mostra o número, continuam sendo WhatsApp.
 
 ## Fontes
 

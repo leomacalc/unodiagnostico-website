@@ -188,6 +188,28 @@ var GA4_ID = tracking.ga4_id || 'G-4T951CHR0E';
 function waLink(message) {
   return 'https://api.whatsapp.com/send?phone=' + site.whatsapp + '&text=' + encodeURIComponent(message);
 }
+
+// --- Telefone (ligacao) ---
+// site.phone e' o numero como aparece na pagina. O link de ligacao (tel:) e o schema.org usam o
+// formato internacional, montado a partir dele; "phone_e164" em data/site.json troca esse numero
+// se um dia o telefone de ligacao for outro.
+var PHONE_E164 = site.phone_e164 || ('+55' + String(site.phone || '').replace(/\D/g, ''));
+var PHONE_TEL_HREF = 'tel:' + PHONE_E164;
+
+// Torna clicavel o telefone citado em um texto ja' escapado (respostas da FAQ): vira ligacao,
+// ou conversa no WhatsApp quando a frase diz "WhatsApp" logo antes do numero.
+function linkPhone(html, waHref, place) {
+  var phone = escapeHTML(site.phone || '');
+  if (!phone || html.indexOf(phone) < 0) return html;
+  var parts = html.split(phone);
+  return parts.map(function (part, i) {
+    if (i === parts.length - 1) return part;
+    var link = /WhatsApp:?\s*$/.test(part)
+      ? '<a href="' + waHref + '" target="_blank" rel="noopener" onclick="return trackWhatsappClick(\'' + place + '\')">' + phone + '</a>'
+      : '<a href="' + PHONE_TEL_HREF + '" onclick="return trackPhoneClick(\'' + place + '\')">' + phone + '</a>';
+    return part + link;
+  }).join('');
+}
 var waMessages = site.whatsapp_messages || {};
 var WA_MSG_DEFAULT = site.whatsapp_message || 'Olá! Vim pelo site da Uno Diagnóstico e gostaria de mais informações.';
 var WA_MSG_PRICE = waMessages.price || 'Olá! Vim pelo site da Uno Diagnóstico e gostaria de consultar valores de exames.';
@@ -533,7 +555,7 @@ function generateFAQHTML() {
       '<h3>' + escapeHTML(item.question) + '</h3>' +
       '<span class="faq-toggle">+</span>' +
       '</div>' +
-      '<div class="faq-answer"><p>' + escapeHTML(item.answer) + '</p></div>' +
+      '<div class="faq-answer"><p>' + linkPhone(escapeHTML(item.answer), WA_LINK_DEFAULT, 'faq') + '</p></div>' +
       '</div>';
   }).join('\n        ');
 }
@@ -584,7 +606,7 @@ function generateSchemaOrg() {
     "name": site.name,
     "description": site.seo.description,
     "url": siteUrl(),
-    "telephone": site.phone,
+    "telephone": PHONE_E164,
     "email": site.email,
     "image": assetUrl('images/og-image.png'),
     "logo": assetUrl('images/logos/logo-verde.png'),
@@ -698,6 +720,7 @@ const replacements = {
   '{{SITE_TAGLINE}}': site.tagline,
   '{{SITE_DESCRIPTION_SHORT}}': site.description,
   '{{PHONE}}': site.phone,
+  '{{PHONE_TEL}}': PHONE_TEL_HREF,
   '{{WHATSAPP}}': site.whatsapp,
   '{{WHATSAPP_LINK_PRICE}}': WA_LINK_PRICE,
   '{{WHATSAPP_LINK_RM}}': waLink((landingPages.find(function (lp) { return lp.slug === 'ressonancia-magnetica'; }) || {}).whatsapp_message || WA_MSG_DEFAULT),
@@ -870,7 +893,7 @@ function buildLandingPage(lp) {
   var faqHTML = (lp.faq || []).map(function (item) {
     return '<details class="lp-faq-item">' +
       '<summary>' + escapeHTML(item.question) + '</summary>' +
-      '<div class="lp-faq-answer">' + escapeHTML(item.answer) + '</div>' +
+      '<div class="lp-faq-answer">' + linkPhone(escapeHTML(item.answer), lpWaLink, 'faq') + '</div>' +
       '</details>';
   }).join('\n        ');
 
@@ -943,7 +966,7 @@ function buildLandingPage(lp) {
       "@type": "MedicalClinic",
       "@id": CLINIC_ID,
       "name": site.name,
-      "telephone": site.phone,
+      "telephone": PHONE_E164,
       "url": siteUrl(),
       "address": {
         "@type": "PostalAddress",
@@ -1054,6 +1077,7 @@ function buildLandingPage(lp) {
     // Shared site values
     '{{SITE_NAME}}': site.name,
     '{{PHONE}}': site.phone,
+    '{{PHONE_TEL}}': PHONE_TEL_HREF,
     '{{WHATSAPP}}': site.whatsapp,
     '{{WHATSAPP_LINK}}': lpWaLink,
     '{{ADDRESS_FULL}}': lpLoc ? escapeHTML(lpLoc.full) : site.address.full,
@@ -1100,6 +1124,7 @@ var blogCommon = {
   '{{OG_IMAGE_URL}}': assetUrl('images/og-image.png'),
   '{{SITE_NAME}}': site.name,
   '{{PHONE}}': site.phone,
+  '{{PHONE_TEL}}': PHONE_TEL_HREF,
   '{{WHATSAPP}}': site.whatsapp,
   '{{WHATSAPP_LINK}}': WA_LINK_BLOG,
   '{{ADS_TAG_ID}}': ADS_TAG_ID,
