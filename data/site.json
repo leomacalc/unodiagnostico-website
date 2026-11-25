@@ -28,6 +28,11 @@
   "unit_name": "Unidade Maracanaú",
   "technical_director": "Dr. Leonardo Alcântara, CRM 10914/RQE 7848",
   "legal_name": "Uno - Clínica de Diagnósticos por Imagem LTDA",
+  "cnpj": "33.446.906/0001-93",
+  "privacy": {
+    "dpo_name": "Leonardo José Araújo Macêdo de Alcântara",
+    "dpo_email": "uno@unodiagnostico.com"
+  },
   "results_url": "https://uno.otimusclinic.com/uno/servlet/app.resultadodeexame?sdTjZIxAkYVpFL5AwTTQ8QwYtMA7qRj3B6bU5uP3P0Y=",
   "social": {
     "instagram": "https://instagram.com/unodiagnostico",

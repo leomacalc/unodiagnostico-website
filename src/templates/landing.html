@@ -56,13 +56,9 @@
 
   <!-- Google Ads + Analytics (gtag.js carrega uma vez e serve aos dois) -->
   <!-- IDs em data/site.json > "tracking". {{ADS_TAG_ID}} é o ID de conversão da conta, não o número da conta. -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ADS_TAG_ID}}"></script>
+  <!-- As etiquetas só carregam depois do "Aceitar" no aviso de cookies: o trecho abaixo vem de src/js/consent.js. -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '{{ADS_TAG_ID}}');
-    gtag('config', '{{GA4_ID}}');
+{{CONSENT_BOOTSTRAP}}
 
     // Clique em qualquer botão de WhatsApp:
     //  1) evento whatsapp_click no GA4 ('location' = qual botão; 'landing_page' = qual página);
@@ -91,6 +87,7 @@
   </style>
 </head>
 <body data-whatsapp="{{WHATSAPP}}">
+{{COOKIE_BANNER}}
 
   <!-- ========== HEADER (minimal, conversion-focused) ========== -->
   <header class="lp-header">
@@ -381,6 +378,7 @@
         <p>Telefone: <a href="{{PHONE_TEL}}" onclick="return trackPhoneClick('footer')">{{PHONE}}</a></p>
         <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
         <p>{{LEGAL_NAME}}</p>
+        <p><a href="{{PRIVACY_URL}}">Política de Privacidade</a> · <button type="button" class="cc-open" onclick="unoConsent.ask()">Cookies</button></p>
         <p>&copy; {{YEAR}} {{SITE_NAME}}. Todos os direitos reservados.</p>
       </div>
     </div>

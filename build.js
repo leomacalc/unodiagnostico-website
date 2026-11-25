@@ -33,6 +33,12 @@ const blogIndexTemplate = fs.readFileSync(path.join(__dirname, 'src', 'templates
 const css = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'main.css'), 'utf-8');
 const landingCss = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'landing.css'), 'utf-8');
 const js = fs.readFileSync(path.join(__dirname, 'src', 'js', 'main.js'), 'utf-8');
+// Aviso de cookies e paginas institucionais (ver "Aviso de cookies e privacidade" no CLAUDE.md)
+const consentJs = fs.readFileSync(path.join(__dirname, 'src', 'js', 'consent.js'), 'utf-8');
+const consentCss = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'consent.css'), 'utf-8');
+const cookieBannerTemplate = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'cookie-banner.html'), 'utf-8');
+const legalTemplate = fs.readFileSync(path.join(__dirname, 'src', 'templates', 'legal.html'), 'utf-8');
+const legalCss = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'legal.css'), 'utf-8');
 
 // --- Load Landing Pages Data ---
 function loadLandingPages() {
@@ -180,6 +186,15 @@ var tracking = site.tracking || {};
 var ADS_TAG_ID = tracking.google_ads_tag_id || 'AW-715533760';
 var ADS_WHATSAPP_SEND_TO = tracking.google_ads_whatsapp_send_to || 'AW-715533760/KKyuCPnntfcCEMDbmNUC';
 var GA4_ID = tracking.ga4_id || 'G-4T951CHR0E';
+
+// --- Aviso de cookies (consentimento) e politica de privacidade ---
+// As etiquetas do Google so' carregam depois do "Aceitar" (src/js/consent.js). O trecho do <head>,
+// o aviso e o CSS dele tem fonte unica e entram em todos os templates pelos marcadores
+// {{CONSENT_BOOTSTRAP}} e {{COOKIE_BANNER}}; o CSS e' anexado ao {{CSS}} / {{LANDING_CSS}}.
+var PRIVACY_PATH = 'politica-de-privacidade';
+var PRIVACY_URL = '/' + PRIVACY_PATH + '/';
+var CONSENT_BOOTSTRAP = consentJs.split('{{ADS_TAG_ID}}').join(ADS_TAG_ID).split('{{GA4_ID}}').join(GA4_ID).replace(/\s+$/, '');
+var COOKIE_BANNER_HTML = cookieBannerTemplate.split('{{PRIVACY_URL}}').join(PRIVACY_URL).replace(/\s+$/, '');
 
 // --- Links de WhatsApp com mensagem pre-preenchida ---
 // Cada pagina abre a conversa ja' dizendo de onde a pessoa veio e o que quer
@@ -727,6 +742,9 @@ const replacements = {
   '{{WHATSAPP_LINK}}': WA_LINK_DEFAULT,
   '{{WHATSAPP_EXAM_PREFIX}}': escapeHTML(WA_MSG_EXAM_PREFIX),
   '{{ADS_TAG_ID}}': ADS_TAG_ID,
+  '{{CONSENT_BOOTSTRAP}}': CONSENT_BOOTSTRAP,
+  '{{COOKIE_BANNER}}': COOKIE_BANNER_HTML,
+  '{{PRIVACY_URL}}': PRIVACY_URL,
   '{{ADS_WHATSAPP_SEND_TO}}': ADS_WHATSAPP_SEND_TO,
   '{{GA4_ID}}': GA4_ID,
   '{{FOOTER_EXAMS_HTML}}': examLinksHTML(null),
@@ -761,7 +779,7 @@ const replacements = {
   '{{STATS_YEARS}}': site.stats ? site.stats.years : '5+',
   '{{STATS_EXAMS}}': site.stats ? site.stats.exams : '50mil+',
   '{{STATS_EQUIPMENT}}': site.stats ? site.stats.equipment : '6+',
-  '{{CSS}}': css,
+  '{{CSS}}': css + '\n' + consentCss,
   '{{JS}}': js,
   '{{ICON_INSTAGRAM}}': icons.instagram,
   '{{ICON_FACEBOOK}}': icons.facebook,
@@ -1027,6 +1045,9 @@ function buildLandingPage(lp) {
     '{{WHATSAPP_LINK_PRICE}}': lpWaPriceLink,
     '{{WHATSAPP_LINK_SECONDARY}}': lpWaSecondaryLink,
     '{{ADS_TAG_ID}}': ADS_TAG_ID,
+    '{{CONSENT_BOOTSTRAP}}': CONSENT_BOOTSTRAP,
+    '{{COOKIE_BANNER}}': COOKIE_BANNER_HTML,
+    '{{PRIVACY_URL}}': PRIVACY_URL,
     '{{ADS_WHATSAPP_SEND_TO}}': ADS_WHATSAPP_SEND_TO,
     '{{GA4_ID}}': GA4_ID,
     '{{FOOTER_EXAMS_HTML}}': examLinksHTML(lp.slug),
@@ -1073,7 +1094,7 @@ function buildLandingPage(lp) {
     '{{SCHEMA_MEDICAL}}': schemaMedical,
     '{{SCHEMA_FAQ}}': schemaFAQ,
     '{{SCHEMA_BREADCRUMB}}': schemaBreadcrumb,
-    '{{LANDING_CSS}}': landingCss,
+    '{{LANDING_CSS}}': landingCss + '\n' + consentCss,
     // Shared site values
     '{{SITE_NAME}}': site.name,
     '{{PHONE}}': site.phone,
@@ -1119,7 +1140,7 @@ landingPages.forEach(function (lp) {
 
 // --- Build Blog (indice + uma pagina por post) ---
 var blogCommon = {
-  '{{CSS}}': css,
+  '{{CSS}}': css + '\n' + consentCss,
   '{{SITE_URL}}': SITE_URL,
   '{{OG_IMAGE_URL}}': assetUrl('images/og-image.png'),
   '{{SITE_NAME}}': site.name,
@@ -1128,6 +1149,9 @@ var blogCommon = {
   '{{WHATSAPP}}': site.whatsapp,
   '{{WHATSAPP_LINK}}': WA_LINK_BLOG,
   '{{ADS_TAG_ID}}': ADS_TAG_ID,
+  '{{CONSENT_BOOTSTRAP}}': CONSENT_BOOTSTRAP,
+  '{{COOKIE_BANNER}}': COOKIE_BANNER_HTML,
+  '{{PRIVACY_URL}}': PRIVACY_URL,
   '{{ADS_WHATSAPP_SEND_TO}}': ADS_WHATSAPP_SEND_TO,
   '{{GA4_ID}}': GA4_ID,
   '{{FOOTER_EXAMS_HTML}}': examLinksHTML(null),
@@ -1306,6 +1330,107 @@ console.log('  + /blog/ (' + Math.round(blogIndexSize / 1024) + ' KB, ' + blogPo
 blogPosts.forEach(function (post, i) { buildBlogPost(post, i); });
 console.log('  + ' + blogPosts.length + ' paginas de post em /blog/<slug>/');
 
+// --- Politica de Privacidade (data/privacy.json -> /politica-de-privacidade/) ---
+// Cada secao tem "id", "heading" e "blocks". Blocos aceitos:
+//   { "p": "texto" } | { "ul": ["item", ...] } | { "table": { "head": [...], "rows": [[...], ...] } }
+// No texto: **negrito** e `codigo`; e-mail vira link, e o telefone da clinica tambem (linkPhone).
+// Marcadores preenchidos com data/site.json: {{LEGAL_NAME}} {{CNPJ}} {{ADDRESS_FULL}} {{DPO_NAME}}
+// {{DPO_EMAIL}} {{PHONE}} e {{GA4_COOKIE}} (nome do cookie de sessao do Analytics, tirado do ID).
+var privacy = loadJSON('privacy.json');
+
+function legalInline(text) {
+  var html = escapeHTML(text)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/[A-Za-z0-9._-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+/g, function (m) {
+      return '<a href="mailto:' + m + '">' + m + '</a>';
+    });
+  return linkPhone(html, WA_LINK_DEFAULT, 'texto');
+}
+
+function legalBlockHTML(block) {
+  if (block.p) return '<p>' + legalInline(block.p) + '</p>';
+  if (block.ul) {
+    return '<ul>\n' + block.ul.map(function (item) {
+      return '            <li>' + legalInline(item) + '</li>';
+    }).join('\n') + '\n          </ul>';
+  }
+  if (block.table) {
+    var head = block.table.head;
+    return '<table class="legal-table">\n            <thead><tr>' +
+      head.map(function (h) { return '<th scope="col">' + escapeHTML(h) + '</th>'; }).join('') +
+      '</tr></thead>\n            <tbody>\n' +
+      block.table.rows.map(function (row) {
+        return '              <tr>' + row.map(function (cell, i) {
+          return '<td data-label="' + escapeHTML(head[i] || '') + '">' + legalInline(cell) + '</td>';
+        }).join('') + '</tr>';
+      }).join('\n') + '\n            </tbody>\n          </table>';
+  }
+  throw new Error('Bloco desconhecido em data/privacy.json: ' + JSON.stringify(block).slice(0, 80));
+}
+
+function buildPrivacyPage() {
+  var dpo = site.privacy || {};
+  if (!site.cnpj || !dpo.dpo_name) {
+    console.warn('  ! data/site.json sem "cnpj" ou "privacy.dpo_name": a politica sai com campo vazio');
+  }
+  var page = privacy;
+  [
+    ['{{LEGAL_NAME}}', site.legal_name],
+    ['{{CNPJ}}', site.cnpj || ''],
+    ['{{ADDRESS_FULL}}', site.address.full],
+    ['{{DPO_NAME}}', dpo.dpo_name || ''],
+    ['{{DPO_EMAIL}}', dpo.dpo_email || site.email],
+    ['{{PHONE}}', site.phone],
+    ['{{GA4_COOKIE}}', '_ga_' + GA4_ID.replace(/^G-/, '')]
+  ].forEach(function (pair) { page = fillToken(page, pair[0], pair[1]); });
+
+  var content = page.sections.map(function (section) {
+    return '<h2 id="' + section.id + '">' + escapeHTML(section.heading) + '</h2>\n          ' +
+      section.blocks.map(legalBlockHTML).join('\n          ');
+  }).join('\n\n          ');
+
+  var schemaPage = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": page.title,
+    "description": page.seo.description,
+    "url": siteUrl(PRIVACY_PATH),
+    "inLanguage": "pt-BR",
+    "dateModified": page.updated,
+    "publisher": { "@type": "MedicalClinic", "@id": CLINIC_ID, "name": site.name, "url": siteUrl() }
+  }, null, 2);
+
+  var schemaBreadcrumb = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": siteUrl() },
+      { "@type": "ListItem", "position": 2, "name": page.title, "item": siteUrl(PRIVACY_PATH) }
+    ]
+  }, null, 2);
+
+  var map = Object.assign({}, blogCommon, {
+    '{{CSS}}': css + '\n' + consentCss + '\n' + legalCss,
+    '{{PAGE_SEO_TITLE}}': escapeHTML(page.seo.title),
+    '{{PAGE_SEO_DESCRIPTION}}': escapeHTML(page.seo.description),
+    '{{CANONICAL_URL}}': siteUrl(PRIVACY_PATH),
+    '{{PAGE_SLUG}}': PRIVACY_PATH,
+    '{{PAGE_TITLE}}': escapeHTML(page.title),
+    '{{PAGE_LEAD}}': escapeHTML(page.lead),
+    '{{PAGE_UPDATED_ISO}}': page.updated,
+    '{{PAGE_UPDATED}}': formatDate(page.updated),
+    '{{PAGE_CONTENT}}': content,
+    '{{SCHEMA_PAGE}}': schemaPage,
+    '{{SCHEMA_BREADCRUMB}}': schemaBreadcrumb
+  });
+
+  return writePage(PRIVACY_PATH, applyTemplate(legalTemplate, map));
+}
+
+var privacySize = buildPrivacyPage();
+console.log('  + /' + PRIVACY_PATH + '/ (' + Math.round(privacySize / 1024) + ' KB, atualizada em ' + privacy.updated + ')');
+
 // --- Gerar sitemap.xml ---
 function generateSitemap() {
   var today = new Date().toISOString().split('T')[0];
@@ -1323,6 +1448,7 @@ function generateSitemap() {
   blogPosts.forEach(function (p) {
     urls.push({ loc: siteUrl(postPath(p)), priority: '0.6', changefreq: 'yearly', lastmod: p.date });
   });
+  urls.push({ loc: siteUrl(PRIVACY_PATH), priority: '0.3', changefreq: 'yearly', lastmod: privacy.updated });
   var xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
   urls.forEach(function (u) {
@@ -1343,7 +1469,7 @@ function generateRobots() {
 
 fs.writeFileSync(path.join(distDir, 'sitemap.xml'), generateSitemap());
 fs.writeFileSync(path.join(distDir, 'robots.txt'), generateRobots());
-console.log('  + sitemap.xml (' + (2 + landingPages.length + blogPosts.length) + ' URLs)');
+console.log('  + sitemap.xml (' + (3 + landingPages.length + blogPosts.length) + ' URLs)');
 console.log('  + robots.txt');
 
 var html404 = template404

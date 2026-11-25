@@ -1,0 +1,9 @@
+  <!-- Aviso de cookies. Fonte única: src/templates/cookie-banner.html (o build injeta em todas as páginas).
+       Só aparece quando não há escolha guardada: ver src/js/consent.js e src/styles/consent.css. -->
+  <div id="cc-banner" class="cc-banner" role="region" aria-label="Aviso de cookies" tabindex="-1">
+    <p class="cc-text"><strong>Podemos usar cookies de medição?</strong> Eles mostram quais páginas ajudam e se os nossos anúncios funcionam. Se você recusar, o site funciona do mesmo jeito. <a href="{{PRIVACY_URL}}">Política de Privacidade</a></p>
+    <div class="cc-actions">
+      <button type="button" class="cc-btn" onclick="unoConsent.refuse()">Recusar</button>
+      <button type="button" class="cc-btn" onclick="unoConsent.accept()">Aceitar</button>
+    </div>
+  </div>
