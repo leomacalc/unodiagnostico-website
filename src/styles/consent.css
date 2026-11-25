@@ -1,0 +1,67 @@
+/* ============================================================================================
+   Aviso de cookies. Fonte única: o build anexa este arquivo ao CSS de todas as páginas.
+   O aviso já vem no HTML e só aparece quando o <html> tem a classe "cc-ask" (posta pelo script
+   do <head> quando ainda não há escolha guardada). É fixo na tela: não empurra o conteúdo.
+   "Aceitar" e "Recusar" usam a mesma classe de propósito: os dois têm o mesmo destaque.
+   ============================================================================================ */
+.cc-banner,
+.cc-banner * { box-sizing: border-box; }
+.cc-banner {
+  display: none;
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 1001;
+  width: calc(100% - 32px);
+  max-width: 440px;
+  padding: 16px 18px;
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  font-family: 'Open Sans', 'Open Sans Fallback Roboto', 'Open Sans Fallback Arial', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  text-align: left;
+}
+.cc-ask .cc-banner { display: block; }
+.cc-banner:focus { outline: 2px solid #005a87; outline-offset: 2px; }
+.cc-text { margin: 0 0 12px; color: #333333; }
+.cc-text strong { display: block; margin-bottom: 4px; color: #003f5f; font-size: 0.95rem; }
+.cc-text a { color: #005a87; font-weight: 600; text-decoration: underline; white-space: nowrap; }
+.cc-actions { display: flex; gap: 10px; }
+.cc-btn {
+  flex: 1 1 0;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 2px solid #005a87;
+  border-radius: 8px;
+  background: #005a87;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cc-btn:hover,
+.cc-btn:focus-visible { background: #003f5f; border-color: #003f5f; }
+
+/* No celular o aviso fica acima da barra fixa de WhatsApp, que continua visível. */
+@media (max-width: 768px) {
+  .cc-banner { left: 8px; bottom: 84px; width: calc(100% - 16px); max-width: none; padding: 12px 14px; }
+  .cc-text { margin-bottom: 10px; }
+  .cc-text strong { display: inline; margin: 0; font-size: inherit; }
+}
+
+/* Link "Cookies" do rodapé: é um botão (funciona no teclado) com cara de link. */
+.cc-open {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #abce5f;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
