@@ -50,6 +50,23 @@ function loadLandingPages() {
 }
 const landingPages = loadLandingPages();
 
+// --- Subpaginas de exame ---
+// "parent" no JSON da landing aponta para o slug da pagina-mae (ex.: ultrassom-abdome-total ->
+// ultrassonografia). A subpagina herda icone e foto da mae, entra logo depois dela no rodape,
+// ganha a linha "Veja tambem" e fica fora da lista de precos da home.
+function parentOf(lp) {
+  if (!lp || !lp.parent || lp.parent === lp.slug) return null;
+  return landingPages.find(function (p) { return p.slug === lp.parent; }) || null;
+}
+function childrenOf(lp) {
+  return landingPages.filter(function (p) { return p.parent === lp.slug && p.slug !== lp.slug; });
+}
+landingPages.forEach(function (lp) {
+  if (lp.parent && !parentOf(lp)) {
+    console.warn('  ! /' + lp.slug + '/: "parent" aponta para pagina inexistente (' + lp.parent + ')');
+  }
+});
+
 // --- Preco particular "a partir de" ---
 // Fonte unica: public/produtos-chatgpt.csv, o feed de produtos dos anuncios no ChatGPT. Cada
 // produto aponta (coluna "url") para a pagina do exame; o "a partir de" de uma pagina e' o menor
@@ -57,6 +74,8 @@ const landingPages = loadLandingPages();
 // Sem feed, ou sem produto para a pagina, ela sai com "sob consulta".
 // Para fixar ou esconder em uma pagina: "price_from" no JSON da landing (numero = valor fixo;
 // false = nao mostrar).
+// Pagina que nao e' o destino da "url" de nenhum produto (subpaginas): "price_items" no JSON da
+// landing lista os "item_id" do feed que pertencem a ela; vale o menor preco entre eles.
 function parseCSV(text) {
   var rows = [], row = [], field = '', inQuotes = false;
   for (var i = 0; i < text.length; i++) {
@@ -86,18 +105,20 @@ function parseCSV(text) {
 }
 
 var PRICE_FEED = path.join(__dirname, 'public', 'produtos-chatgpt.csv');
-var priceFromBySlug = (function () {
-  var map = {};
+// Produtos disponiveis do feed: { id (item_id), slug (pagina de destino da "url"), price }.
+var feedProducts = (function () {
+  var list = [];
   if (!fs.existsSync(PRICE_FEED)) {
     console.warn('  ! Feed de produtos ausente (public/produtos-chatgpt.csv) — paginas saem sem preco');
-    return map;
+    return list;
   }
   var rows = parseCSV(fs.readFileSync(PRICE_FEED, 'utf-8').replace(/^\uFEFF/, ''));
   var head = rows.shift() || [];
   var iUrl = head.indexOf('url'), iPrice = head.indexOf('price'), iAvail = head.indexOf('availability');
+  var iId = head.indexOf('item_id');
   if (iUrl < 0 || iPrice < 0) {
     console.warn('  ! Feed de produtos sem as colunas "url" e "price" — paginas saem sem preco');
-    return map;
+    return list;
   }
   rows.forEach(function (r) {
     if (iAvail >= 0 && r[iAvail] && r[iAvail].trim() !== 'in_stock') return;
@@ -106,10 +127,24 @@ var priceFromBySlug = (function () {
     if (!price || !slug) return;
     var value = parseFloat(price[1]);
     if (!(value > 0)) return;
-    if (!(slug[1] in map) || value < map[slug[1]]) map[slug[1]] = value;
+    list.push({ id: iId >= 0 ? (r[iId] || '').trim() : '', slug: slug[1], price: value });
   });
-  return map;
+  return list;
 })();
+var priceFromBySlug = {};
+var priceByItemId = {};
+feedProducts.forEach(function (p) {
+  if (!(p.slug in priceFromBySlug) || p.price < priceFromBySlug[p.slug]) priceFromBySlug[p.slug] = p.price;
+  if (p.id) priceByItemId[p.id] = p.price;
+});
+landingPages.forEach(function (lp) {
+  if (!Array.isArray(lp.price_items) || !feedProducts.length) return;
+  lp.price_items.forEach(function (id) {
+    if (!(id in priceByItemId)) {
+      console.warn('  ! /' + lp.slug + '/: produto "' + id + '" (price_items) nao esta disponivel no feed');
+    }
+  });
+});
 
 // 150 -> "R$ 150"; 1000 -> "R$ 1.000"; 99.9 -> "R$ 99,90" (espaco que nao quebra linha).
 function formatBRL(value) {
@@ -123,6 +158,12 @@ function formatBRL(value) {
 function priceFromFor(lp) {
   if (lp.price_from === false) return null;
   if (typeof lp.price_from === 'number' && lp.price_from > 0) return lp.price_from;
+  if (Array.isArray(lp.price_items)) {
+    var values = lp.price_items
+      .map(function (id) { return priceByItemId[id]; })
+      .filter(function (value) { return value > 0; });
+    return values.length ? Math.min.apply(null, values) : null;
+  }
   return priceFromBySlug[lp.slug] || null;
 }
 
@@ -146,8 +187,10 @@ function fillToken(node, token, value) {
 
 // Lista de precos da home: onde a FAQ de data/site.json escreve {{PRICE_LIST}} entra
 // "raio-X R$ 110; mamografia R$ 150; ...", do menor para o maior. Sem nenhum preco
-// conhecido, a pergunta que usa a lista nao e' publicada.
+// conhecido, a pergunta que usa a lista nao e' publicada. Subpaginas ficam fora: a lista
+// e' de um valor por exame, e o da subpagina ja esta dentro do "a partir de" da pagina-mae.
 var priceListText = landingPages
+  .filter(function (lp) { return !parentOf(lp); })
   .map(function (lp) { return { name: lcFirst(lp.exam_short || lp.exam_name), value: priceFromFor(lp) }; })
   .filter(function (item) { return item.value; })
   .sort(function (x, y) { return x.value - y.value || (x.name < y.name ? -1 : x.name > y.name ? 1 : 0); })
@@ -380,16 +423,23 @@ function pictureTag(srcPng, alt, extraAttrs) {
 
 // --- Links internos: exames que tem pagina propria ---
 // Ordem = a dos cards da home (services.json); landings sem card correspondente vao no fim.
+// Subpagina ("parent") entra logo depois da pagina-mae.
 function landingForService(s) {
   return landingPages.find(function (lp) { return lp.slug === s.id || lp.exam_name === s.name; }) || null;
 }
 var examPages = (function () {
   var list = [];
+  function add(lp) {
+    if (list.indexOf(lp) !== -1) return;
+    list.push(lp);
+    childrenOf(lp).forEach(add);
+  }
   services.forEach(function (s) {
     var lp = landingForService(s);
-    if (lp && list.indexOf(lp) === -1) list.push(lp);
+    if (lp && !parentOf(lp)) add(lp);
   });
-  landingPages.forEach(function (lp) { if (list.indexOf(lp) === -1) list.push(lp); });
+  landingPages.forEach(function (lp) { if (!parentOf(lp)) add(lp); });
+  landingPages.forEach(add);
   return list;
 })();
 
@@ -874,6 +924,13 @@ function buildLandingPage(lp) {
     ? '<span class="lp-location-note">' + escapeHTML(lpLoc.note) + '</span>'
     : '';
 
+  // Botao fixo do celular: "Agendar <exame> pelo WhatsApp". Nome comprido nao cabe em tela de
+  // 360 px; nesse caso o JSON da landing traz um texto mais curto em "sticky_cta".
+  var stickyCta = lp.sticky_cta || ('Agendar ' + (lp.exam_short || lp.exam_name) + ' pelo WhatsApp');
+  if (stickyCta.length > 38) {
+    console.warn('  ! /' + lp.slug + '/: botao fixo do celular com ' + stickyCta.length + ' caracteres ("' + stickyCta + '") — acima de 38 nao cabe em tela de 360 px; use "sticky_cta"');
+  }
+
   var heroTrustHTML = (lp.hero.trust_badges || []).map(function (b) {
     return '<li>' + escapeHTML(b) + '</li>';
   }).join('');
@@ -882,12 +939,32 @@ function buildLandingPage(lp) {
     return '<p>' + escapeHTML(p) + '</p>';
   }).join('');
 
+  // Cartao com "page" (slug de outra landing) ganha link para a pagina propria daquele exame.
   var indicationsHTML = (lp.indications.items || []).map(function (item) {
+    var target = item.page ? landingPages.find(function (p) { return p.slug === item.page; }) : null;
+    if (item.page && !target) {
+      console.warn('  ! /' + lp.slug + '/: o cartao "' + item.title + '" aponta para pagina inexistente (' + item.page + ')');
+    }
+    var cardLinkHTML = target
+      ? '<a href="/' + target.slug + '/" class="lp-card-link">Saiba mais sobre ' + escapeHTML(lcFirst(target.exam_short || target.exam_name)) + '&nbsp;&rarr;</a>'
+      : '';
     return '<div class="lp-indication-card">' +
       '<h3>' + escapeHTML(item.title) + '</h3>' +
       '<p>' + escapeHTML(item.text) + '</p>' +
+      cardLinkHTML +
       '</div>';
   }).join('\n        ');
+
+  // Subpagina: linha "Veja tambem" com a pagina-mae e as irmas (links no meio do texto).
+  var lpParent = parentOf(lp);
+  var relatedExamsHTML = '';
+  if (lpParent) {
+    relatedExamsHTML = '<p class="lp-related">Veja também: ' +
+      [lpParent].concat(childrenOf(lpParent).filter(function (p) { return p.slug !== lp.slug; }))
+        .map(function (p) { return '<a href="/' + p.slug + '/">' + escapeHTML(p.exam_name) + '</a>'; })
+        .join(' · ') +
+      '</p>';
+  }
 
   var differentialsHTML = (lp.differentials.items || []).map(function (item) {
     return '<div class="lp-differential-card">' +
@@ -961,9 +1038,10 @@ function buildLandingPage(lp) {
       '</div></div>';
   }).join('\n        ');
 
-  // Exam icon — reuse services.json icon mapping
+  // Exam icon — reuse services.json icon mapping (subpagina usa o icone da pagina-mae)
   var examIcon = '';
-  var matchedService = services.find(function (s) { return s.id === lp.slug || s.name === lp.exam_name; });
+  var iconOwner = lpParent || lp;
+  var matchedService = services.find(function (s) { return s.id === iconOwner.slug || s.name === iconOwner.exam_name; });
   if (matchedService && icons[matchedService.icon]) {
     examIcon = icons[matchedService.icon].replace('width="28" height="28"', 'width="56" height="56"');
   } else {
@@ -1013,20 +1091,32 @@ function buildLandingPage(lp) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Início", "item": siteUrl() },
-      { "@type": "ListItem", "position": 2, "name": "Exames", "item": SITE_URL + '/#exames' },
-      { "@type": "ListItem", "position": 3, "name": lp.exam_name, "item": siteUrl(lp.slug) }
-    ]
+      { "name": "Início", "item": siteUrl() },
+      { "name": "Exames", "item": SITE_URL + '/#exames' }
+    ].concat(lpParent ? [{ "name": lpParent.exam_name, "item": siteUrl(lpParent.slug) }] : [])
+      .concat([{ "name": lp.exam_name, "item": siteUrl(lp.slug) }])
+      .map(function (crumb, i) {
+        return { "@type": "ListItem", "position": i + 1, "name": crumb.name, "item": crumb.item };
+      })
   }, null, 2);
 
   // Foto do exame: public/images/exames/<slug>.jpg (destaque) e <slug>-og.jpg (1200x630, compartilhamento)
+  // Subpagina sem foto propria usa a da pagina-mae (e o texto alternativo descreve a foto da mae).
   var examImgRel = 'images/exames/' + lp.slug + '.jpg';
   var examOgRel = 'images/exames/' + lp.slug + '-og.jpg';
+  var examImgAlt = lp.exam_name;
+  if (lpParent && !fs.existsSync(path.join(__dirname, 'public', examImgRel))) {
+    examImgRel = 'images/exames/' + lpParent.slug + '.jpg';
+    examImgAlt = lpParent.exam_name;
+  }
+  if (lpParent && !fs.existsSync(path.join(__dirname, 'public', examOgRel))) {
+    examOgRel = 'images/exames/' + lpParent.slug + '-og.jpg';
+  }
   var hasExamImg = fs.existsSync(path.join(__dirname, 'public', examImgRel));
   var hasExamOg = fs.existsSync(path.join(__dirname, 'public', examOgRel));
   // width/height (lidos do arquivo) reservam o espaco da foto antes de ela carregar: sem salto de layout.
   var heroImageHTML = hasExamImg
-    ? '<figure class="lp-hero-image">' + pictureTag('/' + examImgRel, escapeHTML(lp.exam_name) + ' na Uno Diagnóstico em Maracanaú/CE', 'fetchpriority="high" decoding="async"') + '</figure>'
+    ? '<figure class="lp-hero-image">' + pictureTag('/' + examImgRel, escapeHTML(examImgAlt) + ' na Uno Diagnóstico em Maracanaú/CE', 'fetchpriority="high" decoding="async"') + '</figure>'
     : '';
 
   // Titulo principal (h1). Quando o titulo nao cita a cidade, o selo ("Exame em Maracanau")
@@ -1042,6 +1132,7 @@ function buildLandingPage(lp) {
     '{{HERO_IMAGE_HTML}}': heroImageHTML,
     '{{HERO_HEADING_HTML}}': heroHeadingHTML,
     '{{EXAM_SHORT_LC}}': examLc,
+    '{{STICKY_CTA}}': escapeHTML(stickyCta),
     '{{WHATSAPP_LINK_PRICE}}': lpWaPriceLink,
     '{{WHATSAPP_LINK_SECONDARY}}': lpWaSecondaryLink,
     '{{ADS_TAG_ID}}': ADS_TAG_ID,
@@ -1079,6 +1170,7 @@ function buildLandingPage(lp) {
     '{{INDICATIONS_TITLE}}': lp.indications.title,
     '{{INDICATIONS_SUBTITLE}}': lp.indications.subtitle || '',
     '{{INDICATIONS_HTML}}': indicationsHTML,
+    '{{RELATED_EXAMS_HTML}}': relatedExamsHTML,
     '{{DIFFERENTIALS_TITLE}}': lp.differentials.title,
     '{{DIFFERENTIALS_HTML}}': differentialsHTML,
     '{{PROCESS_TITLE}}': lp.process.title,
@@ -1194,6 +1286,9 @@ var EXAM_KEYWORDS = {
   'ressonancia-magnetica': /resson[aâ]ncia/gi,
   'tomografia': /tomografia/gi,
   'ultrassonografia': /ultrass|doppler/gi,
+  'ultrassom-abdome-total': /abdom(?:e|inal) total|ultrassom (?:de |do )?abdom/gi,
+  'ultrassom-obstetrico': /obst[eé]tric|ultrassom morfol[oó]gico|morfol[oó]gico d[eo]|pr[eé]-natal/gi,
+  'ultrassom-doppler': /doppler (?:vascular|arterial|venoso)|doppler d[eao]s? (?:car[oó]tidas|pernas|membros)|trombose|varizes/gi,
   'mamografia': /mamografia/gi,
   'densitometria-ossea': /densitometria|osteoporose/gi,
   'ecocardiografia': /ecocardiogra/gi,

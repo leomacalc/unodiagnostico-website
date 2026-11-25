@@ -73,9 +73,9 @@ Editar `data/site.json`. Campos que o build usa além dos óbvios:
 - `whatsapp_messages`: `price` (botões de valor), `blog` (botões do blog) e `exam_prefix`
   (o botão "Agendar este Exame" do modal vira `exam_prefix` + nome do exame).
 - `geo`: latitude/longitude do schema.org — é a coordenada da ficha da clínica no Google Maps.
-- O mapa embutido da home acha a clínica pelo texto de `MAPS_EMBED_QUERY` (no `build.js`), que ainda
-  leva o CEP antigo (61900-320) porque é assim que a ficha do Google está escrita. Só trocar
-  depois de abrir o mapa e conferir que o alfinete continua na clínica.
+- O mapa embutido da home acha a clínica pelo texto de `MAPS_EMBED_QUERY` (no `build.js`), que leva o
+  CEP 61900-320 porque é assim que a ficha do Google está escrita (e vai continuar: ver regra 14).
+  Só trocar depois de abrir o mapa e conferir que o alfinete continua na clínica.
 - `tracking`: IDs do Google Ads e do GA4 (ver "Tracking de conversão").
 - `second_unit` (opcional): segundo endereço mostrado na home, abaixo do principal — hoje o espaço
   da ressonância no Feira Center. Campos: `label`, `full`, `maps_query`, `maps_place_id`.
@@ -170,7 +170,9 @@ Onde aparece:
   menor para o maior). Sem nenhum preço no feed, a pergunta que usa a lista não é publicada.
 
 Ajustes por página, no JSON da landing: `"price_from": 280` fixa um valor; `"price_from": false`
-esconde o preço. O build lista os preços em uso no fim da saída e avisa quando uma página fica
+esconde o preço; `"price_items": ["uno-us-abdome-total"]` troca a regra da `url`: vale o menor preço
+entre os produtos listados (pelo `item_id` do feed). É o que as subpáginas usam, porque os anúncios
+continuam apontando para a página-mãe. O build lista os preços em uso no fim da saída e avisa quando uma página fica
 sem preço. Frase que leva o marcador precisa funcionar com as duas saídas ("Tomografia
 particular: {{PRICE_FROM}}." serve; "custa {{PRICE_FROM}}" não).
 
@@ -198,7 +200,17 @@ As landing pages ficam em URLs tipo `unodiagnostico.com/<slug>` e são 100% gera
      `days_per_week` (número da faixa de estatísticas; padrão 7) e `cta` (frase acima do botão
      final). Hoje só a mamografia usa.
    - Preço: usar `{{PRICE_FROM}}` no texto e ter ao menos um produto do exame no feed com a `url`
-     da página (ver "Preço particular"). `price_from` (opcional) fixa ou esconde o valor.
+     da página (ver "Preço particular"). `price_from` (opcional) fixa ou esconde o valor;
+     `price_items` (opcional) lista os produtos do feed que valem para a página.
+   - `sticky_cta` (opcional): texto do botão fixo do celular. O padrão é "Agendar <exam_short>
+     pelo WhatsApp"; acima de 38 caracteres ele não cabe em tela de 360 px (o build avisa).
+   - **Subpágina de exame** (ex.: `/ultrassom-abdome-total/`, filha de `/ultrassonografia/`):
+     `"parent": "<slug da página-mãe>"`. A subpágina usa o ícone e a foto da mãe (até ter foto
+     própria em `public/images/exames/<slug>.jpg`), entra no rodapé logo depois dela, ganha a
+     linha "Veja também" (mãe e irmãs), leva a mãe no caminho de navegação do schema.org e fica
+     fora da lista de preços da FAQ da home. Na página-mãe, `"page": "<slug>"` em um cartão de
+     `indications.items` cria o link "Saiba mais sobre <exame>". Hoje: ultrassom obstétrico e
+     morfológico, abdome total e Doppler vascular.
 3. Rode `node build.js` — a landing é gerada em `dist/<slug>/index.html` automaticamente.
 4. A landing reutiliza automaticamente: reviews do Google (`reviews.json`), convênios (`insurance.json`), corpo clínico (`doctors.json`) e dados gerais (`site.json`).
 
@@ -278,10 +290,14 @@ Abre em http://localhost:3000
     linha só entre 1200 e 1920 px de largura. Nas páginas de exame, os dois botões do topo
     ficam sempre um embaixo do outro (lado a lado, caber ou não dependia da fonte em tablet) e
     o segundo botão encolhe abaixo de 360 px de tela para o texto com preço caber em uma linha.
+    O botão fixo do celular dessas páginas usa letra menor até 380 px de tela e comporta até 38
+    caracteres; nome de exame mais comprido usa `sticky_cta`.
 13. **Links entre páginas são automáticos:** rodapé de todas as páginas lista os exames
     (`examLinksHTML()`), e os cards da home apontam para a landing com texto "Saiba mais sobre <exame>".
     Landing nova entra sozinha no rodapé; o card da home só ganha o link se, em `services.json`,
     o `id` do exame for igual ao `slug` da landing ou o `name` for igual ao `exam_name` dela.
+    Para os posts citarem uma landing nova na caixa "Exames citados neste artigo", incluir o slug
+    dela em `EXAM_KEYWORDS` (no `build.js`), com as palavras que identificam o exame.
 14. **Fatos da clínica confirmados pelo Dr. Leonardo em 23/11/2026** — não publicar nada que
     contradiga, a não ser que ele diga que mudou:
     - **Ressonância: só sem contraste, por enquanto.** Nada de orientação de contraste (jejum por
@@ -311,6 +327,9 @@ Abre em http://localhost:3000
       CNPJ 33.446.906/0001-93. Unidade principal: Avenida I, 57, Business Place Torre 2,
       Jereissati I, CEP 61900-410 (o site usava 61900-320, que é o CEP da Rua 7; a Avenida I e a
       Av. Yolanda Pontes Vidal Queiroz são a mesma via). E-mail da clínica: uno@unodiagnostico.com.
+    - **Ficha do Google (25/11/2026):** o CEP da ficha fica como está (61900-320), por decisão
+      dele; o site segue com 61900-410, do CNPJ. Não mexer no endereço da ficha nem propor a troca
+      de novo, a não ser que ele peça.
     - **Privacidade (25/11/2026):** encarregado pelo tratamento de dados: Leonardo José Araújo
       Macêdo de Alcântara, contato uno@unodiagnostico.com. Cookies de medição só com consentimento;
       sem remarketing. A avaliação de conflito de interesse do encarregado ficou com o jurídico.

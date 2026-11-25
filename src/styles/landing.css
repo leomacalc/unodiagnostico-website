@@ -270,6 +270,9 @@ p { color: var(--lp-text-light); }
 }
 .lp-about-text h2 { font-size: clamp(1.6rem, 2.8vw, 2rem); margin-bottom: 20px; }
 .lp-about-text p { margin-bottom: 16px; font-size: 1.02rem; }
+/* "Veja tambem" das subpaginas: pagina-mae e paginas irmas */
+.lp-about-text .lp-related { font-size: 0.95rem; line-height: 1.9; }
+.lp-related a { font-weight: 700; color: var(--lp-primary); text-decoration: underline; }
 .lp-cta-row { margin-top: 28px; }
 .lp-about-visual {
   background: linear-gradient(135deg, var(--lp-primary-light), #f3f9ff);
@@ -317,6 +320,15 @@ p { color: var(--lp-text-light); }
 }
 .lp-indication-card h3 { font-size: 1.15rem; margin-bottom: 10px; color: var(--lp-primary-dark); }
 .lp-indication-card p { font-size: 0.95rem; }
+/* Cartao que leva a pagina propria do exame ("page" no JSON) */
+.lp-card-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--lp-primary);
+}
+.lp-card-link:hover { text-decoration: underline; }
 /* Com 7 indicações (ressonância), o cartão que sobra sozinho na última linha fica no meio.
    A grade tem 3 colunas a partir de ~940 px de tela; 960 dá folga para a barra de rolagem. */
 @media (min-width: 960px) {
@@ -786,6 +798,12 @@ p { color: var(--lp-text-light); }
   .lp-whatsapp-float { bottom: 84px; right: 16px; width: 54px; height: 54px; }
   .lp-preparation-inner { padding: 32px 20px; }
   .lp-footer-top { flex-direction: column; text-align: center; }
+}
+
+/* Botao fixo do celular: ate 380 px de tela, "Agendar Ultrassonografia pelo WhatsApp" era mais
+   largo que o proprio botao (passava 4 px em 360 px). Letra e respiro lateral um pouco menores. */
+@media (max-width: 380px) {
+  .lp-mobile-sticky .lp-btn { font-size: 0.875rem; padding-left: 12px; padding-right: 12px; }
 }
 
 /* ============================================

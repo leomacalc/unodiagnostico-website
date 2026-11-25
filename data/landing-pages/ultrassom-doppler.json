@@ -1,0 +1,172 @@
+{
+  "slug": "ultrassom-doppler",
+  "parent": "ultrassonografia",
+  "exam_name": "Ultrassom Doppler Vascular",
+  "exam_short": "Ultrassom Doppler",
+  "sticky_cta": "Agendar Doppler pelo WhatsApp",
+  "price_items": [
+    "uno-doppler-membro",
+    "uno-doppler-carotidas",
+    "uno-doppler-iliacos-femorais"
+  ],
+  "seo": {
+    "title": "Ultrassom Doppler Vascular em Maracanaú | Uno Diagnóstico",
+    "description": "Ultrassom com Doppler em Maracanaú: trombose, varizes, carótidas e circulação das pernas, com médicos radiologistas e laudo em até 40 minutos. Agende pelo WhatsApp: (85) 2181-6818.",
+    "keywords": "ultrassom Doppler Maracanaú, Doppler vascular Maracanaú, Doppler venoso Maracanaú, Doppler arterial Maracanaú, Doppler de carótidas Maracanaú, Doppler de membros inferiores, exame para trombose Maracanaú, exame de varizes Maracanaú, ecodoppler Maracanaú, Doppler particular Maracanaú"
+  },
+  "whatsapp_message": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar um ultrassom com Doppler.",
+  "whatsapp_message_price": "Olá! Vim pelo site da Uno Diagnóstico e gostaria de saber o valor particular do ultrassom com Doppler.",
+  "hero": {
+    "badge": "Ultrassom Doppler em Maracanaú",
+    "headline": "Doppler para investigar <em>trombose</em>, <em>varizes</em> e carótidas",
+    "subtitle": "Doppler arterial e venoso das pernas, das carótidas e de outros vasos, realizado por médicos radiologistas especialistas, com laudo em até 40 minutos.",
+    "cta_primary": "Agende seu Doppler pelo WhatsApp",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
+    "trust_badges": [
+      "Laudo em até 40 minutos",
+      "Sem radiação, sem dor",
+      "7 dias por semana, 7h às 22h",
+      "Convênios + particular (PIX e cartão)"
+    ]
+  },
+  "about": {
+    "title": "O que é o ultrassom com Doppler?",
+    "paragraphs": [
+      "O Doppler é uma tecnologia que se soma à ultrassonografia. Enquanto o ultrassom comum mostra as estruturas do corpo, o Doppler analisa o movimento do sangue dentro das artérias e das veias, em imagem colorida e em gráficos de velocidade.",
+      "Com ele, o médico identifica coágulos, veias com refluxo, placas de gordura e estreitamentos que atrapalham a circulação. É um exame seguro, indolor e sem radiação.",
+      "Na Uno Diagnóstico, o exame é realizado por médicos radiologistas com título de especialista, e o laudo fica pronto em até 40 minutos."
+    ]
+  },
+  "indications": {
+    "title": "Tipos de Doppler que realizamos",
+    "subtitle": "O pedido médico indica qual vaso será examinado. Os exames mais pedidos:",
+    "items": [
+      {
+        "title": "Doppler venoso das pernas",
+        "text": "Investiga trombose venosa profunda e avalia as veias safenas em quem tem varizes, inclusive antes de cirurgia."
+      },
+      {
+        "title": "Doppler arterial das pernas",
+        "text": "Avalia a circulação em quem sente dor ao caminhar, frieza ou palidez nos pés, e no acompanhamento de quem tem diabetes."
+      },
+      {
+        "title": "Doppler de carótidas e vertebrais",
+        "text": "Procura placas de gordura nas artérias do pescoço, que estão ligadas ao risco de AVC."
+      },
+      {
+        "title": "Doppler de aorta e artérias renais",
+        "text": "Investiga aneurisma da aorta abdominal e estreitamento das artérias dos rins, uma das causas de pressão alta."
+      },
+      {
+        "title": "Doppler dos braços",
+        "text": "Avalia artérias e veias dos membros superiores, inclusive na suspeita de trombose."
+      },
+      {
+        "title": "Doppler de outros órgãos",
+        "text": "Tireoide, bolsa escrotal e partes moles também podem ser avaliadas com Doppler. Na gestação, o Doppler obstétrico acompanha a circulação do bebê.",
+        "page": "ultrassom-obstetrico"
+      }
+    ]
+  },
+  "differentials": {
+    "title": "Por que fazer seu Doppler na Uno Diagnóstico?",
+    "items": [
+      {
+        "title": "Laudo em até 40 minutos",
+        "text": "O laudo fica pronto em até 40 minutos após o exame, no mesmo dia. Ideal para quem tem consulta médica marcada."
+      },
+      {
+        "title": "Radiologistas especialistas",
+        "text": "Todos os exames são realizados e laudados por médicos radiologistas com título de especialista (RQE)."
+      },
+      {
+        "title": "Resultado online",
+        "text": "Acesse o laudo diretamente pelo nosso portal de resultados, a qualquer hora e de qualquer lugar."
+      },
+      {
+        "title": "Atendimento 7 dias por semana",
+        "text": "Funcionamos todos os dias das 7h às 22h, inclusive finais de semana e feriados."
+      },
+      {
+        "title": "Convênios + particular",
+        "text": "Aceitamos LivSaúde, Unimed, CAMED, FUSEx, ISSEC e atendimento particular com PIX, cartão e dinheiro."
+      },
+      {
+        "title": "Sem radiação e sem injeção",
+        "text": "O Doppler é um ultrassom: não usa radiação nem contraste e pode ser repetido sempre que o médico pedir."
+      }
+    ]
+  },
+  "preparation": {
+    "title": "Como se preparar para o Doppler",
+    "intro": "A maioria dos exames com Doppler não exige preparo. Veja as orientações por região:",
+    "items": [
+      "Doppler das pernas (varizes, trombose, artérias): sem jejum e sem preparo; venha com roupa fácil de tirar",
+      "Doppler de carótidas e vertebrais: sem preparo",
+      "Doppler de aorta e artérias renais: jejum de 6 a 8 horas, para reduzir os gases intestinais",
+      "Doppler dos braços: sem preparo",
+      "Evite cremes e hidratantes na região do exame no dia",
+      "Traga o pedido médico e exames anteriores para comparação"
+    ],
+    "note": "Nossa equipe confirma o preparo específico do seu exame no momento do agendamento pelo WhatsApp."
+  },
+  "process": {
+    "title": "Como é feito o exame",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Agendamento pelo WhatsApp",
+        "text": "Envie o pedido médico e nossa equipe retorna com horários disponíveis e orientações de preparo."
+      },
+      {
+        "number": "2",
+        "title": "Chegada à clínica",
+        "text": "Recepção ágil e sem burocracia. O médico radiologista te recebe e explica o exame."
+      },
+      {
+        "number": "3",
+        "title": "Realização do Doppler",
+        "text": "Você fica deitado e, em alguns trechos do exame de varizes, em pé. O médico desliza o transdutor com gel sobre a pele. O exame dura de 20 a 40 minutos, conforme a região."
+      },
+      {
+        "number": "4",
+        "title": "Laudo e resultado online",
+        "text": "O laudo assinado pelo radiologista fica pronto em até 40 minutos e também fica disponível no portal de resultados."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "O ultrassom com Doppler dói?",
+      "answer": "Não. O Doppler é um ultrassom: é indolor, não usa radiação e não precisa de injeção."
+    },
+    {
+      "question": "Qual a diferença entre Doppler arterial e venoso?",
+      "answer": "O arterial avalia as artérias, que levam o sangue do coração para o corpo, e investiga entupimentos e estreitamentos. O venoso avalia as veias, que trazem o sangue de volta, e investiga trombose e varizes. O pedido médico diz qual é o seu."
+    },
+    {
+      "question": "O exame é feito nas duas pernas?",
+      "answer": "Depende do pedido médico, que indica se o exame é de uma perna ou das duas."
+    },
+    {
+      "question": "Estou com a perna inchada e dolorida. Pode ser trombose?",
+      "answer": "Dor e inchaço que aparecem de repente em uma perna precisam de avaliação médica no mesmo dia, porque podem indicar trombose venosa profunda. O Doppler venoso é o exame que confirma ou afasta a suspeita. Se houver falta de ar ou dor no peito, procure um pronto-socorro imediatamente."
+    },
+    {
+      "question": "Quanto tempo dura o Doppler?",
+      "answer": "De 20 a 40 minutos, dependendo da região avaliada."
+    },
+    {
+      "question": "Preciso de pedido médico?",
+      "answer": "Sim. O exame exige pedido médico indicando a região e se o Doppler é arterial ou venoso."
+    },
+    {
+      "question": "Em quanto tempo recebo o laudo?",
+      "answer": "O laudo fica pronto em até 40 minutos após o exame e também fica disponível no nosso portal de resultados online."
+    },
+    {
+      "question": "Qual o valor do Doppler particular?",
+      "answer": "Ultrassom com Doppler particular na Uno Diagnóstico: {{PRICE_FROM}}. O valor varia conforme a região examinada e se o exame é de um lado ou dos dois. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
+    }
+  ]
+}

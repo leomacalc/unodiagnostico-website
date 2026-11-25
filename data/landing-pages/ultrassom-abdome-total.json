@@ -1,0 +1,168 @@
+{
+  "slug": "ultrassom-abdome-total",
+  "parent": "ultrassonografia",
+  "exam_name": "Ultrassom de Abdome Total",
+  "exam_short": "Ultrassom de abdome",
+  "sticky_cta": "Agendar Ultrassom pelo WhatsApp",
+  "price_items": [
+    "uno-us-abdome-total"
+  ],
+  "seo": {
+    "title": "Ultrassom de Abdome Total em Maracanaú | Uno Diagnóstico",
+    "description": "Ultrassom de abdome total em Maracanaú: fígado, vesícula, pâncreas, baço, rins e bexiga em um só exame, com laudo em até 40 minutos. Agende pelo WhatsApp: (85) 2181-6818.",
+    "keywords": "ultrassom de abdome total Maracanaú, ultrassom abdominal Maracanaú, ultrassonografia de abdome total, ultrassom do fígado Maracanaú, ultrassom da vesícula, ultrassom dos rins Maracanaú, preparo ultrassom abdome total, jejum ultrassom abdominal, ultrassom abdome total particular Maracanaú"
+  },
+  "whatsapp_message": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar um ultrassom de abdome total.",
+  "whatsapp_message_price": "Olá! Vim pelo site da Uno Diagnóstico e gostaria de saber o valor particular do ultrassom de abdome total.",
+  "hero": {
+    "badge": "Ultrassom de Abdome Total em Maracanaú",
+    "headline": "Fígado, vesícula e rins em <em>um só exame</em>",
+    "subtitle": "Ultrassom de abdome total realizado por médicos radiologistas especialistas, com laudo em até 40 minutos. Avalia também pâncreas, baço e bexiga, sem radiação e sem dor.",
+    "cta_primary": "Agende seu Ultrassom pelo WhatsApp",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
+    "trust_badges": [
+      "Laudo em até 40 minutos",
+      "Sem radiação, sem dor",
+      "7 dias por semana, 7h às 22h",
+      "Convênios + particular (PIX e cartão)"
+    ]
+  },
+  "about": {
+    "title": "O que é o ultrassom de abdome total?",
+    "paragraphs": [
+      "O ultrassom de abdome total usa ondas sonoras de alta frequência para gerar imagens em tempo real dos órgãos da barriga. Em um único exame, avalia fígado, vesícula e vias biliares, pâncreas, baço, rins, aorta abdominal, bexiga e órgãos da pelve.",
+      "É um dos exames de imagem mais pedidos pelos médicos. É rápido, indolor e não usa radiação, por isso pode ser repetido sempre que necessário, inclusive em crianças e gestantes.",
+      "Na Uno Diagnóstico, o exame é realizado por médicos radiologistas com título de especialista, e o laudo fica pronto em até 40 minutos."
+    ]
+  },
+  "indications": {
+    "title": "Quando o ultrassom de abdome total é indicado",
+    "subtitle": "O exame investiga sintomas, acompanha doenças já conhecidas e faz parte de check-ups. As situações mais comuns:",
+    "items": [
+      {
+        "title": "Dor ou desconforto na barriga",
+        "text": "Dor abdominal, sensação de peso, má digestão ou distensão que não passam."
+      },
+      {
+        "title": "Pedras na vesícula e nos rins",
+        "text": "Investiga cálculos biliares e renais, causas frequentes de cólica."
+      },
+      {
+        "title": "Fígado gorduroso (esteatose)",
+        "text": "Avalia o fígado em quem tem sobrepeso, diabetes ou colesterol alto."
+      },
+      {
+        "title": "Exames de sangue alterados",
+        "text": "Ajuda a esclarecer alterações de enzimas do fígado, bilirrubinas ou função renal."
+      },
+      {
+        "title": "Acompanhamento",
+        "text": "Controle de cistos, nódulos ou aumento de órgãos já identificados em exames anteriores."
+      },
+      {
+        "title": "Check-up",
+        "text": "Avaliação de rotina solicitada pelo médico, inclusive dos rins em pessoas com hipertensão ou diabetes."
+      }
+    ]
+  },
+  "differentials": {
+    "title": "Por que fazer seu ultrassom de abdome na Uno Diagnóstico?",
+    "items": [
+      {
+        "title": "Laudo em até 40 minutos",
+        "text": "O laudo fica pronto em até 40 minutos após o exame, no mesmo dia. Ideal para quem tem consulta médica marcada."
+      },
+      {
+        "title": "Radiologistas especialistas",
+        "text": "Todos os exames são realizados e laudados por médicos radiologistas com título de especialista (RQE)."
+      },
+      {
+        "title": "Resultado online",
+        "text": "Acesse o laudo diretamente pelo nosso portal de resultados, a qualquer hora e de qualquer lugar."
+      },
+      {
+        "title": "Atendimento 7 dias por semana",
+        "text": "Funcionamos todos os dias das 7h às 22h, inclusive finais de semana e feriados. Quem agenda nos primeiros horários faz o jejum durante a noite."
+      },
+      {
+        "title": "Convênios + particular",
+        "text": "Aceitamos LivSaúde, Unimed, CAMED, FUSEx, ISSEC e atendimento particular com PIX, cartão e dinheiro."
+      },
+      {
+        "title": "Sem radiação",
+        "text": "O ultrassom é seguro e pode ser repetido sempre que o médico pedir, inclusive em crianças e gestantes."
+      }
+    ]
+  },
+  "preparation": {
+    "title": "Como se preparar para o ultrassom de abdome total",
+    "intro": "O preparo é simples, e fazer do jeito certo é o que garante imagens nítidas, principalmente da vesícula.",
+    "items": [
+      "Jejum de 6 a 8 horas antes do exame",
+      "Na véspera, evite alimentos gordurosos, frituras, refrigerantes e alimentos que produzem gases (feijão, repolho, brócolis)",
+      "Para avaliar a bexiga e a pelve, chegue com a bexiga cheia: beba água e evite urinar por 1 a 2 horas antes do exame",
+      "Mantenha seus medicamentos de uso contínuo, salvo orientação médica em contrário",
+      "Traga o pedido médico e exames anteriores para comparação"
+    ],
+    "note": "Nossa equipe confirma o preparo específico do seu exame no momento do agendamento pelo WhatsApp."
+  },
+  "process": {
+    "title": "Como é feito o exame",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Agendamento pelo WhatsApp",
+        "text": "Envie o pedido médico e nossa equipe retorna com horários disponíveis e orientações de preparo."
+      },
+      {
+        "number": "2",
+        "title": "Chegada à clínica",
+        "text": "Recepção ágil e sem burocracia. O médico radiologista te recebe e explica o exame."
+      },
+      {
+        "number": "3",
+        "title": "Realização do ultrassom",
+        "text": "Você se deita na maca, o médico aplica um gel na barriga e desliza o transdutor. Ele pode pedir que você prenda a respiração por alguns segundos. O exame dura de 15 a 30 minutos."
+      },
+      {
+        "number": "4",
+        "title": "Laudo e resultado online",
+        "text": "O laudo assinado pelo radiologista fica pronto em até 40 minutos e também fica disponível no portal de resultados."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "Qual a diferença entre ultrassom de abdome total e de abdome superior?",
+      "answer": "O abdome superior avalia fígado, vesícula, pâncreas e baço. O abdome total inclui também rins, bexiga e estruturas da pelve. Seu médico indica qual é o mais adequado."
+    },
+    {
+      "question": "Precisa de jejum para o ultrassom de abdome total?",
+      "answer": "Sim, de 6 a 8 horas. Em jejum a vesícula fica cheia e há menos gases no intestino, o que deixa as imagens mais nítidas."
+    },
+    {
+      "question": "Tenho diabetes. Como faço o jejum?",
+      "answer": "Avise no agendamento e prefira os primeiros horários da manhã, para o jejum coincidir com a noite de sono. Se você usa insulina ou remédio para baixar a glicose, pergunte ao seu médico como ajustar a dose no dia do exame."
+    },
+    {
+      "question": "O ultrassom de abdome total dói?",
+      "answer": "Não. O exame é indolor, não usa radiação e você volta às atividades normais logo depois."
+    },
+    {
+      "question": "Quanto tempo dura o exame?",
+      "answer": "Em geral, de 15 a 30 minutos."
+    },
+    {
+      "question": "Preciso de pedido médico?",
+      "answer": "Sim. O ultrassom exige pedido médico com o tipo de exame solicitado."
+    },
+    {
+      "question": "Em quanto tempo recebo o laudo?",
+      "answer": "O laudo fica pronto em até 40 minutos após o exame e também fica disponível no nosso portal de resultados online."
+    },
+    {
+      "question": "Qual o valor do ultrassom de abdome total particular?",
+      "answer": "Ultrassom de abdome total particular na Uno Diagnóstico: {{PRICE_FROM}}. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
+    }
+  ]
+}
