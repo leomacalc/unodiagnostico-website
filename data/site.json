@@ -70,6 +70,10 @@
       "answer": "O prazo varia conforme o exame. Ultrassonografia e ecocardiograma: laudo em até 40 minutos. Tomografia, ressonância, mamografia, densitometria e radiografia eletivas: 1 dia útil. Tomografia de urgência: até 2 horas. Os resultados ficam disponíveis online em nosso portal de resultados."
     },
     {
+      "question": "Quanto custa um exame particular na Uno Diagnóstico?",
+      "answer": "Valores particulares a partir de: {{PRICE_LIST}}. O valor final depende do exame do seu pedido médico: envie o pedido pelo WhatsApp (85) 2181-6818 e informamos o valor exato. Aceitamos PIX, cartão de crédito com parcelamento, débito e dinheiro."
+    },
+    {
       "question": "Quais formas de pagamento são aceitas para atendimento particular?",
       "answer": "Aceitamos PIX (pagamento instantâneo), cartões de crédito das principais bandeiras (Visa, Mastercard, Elo, American Express e Hipercard) com opção de parcelamento, cartão de débito e dinheiro."
     },
