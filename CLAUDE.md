@@ -21,6 +21,7 @@ O site é construído a partir de **arquivos JSON de dados** + **templates HTML*
 │   ├── insurance.json       # Convênios aceitos
 │   ├── blog-posts.json      # Posts do blog
 │   ├── reviews.json         # Avaliações do Google
+│   ├── privacy.json         # Texto da Política de Privacidade (/politica-de-privacidade/)
 │   └── landing-pages/       # ⬅ LANDING PAGES por exame (campanhas pagas)
 │       └── tomografia.json  # Ex: landing de tomografia computadorizada
 │
@@ -30,12 +31,17 @@ O site é construído a partir de **arquivos JSON de dados** + **templates HTML*
 │   │   ├── landing.html     # Template reutilizável das landing pages
 │   │   ├── blog-index.html  # Template do índice /blog/
 │   │   ├── blog-post.html   # Template de cada post /blog/<slug>/
+│   │   ├── legal.html       # Template de página institucional de texto (política de privacidade)
+│   │   ├── cookie-banner.html # Aviso de cookies (trecho único, injetado em todas as páginas)
 │   │   └── 404.html
 │   ├── styles/
 │   │   ├── main.css         # Estilos do site principal
-│   │   └── landing.css      # Estilos das landing pages (inline na landing)
+│   │   ├── landing.css      # Estilos das landing pages (inline na landing)
+│   │   ├── consent.css      # Aviso de cookies (anexado ao CSS de todas as páginas)
+│   │   └── legal.css        # Tabelas e data da página de política (só nela)
 │   └── js/
-│       └── main.js          # JavaScript do site principal
+│       ├── main.js          # JavaScript do site principal
+│       └── consent.js       # Consentimento de cookies: trecho do <head> de todas as páginas
 │
 ├── public/                  # Arquivos estáticos (copiados direto para dist/)
 │   ├── fonts/               # Montserrat e Open Sans (woff2 variável) — ver "Fontes"
@@ -305,6 +311,9 @@ Abre em http://localhost:3000
       CNPJ 33.446.906/0001-93. Unidade principal: Avenida I, 57, Business Place Torre 2,
       Jereissati I, CEP 61900-410 (o site usava 61900-320, que é o CEP da Rua 7; a Avenida I e a
       Av. Yolanda Pontes Vidal Queiroz são a mesma via). E-mail da clínica: uno@unodiagnostico.com.
+    - **Privacidade (25/11/2026):** encarregado pelo tratamento de dados: Leonardo José Araújo
+      Macêdo de Alcântara, contato uno@unodiagnostico.com. Cookies de medição só com consentimento;
+      sem remarketing. A avaliação de conflito de interesse do encarregado ficou com o jurídico.
 
 ---
 
@@ -318,7 +327,9 @@ Nunca escrever `https://unodiagnostico.com/...` à mão em template ou script: u
 
 ## Tracking de conversão
 
-Todas as páginas (home, landings e blog) têm `trackWhatsappClick(location)`. Cada clique dispara:
+Todas as páginas (home, landings, blog e política de privacidade) têm `trackWhatsappClick(location)`.
+**Nada é medido antes de a pessoa aceitar os cookies** (ver "Aviso de cookies e privacidade"): sem o
+aceite, `gtag()` não faz nada. Depois do aceite, cada clique dispara:
 1. o evento `whatsapp_click` no GA4 (`G-4T951CHR0E`), com `landing_page` identificando a página e
    `location` identificando o botão (`header`, `hero`, `flutuante`, `sticky-mobile`, `footer`...);
 2. a conversão "Whatsapp" do Google Ads (`send_to: AW-715533760/KKyuCPnntfcCEMDbmNUC`).
@@ -341,6 +352,51 @@ Ads. Hoje o número é link de ligação no bloco de endereço (home e páginas 
 de todas as páginas. Nas respostas da FAQ o build faz sozinho (`linkPhone()`): o número citado
 vira link de ligação, ou de WhatsApp quando a frase diz "WhatsApp" logo antes dele. Os botões
 verdes, inclusive o do topo das páginas de exame que mostra o número, continuam sendo WhatsApp.
+
+## Aviso de cookies e privacidade
+
+Em vigor desde a publicação da política (decidido pelo Dr. Leonardo em 25/11/2026: modelo de
+consentimento, sem remarketing). **O que o site promete na política e o código precisa cumprir:**
+
+- **As etiquetas do Google (Analytics e Ads) só carregam depois do "Aceitar".** Antes disso nenhum
+  cookie é gravado e nada vai ao Google; quem recusa ou não responde não é medido (nem o clique de
+  WhatsApp). Por isso os números do Analytics e as conversões do Google Ads são menores que as
+  visitas reais.
+- **"Recusar" e "Aceitar" têm o mesmo destaque** (mesma classe `.cc-btn`). Não transformar um deles
+  em link nem mudar cor ou tamanho de um só.
+- **A escolha vale 180 dias** e fica no navegador (`localStorage`, chave `uno_cookie_consent`). O
+  link "Cookies" do rodapé reabre o aviso; recusar depois de ter aceitado apaga os cookies `_ga*` e
+  `_gcl*` e recarrega a página sem as etiquetas.
+- **Sem remarketing:** `ad_personalization` fica sempre negado no consentimento enviado ao Google.
+
+Onde fica cada parte (fonte única; o build injeta em todos os templates):
+- `src/js/consent.js`: trecho do `<head>` (marcador `{{CONSENT_BOOTSTRAP}}`). Define `gtag()` (que só
+  funciona depois do aceite), `unoConsent.accept()`, `.refuse()` e `.ask()`, e carrega o gtag.js.
+- `src/templates/cookie-banner.html`: o aviso (marcador `{{COOKIE_BANNER}}`, logo depois do `<body>`).
+  Já vem no HTML e só aparece quando o `<html>` tem a classe `cc-ask`; é fixo na tela, não empurra nada.
+- `src/styles/consent.css`: anexado pelo build ao `{{CSS}}` e ao `{{LANDING_CSS}}`.
+- Rodapé de todos os templates: links "Política de Privacidade" (`{{PRIVACY_URL}}`) e "Cookies".
+
+Regras:
+- **Nunca colocar `<script src="https://www.googletagmanager.com/...">` direto em template**, nem
+  outra ferramenta de medição ou anúncio (pixel da Meta, Hotjar, etc.). Ferramenta nova entra em
+  `loadTags()` do `consent.js` **e** na tabela de cookies de `data/privacy.json`.
+- Template novo precisa de `{{CONSENT_BOOTSTRAP}}` no `<script>` do `<head>`, `{{COOKIE_BANNER}}` depois
+  do `<body>` e a linha de links do rodapé (copiar de `blog-index.html`).
+- A página 404 não tem medição nem aviso.
+
+### Política de Privacidade
+Página `/politica-de-privacidade/`, gerada de `data/privacy.json` com o template `legal.html`.
+- Cada seção tem `id`, `heading` e `blocks`. Blocos: `{ "p": "texto" }`, `{ "ul": [...] }` e
+  `{ "table": { "head": [...], "rows": [[...]] } }`. No texto, `**negrito**` e `` `código` ``; e-mail e
+  telefone viram link sozinhos.
+- Dados da clínica entram por marcadores preenchidos com `data/site.json`: `{{LEGAL_NAME}}`, `{{CNPJ}}`
+  (`cnpj`), `{{ADDRESS_FULL}}`, `{{DPO_NAME}}` e `{{DPO_EMAIL}}` (`privacy.dpo_name`, `privacy.dpo_email`),
+  `{{PHONE}}` e `{{GA4_COOKIE}}`.
+- **Ao mudar o texto, atualizar `updated`** (a data aparece no topo da página e no sitemap).
+- O texto descreve o que o site e a clínica fazem. Mudou a prática (ferramenta nova, novo uso de
+  dados, outro encarregado)? Mudar a política junto. Texto jurídico novo passa pelo Dr. Leonardo
+  antes de ir ao ar.
 
 ## Fontes
 
