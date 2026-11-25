@@ -1,0 +1,171 @@
+{
+  "slug": "ultrassom-obstetrico",
+  "parent": "ultrassonografia",
+  "exam_name": "Ultrassom Obstétrico e Morfológico",
+  "exam_short": "Ultrassom obstétrico",
+  "sticky_cta": "Agendar Ultrassom pelo WhatsApp",
+  "price_items": [
+    "uno-us-simples",
+    "uno-us-obst-doppler",
+    "uno-us-doppler-orgaos",
+    "uno-us-morfologico-2tri"
+  ],
+  "seo": {
+    "title": "Ultrassom Obstétrico e Morfológico em Maracanaú | Uno",
+    "description": "Ultrassom obstétrico e morfológico de 1º e 2º trimestre em Maracanaú, com médicos radiologistas e laudo em até 40 minutos. Agende pelo WhatsApp: (85) 2181-6818.",
+    "keywords": "ultrassom obstétrico Maracanaú, ultrassom morfológico Maracanaú, morfológico 1º trimestre, morfológico 2º trimestre, translucência nucal Maracanaú, ultrassom na gravidez Maracanaú, ultrassom gestacional Maracanaú, ultrassom obstétrico com Doppler, perfil biofísico fetal, ultrassom obstétrico particular Maracanaú"
+  },
+  "whatsapp_message": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar um ultrassom obstétrico.",
+  "whatsapp_message_price": "Olá! Vim pelo site da Uno Diagnóstico e gostaria de saber o valor particular do ultrassom obstétrico.",
+  "hero": {
+    "badge": "Ultrassom Obstétrico em Maracanaú",
+    "headline": "Do primeiro ultrassom ao <em>morfológico</em>, perto de você",
+    "subtitle": "Ultrassom obstétrico, morfológico de 1º e 2º trimestre e obstétrico com Doppler, realizados por médicos radiologistas especialistas, com laudo em até 40 minutos.",
+    "cta_primary": "Agende seu Ultrassom pelo WhatsApp",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
+    "trust_badges": [
+      "Laudo em até 40 minutos",
+      "Sem radiação, sem dor",
+      "7 dias por semana, 7h às 22h",
+      "Convênios + particular (PIX e cartão)"
+    ]
+  },
+  "about": {
+    "title": "O que é o ultrassom obstétrico?",
+    "paragraphs": [
+      "O ultrassom obstétrico usa ondas sonoras de alta frequência para mostrar o bebê em tempo real. Não usa radiação e pode ser repetido sempre que o obstetra indicar, em qualquer fase da gravidez.",
+      "Cada fase da gestação tem o seu exame. O ultrassom inicial confirma a gravidez e a idade gestacional, os morfológicos de 1º e 2º trimestre avaliam em detalhe a formação do bebê, e os exames do 3º trimestre acompanham o crescimento, a placenta e o líquido amniótico.",
+      "Na Uno Diagnóstico, os exames são realizados por médicos radiologistas com título de especialista, e o laudo fica pronto em até 40 minutos."
+    ]
+  },
+  "indications": {
+    "title": "Os ultrassons da gestação que realizamos",
+    "subtitle": "Cada exame tem a sua época. O número de exames e o momento de cada um são definidos pelo seu obstetra.",
+    "items": [
+      {
+        "title": "Ultrassom obstétrico inicial",
+        "text": "Em geral entre 6 e 9 semanas, por via transvaginal. Confirma a gravidez dentro do útero, o número de embriões e os batimentos cardíacos, e define a idade gestacional e a data provável do parto."
+      },
+      {
+        "title": "Morfológico de 1º trimestre",
+        "text": "Entre 11 semanas e 13 semanas e 6 dias. Avalia a formação inicial do bebê e mede a translucência nucal, um dos marcadores usados para estimar o risco de alterações cromossômicas, como a síndrome de Down."
+      },
+      {
+        "title": "Morfológico de 2º trimestre",
+        "text": "Entre 20 e 24 semanas. É o exame mais detalhado da gravidez: examina cérebro, face, coração, coluna, abdome, rins, braços e pernas do bebê, além da placenta e do líquido amniótico."
+      },
+      {
+        "title": "Obstétrico de 2º e 3º trimestre",
+        "text": "Acompanha o crescimento e a posição do bebê, a placenta e a quantidade de líquido amniótico."
+      },
+      {
+        "title": "Obstétrico com Doppler",
+        "text": "Analisa o fluxo de sangue nas artérias do útero, do cordão umbilical e do bebê. Costuma ser pedido em gestações de maior risco, como nos casos de pressão alta, diabetes ou restrição de crescimento."
+      },
+      {
+        "title": "Perfil biofísico fetal",
+        "text": "Avalia o bem-estar do bebê pelos movimentos do corpo, pelos movimentos respiratórios, pelo tônus e pela quantidade de líquido amniótico."
+      }
+    ]
+  },
+  "differentials": {
+    "title": "Por que fazer seu ultrassom obstétrico na Uno Diagnóstico?",
+    "items": [
+      {
+        "title": "Laudo em até 40 minutos",
+        "text": "O laudo fica pronto em até 40 minutos após o exame, no mesmo dia. Você já sai com o resultado para levar à consulta de pré-natal."
+      },
+      {
+        "title": "Radiologistas especialistas",
+        "text": "Todos os exames são realizados e laudados por médicos radiologistas com título de especialista (RQE)."
+      },
+      {
+        "title": "Resultado online",
+        "text": "Acesse o laudo diretamente pelo nosso portal de resultados, a qualquer hora e de qualquer lugar."
+      },
+      {
+        "title": "Atendimento 7 dias por semana",
+        "text": "Funcionamos todos os dias das 7h às 22h, inclusive finais de semana e feriados."
+      },
+      {
+        "title": "Convênios + particular",
+        "text": "Aceitamos LivSaúde, Unimed, CAMED, FUSEx, ISSEC e atendimento particular com PIX, cartão e dinheiro."
+      },
+      {
+        "title": "Acompanhante bem-vindo",
+        "text": "Você pode trazer um acompanhante para ver o bebê junto com você durante o exame."
+      }
+    ]
+  },
+  "preparation": {
+    "title": "Como se preparar para o ultrassom obstétrico",
+    "intro": "O preparo é simples e muda conforme a fase da gestação. Em caso de dúvida, fale com nossa equipe pelo WhatsApp.",
+    "items": [
+      "Ultrassom transvaginal (início da gestação): bexiga vazia, sem jejum",
+      "Ultrassom obstétrico pela barriga no 1º trimestre: bexiga cheia (beba água e não urine até o exame)",
+      "Morfológico e exames de 2º e 3º trimestre: sem preparo",
+      "Use roupas confortáveis, de preferência de duas peças",
+      "Traga o pedido médico, o cartão de pré-natal e os ultrassons anteriores"
+    ],
+    "note": "Nossa equipe confirma o preparo específico do seu exame no momento do agendamento pelo WhatsApp."
+  },
+  "process": {
+    "title": "Como é feito o exame",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Agendamento pelo WhatsApp",
+        "text": "Envie o pedido médico e informe a idade gestacional. Nossa equipe retorna com horários disponíveis e orientações de preparo."
+      },
+      {
+        "number": "2",
+        "title": "Chegada à clínica",
+        "text": "Recepção ágil e sem burocracia. O médico radiologista te recebe e explica o exame."
+      },
+      {
+        "number": "3",
+        "title": "Realização do ultrassom",
+        "text": "Com gel sobre a barriga, o médico desliza o transdutor e mostra o bebê em tempo real. No início da gestação, o exame costuma ser transvaginal. Dura de 20 a 40 minutos."
+      },
+      {
+        "number": "4",
+        "title": "Laudo e resultado online",
+        "text": "O laudo assinado pelo radiologista fica pronto em até 40 minutos e também fica disponível no portal de resultados."
+      }
+    ]
+  },
+  "faq": [
+    {
+      "question": "O ultrassom faz mal para o bebê?",
+      "answer": "Não. O ultrassom usa ondas sonoras, e não radiação. É considerado seguro para a gestante e para o bebê em todas as fases da gravidez e pode ser repetido sempre que o obstetra indicar."
+    },
+    {
+      "question": "Com quantas semanas devo fazer o morfológico?",
+      "answer": "O morfológico de 1º trimestre é feito entre 11 semanas e 13 semanas e 6 dias, e o de 2º trimestre, entre 20 e 24 semanas. Fora dessas janelas o exame perde parte da sua função, por isso vale agendar com antecedência."
+    },
+    {
+      "question": "Quando dá para saber o sexo do bebê?",
+      "answer": "Em geral a partir de 16 semanas, pelo ultrassom obstétrico comum. A confirmação mais segura costuma vir no morfológico de 2º trimestre. A posição do bebê no dia do exame pode dificultar a visualização."
+    },
+    {
+      "question": "Preciso de pedido médico para fazer o ultrassom obstétrico?",
+      "answer": "Sim. O ultrassom exige pedido médico com o tipo de exame solicitado."
+    },
+    {
+      "question": "Posso levar acompanhante?",
+      "answer": "Sim. No ultrassom obstétrico é comum os pais quererem ver o bebê juntos."
+    },
+    {
+      "question": "Vocês fazem ultrassom em gestação de gêmeos?",
+      "answer": "Sim. Avise no agendamento que a gestação é gemelar, para reservarmos o tempo adequado para o exame."
+    },
+    {
+      "question": "Em quanto tempo recebo o laudo?",
+      "answer": "O laudo fica pronto em até 40 minutos após o exame e também fica disponível no nosso portal de resultados online."
+    },
+    {
+      "question": "Qual o valor do ultrassom obstétrico particular?",
+      "answer": "Ultrassom obstétrico particular na Uno Diagnóstico: {{PRICE_FROM}}. O valor varia conforme o tipo de exame: o morfológico e os exames com Doppler têm valor próprio. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
+    }
+  ]
+}

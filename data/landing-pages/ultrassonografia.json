@@ -36,7 +36,8 @@
     "items": [
       {
         "title": "Ultrassom Abdominal Total",
-        "text": "Avalia fígado, vesícula biliar, pâncreas, baço, rins e vias urinárias. Indicado em dores abdominais, cálculos e rotinas de check-up."
+        "text": "Avalia fígado, vesícula biliar, pâncreas, baço, rins e vias urinárias. Indicado em dores abdominais, cálculos e rotinas de check-up.",
+        "page": "ultrassom-abdome-total"
       },
       {
         "title": "Ultrassom Pélvico e Transvaginal",
@@ -48,7 +49,8 @@
       },
       {
         "title": "Ultrassom Obstétrico e Morfológico",
-        "text": "Acompanhamento da gestação em todos os trimestres, com avaliação do crescimento fetal e exame morfológico de 1º e 2º trimestre."
+        "text": "Acompanhamento da gestação em todos os trimestres, com avaliação do crescimento fetal e exame morfológico de 1º e 2º trimestre.",
+        "page": "ultrassom-obstetrico"
       },
       {
         "title": "Ultrassom de Mamas",
@@ -56,7 +58,8 @@
       },
       {
         "title": "Ultrassom Doppler Vascular",
-        "text": "Avalia artérias e veias de membros, carótidas e vasos viscerais. Indicado em suspeita de trombose, varizes e insuficiência vascular."
+        "text": "Avalia artérias e veias de membros, carótidas e vasos viscerais. Indicado em suspeita de trombose, varizes e insuficiência vascular.",
+        "page": "ultrassom-doppler"
       }
     ]
   },
