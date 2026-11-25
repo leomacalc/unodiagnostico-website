@@ -71,13 +71,15 @@
           hide();
           loadTags();
         },
-        // Recusar depois de ter aceitado: apaga os cookies e recarrega a página sem as etiquetas.
+        // Recusar apaga os cookies do Google que já existirem (inclusive os de antes do aviso).
+        // Se as etiquetas já estavam carregadas, recarrega a página sem elas.
         refuse: function () {
           var hadTags = loaded;
           choice = 'denied';
           write(choice);
           hide();
-          if (hadTags) { clearCookies(); location.reload(); }
+          clearCookies();
+          if (hadTags) location.reload();
         },
         ask: function () {
           show();
