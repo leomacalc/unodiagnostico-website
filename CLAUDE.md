@@ -248,15 +248,16 @@ Abre em http://localhost:3000
     contradiga, a não ser que ele diga que mudou:
     - **Ressonância: só sem contraste, por enquanto.** Nada de orientação de contraste (jejum por
       causa de contraste, creatinina, gadolínio) em texto de ressonância — essas orientações são
-      da tomografia. Inclui angiorressonância arterial. Dizer "alta definição"; nunca citar
-      Tesla nem "alto campo".
+      da tomografia. Inclui angiorressonância arterial. **Ressonância de abdome ainda não é
+      feita** (depende do contraste): não listar abdome entre os exames de ressonância.
+      Dizer "alta definição"; nunca citar Tesla nem "alto campo".
     - **Onde é feita a ressonância:** Feira Center (open mall), Av. Yolanda Pontes Vidal Queiroz,
       17, lojas 102 e 103, Jereissati I, CEP 61900-410. Os demais exames seguem na Avenida I,
       Business Place Torre 2.
     - **A clínica não faz exame sob sedação.**
-    - **Prazo de laudo:** ultrassom em até 40 minutos; tomografia, ressonância, mamografia,
-      densitometria e raio-X eletivos em 1 dia útil; tomografia de urgência em até 2 horas.
-      (Ecocardiograma e biópsias: prazo ainda não confirmado.)
+    - **Prazo de laudo:** ultrassom e ecocardiograma em até 40 minutos; tomografia, ressonância,
+      mamografia, densitometria e raio-X eletivos em 1 dia útil; tomografia de urgência em até
+      2 horas. (Biópsias: prazo não confirmado; o site não cita.)
     - **Mamografia:** segunda a sexta, 8h às 18h, e sábado, 8h às 12h. A clínica abre todos os
       dias, das 7h às 22h.
     - **Convênios:** LivSaúde, Unimed, CAMED, FUSEx e ISSEC. **Parcerias:** Cartão de Todos e AmorSaúde.
