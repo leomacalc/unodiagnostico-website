@@ -407,6 +407,13 @@ Regras:
   Analytics fixo no `<head>`. Como o gtag.js agora só carrega depois do aceite, a home leva a metatag
   `google-site-verification` (em `src/templates/index.html`), que é o método "Tag HTML" do Search
   Console. **Não remover a metatag.** Se a verificação cair, é só clicar em "Verificar" nesse método.
+- **Bing Webmaster Tools:** o site `https://unodiagnostico.com/` foi cadastrado em 25/11/2026 (o
+  login é do Dr. Leonardo) e é verificado pela metatag `msvalidate.01`, também em
+  `src/templates/index.html`. **Não remover a metatag.** O `sitemap.xml` está enviado lá. Página nova
+  ou muito alterada: enviar a URL em "URL Submission" (equivale ao "Solicitar indexação" do Search
+  Console). O relatório "AI Performance" mostra as citações do site no Copilot e em parceiros da
+  Microsoft. **Não ligar o Microsoft Clarity** que o painel oferece: é ferramenta de medição e cai na
+  regra acima (consentimento e tabela de cookies).
 
 ### Política de Privacidade
 Página `/politica-de-privacidade/`, gerada de `data/privacy.json` com o template `legal.html`.
