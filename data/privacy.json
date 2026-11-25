@@ -1,0 +1,207 @@
+{
+  "slug": "politica-de-privacidade",
+  "title": "Política de Privacidade",
+  "seo": {
+    "title": "Política de Privacidade | Uno Diagnóstico",
+    "description": "Como a Uno Diagnóstico trata os dados de quem visita o site, fala com a clínica ou faz exames: quais dados, para quê, por quanto tempo e como pedir os seus."
+  },
+  "updated": "2026-11-25",
+  "lead": "Como a Uno Diagnóstico trata os dados de quem visita este site, fala com a clínica ou faz exames conosco.",
+  "sections": [
+    {
+      "id": "quem-somos",
+      "heading": "Quem somos",
+      "blocks": [
+        { "p": "A Uno Diagnóstico é a controladora dos dados tratados neste site e no seu atendimento: é ela quem decide como e para que eles são usados." },
+        {
+          "table": {
+            "head": ["Item", "Dado"],
+            "rows": [
+              ["Razão social", "{{LEGAL_NAME}}"],
+              ["CNPJ", "{{CNPJ}}"],
+              ["Endereço", "{{ADDRESS_FULL}}"],
+              ["Encarregado pelo tratamento de dados pessoais", "{{DPO_NAME}}"],
+              ["Contato do encarregado", "{{DPO_EMAIL}}"],
+              ["Outros canais", "{{PHONE}}, telefone e WhatsApp"]
+            ]
+          }
+        },
+        { "p": "Esta política vale para o site unodiagnostico.com e para os canais de contato que ele oferece. Ela também resume como tratamos os dados de quem faz exames conosco." }
+      ]
+    },
+    {
+      "id": "dados",
+      "heading": "Que dados tratamos e para quê",
+      "blocks": [
+        { "p": "O site não tem cadastro, formulário nem área de login, e não pede dados de saúde. Os dados chegam até nós quando você navega no site, quando fala conosco e quando faz um exame." },
+        {
+          "table": {
+            "head": ["Momento", "Dados", "Para quê", "Base legal (LGPD)"],
+            "rows": [
+              [
+                "Navegar no site",
+                "Endereço IP, tipo de aparelho e de navegador, páginas visitadas, cliques nos botões de WhatsApp e de telefone, identificadores de cookies",
+                "Manter o site no ar e seguro; saber quais páginas são úteis; medir o resultado de anúncios",
+                "Legítimo interesse para funcionamento e segurança (art. 7º, IX); consentimento para medição e anúncios (art. 7º, I)"
+              ],
+              [
+                "Falar conosco por WhatsApp, telefone ou e-mail",
+                "Nome, telefone, mensagens e áudios, pedido médico e documentos que você enviar, convênio",
+                "Responder dúvidas, informar preparo e valores, agendar",
+                "Procedimentos preliminares a contrato, a seu pedido (art. 7º, V); tutela da saúde quando há dado de saúde (art. 11, II, \"f\")"
+              ],
+              [
+                "Fazer um exame",
+                "Identificação e contato (nome, CPF, data de nascimento, telefone), dados do convênio, pedido médico, informações clínicas, imagens e laudo",
+                "Realizar o exame, emitir e entregar o laudo, faturar ao convênio, cumprir as regras de guarda de prontuário",
+                "Tutela da saúde (art. 7º, VIII, e art. 11, II, \"f\"); obrigação legal ou regulatória (art. 7º, II, e art. 11, II, \"a\"); execução de contrato (art. 7º, V)"
+              ],
+              [
+                "Consultar o resultado pela internet",
+                "Dados de acesso ao portal de resultados e registros desses acessos",
+                "Entregar o resultado com segurança",
+                "Tutela da saúde (art. 11, II, \"f\")"
+              ],
+              [
+                "Avaliar a clínica no Google",
+                "Nome público e texto da avaliação, quando reproduzidos no site",
+                "Mostrar a experiência de quem já foi atendido",
+                "Legítimo interesse (art. 7º, IX); retiramos a avaliação do site a pedido"
+              ]
+            ]
+          }
+        },
+        { "p": "O atendimento pelo WhatsApp pode começar com uma assistente virtual, que usa inteligência artificial, e segue com a nossa equipe sempre que você pedir ou for necessário. As ligações telefônicas podem ser gravadas para registro do atendimento." },
+        { "p": "Não vendemos dados pessoais. Não usamos laudos, imagens nem informações do seu atendimento para publicidade." }
+      ]
+    },
+    {
+      "id": "cookies",
+      "heading": "Cookies e medição de audiência",
+      "blocks": [
+        { "p": "O site só carrega as ferramentas de medição do Google, e grava os cookies delas, depois que você aceita no aviso que aparece na primeira visita. Recusar não muda nada no funcionamento do site. Sua escolha fica guardada no seu navegador por 6 meses, e você pode mudá-la quando quiser pelo link \"Cookies\" no rodapé." },
+        {
+          "table": {
+            "head": ["Cookie", "Quem define", "Para quê", "Duração"],
+            "rows": [
+              ["`_ga`", "Google Analytics", "Distinguir um visitante de outro, sem identificar quem é", "2 anos"],
+              ["`{{GA4_COOKIE}}`", "Google Analytics", "Manter a sessão durante a visita", "2 anos"],
+              ["`_gcl_au`", "Google Ads", "Ligar o clique em um anúncio ao contato feito pelo site", "90 dias"]
+            ]
+          }
+        },
+        { "p": "Com esses cookies medimos páginas visitadas, origem da visita (busca, anúncio ou link), tipo de aparelho, cidade aproximada e cliques nos botões de WhatsApp e de telefone. O Google Analytics não registra nem armazena o endereço IP. Essas ferramentas não nos mostram seu nome, seu telefone nem o conteúdo da sua conversa conosco. Não usamos esses dados para personalizar anúncios nem para montar listas de remarketing." },
+        { "p": "As páginas com mapa carregam conteúdo do Google Maps, e o Google pode gravar cookies próprios, nos domínios dele, ao exibi-lo. O mesmo vale para as ferramentas de medição depois do aceite. Você também pode bloquear ou apagar cookies nas configurações do seu navegador." }
+      ]
+    },
+    {
+      "id": "compartilhamento",
+      "heading": "Com quem compartilhamos",
+      "blocks": [
+        { "p": "Compartilhamos dados só com quem precisa deles para o site funcionar, para o seu atendimento acontecer ou porque a lei exige." },
+        {
+          "table": {
+            "head": ["Com quem", "O quê", "Por quê"],
+            "rows": [
+              [
+                "Fornecedores que tratam dados em nosso nome: hospedagem do site, sistema de gestão da clínica e portal de resultados, sistema de armazenamento de imagens, plataforma de atendimento por mensagens e ferramentas de inteligência artificial usadas nela, telefonia e contabilidade",
+                "Os dados necessários a cada serviço",
+                "Fazem parte da operação da clínica e, pela LGPD, só podem tratar os dados conforme as nossas instruções (art. 39)"
+              ],
+              [
+                "Google e Meta (WhatsApp)",
+                "Dados de navegação medidos no site; mensagens trocadas pelo WhatsApp",
+                "São as plataformas de medição, anúncios, mapa e mensagens, e também tratam dados conforme as políticas de privacidade delas"
+              ],
+              [
+                "Convênios e operadoras de planos de saúde",
+                "Identificação, exame realizado e o que for exigido para autorização e cobrança",
+                "Autorizar e faturar o exame (LGPD, art. 11, § 4º)"
+              ],
+              [
+                "Médico que pediu o exame",
+                "Laudo e imagens",
+                "Quando você pede ou autoriza, ou quando é necessário para a continuidade do seu cuidado"
+              ],
+              [
+                "Autoridades públicas",
+                "O que a lei ou a ordem determinar",
+                "Obrigação legal, como notificações de saúde e ordens judiciais"
+              ]
+            ]
+          }
+        },
+        { "p": "**Transferência internacional.** Alguns desses fornecedores, como o Google, a Meta, a hospedagem do site e serviços de inteligência artificial, podem processar dados em servidores fora do Brasil. Nesses casos, a transferência é regida pelo art. 33 da LGPD e pelos termos de proteção de dados contratados com cada fornecedor." }
+      ]
+    },
+    {
+      "id": "prazos",
+      "heading": "Por quanto tempo guardamos",
+      "blocks": [
+        { "p": "Guardamos cada dado só pelo tempo necessário à finalidade dele ou pelo prazo que a lei exige." },
+        {
+          "table": {
+            "head": ["Dado", "Prazo"],
+            "rows": [
+              ["Medição de audiência no Google Analytics", "Até 14 meses; depois disso restam só estatísticas, sem identificação do visitante"],
+              ["Cookies", "De 90 dias a 2 anos, conforme a tabela de cookies, ou até você apagar"],
+              ["Sua escolha sobre cookies", "6 meses, no seu navegador"],
+              ["Conversas por WhatsApp, telefone e e-mail", "Pelo tempo necessário ao atendimento e, depois, enquanto puderem ser exigidas para esclarecer dúvidas ou defender direitos"],
+              ["Laudos e registros do atendimento (prontuário)", "No mínimo 20 anos a partir do último registro (Lei 13.787/2018, art. 6º)"],
+              ["Imagens dos exames", "Pelo prazo que a legislação e as normas do Conselho Federal de Medicina exigem para a guarda de exames"],
+              ["Documentos fiscais e de faturamento", "Pelo prazo exigido pela legislação tributária"]
+            ]
+          }
+        },
+        { "p": "Terminado o prazo, os dados são eliminados ou anonimizados, salvo quando a lei mandar conservar por mais tempo (LGPD, art. 16)." }
+      ]
+    },
+    {
+      "id": "direitos",
+      "heading": "Seus direitos",
+      "blocks": [
+        { "p": "Você pode pedir à Uno Diagnóstico, a qualquer momento e sem custo (LGPD, art. 18):" },
+        {
+          "ul": [
+            "confirmar se tratamos dados seus e ter acesso a eles;",
+            "corrigir dados incompletos, inexatos ou desatualizados;",
+            "anonimizar, bloquear ou eliminar dados desnecessários, excessivos ou tratados em desacordo com a lei;",
+            "levar seus dados a outro prestador de serviço (portabilidade);",
+            "eliminar dados tratados com o seu consentimento;",
+            "saber com quem compartilhamos seus dados;",
+            "ser informado sobre a possibilidade de não dar consentimento e sobre as consequências disso;",
+            "revogar um consentimento já dado, como o dos cookies;",
+            "opor-se a um tratamento feito sem o seu consentimento, se ele descumprir a lei;",
+            "pedir a revisão de decisões tomadas apenas por meios automatizados que afetem seus interesses (art. 20)."
+          ]
+        },
+        { "p": "**Como pedir.** Escreva para o encarregado, no e-mail {{DPO_EMAIL}}. Podemos pedir uma confirmação da sua identidade antes de responder. A confirmação de que tratamos seus dados e o acesso a eles são dados de imediato, em formato simplificado, ou em até 15 dias, por declaração completa (LGPD, art. 19)." },
+        { "p": "**Laudos e imagens.** Você tem direito a cópia dos seus exames, pelo portal de resultados ou na recepção da clínica." },
+        { "p": "**O que não podemos apagar.** Dados que a lei manda guardar, como o prontuário, ficam conservados pelo prazo legal mesmo que você peça a exclusão." },
+        { "p": "**Reclamações.** Se o seu pedido não for atendido, você pode procurar a Agência Nacional de Proteção de Dados (ANPD) e os órgãos de defesa do consumidor." }
+      ]
+    },
+    {
+      "id": "seguranca",
+      "heading": "Segurança",
+      "blocks": [
+        { "p": "O site funciona apenas com conexão criptografada (HTTPS). O acesso a laudos e imagens é restrito a quem precisa deles para o seu atendimento e para as rotinas da clínica ligadas a ele, sob dever de sigilo." },
+        { "p": "Se ocorrer um incidente de segurança que possa trazer risco ou dano relevante a você, avisaremos você e a ANPD nos prazos da regulamentação (LGPD, art. 48)." }
+      ]
+    },
+    {
+      "id": "criancas",
+      "heading": "Crianças e adolescentes",
+      "blocks": [
+        { "p": "Exames de menores de 18 anos são agendados e acompanhados por um dos pais ou pelo responsável legal. Tratamos os dados de crianças e adolescentes no melhor interesse deles (LGPD, art. 14). O site não é dirigido a crianças." }
+      ]
+    },
+    {
+      "id": "mudancas",
+      "heading": "Mudanças nesta política",
+      "blocks": [
+        { "p": "Podemos atualizar este texto quando o site, o atendimento ou a lei mudarem. A data da última atualização fica no início da página, e mudanças relevantes serão avisadas no site." }
+      ]
+    }
+  ]
+}
