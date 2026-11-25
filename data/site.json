@@ -10,15 +10,15 @@
     "blog": "Olá! Vim pelo blog da Uno Diagnóstico e gostaria de agendar um exame.",
     "exam_prefix": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar: "
   },
-  "email": "contato@unodiagnostico.com",
+  "email": "uno@unodiagnostico.com",
   "address": {
-    "street": "Avenida I",
-    "neighborhood": "Jereissati",
-    "complement": "Business Place Torre 2 - Ao lado da UNIMED - Setor A",
+    "street": "Avenida I, 57",
+    "neighborhood": "Jereissati I",
+    "complement": "Business Place Torre 2 - Ao lado da UNIMED",
     "city": "Maracanaú",
     "state": "CE",
-    "cep": "61900-320",
-    "full": "Avenida I, Business Place Torre 2, ao lado da UNIMED - Jereissati, Setor A - Maracanaú/CE, 61900-320"
+    "cep": "61900-410",
+    "full": "Avenida I, 57, Business Place Torre 2, ao lado da UNIMED - Jereissati I - Maracanaú/CE, 61900-410"
   },
   "geo": {
     "latitude": -3.8707165,
@@ -27,7 +27,7 @@
   "hours": "Todos os dias | 7h às 22h",
   "unit_name": "Unidade Maracanaú",
   "technical_director": "Dr. Leonardo Alcântara, CRM 10914/RQE 7848",
-  "legal_name": "Uno Clínica de Diagnóstico por Imagem LTDA",
+  "legal_name": "Uno - Clínica de Diagnósticos por Imagem LTDA",
   "results_url": "https://uno.otimusclinic.com/uno/servlet/app.resultadodeexame?sdTjZIxAkYVpFL5AwTTQ8QwYtMA7qRj3B6bU5uP3P0Y=",
   "social": {
     "instagram": "https://instagram.com/unodiagnostico",
@@ -79,7 +79,7 @@
     },
     {
       "question": "Onde fica a Uno Diagnóstico?",
-      "answer": "Estamos localizados na Avenida I, Business Place Torre 2, ao lado da UNIMED, no bairro Jereissati, Setor A, em Maracanaú/CE, CEP 61900-320. A ressonância magnética é feita no nosso espaço no Feira Center (open mall), na Av. Yolanda Pontes Vidal Queiroz, 17, lojas 102 e 103, Jereissati I. Funcionamos todos os dias das 7h às 22h; a mamografia é realizada de segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h."
+      "answer": "Estamos localizados na Avenida I, 57, Business Place Torre 2, ao lado da UNIMED, no bairro Jereissati I, em Maracanaú/CE, CEP 61900-410. A ressonância magnética é feita no nosso espaço no Feira Center (open mall), na Av. Yolanda Pontes Vidal Queiroz, 17, lojas 102 e 103, Jereissati I. Funcionamos todos os dias das 7h às 22h; a mamografia é realizada de segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h."
     }
   ],
   "seo": {
