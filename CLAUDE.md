@@ -384,6 +384,10 @@ Regras:
 - Template novo precisa de `{{CONSENT_BOOTSTRAP}}` no `<script>` do `<head>`, `{{COOKIE_BANNER}}` depois
   do `<body>` e a linha de links do rodapé (copiar de `blog-index.html`).
 - A página 404 não tem medição nem aviso.
+- **Search Console:** a propriedade `https://unodiagnostico.com/` era verificada pelo código do
+  Analytics fixo no `<head>`. Como o gtag.js agora só carrega depois do aceite, a home leva a metatag
+  `google-site-verification` (em `src/templates/index.html`), que é o método "Tag HTML" do Search
+  Console. **Não remover a metatag.** Se a verificação cair, é só clicar em "Verificar" nesse método.
 
 ### Política de Privacidade
 Página `/politica-de-privacidade/`, gerada de `data/privacy.json` com o template `legal.html`.
