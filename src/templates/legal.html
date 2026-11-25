@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PAGE_SEO_TITLE}}</title>
+  <meta name="description" content="{{PAGE_SEO_DESCRIPTION}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#005a87">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{PAGE_SEO_TITLE}}">
+  <meta property="og:description" content="{{PAGE_SEO_DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Uno Diagnóstico">
+  <meta property="og:image" content="{{OG_IMAGE_URL}}">
+
+  <!-- Fontes: hospedadas no próprio site (/fonts); os @font-face e as fontes de reserva ficam no CSS.
+       Sem <link rel="preload"> de propósito: fonte pré-carregada segura o primeiro desenho da página
+       (medido: ~0,2 s a mais no celular) e a fonte de reserva já ocupa o mesmo espaço da final. -->
+
+  <script type="application/ld+json">
+    {{SCHEMA_PAGE}}
+  </script>
+  <script type="application/ld+json">
+    {{SCHEMA_BREADCRUMB}}
+  </script>
+
+  <!-- Google Ads + Analytics (gtag.js carrega uma vez e serve aos dois) -->
+  <!-- IDs em data/site.json > "tracking". {{ADS_TAG_ID}} é o ID de conversão da conta, não o número da conta. -->
+  <!-- As etiquetas só carregam depois do "Aceitar" no aviso de cookies: o trecho abaixo vem de src/js/consent.js. -->
+  <script>
+{{CONSENT_BOOTSTRAP}}
+
+    // Clique em qualquer botão de WhatsApp:
+    //  1) evento whatsapp_click no GA4 ('location' = qual botão; 'landing_page' = qual página);
+    //  2) conversão "Whatsapp" no Google Ads (send_to = ID de conversão/rótulo da ação).
+    function trackWhatsappClick(location){
+      try {
+        gtag('event', 'whatsapp_click', { 'send_to': '{{GA4_ID}}', 'landing_page': '{{PAGE_SLUG}}', 'location': location || 'unknown' });
+        gtag('event', 'conversion', { 'send_to': '{{ADS_WHATSAPP_SEND_TO}}' });
+      } catch(e) {}
+      return true;
+    }
+
+    // Clique no telefone (link tel:): evento phone_click no GA4, com os mesmos parâmetros.
+    // Não conta como a conversão "Whatsapp" do Google Ads.
+    function trackPhoneClick(location){
+      try {
+        gtag('event', 'phone_click', { 'send_to': '{{GA4_ID}}', 'landing_page': '{{PAGE_SLUG}}', 'location': location || 'unknown' });
+      } catch(e) {}
+      return true;
+    }
+  </script>
+
+  <style>
+    {{CSS}}
+  </style>
+</head>
+<body data-whatsapp="{{WHATSAPP}}">
+{{COOKIE_BANNER}}
+
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">
+        <picture>
+          <source srcset="/images/logos/logo-verde.webp" type="image/webp">
+          <img src="/images/logos/logo-verde.png" alt="{{SITE_NAME}} - Clínica de Diagnóstico por Imagem em Maracanaú" width="512" height="512" fetchpriority="high">
+        </picture>
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="/#exames">Exames</a></li>
+          <li><a href="/#equipamentos">Equipamentos</a></li>
+          <li><a href="/#convenios">Convênios</a></li>
+          <li><a href="/#corpo-clinico">Corpo Clínico</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="header-cta">
+        <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('header')" class="btn btn-whatsapp btn-sm">
+          {{ICON_WHATSAPP}} Agendar Exame
+        </a>
+      </div>
+
+      <button class="mobile-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <nav class="mobile-nav">
+    <a href="/#exames">Exames</a>
+    <a href="/#equipamentos">Equipamentos</a>
+    <a href="/#convenios">Convênios</a>
+    <a href="/#corpo-clinico">Corpo Clínico</a>
+    <a href="/blog/">Blog</a>
+    <div class="mobile-nav-social">
+      <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
+      <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
+      <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('menu-mobile')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
+    </div>
+  </nav>
+
+  <main class="post-page">
+    <div class="container post-container">
+      <nav class="post-breadcrumb" aria-label="Você está aqui">
+        <a href="/">Início</a> <span aria-hidden="true">›</span>
+        <span>{{PAGE_TITLE}}</span>
+      </nav>
+
+      <article class="post-article">
+        <header class="post-header">
+          <h1>{{PAGE_TITLE}}</h1>
+          <p class="post-lead">{{PAGE_LEAD}}</p>
+          <p class="legal-updated">Última atualização: <time datetime="{{PAGE_UPDATED_ISO}}">{{PAGE_UPDATED}}</time></p>
+        </header>
+
+        <div class="post-body legal-body">
+          {{PAGE_CONTENT}}
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo"><picture><source srcset="/images/logos/logo-branco.webp" type="image/webp"><img src="/images/logos/logo-branco.png" alt="{{SITE_NAME}}" width="512" height="512" loading="lazy"></picture></div>
+        <div class="footer-social">
+          <a href="{{INSTAGRAM}}" target="_blank" rel="noopener" aria-label="Instagram">{{ICON_INSTAGRAM}}</a>
+          <a href="{{FACEBOOK}}" target="_blank" rel="noopener" aria-label="Facebook">{{ICON_FACEBOOK}}</a>
+          <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('footer')" aria-label="WhatsApp">{{ICON_WHATSAPP}}</a>
+        </div>
+      </div>
+      <nav class="footer-exams" aria-label="Exames">
+        <span class="footer-exams-title">Exames em Maracanaú</span>
+        {{FOOTER_EXAMS_HTML}}
+      </nav>
+      <div class="footer-bottom">
+        <p>Telefone: <a href="{{PHONE_TEL}}" onclick="return trackPhoneClick('footer')">{{PHONE}}</a></p>
+        <p>Direção Técnica: {{TECHNICAL_DIRECTOR}}</p>
+        <p>{{LEGAL_NAME}}</p>
+        <p><a href="{{PRIVACY_URL}}">Política de Privacidade</a> · <button type="button" class="cc-open" onclick="unoConsent.ask()">Cookies</button></p>
+        <p>&copy; {{YEAR}} {{SITE_NAME}}. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('flutuante')" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+    {{ICON_WHATSAPP_LARGE}}
+  </a>
+
+  <div class="mobile-sticky-cta">
+    <a href="{{WHATSAPP_LINK}}" target="_blank" rel="noopener" onclick="return trackWhatsappClick('sticky-mobile')" class="btn btn-whatsapp btn-block">
+      {{ICON_WHATSAPP}} Agendar Exame pelo WhatsApp
+    </a>
+  </div>
+
+  <script>
+    (function () {
+      var header = document.querySelector('.header');
+      if (header) {
+        window.addEventListener('scroll', function () {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+      }
+
+      // Menu mobile (o main.js do site principal nao e' carregado aqui)
+      var toggle = document.querySelector('.mobile-toggle');
+      var nav = document.querySelector('.mobile-nav');
+      if (toggle && nav) {
+        toggle.addEventListener('click', function () {
+          var open = nav.classList.toggle('active');
+          toggle.classList.toggle('active', open);
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        nav.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            nav.classList.remove('active');
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
