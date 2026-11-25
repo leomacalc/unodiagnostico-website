@@ -14,7 +14,7 @@
     "headline": "Diagnóstico de <em>osteoporose</em> com precisão. Previna fraturas antes que aconteçam.",
     "subtitle": "Densitometria óssea é o exame padrão-ouro para medir a densidade dos ossos, diagnosticar osteoporose e osteopenia, e orientar o tratamento. Rápido, indolor e sem preparo complicado.",
     "cta_primary": "Agende sua Densitometria pelo WhatsApp",
-    "cta_secondary": "Consultar valor particular",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
     "trust_badges": [
       "Laudo em 1 dia útil",
       "Exame rápido e indolor",
@@ -155,7 +155,7 @@
     },
     {
       "question": "Qual o valor da densitometria particular?",
-      "answer": "Consulte valores atualizados pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
+      "answer": "Densitometria óssea particular na Uno Diagnóstico: {{PRICE_FROM}}. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
     }
   ]
 }

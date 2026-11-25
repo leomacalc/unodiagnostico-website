@@ -14,7 +14,7 @@
     "headline": "Raio-X digital com <em>alta resolução</em> e laudo rápido",
     "subtitle": "Radiografia digital com equipamento moderno, imagens de alta definição e menor dose de radiação. Atendemos todos os dias das 7h às 22h, sem necessidade de agendamento prévio na maioria dos casos.",
     "cta_primary": "Fale com a gente pelo WhatsApp",
-    "cta_secondary": "Consultar valor particular",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
     "trust_badges": [
       "Laudo em 1 dia útil",
       "Atendimento no mesmo dia",
@@ -154,7 +154,7 @@
     },
     {
       "question": "Qual o valor do raio-X particular?",
-      "answer": "Os valores variam conforme a região e quantidade de incidências. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro. Consulte valores pelo WhatsApp."
+      "answer": "Raio-X particular na Uno Diagnóstico: {{PRICE_FROM}}. O valor varia conforme a região e a quantidade de incidências. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
     }
   ]
 }

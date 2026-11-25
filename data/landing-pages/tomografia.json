@@ -14,7 +14,7 @@
     "headline": "Diagnóstico rápido e preciso com <em>tomografia de alta resolução</em>",
     "subtitle": "Equipamento moderno, equipe médica especializada e laudo em 1 dia útil nos exames eletivos e em até 2 horas nas urgências. Atendemos todos os dias das 7h às 22h, com convênios e atendimento particular.",
     "cta_primary": "Agende sua Tomografia pelo WhatsApp",
-    "cta_secondary": "Consultar valor particular",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
     "trust_badges": [
       "Laudo em 1 dia útil",
       "7 dias por semana, 7h às 22h",
@@ -159,7 +159,7 @@
     },
     {
       "question": "Qual o valor da tomografia particular na Uno Diagnóstico?",
-      "answer": "Os valores variam conforme a região a ser examinada e a necessidade de contraste. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro. Consulte valores atualizados pelo WhatsApp."
+      "answer": "Tomografia particular: {{PRICE_FROM}}. O valor varia conforme a região a ser examinada e a necessidade de contraste. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
     }
   ]
 }

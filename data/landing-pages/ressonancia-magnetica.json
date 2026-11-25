@@ -17,6 +17,7 @@
     "cta_primary": "Agendar minha ressonância pelo WhatsApp",
     "cta_secondary": "Tirar dúvidas com a equipe",
     "trust_badges": [
+      "Particular {{PRICE_FROM}}",
       "Aqui em Maracanaú, sem ir a Fortaleza",
       "Exame sem radiação ionizante",
       "Laudo por médico radiologista",
@@ -184,7 +185,7 @@
     },
     {
       "question": "Quanto custa a ressonância particular?",
-      "answer": "O valor depende da região examinada. Consulte pelo WhatsApp (85) 2181-6818 informando o exame do seu pedido médico — passamos o valor na hora. Aceitamos PIX, cartão de crédito com parcelamento, débito e dinheiro."
+      "answer": "Ressonância magnética particular na Uno Diagnóstico: {{PRICE_FROM}}. O valor depende da região examinada: informe o exame do seu pedido médico pelo WhatsApp (85) 2181-6818 e passamos o valor na hora. Aceitamos PIX, cartão de crédito com parcelamento, débito e dinheiro."
     }
   ],
   "location": {

@@ -14,7 +14,7 @@
     "headline": "<em>Detecção precoce</em> salva vidas. Sua mamografia com conforto e agilidade.",
     "subtitle": "Mamografia digital com equipamento moderno e equipe feminina acolhedora. Laudo entregue em 1 dia útil, pronto para sua consulta com o mastologista.",
     "cta_primary": "Agende sua Mamografia pelo WhatsApp",
-    "cta_secondary": "Consultar valor particular",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
     "trust_badges": [
       "Laudo em 1 dia útil",
       "Atendimento acolhedor",
@@ -159,7 +159,7 @@
     },
     {
       "question": "Qual o valor da mamografia particular?",
-      "answer": "Os valores variam conforme o tipo de mamografia (rastreamento ou diagnóstica) e se há complemento com ultrassom. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro. Consulte valores atualizados pelo WhatsApp."
+      "answer": "Mamografia particular na Uno Diagnóstico: {{PRICE_FROM}}. O valor varia conforme o tipo de mamografia (rastreamento ou diagnóstica) e se há complemento com ultrassom. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
     }
   ],
   "hours": {

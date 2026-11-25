@@ -14,7 +14,7 @@
     "headline": "Avalie o seu <em>coração</em> com precisão e rapidez",
     "subtitle": "O ecocardiograma é o exame não-invasivo mais completo para avaliar o coração. Indolor, sem radiação e com resultado confiável. Na Uno Diagnóstico, você faz seu eco com equipe especializada e recebe o laudo em até 40 minutos.",
     "cta_primary": "Agende seu Ecocardiograma pelo WhatsApp",
-    "cta_secondary": "Consultar valor particular",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
     "trust_badges": [
       "Laudo em até 40 minutos",
       "Sem radiação, sem dor",
@@ -158,7 +158,7 @@
     },
     {
       "question": "Qual o valor do ecocardiograma particular?",
-      "answer": "Consulte valores atualizados pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
+      "answer": "Ecocardiograma particular na Uno Diagnóstico: {{PRICE_FROM}}. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
     }
   ]
 }

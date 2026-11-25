@@ -14,7 +14,7 @@
     "headline": "Ultrassom com <em>agilidade</em> e <em>precisão</em> em Maracanaú",
     "subtitle": "Ultrassonografia e Doppler realizados por médicos radiologistas especialistas, com laudo em até 40 minutos. Abdominal, pélvico, tireoide, obstétrico, morfológico, doppler e muito mais.",
     "cta_primary": "Agende seu Ultrassom pelo WhatsApp",
-    "cta_secondary": "Consultar valor particular",
+    "cta_secondary": "Particular {{PRICE_FROM}}",
     "trust_badges": [
       "Laudo em até 40 minutos",
       "Sem radiação, sem dor",
@@ -155,7 +155,7 @@
     },
     {
       "question": "Qual o valor do ultrassom particular?",
-      "answer": "Os valores variam conforme o tipo de exame. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro. Consulte valores atualizados pelo WhatsApp."
+      "answer": "Ultrassom particular na Uno Diagnóstico: {{PRICE_FROM}}. O valor varia conforme o tipo de exame. Confirme o valor do seu exame pelo WhatsApp. Aceitamos PIX, cartão de crédito (com opção de parcelamento), débito e dinheiro."
     }
   ]
 }
