@@ -12,11 +12,11 @@
   "hero": {
     "badge": "Ecocardiograma em Maracanaú",
     "headline": "Avalie o seu <em>coração</em> com precisão e rapidez",
-    "subtitle": "O ecocardiograma é o exame não-invasivo mais completo para avaliar o coração. Indolor, sem radiação e com resultado confiável. Na Uno Diagnóstico, você faz seu eco com equipe especializada e recebe o laudo em 1 dia útil.",
+    "subtitle": "O ecocardiograma é o exame não-invasivo mais completo para avaliar o coração. Indolor, sem radiação e com resultado confiável. Na Uno Diagnóstico, você faz seu eco com equipe especializada e recebe o laudo em até 40 minutos.",
     "cta_primary": "Agende seu Ecocardiograma pelo WhatsApp",
     "cta_secondary": "Consultar valor particular",
     "trust_badges": [
-      "Laudo em 1 dia útil",
+      "Laudo em até 40 minutos",
       "Sem radiação, sem dor",
       "Atendimento acolhedor",
       "Convênios + particular"
@@ -68,8 +68,8 @@
         "text": "Aparelho atualizado, com doppler colorido e recursos para uma avaliação cardíaca completa."
       },
       {
-        "title": "Laudo em 1 dia útil",
-        "text": "Você recebe o resultado rápido, pronto para levar à consulta com o cardiologista."
+        "title": "Laudo em até 40 minutos",
+        "text": "O laudo fica pronto em até 40 minutos após o exame, para você levar à consulta com o cardiologista."
       },
       {
         "title": "Sem radiação, sem dor",
@@ -122,8 +122,8 @@
       },
       {
         "number": "4",
-        "title": "Laudo em 1 dia útil",
-        "text": "O laudo assinado pelo médico fica disponível no portal de resultados online em 1 dia útil."
+        "title": "Laudo em até 40 minutos",
+        "text": "O laudo assinado pelo médico fica pronto em até 40 minutos e também fica disponível no portal de resultados online."
       }
     ]
   },
@@ -139,6 +139,10 @@
     {
       "question": "Quanto tempo dura o exame?",
       "answer": "O eco dura em média 20 a 30 minutos. Exames mais detalhados podem levar um pouco mais de tempo."
+    },
+    {
+      "question": "Em quanto tempo sai o laudo do ecocardiograma?",
+      "answer": "O laudo fica pronto em até 40 minutos após o exame e também fica disponível no nosso portal de resultados online."
     },
     {
       "question": "Preciso de pedido médico?",

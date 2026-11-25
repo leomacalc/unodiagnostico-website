@@ -4,7 +4,7 @@
   "exam_short": "Ressonância",
   "seo": {
     "title": "Ressonância Magnética em Maracanaú | Uno Diagnóstico",
-    "description": "Ressonância magnética em Maracanaú, já em operação na Uno Diagnóstico. Crânio, coluna, joelho, ombro, abdome e pelve com alta definição, sem radiação e sem precisar ir a Fortaleza. Convênios e particular. Agende pelo WhatsApp.",
+    "description": "Ressonância magnética em Maracanaú, já em operação na Uno Diagnóstico. Crânio, coluna, joelho, ombro e pelve com alta definição, sem radiação e sem precisar ir a Fortaleza. Convênios e particular. Agende pelo WhatsApp.",
     "keywords": "ressonância magnética Maracanaú, ressonância Maracanaú, RM Maracanaú, ressonância particular Maracanaú, clínica de ressonância Maracanaú, ressonância magnética de joelho Maracanaú, ressonância de coluna Maracanaú, ressonância de crânio Maracanaú, angiorressonância Maracanaú, ressonância Ceará, ressonância magnética perto de mim"
   },
   "whatsapp_message": "Olá! Vim pelo site da Uno Diagnóstico e quero agendar uma ressonância magnética.",
@@ -26,7 +26,7 @@
   "about": {
     "title": "O que é a ressonância magnética?",
     "paragraphs": [
-      "A ressonância magnética é um exame de imagem que usa um campo magnético e ondas de rádio — e nenhuma radiação ionizante — para gerar imagens muito detalhadas do interior do corpo. É o exame mais preciso para avaliar cérebro, medula, coluna, músculos, ligamentos, tendões e cartilagens, além de trazer informações complementares às da tomografia e do ultrassom em abdome e pelve.",
+      "A ressonância magnética é um exame de imagem que usa um campo magnético e ondas de rádio — e nenhuma radiação ionizante — para gerar imagens muito detalhadas do interior do corpo. É o exame mais preciso para avaliar cérebro, medula, coluna, músculos, ligamentos, tendões e cartilagens, além de trazer informações complementares às da tomografia e do ultrassom na pelve.",
       "Durante anos, pacientes de Maracanaú e região precisaram se deslocar até Fortaleza para fazer ressonância: tempo em trânsito, custo com transporte, dificuldade para idosos e pessoas com mobilidade reduzida e demora na marcação. Esse cenário mudou — a ressonância da Uno Diagnóstico já está em operação aqui, no Feira Center (open mall), no Jereissati.",
       "O exame é conduzido por equipe técnica treinada e laudado por médicos radiologistas com título de especialista, seguindo os mesmos padrões de qualidade, rapidez e acolhimento que a Uno já pratica há mais de 7 anos nos demais exames."
     ]
@@ -50,10 +50,6 @@
       {
         "title": "Ressonância de Ombro",
         "text": "Lesões do manguito rotador, instabilidade, bursites, tendinopatias e avaliação pós-operatória."
-      },
-      {
-        "title": "Ressonância de Abdome",
-        "text": "Avaliação detalhada de fígado, vias biliares, pâncreas, baço e rins, complementando o ultrassom e a tomografia."
       },
       {
         "title": "Ressonância de Pelve",
@@ -98,7 +94,7 @@
     "title": "Como se preparar para a ressonância",
     "intro": "O preparo varia conforme a região examinada. No momento, a ressonância da Uno é realizada apenas sem contraste. Em geral:",
     "items": [
-      "Jejum de 4 a 6 horas nos exames de abdome e pelve — nossa equipe confirma no agendamento",
+      "Jejum de 4 a 6 horas nos exames de pelve — nossa equipe confirma no agendamento",
       "Avise se possui marca-passo, implante coclear, clipe de aneurisma, neuroestimulador, bomba de insulina ou fragmento metálico no corpo",
       "Retire joias, relógio, piercings, próteses dentárias removíveis, aparelho auditivo e cartões magnéticos antes de entrar na sala",
       "Informe se está grávida ou amamentando",
@@ -140,11 +136,15 @@
     },
     {
       "question": "Quais tipos de ressonância vocês realizam?",
-      "answer": "Realizamos as principais modalidades: crânio e encéfalo, coluna (cervical, torácica e lombar), articulações (joelho, ombro, quadril, tornozelo, punho, cotovelo), abdome e pelve, além de angiorressonância. No momento, todos os exames são feitos sem contraste. Se tiver dúvida se o seu pedido médico é contemplado, envie uma foto do pedido pelo WhatsApp que confirmamos na hora."
+      "answer": "Realizamos as principais modalidades: crânio e encéfalo, coluna (cervical, torácica e lombar), articulações (joelho, ombro, quadril, tornozelo, punho, cotovelo) e pelve, além de angiorressonância. No momento, todos os exames são feitos sem contraste, e a ressonância de abdome ainda não é realizada. Se tiver dúvida se o seu pedido médico é contemplado, envie uma foto do pedido pelo WhatsApp que confirmamos na hora."
     },
     {
       "question": "Vocês fazem ressonância com contraste?",
       "answer": "No momento, não. A ressonância da Uno Diagnóstico é realizada apenas sem contraste. Se o seu pedido médico indicar contraste, fale com a nossa equipe pelo WhatsApp (85) 2181-6818 antes de agendar."
+    },
+    {
+      "question": "Vocês fazem ressonância de abdome?",
+      "answer": "Ainda não. A ressonância de abdome depende do uso de contraste, que ainda não está disponível na ressonância da Uno. Para avaliar o abdome, realizamos ultrassonografia e tomografia computadorizada."
     },
     {
       "question": "Vocês fazem ressonância com sedação ou anestesia?",
