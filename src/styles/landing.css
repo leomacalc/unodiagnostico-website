@@ -630,6 +630,8 @@ p { color: var(--lp-text-light); }
   font-size: 0.95rem;
   line-height: 1.7;
 }
+/* Telefone citado na resposta vira link de ligação ou de WhatsApp (linkPhone() no build.js) */
+.lp-faq-answer a { color: var(--lp-primary); font-weight: 600; text-decoration: underline; }
 
 /* --- Location --- */
 .lp-location {
@@ -724,6 +726,7 @@ p { color: var(--lp-text-light); }
 .lp-footer-exams a:hover { color: var(--lp-secondary); }
 .lp-footer-bottom { padding-top: 20px; text-align: center; font-size: 0.8rem; }
 .lp-footer-bottom p { color: rgba(255,255,255,0.55); margin: 4px 0; }
+.lp-footer-bottom a { color: var(--lp-secondary); font-weight: 600; }
 
 /* --- Floating WhatsApp --- */
 .lp-whatsapp-float {

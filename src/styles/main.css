@@ -1272,6 +1272,13 @@ h1, h2, h3, h4 {
   line-height: 1.7;
 }
 
+/* Telefone citado na resposta vira link de ligação ou de WhatsApp (linkPhone() no build.js) */
+.faq-answer a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 .faq-more {
   font-weight: 600;
   color: var(--color-text) !important;
@@ -1478,6 +1485,11 @@ h1, h2, h3, h4 {
 
 .footer-bottom p {
   margin-bottom: 4px;
+}
+
+.footer-bottom a {
+  color: var(--color-secondary);
+  font-weight: 600;
 }
 
 /* --- Footer Map --- */
