@@ -655,6 +655,17 @@ h1, h2, h3, h4 {
   line-height: 1.5;
 }
 
+/* Preço particular "a partir de": vem do feed de produtos (ver "Preço particular" no build.js) */
+.service-card .service-card-price {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+.service-card-price strong {
+  font-weight: 800;
+}
+
 /* --- Modal --- */
 .modal-overlay {
   display: flex;
