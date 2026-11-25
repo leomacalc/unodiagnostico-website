@@ -67,6 +67,9 @@ Editar `data/site.json`. Campos que o build usa além dos óbvios:
 - `whatsapp_messages`: `price` (botões de valor), `blog` (botões do blog) e `exam_prefix`
   (o botão "Agendar este Exame" do modal vira `exam_prefix` + nome do exame).
 - `geo`: latitude/longitude do schema.org — é a coordenada da ficha da clínica no Google Maps.
+- O mapa embutido da home acha a clínica pelo texto de `MAPS_EMBED_QUERY` (no `build.js`), que ainda
+  leva o CEP antigo (61900-320) porque é assim que a ficha do Google está escrita. Só trocar
+  depois de abrir o mapa e conferir que o alfinete continua na clínica.
 - `tracking`: IDs do Google Ads e do GA4 (ver "Tracking de conversão").
 - `second_unit` (opcional): segundo endereço mostrado na home, abaixo do principal — hoje o espaço
   da ressonância no Feira Center. Campos: `label`, `full`, `maps_query`, `maps_place_id`.
@@ -297,6 +300,11 @@ Abre em http://localhost:3000
       exame, tirado do feed. A tabela completa de valores foi proposta e recusada em
       25/11/2026; preço no schema.org (`offers`) não foi autorizado.
     - **O (85) 2181-6818 atende ligação** (confirmado em 25/11/2026), além de ser o WhatsApp.
+    - **Cadastro da empresa (25/11/2026: vale o que está no CNPJ):** razão social
+      "Uno - Clínica de Diagnósticos por Imagem LTDA" (com hífen e "Diagnósticos" no plural),
+      CNPJ 33.446.906/0001-93. Unidade principal: Avenida I, 57, Business Place Torre 2,
+      Jereissati I, CEP 61900-410 (o site usava 61900-320, que é o CEP da Rua 7; a Avenida I e a
+      Av. Yolanda Pontes Vidal Queiroz são a mesma via). E-mail da clínica: uno@unodiagnostico.com.
 
 ---
 
