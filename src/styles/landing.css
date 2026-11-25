@@ -886,6 +886,15 @@ p { color: var(--lp-text-light); }
 @media (max-width: 600px) {
   .lp-hero-buttons .lp-btn { white-space: normal; text-align: center; line-height: 1.3; padding-left: 20px; padding-right: 20px; }
 }
+/* Os botões grandes do resto da página também. Três deles ("Agendar meu exame pelo WhatsApp",
+   "Confirmar preparo com a equipe" e "Agendar pelo WhatsApp agora") eram mais largos que a tela do
+   celular e faziam a página inteira passar da largura da tela. Ficam abaixo da primeira tela, então
+   quebrar linha aqui não desloca nada que o visitante esteja vendo (regra 12 do CLAUDE.md). */
+@media (max-width: 600px) {
+  .lp-btn-lg,
+  .lp-btn-xl { max-width: 100%; white-space: normal; text-align: center; line-height: 1.3; padding-left: 20px; padding-right: 20px; }
+  .lp-btn-xl { padding-top: 18px; padding-bottom: 18px; font-size: 1.05rem; }
+}
 /* O segundo botão do topo leva o preço ("Particular a partir de R$ X"). No tamanho normal ele
    só cabe em uma linha a partir de ~342 px de tela; abaixo de 360 px ele encolhe um pouco para
    caber com folga — senão quebraria com uma fonte e não com a outra (ver regra 12 do CLAUDE.md). */
