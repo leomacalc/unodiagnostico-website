@@ -349,6 +349,13 @@ Abre em http://localhost:3000
     - **Privacidade (25/11/2026):** encarregado pelo tratamento de dados: Leonardo José Araújo
       Macêdo de Alcântara, contato uno@unodiagnostico.com. Cookies de medição só com consentimento;
       sem remarketing. A avaliação de conflito de interesse do encarregado ficou com o jurídico.
+15. **Mais de uma sessão publica neste repositório** (em 25/11/2026, outra sessão trocou o rótulo
+    do Google Ads enquanto esta mexia nos títulos). O envio pelo navegador substitui o arquivo
+    inteiro: antes de enviar, rodar `git fetch` e conferir que o arquivo não mudou em
+    `origin/main` desde a cópia de trabalho, para não apagar a mudança de outra sessão.
+    **Nunca publicar pela pasta do computador (OneDrive) com a Vercel CLI:** ela está atrás do
+    repositório e o deploy traria de volta a versão antiga do site. O que sai da pasta (por
+    exemplo, o post que a tarefa semanal escreve lá) entra no site pelo repositório.
 
 ---
 
@@ -367,7 +374,10 @@ Todas as páginas (home, landings, blog e política de privacidade) têm `trackW
 aceite, `gtag()` não faz nada. Depois do aceite, cada clique dispara:
 1. o evento `whatsapp_click` no GA4 (`G-4T951CHR0E`), com `landing_page` identificando a página e
    `location` identificando o botão (`header`, `hero`, `flutuante`, `sticky-mobile`, `footer`...);
-2. a conversão "Whatsapp" do Google Ads (`send_to: AW-715533760/KKyuCPnntfcCEMDbmNUC`).
+2. a conversão "Whatsapp" do Google Ads. O `send_to` fica em `data/site.json` > `tracking` e foi
+   trocado em 25/11/2026, por outra sessão, para `AW-715533760/0cuGCI2c4fcCEMDbmNUC` (commit
+   `9251564`: rótulo lido no snippet de evento da ação no Google Ads; segundo ele, o anterior,
+   `KKyuCPnntfcCEMDbmNUC`, não era dessa ação).
 
 Os IDs ficam em `data/site.json` > `tracking` e entram nos templates por `{{ADS_TAG_ID}}`,
 `{{ADS_WHATSAPP_SEND_TO}}` e `{{GA4_ID}}` — não escrever ID à mão em template.

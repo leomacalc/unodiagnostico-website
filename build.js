@@ -227,7 +227,7 @@ function assetUrl(pathname) {
 // Os valores vivem em data/site.json ("tracking"); os de baixo sao so' reserva.
 var tracking = site.tracking || {};
 var ADS_TAG_ID = tracking.google_ads_tag_id || 'AW-715533760';
-var ADS_WHATSAPP_SEND_TO = tracking.google_ads_whatsapp_send_to || 'AW-715533760/KKyuCPnntfcCEMDbmNUC';
+var ADS_WHATSAPP_SEND_TO = tracking.google_ads_whatsapp_send_to || 'AW-715533760/0cuGCI2c4fcCEMDbmNUC';
 var GA4_ID = tracking.ga4_id || 'G-4T951CHR0E';
 
 // --- Aviso de cookies (consentimento) e politica de privacidade ---
