@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003f6b;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#005a87;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#007ab5;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="liver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e6f4ff;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#9fd0ee;stop-opacity:0.75" />
+    </linearGradient>
+    <radialGradient id="gb" cx="45%" cy="40%" r="65%">
+      <stop offset="0%" style="stop-color:#e4f3b8;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#abce5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7ba640;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.18" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)" />
+  <circle cx="700" cy="60" r="120" fill="#007ab5" opacity="0.25"/>
+  <circle cx="740" cy="320" r="80" fill="#abce5f" opacity="0.12"/>
+  <circle cx="80" cy="350" r="100" fill="#005a87" opacity="0.3"/>
+  <circle cx="50" cy="80" r="60" fill="#abce5f" opacity="0.1"/>
+  <circle cx="600" cy="40" r="4" fill="#abce5f" opacity="0.5"/>
+  <circle cx="625" cy="55" r="3" fill="#abce5f" opacity="0.4"/>
+  <circle cx="650" cy="35" r="3" fill="#abce5f" opacity="0.5"/>
+
+  <!-- Liver + gallbladder -->
+  <g transform="translate(250 190)">
+    <path d="M -150 -70 Q -40 -120 110 -90 Q 140 -50 110 -5 Q 40 20 -60 15 Q -150 0 -150 -70 Z"
+          fill="url(#liver)" stroke="#ffffff" stroke-width="2.5" opacity="0.9"/>
+    <!-- bile duct -->
+    <path d="M 10 0 Q 20 40 5 90" fill="none" stroke="#c8e47a" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+    <!-- Gallbladder (pear) -->
+    <path d="M 10 5 Q -10 30 -30 70 Q -45 115 -5 125 Q 35 130 40 90 Q 42 50 22 8 Z"
+          fill="url(#gb)" stroke="#ffffff" stroke-width="2.5"/>
+    <!-- Stones -->
+    <circle cx="-8" cy="100" r="10" fill="#f4f8fb" stroke="#003f6b" stroke-width="1.5"/>
+    <circle cx="16" cy="104" r="8" fill="#f4f8fb" stroke="#003f6b" stroke-width="1.5"/>
+    <circle cx="4" cy="84" r="6" fill="#f4f8fb" stroke="#003f6b" stroke-width="1.5"/>
+    <circle cx="22" cy="86" r="4.5" fill="#f4f8fb" stroke="#003f6b" stroke-width="1.2"/>
+  </g>
+
+  <!-- Ultrasound screen -->
+  <g transform="translate(470 85)">
+    <rect width="260" height="190" rx="16" fill="url(#screen)" stroke="#ffffff" stroke-opacity="0.5" stroke-width="2"/>
+    <path d="M 130 25 L 40 165 Q 130 185 220 165 Z" fill="#0b2233" opacity="0.75"/>
+    <!-- gallbladder echo (dark lumen) -->
+    <ellipse cx="128" cy="112" rx="48" ry="26" fill="#000c14" stroke="#9fd0ee" stroke-width="2" opacity="0.95"/>
+    <!-- bright stone echoes -->
+    <circle cx="122" cy="126" r="7" fill="#ffffff"/>
+    <circle cx="140" cy="128" r="5" fill="#ffffff"/>
+    <!-- acoustic shadows -->
+    <rect x="116" y="133" width="12" height="35" fill="#000000" opacity="0.55"/>
+    <rect x="136" y="133" width="9" height="33" fill="#000000" opacity="0.55"/>
+    <rect x="20" y="172" width="80" height="6" rx="3" fill="#abce5f" opacity="0.8"/>
+    <rect x="110" y="172" width="45" height="6" rx="3" fill="#ffffff" opacity="0.4"/>
+  </g>
+
+  <!-- Transducer -->
+  <g transform="translate(430 300) rotate(-25)">
+    <rect x="-14" y="-60" width="28" height="70" rx="12" fill="#e6f4ff"/>
+    <rect x="-20" y="5" width="40" height="18" rx="7" fill="#abce5f"/>
+    <path d="M 0 -60 Q 0 -100 40 -120" fill="none" stroke="#e6f4ff" stroke-width="4" opacity="0.6"/>
+  </g>
+  <!-- Waves -->
+  <g fill="none" stroke="#c8e47a" stroke-width="3" stroke-linecap="round" opacity="0.7">
+    <path d="M 380 250 Q 365 235 380 220"/>
+    <path d="M 365 260 Q 342 235 365 210"/>
+  </g>
+</svg>
