@@ -131,6 +131,7 @@ Adicionar ao início do array em `data/blog-posts.json`:
 {
   "id": "slug-do-post",
   "title": "Título do Post",
+  "seo_title": "Título de busca, até 60 caracteres",
   "date": "2026-04-06",
   "slug": "slug-do-post",
   "excerpt": "Resumo curto do post...",
@@ -148,6 +149,19 @@ Adicionar ao início do array em `data/blog-posts.json`:
 
 **Regras do `slug`:** único entre todos os posts, kebab-case, e **não mudar depois de publicado**
 (a URL já indexada quebra). O `image` aponta para um SVG em `public/images/blog/`.
+
+**`seo_title` (título de busca):** é o que vai no `<title>` da página, a linha azul do Google e do
+Bing. **Até 60 caracteres** (acima disso o buscador corta e o Bing marca erro). O `title` continua
+sendo o título que o leitor vê: página, cartões, redes sociais e schema.org. Como escrever:
+- Exame ou assunto primeiro, depois o gancho ("Ultrassom de mama em Maracanaú: quando fazer e preparo").
+- Exame sem página própria leva "em Maracanaú". Doença ou sintoma leva a cidade junto do exame
+  ("Pedras nos rins: ultrassom ou tomografia em Maracanaú").
+- Exame que já tem página própria fica sem a cidade e com ângulo de dúvida ("Densitometria óssea:
+  quando fazer e como se preparar"), para o post não disputar a busca com a página de exame. Nunca
+  repetir o título de uma página de exame ("<Exame> em Maracanaú").
+- Não escrever a marca: o build acrescenta " | Uno Diagnóstico" quando o total cabe em 60.
+- Post sem `seo_title`: o build usa o `title` se couber em 60, ou o trecho antes dos dois-pontos, e
+  avisa. Ele também avisa título acima de 60, repetido ou igual ao de uma página de exame.
 
 **O build faz sozinho em cada post:** a descrição para o Google (o `excerpt` cortado em ~155
 caracteres, sem partir palavra) e a caixa "Exames citados neste artigo", com link para as páginas
@@ -183,6 +197,8 @@ As landing pages ficam em URLs tipo `unodiagnostico.com/<slug>` e são 100% gera
 1. Copie `data/landing-pages/tomografia.json` como modelo e renomeie para `<slug>.json` (ex: `ultrassonografia.json`).
 2. Preencha todos os campos: `slug`, `exam_name`, `exam_short`, `seo`, `whatsapp_message`, `whatsapp_message_price`, `hero`, `about`, `indications`, `differentials`, `preparation`, `process`, `faq`.
    - `seo.title`: no máximo 60 caracteres, no formato "<Exame> em Maracanaú | Uno Diagnóstico" (título maior é cortado no Google).
+   - `seo.description`: até 155 caracteres, com exame, cidade, um diferencial confirmado (regra 14) e
+     o convite para agendar. Acima de 160 o Google corta e o Bing marca erro; o build avisa.
    - `whatsapp_message`: mensagem dos botões de agendar ("...quero agendar uma tomografia.").
      `whatsapp_message_price`: mensagem dos botões de valor. `whatsapp_message_secondary` (opcional):
      mensagem do segundo botão do topo quando ele não é de valor (ex.: "Tirar dúvidas").

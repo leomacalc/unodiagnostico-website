@@ -562,6 +562,40 @@ function postPath(post) {
   return 'blog/' + postSlug(post);
 }
 
+// Titulo de busca do post (<title>). O Google e o Bing cortam perto de 60 caracteres, e o Bing
+// marca titulo longo como erro. Ordem: "seo_title" do post; senao o proprio titulo, se couber;
+// senao o trecho antes dos dois-pontos, desde que nao repita o titulo de uma pagina de exame.
+// A marca entra no fim so quando cabe. O titulo que o leitor ve (H1, cartoes, redes sociais e
+// schema.org) continua sendo "title".
+var SEO_TITLE_MAX = 60;
+var SEO_DESCRIPTION_MAX = 160;
+var POST_TITLE_BRAND = ' | Uno Diagnóstico';
+// Nomes que ja sao titulo de pagina de exame ("Mamografia em Maracanaú"): o post nao os repete.
+var landingTitleHeads = [];
+landingPages.forEach(function (lp) {
+  var seoHead = String((lp.seo && lp.seo.title) || '').split(' | ')[0];
+  [seoHead, lp.exam_name, lp.exam_short].forEach(function (name) {
+    name = String(name || '').trim().toLowerCase();
+    if (!name) return;
+    landingTitleHeads.push(name);
+    if (name.indexOf(' em maracanaú') === -1) landingTitleHeads.push(name + ' em maracanaú');
+  });
+});
+function postSeoTitle(post) {
+  var base = String(post.seo_title || '').trim();
+  if (!base) {
+    base = String(post.title || '').trim();
+    if (base.length > SEO_TITLE_MAX) {
+      var cut = base.indexOf(': ');
+      var head = cut > 0 ? base.slice(0, cut).trim() : '';
+      if (head.length >= 20 && head.length <= SEO_TITLE_MAX && landingTitleHeads.indexOf(head.toLowerCase()) === -1) {
+        base = head;
+      }
+    }
+  }
+  return (base + POST_TITLE_BRAND).length <= SEO_TITLE_MAX ? base + POST_TITLE_BRAND : base;
+}
+
 // Converte o texto puro do post (blocos separados por \n\n) em HTML semantico.
 // Regras: bloco iniciado por "•" vira <ul>; linha curta sem pontuacao final vira
 // <h2> (sao os subtitulos dos posts); o resto vira <p>.
@@ -929,6 +963,16 @@ function buildLandingPage(lp) {
   var stickyCta = lp.sticky_cta || ('Agendar ' + (lp.exam_short || lp.exam_name) + ' pelo WhatsApp');
   if (stickyCta.length > 38) {
     console.warn('  ! /' + lp.slug + '/: botao fixo do celular com ' + stickyCta.length + ' caracteres ("' + stickyCta + '") — acima de 38 nao cabe em tela de 360 px; use "sticky_cta"');
+  }
+
+  // Titulo e descricao para buscadores: acima disso o Google corta e o Bing marca erro.
+  var lpSeoTitleLength = String((lp.seo && lp.seo.title) || '').length;
+  var lpSeoDescriptionLength = String((lp.seo && lp.seo.description) || '').length;
+  if (lpSeoTitleLength > SEO_TITLE_MAX) {
+    console.warn('  ! /' + lp.slug + '/: seo.title com ' + lpSeoTitleLength + ' caracteres (maximo ' + SEO_TITLE_MAX + ')');
+  }
+  if (lpSeoDescriptionLength > SEO_DESCRIPTION_MAX) {
+    console.warn('  ! /' + lp.slug + '/: seo.description com ' + lpSeoDescriptionLength + ' caracteres (maximo ' + SEO_DESCRIPTION_MAX + '; escrever ate 155)');
   }
 
   var heroTrustHTML = (lp.hero.trust_badges || []).map(function (b) {
@@ -1358,7 +1402,7 @@ function buildBlogPost(post, index) {
 
   var map = Object.assign({}, blogCommon, {
     '{{POST_TITLE}}': escapeHTML(post.title),
-    '{{POST_SEO_TITLE}}': escapeHTML(post.title) + ' | Uno Diagnóstico',
+    '{{POST_SEO_TITLE}}': escapeHTML(postSeoTitle(post)),
     '{{POST_EXCERPT}}': escapeHTML(post.excerpt),
     // Descricao para buscadores: mesmo resumo, cortado em ~155 caracteres sem partir palavra
     '{{POST_META_DESCRIPTION}}': escapeHTML(truncateText(post.excerpt, 155)),
@@ -1410,7 +1454,7 @@ function buildBlogIndex() {
 
   var map = Object.assign({}, blogCommon, {
     '{{BLOG_SEO_TITLE}}': 'Blog sobre Exames de Imagem | Uno Diagnóstico Maracanaú',
-    '{{BLOG_SEO_DESCRIPTION}}': 'Artigos sobre ressonância, tomografia, ultrassom, mamografia e densitometria: quando fazer, como se preparar e o que cada exame mostra. Escritos pela equipe da Uno Diagnóstico em Maracanaú/CE.',
+    '{{BLOG_SEO_DESCRIPTION}}': 'Artigos da Uno Diagnóstico, em Maracanaú/CE, sobre ressonância, tomografia, ultrassom e mamografia: quando fazer, como se preparar e o que o exame mostra.',
     '{{CANONICAL_URL}}': siteUrl('blog'),
     '{{BLOG_LIST_HTML}}': blogPosts.map(blogCardHTML).join('\n        '),
     '{{SCHEMA_BLOG}}': schemaBlog,
@@ -1419,6 +1463,29 @@ function buildBlogIndex() {
 
   return writePage('blog', applyTemplate(blogIndexTemplate, map));
 }
+
+// Avisos sobre o titulo de busca dos posts (nao param o build).
+(function () {
+  var seenSeoTitles = {};
+  blogPosts.forEach(function (post) {
+    var seoTitle = postSeoTitle(post);
+    var where = '/' + postPath(post) + '/';
+    var own = String(post.seo_title || '').trim();
+    if (seoTitle.length > SEO_TITLE_MAX) {
+      console.warn('  ! ' + where + ': titulo de busca com ' + seoTitle.length + ' caracteres (maximo ' + SEO_TITLE_MAX + ') — preencher ou encurtar "seo_title"');
+    } else if (!own && String(post.title || '').trim().length > SEO_TITLE_MAX) {
+      console.warn('  ! ' + where + ': sem "seo_title"; o titulo de busca saiu como "' + seoTitle + '"');
+    }
+    if (own && landingTitleHeads.indexOf(own.toLowerCase()) !== -1) {
+      console.warn('  ! ' + where + ': "seo_title" igual ao titulo de uma pagina de exame');
+    }
+    var key = seoTitle.toLowerCase();
+    if (seenSeoTitles[key]) {
+      console.warn('  ! ' + where + ': titulo de busca igual ao de ' + seenSeoTitles[key]);
+    }
+    seenSeoTitles[key] = where;
+  });
+})();
 
 var blogIndexSize = buildBlogIndex();
 console.log('  + /blog/ (' + Math.round(blogIndexSize / 1024) + ' KB, ' + blogPosts.length + ' posts)');
